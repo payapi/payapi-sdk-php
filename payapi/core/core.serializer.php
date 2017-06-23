@@ -124,7 +124,7 @@ final class serializer {
     if ( ! is_string ( $adaptor ) ) {
       return false ;
     }
-    $file = router :: checkDir ( 'adaptor' ) . 'adaptor' . '.' . strtolower ( trim ( $adaptor ) ) . '.' . 'php' ;
+    $file = router :: dir ( 'adaptor' ) . 'adaptor' . '.' . strtolower ( trim ( $adaptor ) ) . '.' . 'php' ;
     if ( is_file ( $file ) ) {
       try {
         require ( $file ) ;

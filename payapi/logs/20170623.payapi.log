@@ -1,12 +1,13 @@
-2017-06-23 07:04:53 [info] debugger->single : ___debugging___
-2017-06-23 07:04:53 [info] engine->construct : autoload : cgi
-2017-06-23 07:04:53 [info] cgi->auto : server load : 0%
-2017-06-23 07:04:53 [info] engine->construct : autoload : model
-2017-06-23 07:04:53 [info] engine->construct : autoload : validate
-2017-06-23 07:04:53 [info] controller->auto : command : validate
-2017-06-23 07:04:53 [info] cgi->render : rendering response 
-2017-06-23 07:04:53 [info] cgi->render : [mode] string
-2017-06-23 07:04:53 [info] cgi->render : [code] 200
-2017-06-23 07:04:53 [info] cgi->headers : sending headers
-2017-06-23 07:04:53 [info] debugger->destruct : ___0.01916ms___
+2017-06-23 07:28:13 [info] debugger->single : ___debugging___
+2017-06-23 07:28:13 [info] engine->construct : autoload : cgi
+2017-06-23 07:28:13 [info] cgi->auto : server load : 0%
+2017-06-23 07:28:13 [info] engine->construct : autoload : model
+2017-06-23 07:28:13 [info] engine->construct : autoload : adaptor
+2017-06-23 07:28:13 [info] engine->construct : autoload : validate
+2017-06-23 07:28:13 [info] controller->auto : command : validate
+2017-06-23 07:28:13 [info] cgi->render : rendering response 
+2017-06-23 07:28:13 [info] cgi->render : [mode] string
+2017-06-23 07:28:13 [info] cgi->render : [code] 200
+2017-06-23 07:28:13 [info] cgi->headers : sending headers
+2017-06-23 07:28:13 [info] debugger->destruct : ___0.0184ms___
 

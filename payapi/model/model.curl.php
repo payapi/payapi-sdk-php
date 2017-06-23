@@ -22,7 +22,6 @@ final class model_curl {
 
   public function request ( $url , $data = null , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
     $this -> reset () ;
-    //$this -> log ( 'curling : ' . $url ) ;
     $this -> response = false ;
     $options = array
       (
@@ -42,8 +41,6 @@ final class model_curl {
     curl_setopt_array ( $this -> buffer , $options ) ;
     if ( $data != false ) {
       $post = http_build_query ( array ( "data" => $data ) ) ;
-      //var_Dump ( $post ) ; exit () ;
-
       curl_setopt ( $this -> buffer , CURLOPT_POSTFIELDS , $post ) ;
     }
     $response = curl_exec ( $this -> buffer ) ;

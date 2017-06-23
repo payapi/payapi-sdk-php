@@ -1,6 +1,6 @@
 <?php
 /**
-*  Testing PayApi Payments PHP Library
+*  Testing PayApi Payments PHP
 **/
 
 // @TODELETE just for DEV
