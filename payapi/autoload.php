@@ -20,6 +20,8 @@
 *
 **/
 
+require ( "/opt/php-jwt/vendor/autoload.php" ) ;
+
 use \payapi\cgi as cgi ;
 use \payapi\debugger as debugger ;
 use \payapi\data as data ;

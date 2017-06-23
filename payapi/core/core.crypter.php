@@ -1,7 +1,6 @@
 <?php
 namespace payapi ;
 
-require ( "/opt/php-jwt/vendor/autoload.php" ) ;
 use \Firebase\JWT\JWT;
 
 final class crypter {
@@ -10,14 +9,18 @@ final class crypter {
     $sanitized                 =    false ;
 
   private
-    $mode                      =    '' ,
-    $hash                      = '<your_encription_key>' ,
-    $prefix                    = false ;
+    $mode                      =  'HS256' ,
+    $hash                      =    false ,
+    $prefix                    =    false ;
 
-  public function __construct ( $hash = false , $mode = false ) {
+  public function __construct ( $hash , $mode = false ) {
     if ( is_string ( $hash ) ) $this -> hash = $hash ;
-    $this -> mode = ( is_string ( $mode ) ) ? $mode : 'HS256' ;
-    $this -> prefix = strtok ( @JWT :: encode ( ' ' , $this -> hash ) , '.' ) ;
+    if ( is_string ( $mode ) ) $this -> mode = $mode ;
+    try {
+      $this -> prefix = strtok ( JWT :: encode ( ' ' , $this -> hash ) , '.' ) ;
+    } catch ( Exception $e ) {
+      return false ;
+    }
   }
 
   public function decode ( $encoded , $hash = false , $sanitized = false ) {
@@ -66,6 +69,10 @@ final class crypter {
   public function encodejsonized ( $decodejsonized ) {
     $encodejsonized = $this -> encode ( json_encode ( $decodejsonized ) ) ;
     return $encodejsonized ;
+  }
+
+  protected function error ( $error ) {
+    return true ;
   }
 
 

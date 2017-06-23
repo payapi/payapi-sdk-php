@@ -1,17 +1,17 @@
-2017-06-23 10:51:20 [info] payapi->construct : ___debugging___
-2017-06-23 10:51:20 [info] payapi->construct : autoload : cgi
-2017-06-23 10:51:20 [warning] cgi->auto : staging mode
-2017-06-23 10:51:20 [info] engine->construct : server load : 0%
-2017-06-23 10:51:20 [info] payapi->model : autoload : callback
-2017-06-23 10:51:20 [info] serializer->adaptor : autoload : adaptor
-2017-06-23 10:51:20 [info] model->auto : autoload : branding
-2017-06-23 10:51:20 [info] engine->construct : brand : payapi
-2017-06-23 10:51:20 [info] payapi->controller : autoload : callback
-2017-06-23 10:51:20 [info] engine->construct : command : callback
-2017-06-23 10:51:20 [error] model_callback->validate : no valid callback
-2017-06-23 10:51:20 [info] controller->response : rendering response 
-2017-06-23 10:51:20 [info] controller->response : [mode] string
-2017-06-23 10:51:20 [info] controller->response : [code] 406
-2017-06-23 10:51:20 [info] cgi->render : sending headers
-2017-06-23 10:51:20 [info] debugger->destruct : ___0.03038ms___
+2017-06-23 11:09:01 [info] payapi->construct : ___debugging___
+2017-06-23 11:09:01 [info] payapi->construct : autoload : cgi
+2017-06-23 11:09:01 [warning] cgi->auto : staging mode
+2017-06-23 11:09:01 [info] engine->construct : server load : 0%
+2017-06-23 11:09:01 [info] payapi->model : autoload : callback
+2017-06-23 11:09:01 [info] serializer->adaptor : autoload : adaptor
+2017-06-23 11:09:01 [info] model->auto : autoload : branding
+2017-06-23 11:09:01 [info] engine->construct : brand : payapi
+2017-06-23 11:09:01 [info] payapi->controller : autoload : callback
+2017-06-23 11:09:01 [info] engine->construct : command : callback
+2017-06-23 11:09:01 [error] model_callback->validate : no valid callback
+2017-06-23 11:09:01 [info] controller->response : rendering response 
+2017-06-23 11:09:01 [info] controller->response : [mode] string
+2017-06-23 11:09:01 [info] controller->response : [code] 406
+2017-06-23 11:09:01 [info] cgi->render : sending headers
+2017-06-23 11:09:01 [info] debugger->destruct : ___0.04716ms___
 

@@ -19,7 +19,7 @@ class model extends engine {
 
   protected function auto () {
     $this -> adaptor = serializer :: adaptor ( $this -> config ( 'plugin' ) ) ;
-    $this -> crypter = new crypter () ;
+    $this -> crypter = new crypter ( md5 ( $this -> config ( 'payapi_public_id' ) . md5 ( $this -> config ( 'payapi_api_key' ) ) ) ) ; // @TODO to include server signature after developing
     $this -> info = $this -> serializer -> sign ( $this -> get ( 'info' ) ) ;
     $this -> brand = new branding () ;
     $this -> arguments = $this -> get ( 'arguments' ) ;
