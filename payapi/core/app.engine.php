@@ -28,12 +28,12 @@ abstract class engine {
 
   public function get ( $key = false ) {
     if ( $key === false )
-      return $this -> model -> data -> get () ;
-    return $this -> model -> data -> get ( $key ) ;
+      return $this -> data -> get () ;
+    return $this -> data -> get ( $key ) ;
   }
 
   public function has ( $key ) {
-    return $this -> model -> data -> has ( $key ) ;
+    return $this -> data -> has ( $key ) ;
   }
 
   public function set ( $key , $value = false ) {
@@ -41,7 +41,7 @@ abstract class engine {
       $this -> error ( 'use only (string) for key' ) ;
       return false ;
     }
-    $this -> model -> data -> set ( $key , $value ) ;
+    $this -> data -> set ( $key , $value ) ;
   }
 
   public function __set ( $key = false , $value = false ) {

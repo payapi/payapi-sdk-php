@@ -23,6 +23,7 @@ class branding extends engine {
       $this -> defaulted = true ;
       $this -> warning ( 'brand not found, using default' ) ;
     }
+    $this -> set ( 'brand' , $this -> brand ) ;
     $this -> debug ( 'brand : ' . $this -> key ) ;
   }
 
