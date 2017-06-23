@@ -85,6 +85,9 @@ final class cgi extends engine {
     if ( $this -> config ( 'headers' ) ) {
       $this -> headers = true ;
     }
+    if ( $this -> config ( 'production' ) === false ) {
+      $this -> warning ( 'staging mode' ) ;
+    }
     if ( function_exists ( 'sys_getloadavg' ) ) {
       $this -> serverLoad = sys_getloadavg () ;
       $this -> debug ( 'server load : ' . ( $this -> serverLoad [ 0 ] * 100 ) . '%' ) ;

@@ -17,7 +17,7 @@ class model extends engine {
   private
     $crypter                       =             false ;
 
-  public function auto () {
+  protected function auto () {
     $this -> adaptor = serializer :: adaptor ( $this -> config ( 'plugin' ) ) ;
     $this -> crypter = new crypter () ;
     $this -> info = $this -> serializer -> sign ( $this -> get ( 'info' ) ) ;

@@ -16,7 +16,7 @@
 *              curl
 *
 * @TODO
-*
+*       encode payapi data account!
 *
 **/
 
@@ -71,7 +71,9 @@ final class payapi {
       "headers" => ( ( isset ( $config [ 'headers' ] ) && $config [ 'headers' ] !== false ) ? true : false ) ,
       "archival" => ( ( isset ( $config [ 'archival' ] ) && $config [ 'archival' ] !== false ) ? true : false ) ,
       "production" => ( ( isset ( $config [ 'production' ] ) && $config [ 'production' ] !== false ) ? true : false ) ,
-      "debug" => ( ( isset ( $config [ 'debug' ] ) && $config [ 'debug' ] !== false ) ? true : false )
+      "debug" => ( ( isset ( $config [ 'debug' ] ) && $config [ 'debug' ] !== false ) ? true : false ) ,
+      "payapi_public_id" => ( isset ( $config [ 'payapi_public_id' ] ) && is_string ( $config [ 'payapi_public_id' ] ) && preg_match ( '~^[0-9a-z]+$~i' , $config [ 'payapi_public_id' ] ) ) ? $config [ 'payapi_public_id' ] : false ,
+      "payapi_api_key" => ( isset ( $config [ 'payapi_api_key' ] ) && is_string ( $config [ 'payapi_api_key' ] ) && preg_match ( '~^[0-9a-z]+$~i' , $config [ 'payapi_api_key' ] ) ) ? $config [ 'payapi_api_key' ] : false
     ) ;
     $this -> data -> set ( 'config' , $this -> config ) ;
     $this -> data -> set ( 'info' , $this -> info ) ;
@@ -86,6 +88,9 @@ final class payapi {
   }
 
   public function __call ( $command , $arguments = array () ) {
+    if ( $this -> config [ 'payapi_public_id' ] === false || $this -> config [ 'payapi_public_id' ] === false ) {
+      return $this -> unauthorized () ;
+    }
     $this -> validate ( $command , $arguments ) ;
     $this -> data -> set ( 'arguments' , $arguments ) ;
     $this -> model () ;
@@ -105,6 +110,11 @@ final class payapi {
       $this -> command = 'error' ;
       $this -> arguments = array () ;
     }
+  }
+
+  protected function unauthorized () {
+    $this -> cgi -> error ( 'no valid payapi account' ) ;
+    return $this -> cgi -> render ( $this -> cgi -> response ( 403 ) , 403 ) ;
   }
 
   private function model () {

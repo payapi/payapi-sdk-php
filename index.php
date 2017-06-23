@@ -20,18 +20,21 @@ function example ( $key ) {
     "info" ,
     "validate" ,
     "settings" ,
-    "tostring"
+    "tostring" ,
+    "callback"
   ) ;
   // app config
   $config = array (
-    "production"     =>    false , // bool true/false
-    "debug"          =>     true , // bool true/false
-    "archival"       =>     true , // bool true/false
-    "plugin"         =>    false , // string [opencart,magento,prestashop,default] OR bool false
+    "production"       =>    false , // bool true/false
+    "debug"            =>     true , // bool true/false
+    "archival"         =>     true , // bool true/false
+    "plugin"           =>    false , // string [opencart,magento,prestashop,default] OR bool false
     // @FIXME array/object render is duplicated?
-    "mode"           => 'string' , // string [json,object,array,string,html] OR bool false
-    "headers"        =>     true ,
-    "branding"       => 'payapi'   // string [payapi] OR bool false
+    "mode"             => 'string' , // string [json,object,array,string,html] OR bool false
+    "headers"          =>     true ,
+    "branding"         => 'payapi' ,  // string [payapi] OR bool false
+    "payapi_public_id" => 'multimerchantshop' , // PayApi public id (PayApi backend)
+    "payapi_api_key"   => 'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9'  // PayApi api key (PayApi backend)
   ) ;
   $app = new payapi ( $config ) ;
   if ( in_array ( $key , $examples ) ) {
@@ -39,6 +42,7 @@ function example ( $key ) {
   } else {
     $app -> error ( 404 ) ;
   }
+  unset ( $app ) ;
 }
 // test
 $foo = example ( 'settings' ) ;

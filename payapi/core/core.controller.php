@@ -49,6 +49,7 @@ abstract class controller extends engine {
   }
 
   protected function curling ( $url , $data = null , $return = 1 , $header = 0 , $ssl = 0 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
+    $this -> debug ( $url ) ;
     if ( $this -> curl === false ) {
       $this -> load -> model ( 'curl' ) ;
       $this -> curl = new model_curl () ;

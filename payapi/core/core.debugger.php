@@ -37,8 +37,8 @@ final class debugger {
 
   public function add ( $info , $label = 'info' ) {
     $trace = debug_backtrace () ;
-    $class = str_replace ( 'payapi\\' , null , ( isset ( $trace [ 2 ] [ 'class' ] ) ) ? str_replace ( '"' , null , $trace [ 2 ] [ 'class' ] ) : $trace [ 1 ] [ 'class' ] ) ;
-    $method = str_replace ( '__' , null , ( isset ( $trace [ 2 ] [ 'function' ] ) ) ? str_replace ( '"' , null , $trace [ 2 ] [ 'function' ] ) : $trace [ 1 ] [ 'function' ] ) ;
+    $class = str_replace ( 'payapi\\' , null , ( isset ( $trace [ 3] [ 'class' ] ) ) ? str_replace ( '"' , null , $trace [ 3 ] [ 'class' ] ) : ( ( isset ( $trace [ 2 ] [ 'class' ] ) ) ? $trace [ 2 ] [ 'class' ] : $trace [ 1 ] [ 'class' ] ) ) ;
+    $method = str_replace ( '__' , null , ( isset ( $trace [ 3 ] [ 'function' ] ) ) ? str_replace ( '"' , null , $trace [ 3 ] [ 'function' ] ) : ( ( isset ( $trace [ 2 ] [ 'function' ] ) ) ? $trace [ 2 ] [ 'function' ] : $trace [ 1 ] [ 'function' ] ) ) ;
     $entry = ( date ( 'Y-m-d H:i:s' , time () ) . ' [' . ( string ) trim ( $label ) . '] ' . $class . '->' . $method . ' : ' . ( ( is_string ( $info ) ) ? $info : ( ( is_array ( $info ) ? json_encode ( $info ) : ( ( is_bool ( $info ) || is_object ( $info ) ) ? ( string ) $info : serializer :: undefined () ) ) ) ) ) ;
     $this -> history [] = $entry ;
     return $this -> set ( $entry ) ;

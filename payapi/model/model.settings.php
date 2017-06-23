@@ -9,9 +9,9 @@ final class model_settings extends model {
     $encKey                 =   false ;
 
   public function validSettings () {
-    if ( is_string ( $this -> arguments () ) && is_string ( $this -> arguments ( 1 ) ) ) {
-      $this -> publicId = $this -> arguments () ;
-      $this -> encKey = $this -> arguments ( 1 ) ;
+    if ( is_string ( $this -> config ( 'payapi_public_id' ) ) && is_string ( $this -> config ( 'payapi_api_key' ) ) ) {
+      $this -> publicId = $this -> config ( 'payapi_public_id' ) ;
+      $this -> encKey = $this -> config ( 'payapi_api_key' ) ;
       return true ;
     }
     return false ;

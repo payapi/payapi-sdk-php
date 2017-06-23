@@ -1,3 +1,3 @@
 <?php
 
-$app -> settings ( 'multimerchantshop' , 'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9' ) ;
+$app -> settings () ;
