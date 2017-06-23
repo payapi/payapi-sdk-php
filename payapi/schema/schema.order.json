@@ -1,0 +1,33 @@
+{
+  "___info___" : {
+    "version" : "0.0.1",
+    "createdAt" : "20170621",
+    "updateddAt" : "20170621"
+  } ,
+  "___schema___" : {
+    "sumInCentsIncVat": {
+      "___mandatory___": true,
+      "___type___": "int"
+    },
+    "sumInCentsExcVat": {
+      "___mandatory___": true,
+      "___type___": "int"
+    },
+    "vatInCents": {
+      "___mandatory___": true,
+      "___type___": "int"
+    },
+    "currency": {
+      "___mandatory___": true,
+      "___type___": "string"
+    },
+    "referenceId": {
+      "___mandatory___": true,
+      "___type___": "string"
+    },
+    "tosUrl": {
+      "___mandatory___": false,
+      "___type___": "string"
+    }
+  }
+}

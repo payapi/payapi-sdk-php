@@ -1,0 +1,39 @@
+{
+  "___info___": {
+    "version": "0.0.1",
+    "createdAt": "20170620",
+    "updateddAt": "20170620"
+  },
+  "___schema___": {
+    "order": {
+      "___mandatory___": true,
+      "___type___": "array",
+      "___validate___": "order"
+    },
+    "products": {
+      "___mandatory___": true,
+      "___type___": "array",
+      "___validate___": "product"
+    },
+    "shippingAddress": {
+      "___mandatory___": true,
+      "___type___": "array",
+      "___validate___": "address"
+    },
+    "consumer": {
+      "___mandatory___": false,
+      "___type___": "array",
+      "___validate___": "consumer"
+    },
+    "callbacks": {
+      "___mandatory___": false,
+      "___type___": "array",
+      "___validate___": "callbacks"
+    },
+    "returnUrls": {
+      "___mandatory___": false,
+      "___type___": "array",
+      "___validate___": "returns"
+    }
+  }
+}

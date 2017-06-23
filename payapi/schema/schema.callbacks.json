@@ -1,0 +1,25 @@
+{
+  "___info___" : {
+    "version" : "0.0.1",
+    "createdAt" : "20170621",
+    "updateddAt" : "20170621"
+  } ,
+  "___schema___" : {
+    "processing": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "success": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "failed": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "chargeback": {
+      "___mandatory___": false,
+      "___type___": "string"
+    }
+  }
+}

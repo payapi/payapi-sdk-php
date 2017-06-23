@@ -1,0 +1,21 @@
+{
+  "___info___" : {
+    "version" : "0.0.1",
+    "createdAt" : "20170621",
+    "updateddAt" : "20170621"
+  } ,
+  "___schema___" : {
+    "success": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "cancel": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "failed": {
+      "___mandatory___": false,
+      "___type___": "string"
+    }
+  }
+}

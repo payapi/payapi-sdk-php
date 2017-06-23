@@ -1,0 +1,41 @@
+{
+  "___info___" : {
+    "version" : "0.0.1",
+    "createdAt" : "20170621",
+    "updateddAt" : "20170621"
+  } ,
+  "___schema___" : {
+    "recipientName": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "co": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "streetAddress": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "streetAddress2": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "postalCode": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "city": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "stateOrProvince": {
+      "___mandatory___": false,
+      "___type___": "string"
+    },
+    "countryCode": {
+      "___mandatory___": false,
+      "___type___": "string"
+    }
+  }
+}
