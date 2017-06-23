@@ -68,8 +68,14 @@ final class validator {
       case 'string':
         return is_string ( $data ) ;
       break;
+      case 'url':
+        return $this -> isUrl ( $data ) ;
+      break;
       case 'email':
         return filter_var ( $data , FILTER_VALIDATE_EMAIL ) ;
+      break;
+      case 'phone':
+        return $this -> isPhoneNumber ( $data ) ;
       break;
       case 'int':
         return is_int ( $data ) ;
@@ -93,6 +99,16 @@ final class validator {
         return false ;
       break;
     }
+  }
+
+  protected function isPhoneNumber ( $phone ) {
+    // @TODO
+    return is_string ( $phone ) ;
+  }
+
+  protected function isUrl ( $phone ) {
+    // @TODO
+    return is_string ( $phone ) ;
   }
 
 

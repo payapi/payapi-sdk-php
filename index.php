@@ -1,6 +1,9 @@
 <?php
 /**
 *  Testing PayApi Payments PHP
+*
+*  @debug  payapi/logs
+*
 **/
 
 // @TODELETE just for DEV
