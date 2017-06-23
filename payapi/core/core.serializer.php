@@ -11,12 +11,10 @@ namespace payapi ;
 final class serializer {
 
   public static
-    $single                   =  false ;
+    $single                   =     false ;
 
   protected
-    $version                  =  array (
-      "___serializer__v"      => '0.0.1'
-    ) ;
+    $version                  =   '0.0.1' ;
 
   private
     $info                     =  array () ;
@@ -45,7 +43,7 @@ final class serializer {
   }
 
   public function jsonToArray ( $json , $toArray = false ) {
-    $array = json_decode ( $data , $toArray ) ;
+    $array = json_decode ( $json , $toArray ) ;
     return $array ;
   }
 
@@ -71,6 +69,10 @@ final class serializer {
     return preg_match ( '~^[0-9a-z]+$~i' , $string ) ;
   }
 
+  public function isAlphaNumeric ( $key ) {
+    return preg_match ( '~^[0-9a-z]+$~i' , $key ) ;
+  }
+
   public function isNumeric ( $number ) {
     return preg_match ( '~^[0-9]+$~i' , $number ) ;
   }
@@ -83,6 +85,7 @@ final class serializer {
     $info = array_merge ( $this -> info ,
       array (
         "___ip"    => $this -> getIp () ,
+        "___serializer__v" => $this -> version ,
         "___stamp" => date ( 'Y-m-d H:i:s T' , time () )
       )
     ) ;
@@ -91,10 +94,6 @@ final class serializer {
     } else {
       return $info ;
     }
-  }
-
-  public function undefined () {
-    return 'undefined' ;
   }
 
   public function getIp () {
@@ -141,6 +140,10 @@ final class serializer {
 
   public static function cleanNamespace ( $route ) {
     return str_replace ( array ( 'payapi\\' , 'controller_' , 'model_' ) , null , $route ) ;
+  }
+
+  public function undefined () {
+    return 'undefined' ;
   }
 
   public function toString ( $data ) {

@@ -11,7 +11,8 @@ class model extends engine {
 
   protected
     $info                          =             false ,
-    $adaptor                       =             false ;
+    $adaptor                       =             false ,
+    $brand                         =             false ;
 
   private
     $crypter                       =             false ;
@@ -20,6 +21,7 @@ class model extends engine {
     $this -> adaptor = serializer :: adaptor ( $this -> config ( 'plugin' ) ) ;
     $this -> crypter = new crypter () ;
     $this -> info = $this -> serializer -> sign ( $this -> get ( 'info' ) ) ;
+    $this -> brand = new branding () ;
     $this -> arguments = $this -> get ( 'arguments' ) ;
   }
 
@@ -36,6 +38,17 @@ class model extends engine {
     }
     if ( isset ( $this -> config [ $key ] ) ) {
       return $this -> config [ $key ] ;
+    } else {
+      return false ;
+    }
+  }
+
+  public function brand ( $key = false ) {
+    if ( $key === false  ) {
+      return $this -> brand ;
+    }
+    if ( isset ( $this -> brand [ $key ] ) ) {
+      return $this -> brand [ $key ] ;
     } else {
       return false ;
     }

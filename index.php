@@ -38,4 +38,4 @@ function example ( $key ) {
   }
 }
 // test
-$foo = example ( 'validate' ) ;
+$foo = example ( 'settings' ) ;
