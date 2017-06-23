@@ -19,7 +19,7 @@ final class crypter {
     try {
       $this -> prefix = strtok ( JWT :: encode ( ' ' , $this -> hash ) , '.' ) ;
     } catch ( Exception $e ) {
-      return false ;
+      $this -> error ( 'JWT is not loaded' ) ;
     }
   }
 
@@ -29,7 +29,7 @@ final class crypter {
     try {
       $decoded = JWT :: decode ( self :: build ( $encoded ) , $hash_update , array ( $this -> mode ) ) ;
     } catch ( Exception $e ) {
-      $this -> error ( 'cannot decode provided data : ' . json_encode ( $e -> getMessage () ) , 'error' ) ;
+      $this -> error ( 'cannot decode provided data : ' . json_encode ( $e -> getMessage () ) ) ;
       $decoded = false ;
     }
     return $decoded ;
@@ -41,7 +41,7 @@ final class crypter {
     try {
       $encoded = self :: clean ( JWT :: encode ( $decoded , $hash_update , $this -> mode ) ) ;
     } catch ( Exception $e ) {
-      $this -> error ( 'cannot encode provided data' , 'error' ) ;
+      $this -> error ( 'cannot encode provided data' ) ;
       $encoded = false ;
     }
     return $encoded ;
@@ -71,7 +71,8 @@ final class crypter {
     return $encodejsonized ;
   }
 
-  protected function error ( $error ) {
+  private function error ( $error ) {
+    // @TODO
     return true ;
   }
 
