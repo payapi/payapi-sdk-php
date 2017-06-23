@@ -1,0 +1,33 @@
+{
+  "___info___" : {
+    "version" : "0.0.1",
+    "createdAt" : "20170621",
+    "updateddAt" : "20170621"
+  } ,
+  "___schema___" : {
+    "payment": {
+      "___mandatory___": true,
+      "___type___": "array"
+    },
+    "order": {
+      "___mandatory___": true,
+      "___type___": "array"
+    },
+    "products": {
+      "___mandatory___": true,
+      "___type___": "array"
+    },
+    "shippingAddress": {
+      "___mandatory___": true,
+      "___type___": "array"
+    },
+    "consumer": {
+      "___mandatory___": true,
+      "___type___": "array"
+    },
+    "extraInputData": {
+      "___mandatory___": false,
+      "___type___": "array"
+    }
+  }
+}

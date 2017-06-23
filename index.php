@@ -33,8 +33,8 @@ function example ( $key ) {
     "mode"             => 'string' , // string [json,object,array,string,html] OR bool false
     "headers"          =>     true ,
     "branding"         => 'payapi' ,  // string [payapi] OR bool false
-    "payapi_public_id" => 'multimerchantshop' , // PayApi public id (PayApi backend)
-    "payapi_api_key"   => 'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9'  // PayApi api key (PayApi backend)
+    "payapi_public_id" => 'multimerchantshop' , // MANDATORY PayApi public id (PayApi backend)
+    "payapi_api_key"   => 'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9'  // MANDATORY PayApi api key (PayApi backend)
   ) ;
   $app = new payapi ( $config ) ;
   if ( in_array ( $key , $examples ) ) {
@@ -45,4 +45,4 @@ function example ( $key ) {
   unset ( $app ) ;
 }
 // test
-$foo = example ( 'settings' ) ;
+$foo = example ( 'callback' ) ;
