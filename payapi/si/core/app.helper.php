@@ -1,26 +1,25 @@
 <?php
-
 namespace payapi ;
 
-abstract class handler {
+abstract class helper {
 
   protected
+    $load                          =             false ,
     $error                         =             false ,
-    $serializer                    =             false ,
     $debugger                      =             false ,
     $data                          =             false ,
     $config                        =             false ;
 
   public function __construct () {
-    $this -> serializer = serializer :: single () ;
     $this -> error = error :: single () ;
     $this -> data = data :: single () ;
     $this -> config = $this -> data -> get ( 'config' ) ;
+    $this -> load = $this -> data -> get ( 'loader' ) ;
     if ( $this -> config ( 'debug' ) ) {
       $this -> debugger = debugger :: single () ;
     }
     if ( method_exists ( $this , 'auto' ) ) {
-      $this -> debug ( '[autoload] ' . serializer :: cleanNamespace ( get_called_class () ) ) ;
+      $this -> debug ( '[autoload] ' . serializer :: cleanLogNamespace ( get_called_class () ) ) ;
       return $this -> auto () ;
     }
   }
@@ -44,13 +43,20 @@ abstract class handler {
   }
 
   public function __set ( $key = false , $value = false ) {
-    $this -> warning ( 'method not allowed : __set' ) ;
-    return false ;
+    $this -> warning ( 'not allowed ' . $key , '__set' ) ;
+  return false ;
   }
 
   public function __get ( $key = false ) {
-    $this -> warning ( 'method not allowed : __get ' . $key ) ;
+    $this -> warning ( 'not allowed ' . $key , '__get' ) ;
     return false ;
+  }
+
+  public function load ( $data ) {
+    $loadable = array ( 'model' , 'schema' ) ;
+    $split = explode ( '/' , $data ) ;
+    if ( ! isset ( $split [ 0 ] ) || ! isset ( $split [ 1 ] ) || ! in_array ( $split [ 0 ] , $loadable ) )
+      $this -> error ( 'do not find loadable : ' . $data ) ;
   }
 
   public function config ( $key = false ) {
@@ -75,10 +81,12 @@ abstract class handler {
     return $this -> error -> set (  $errors , $key ) ;
   }
 
-  public function warning ( $warning ) {
-    return $this -> debug ( $warning , 'warning' ) ;
+  public function warning ( $warning , $label = false ) {
+    $extraLabel = ( is_string ( $label ) === true ) ? '[' . $label . '] ' : null ;
+    $entry = $extraLabel . $warning ;
+    return $this -> error ( $entry , 'warning' ) ;
   }
-
+  //->
   public function fatal (  $errors ) {
     $this -> debug ( $errors , 'fatal' ) ;
     $this -> error -> fatal (  $errors ) ;
