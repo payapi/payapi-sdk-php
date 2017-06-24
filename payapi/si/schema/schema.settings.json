@@ -1,0 +1,49 @@
+{
+  "___info___": {
+    "version": "0.0.1",
+    "createdAt": "20170622",
+    "updateddAt": "20170622"
+  } ,
+  "___schema___": {
+    "preselectedPartialPayment": {
+      "___mandatory___": true,
+      "___type___": "string",
+      "___min___": 2,
+      "___max___": 250
+    } ,
+    "minimumAmountAllowedInCents": {
+      "___mandatory___": true,
+      "___type___": "int",
+      "___min___": 1,
+      "___max___": 250
+    } ,
+    "minimumAmountAllowedCurrency": {
+      "___mandatory___": true,
+      "___type___": "string",
+      "___min___": 2,
+      "___max___": 15
+    } ,
+    "invoiceFeeInCents": {
+      "___mandatory___": true,
+      "___type___": "int",
+      "___min___": 1,
+      "___max___": 50
+    } ,
+    "invoiceFeeCurrency": {
+      "___mandatory___": true,
+      "___type___": "string",
+      "___min___": 2,
+      "___max___": 15
+    } ,
+    "nominalAnnualInterestRate": {
+      "___mandatory___": true,
+      "___type___": "float",
+      "___min___": 1,
+      "___max___": 50
+    } ,
+    "whitelistedCountries": {
+      "___mandatory___": false,
+      "___type___": "array"
+    }
+  }
+}

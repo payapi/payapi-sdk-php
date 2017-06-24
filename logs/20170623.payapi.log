@@ -1,0 +1,17 @@
+2017-06-23 22:51:40 [info] engine->construct [debugger] enabled
+2017-06-23 22:51:40 [info] payapi->construct [autoload] cgi
+2017-06-23 22:51:40 [warning] cgi->auto staging mode
+2017-06-23 22:51:40 [info] engine->construct [server_load] 0%
+2017-06-23 22:51:40 [info] payapi->call [command] settings
+2017-06-23 22:51:40 [info] payapi->model [autoload] settings
+2017-06-23 22:51:40 [info] serializer->adaptor [autoload] adaptor
+2017-06-23 22:51:40 [info] model->auto [autoload] branding
+2017-06-23 22:51:40 [info] engine->construct [brand] payapi
+2017-06-23 22:51:40 [info] payapi->controller [autoload] settings
+2017-06-23 22:51:40 [info] controller->response [rendering] info
+2017-06-23 22:51:40 [info] controller->response [mode] string
+2017-06-23 22:51:40 [info] controller->response [code] 400
+2017-06-23 22:51:40 [info] cgi->render [headers] string
+2017-06-23 22:51:40 [info] payapi->destruct [destructed]
+2017-06-23 22:51:40 [info] debugger->destruct ___0.0211ms___
+

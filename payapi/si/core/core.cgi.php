@@ -2,7 +2,7 @@
 
 namespace payapi ;
 
-final class cgi extends engine {
+final class cgi extends handler {
 
   protected
     $responses =    array (
@@ -90,7 +90,7 @@ final class cgi extends engine {
     }
     if ( function_exists ( 'sys_getloadavg' ) ) {
       $this -> serverLoad = sys_getloadavg () ;
-      $this -> debug ( 'server load : ' . ( $this -> serverLoad [ 0 ] * 100 ) . '%' ) ;
+      $this -> debug ( '[server_load] ' . ( $this -> serverLoad [ 0 ] * 100 ) . '%' ) ;
       if ( $this -> serverLoad [ 0 ] > 0.96 ) {
         $this -> render ( $this -> response ( 503 ) , 503 ) ;
       }
@@ -102,7 +102,7 @@ final class cgi extends engine {
   public function render ( $data , $code = false , $mode = false , $headers = 'undefined' ) {
     if ( $mode ) $this -> mode ( $mode ) ;
     if ( $code ) $this -> code ( $code ) ;
-    $this -> debug ( 'rendering response ' ) ;
+    $this -> debug ( '[rendering] info' ) ;
     $this -> debug ( '[mode] ' . $this -> mode ) ;
     $this -> debug ( '[code] ' . $this -> code ) ;
     if ( is_bool ( $headers ) && $headers != 'undefined' && $headers !== false ) $this -> headers = true ;
@@ -138,7 +138,7 @@ final class cgi extends engine {
     if ( ! $this -> headers ) {
       return true ;
     }
-    $this -> debug ( 'sending headers' ) ;
+    $this -> debug ( '[headers] ' . $this -> mode ) ;
     header ( 'Content-type: ' . $this -> modes [ $this -> mode ] ) ;
     return http_response_code ( $this -> code ) ;
   }

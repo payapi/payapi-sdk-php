@@ -7,19 +7,27 @@
   "___schema___" : {
     "processing": {
       "___mandatory___": false,
-      "___type___": "string"
+      "___type___": "string",
+      "___min___": 15,
+      "___max___": 250
     },
     "success": {
       "___mandatory___": false,
-      "___type___": "string"
+      "___type___": "string",
+      "___min___": 15,
+      "___max___": 250
     },
     "failed": {
       "___mandatory___": false,
-      "___type___": "string"
+      "___type___": "string",
+      "___min___": 15,
+      "___max___": 250
     },
     "chargeback": {
       "___mandatory___": false,
-      "___type___": "string"
+      "___type___": "string",
+      "___min___": 15,
+      "___max___": 250
     }
   }
 }

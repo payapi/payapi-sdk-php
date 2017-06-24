@@ -4,22 +4,26 @@ namespace payapi ;
 
 use \payapi\cgi as cgi ;
 
-class model extends engine {
+class model extends handler {
 
   public
     $arguments                     =             false ;
 
   protected
     $info                          =             false ,
+    $validator                     =             false ,
     $adaptor                       =             false ,
+    $curl                          =             false ,
+    $curlResponse                  =             false ,
     $brand                         =             false ;
 
   private
     $crypter                       =             false ;
 
   protected function auto () {
+    $this -> validator = $this -> data -> get ( 'validator' ) ;
+    $this -> crypter = $this -> data -> get ( 'crypter' ) ;
     $this -> adaptor = serializer :: adaptor ( $this -> config ( 'plugin' ) ) ;
-    $this -> crypter = new crypter ( md5 ( $this -> config ( 'payapi_public_id' ) . md5 ( $this -> config ( 'payapi_api_key' ) ) ) ) ; // @TODO to include server signature after developing
     $this -> info = $this -> serializer -> sign ( $this -> get ( 'info' ) ) ;
     $this -> brand = new branding () ;
     $this -> arguments = $this -> get ( 'arguments' ) ;
@@ -43,6 +47,14 @@ class model extends engine {
     }
   }
 
+  public function validSchema ( $schema , $data ) {
+    if ( ! $schema || ! is_array ( $data ) ) {
+      return false ;
+    }
+    $validated = $this -> validator -> validSchema ( $schema , $data ) ;
+    return $validated ;
+  }
+
   public function brand ( $key = false ) {
     if ( $key === false  ) {
       return $this -> brand ;
@@ -52,6 +64,17 @@ class model extends engine {
     } else {
       return false ;
     }
+  }
+
+  protected function curling ( $url , $data = null , $return = 1 , $header = 0 , $ssl = 0 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
+    $this -> curlResponse = false ;
+    $this -> debug ( $url ) ;
+    if ( $this -> curl === false ) {
+      $this -> load -> model ( 'curl' ) ;
+      $this -> curl = new model_curl () ;
+    }
+    $this -> curlResponse = $this -> curl -> request ( $url , $data , $return , $header , $ssl , $fresh , $noreuse , $timeout ) ;
+    return $this -> curlResponse ;
   }
 
   public function get ( $key = false ) {

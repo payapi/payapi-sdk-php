@@ -2,11 +2,10 @@
 
 namespace payapi ;
 
-abstract class engine {
+abstract class handler {
 
   protected
     $error                         =             false ,
-    $validator                     =             false ,
     $serializer                    =             false ,
     $debugger                      =             false ,
     $data                          =             false ,
@@ -21,7 +20,7 @@ abstract class engine {
       $this -> debugger = debugger :: single () ;
     }
     if ( method_exists ( $this , 'auto' ) ) {
-      $this -> debug ( 'autoload : ' . serializer :: cleanNamespace ( get_called_class () ) ) ;
+      $this -> debug ( '[autoload] ' . serializer :: cleanNamespace ( get_called_class () ) ) ;
       return $this -> auto () ;
     }
   }
@@ -60,19 +59,6 @@ abstract class engine {
     }
     if ( isset ( $this -> config [ $key ] ) ) {
       return $this -> config [ $key ] ;
-    }
-    return false ;
-  }
-
-  protected function valid ( $schema , $data ) {
-    if ( ! $schema || ! is_array ( $data ) ) {
-      return false ;
-    }
-    if ( $this -> validator === false ) {
-      $this -> validator = new validator () ;
-    }
-    if ( $this -> validator -> validate ( $schema , $data ) ) {
-      return true ;
     }
     return false ;
   }

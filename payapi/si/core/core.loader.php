@@ -21,7 +21,7 @@ final class loader {
     if ( isset ( $this -> loaded [ 'model' ] [ $key ] ) ) {
       return true ;
     }
-    $file = router :: dir ( 'model' ) . 'model' . '.' . $key . '.' . 'php' ;
+    $file = router :: dirCore ( 'model' ) . 'model' . '.' . $key . '.' . 'php' ;
     if ( is_file ( $file ) ) {
       return require ( $file ) ;
     }

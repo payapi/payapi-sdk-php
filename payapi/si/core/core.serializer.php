@@ -65,18 +65,6 @@ final class serializer {
     return ( int ) $int ;
   }
 
-  public function isString ( $string ) {
-    return preg_match ( '~^[0-9a-z]+$~i' , $string ) ;
-  }
-
-  public function isAlphaNumeric ( $key ) {
-    return preg_match ( '~^[0-9a-z]+$~i' , $key ) ;
-  }
-
-  public function isNumeric ( $number ) {
-    return preg_match ( '~^[0-9]+$~i' , $number ) ;
-  }
-
   public function sign ( $array = array () ) {
     return array_merge ( $array , $this -> info () ) ;
   }
@@ -123,7 +111,7 @@ final class serializer {
     if ( ! is_string ( $adaptor ) ) {
       return false ;
     }
-    $file = router :: dir ( 'adaptor' ) . 'adaptor' . '.' . strtolower ( trim ( $adaptor ) ) . '.' . 'php' ;
+    $file = router :: dirCore ( 'adaptor' ) . 'adaptor' . '.' . strtolower ( trim ( $adaptor ) ) . '.' . 'php' ;
     if ( is_file ( $file ) ) {
       try {
         require ( $file ) ;
@@ -146,7 +134,7 @@ final class serializer {
     return 'undefined' ;
   }
 
-  public function toString ( $data ) {
+  public static function toString ( $data ) {
     if ( ! is_array ( $data ) )
       return $this -> undefined () ;
     return $this -> arrayToJson ( $data ) ;

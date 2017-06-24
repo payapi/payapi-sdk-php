@@ -1,7 +1,7 @@
 <?php
 namespace payapi ;
 
-abstract class plugin extends engine {
+abstract class plugin extends handler {
 
   protected
     $error                     =   false ;

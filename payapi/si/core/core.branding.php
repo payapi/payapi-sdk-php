@@ -4,7 +4,7 @@ namespace payapi ;
 
 // @NOTE we will handle merchant personalitations
 
-class branding extends engine {
+class branding extends handler {
 
   private
     $default                  =  'payapi' ,
@@ -24,7 +24,7 @@ class branding extends engine {
       $this -> warning ( 'brand not found, using default' ) ;
     }
     $this -> set ( 'brand' , $this -> brand ) ;
-    $this -> debug ( 'brand : ' . $this -> key ) ;
+    $this -> debug ( '[brand] ' . $this -> key ) ;
   }
 
   private function getBrand ( $key ) {

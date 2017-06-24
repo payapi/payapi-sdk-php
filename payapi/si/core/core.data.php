@@ -43,8 +43,13 @@ final class data {
     return ( $this -> data [ $key ] = $value ) ;
   }
 
-  public function reset () {
-    $this -> data = false ;
+  public function reset ( $fullReset = false) {
+    $exceptions = array ( 'config' , 'cgi' ) ; // @TODO update after isolate controller
+    foreach ( $this -> data as $key => $value ) {
+      if ( ! in_array ( $key , $exceptions ) ) {
+        unset ( $this -> data [ $key ] ) ;
+      }
+    }
   }
 
   public static function single () {

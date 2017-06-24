@@ -2,7 +2,7 @@
 
 namespace payapi ;
 
-abstract class controller extends engine {
+abstract class controller extends handler {
 
   protected
     $model                         =             false ,
@@ -11,7 +11,6 @@ abstract class controller extends engine {
 
   private
     $cgi                           =             false ,
-    $curl                          =             false ,
     $arguments                     =             false ;
 
   protected function auto () {
@@ -22,7 +21,10 @@ abstract class controller extends engine {
     $this -> error = error :: single () ;
     $this -> arguments = $this -> model -> get ( 'arguments' ) ;
     $this -> initialized () ;
-    $this -> debug ( 'command : ' . serializer :: cleanNamespace ( get_called_class () ) );
+  }
+
+  public function validSchema ( $schema , $data ) {
+    return $this -> model -> validSchema ( $schema , $data ) ;
   }
 
   protected function initialized () {
@@ -46,16 +48,6 @@ abstract class controller extends engine {
     $split = explode ( '/' , $data ) ;
     if ( ! isset ( $split [ 0 ] ) || ! isset ( $split [ 1 ] ) || ! in_array ( $split [ 0 ] , $loadable ) )
       $this -> error ( 'do not find loadable : ' . $data ) ;
-  }
-
-  protected function curling ( $url , $data = null , $return = 1 , $header = 0 , $ssl = 0 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
-    $this -> debug ( $url ) ;
-    if ( $this -> curl === false ) {
-      $this -> load -> model ( 'curl' ) ;
-      $this -> curl = new model_curl () ;
-    }
-    $this -> response = $this -> curl -> request ( $url , $data , $return , $header , $ssl , $fresh , $noreuse , $timeout ) ;
-    return $this -> response ;
   }
 
   protected function render ( $data , $code = false , $mode = false , $display = true ) {

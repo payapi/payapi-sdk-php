@@ -23,11 +23,11 @@ final class debugger {
 
   protected function __construct () {
     $this -> microtime = microtime ( true ) ;
-    $this -> dir = router :: dir ( 'logs' ) ;
+    $this -> dir = router :: dirLogs () ;
     $this -> file = date ( 'Ymd' ) . '.' . __NAMESPACE__ . '.' . 'log' ;
     router :: checkDir ( $this -> dir ) ;
     $this -> reset () ;
-    $this -> add ( '___debugging___' ) ;
+    $this -> add ( '[debugger] enabled' ) ;
   }
 
   private function reset () {
@@ -39,9 +39,17 @@ final class debugger {
     $trace = debug_backtrace () ;
     $class = str_replace ( 'payapi\\' , null , ( isset ( $trace [ 3] [ 'class' ] ) ) ? str_replace ( '"' , null , $trace [ 3 ] [ 'class' ] ) : ( ( isset ( $trace [ 2 ] [ 'class' ] ) ) ? $trace [ 2 ] [ 'class' ] : $trace [ 1 ] [ 'class' ] ) ) ;
     $method = str_replace ( '__' , null , ( isset ( $trace [ 3 ] [ 'function' ] ) ) ? str_replace ( '"' , null , $trace [ 3 ] [ 'function' ] ) : ( ( isset ( $trace [ 2 ] [ 'function' ] ) ) ? $trace [ 2 ] [ 'function' ] : $trace [ 1 ] [ 'function' ] ) ) ;
-    $entry = ( date ( 'Y-m-d H:i:s' , time () ) . ' [' . ( string ) trim ( $label ) . '] ' . $class . '->' . $method . ' : ' . ( ( is_string ( $info ) ) ? $info : ( ( is_array ( $info ) ? json_encode ( $info ) : ( ( is_bool ( $info ) || is_object ( $info ) ) ? ( string ) $info : serializer :: undefined () ) ) ) ) ) ;
+    $entry = ( date ( 'Y-m-d H:i:s' , time () ) . ' [' . $this -> label ( $label ) . '] ' . $class . '->' . $method . ' ' . ( ( is_string ( $info ) ) ? $info : ( ( is_array ( $info ) ? json_encode ( $info ) : ( ( is_bool ( $info ) || is_object ( $info ) ) ? ( string ) $info : serializer :: undefined () ) ) ) ) ) ;
     $this -> history [] = $entry ;
     return $this -> set ( $entry ) ;
+  }
+
+  public function label ( $label ) {
+    if ( is_string ( $label ) && preg_match ( '~^[a-z]+$~i' , $label ) && in_array ( $label , $this -> labels ) ) {
+      return $label ;
+    }
+    reset ( $this -> labels ) ;
+    return current ( $this -> labels ) ;
   }
 
   public function history () {
@@ -57,6 +65,10 @@ final class debugger {
       self :: $single = new self ();
     }
     return self :: $single ;
+  }
+
+  public function __toString () {
+    return serializer :: toString ( $this -> labels ) ;
   }
 
   public function __destruct () {

@@ -7,15 +7,21 @@
   "___schema___" : {
     "success": {
       "___mandatory___": false,
-      "___type___": "string"
+      "___type___": "string",
+      "___min___": 15,
+      "___max___": 250
     },
     "cancel": {
       "___mandatory___": false,
-      "___type___": "string"
+      "___type___": "string",
+      "___min___": 15,
+      "___max___": 250
     },
     "failed": {
       "___mandatory___": false,
-      "___type___": "string"
+      "___type___": "string",
+      "___min___": 15,
+      "___max___": 250
     }
   }
 }

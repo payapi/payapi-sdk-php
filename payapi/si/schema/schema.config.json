@@ -1,0 +1,55 @@
+{
+  "___info___" : {
+    "version" : "0.0.1",
+    "createdAt" : "20170623",
+    "updateddAt" : "20170623"
+  } ,
+  "___schema___" : {
+    "production": {
+      "___mandatory___": false,
+      "___type___": "bool"
+    },
+    "debug": {
+      "___mandatory___": false,
+      "___type___": "bool"
+    },
+    "archival": {
+      "___mandatory___": false,
+      "___type___": "bool"
+    },
+    "plugin": {
+      "___mandatory___": false,
+      "___type___": "string",
+      "___min___": 5,
+      "___max___": 25
+    },
+    "mode": {
+      "___mandatory___": false,
+      "___type___": "string",
+      "___min___": 4,
+      "___max___": 25
+    },
+    "headers": {
+      "___mandatory___": false,
+      "___type___": "bool"
+    },
+    "branding": {
+      "___mandatory___": false,
+      "___type___": "string",
+      "___min___": 3,
+      "___max___": 25
+    },
+    "payapi_public_id": {
+      "___mandatory___": true,
+      "___type___": "string",
+      "___min___": 5,
+      "___max___": 50
+    },
+    "payapi_api_key": {
+      "___mandatory___": true,
+      "___type___": "string",
+      "___min___": 5,
+      "___max___": 50
+    }
+  }
+}
