@@ -6,7 +6,7 @@ use \Firebase\JWT\JWT;
 final class crypter {
 
   protected
-    $sanitized                 =    false ;
+    $crypted                   =    false ;
 
   private
     $mode                      =  'HS256' ,
@@ -23,11 +23,12 @@ final class crypter {
     }
   }
 
-  public function decode ( $encoded , $hash = false , $sanitized = false ) {
+  public function decode ( $encoded , $hash = false , $crypted = false ) {
     $hash_update = ( $hash != false ) ? $hash : $this -> hash ;
-    $this -> sanitized = ( $sanitized !== false ) ? true : false ;
+    $this -> sanitized = ( $crypted !== false ) ? true : false ;
+    $build = $this -> build ( $encoded ) ;
     try {
-      $decoded = JWT :: decode ( self :: build ( $encoded ) , $hash_update , array ( $this -> mode ) ) ;
+      $decoded = JWT :: decode ( $build , $hash_update , array ( $this -> mode ) ) ;
     } catch ( Exception $e ) {
       $this -> error ( 'cannot decode provided data : ' . json_encode ( $e -> getMessage () ) ) ;
       $decoded = false ;
@@ -35,11 +36,11 @@ final class crypter {
     return $decoded ;
   }
 
-  public function encode ( $decoded , $hash = false , $sanitized = false ) {
-    $this -> sanitized = ( $sanitized !== false ) ? true : false ;
+  public function encode ( $decoded , $hash = false , $crypted = false ) {
+    $this -> sanitized = ( $crypted !== false ) ? true : false ;
     $hash_update = ( $hash != false ) ? $hash : $this -> hash ;
     try {
-      $encoded = self :: clean ( JWT :: encode ( $decoded , $hash_update , $this -> mode ) ) ;
+      $encoded = $this -> clean ( JWT :: encode ( $decoded , $hash_update , $this -> mode ) ) ;
     } catch ( Exception $e ) {
       $this -> error ( 'cannot encode provided data' ) ;
       $encoded = false ;

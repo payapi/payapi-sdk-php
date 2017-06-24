@@ -4,19 +4,22 @@ namespace payapi ;
 
 final class model_settings extends model {
 
-  public function validSettings () {
-    if ( $this -> validator -> isString ( $this -> config ( 'payapi_public_id' ) ) && $this -> validator -> isPayload ( $this -> config ( 'payapi_api_key' ) , true ) ) {
-      $this -> curling ( $this -> endpoint () , $this -> payload () ) ;
-      $this -> responseCode = ( is_array ( $this -> curlResponse ) && isset ( $this -> curlResponse [ 'data' ] ) && isset ( $this -> curlResponse [ 'code' ] ) ) ? $this -> curlResponse [ 'code' ] : 408 ;
-      if ( $this -> responseCode == 200 ) {
-        $settings = json_decode ( $this -> crypter -> decode ( $this -> curlResponse [ 'data' ] , $this -> config ( 'payapi_public_id' ) , true ) , true ) ;
-        if ( is_array ( $settings ) && isset ( $settings [ 'partialPayments' ] ) ) {
-          $validated = $this -> validSchema ( 'settings' , $settings [ 'partialPayments' ] ) ;
-          if ( is_array ( $validated ) ) {
-            return $validated ;
-          }
+  public function getMerchantSettings () {
+    $this -> curling ( $this -> endpoint () , $this -> payload () ) ;
+    if ( $this -> curlResponse [ 'code' ] === 200 ) {
+      if ( isset ( $this -> curlResponse [ 'partialPayments' ] ) === true && is_array ( $this -> curlResponse [ 'partialPayments' ] ) === true ) {
+        //-> @TODO if partialPayments === false
+        $validated = $this -> validSchema ( 'merchantSettings' , $this -> curlResponse [ 'partialPayments' ] ) ;
+        if ( is_array ( $validated ) === true ) {
+          return $validated ;
+        } else {
+          $this -> status = $this -> error -> errorUnexpectedCurlSchema () ;
         }
+      } else {
+        $this -> status = $this -> error -> errorNoValidJsonPayload () ;
       }
+    } else {
+      $this -> status = $this -> curlResponse [ 'code' ] ;
     }
     return false ;
   }
@@ -25,7 +28,7 @@ final class model_settings extends model {
     $payload = array (
       "storeDomain" => getenv ( 'SERVER_NAME' )
     ) ;
-    return $this -> encode ( $payload , $this -> encKey ) ;
+    return $this -> encode ( $payload , $this -> decode ( $this -> config ( 'encoded_payapi_api_key' ) , $this -> config ( 'payapi_public_id' )  , true ) ) ;
   }
 
   public function endpoint () {

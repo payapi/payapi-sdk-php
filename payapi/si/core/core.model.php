@@ -4,29 +4,33 @@ namespace payapi ;
 
 use \payapi\cgi as cgi ;
 
-class model extends handler {
+class model extends helper {
 
   public
     $arguments                     =             false ;
 
   protected
     $info                          =             false ,
-    $validator                     =             false ,
     $adaptor                       =             false ,
+    $handler                       =             false ,
     $curl                          =             false ,
     $curlResponse                  =             false ,
+    $status                        =             false ,
     $brand                         =             false ;
 
   private
     $crypter                       =             false ;
 
   protected function auto () {
-    $this -> validator = $this -> data -> get ( 'validator' ) ;
+    $this -> status = false ;
+    $this -> handler = $this -> data -> get ( 'handler' ) ;
+    $this -> data -> set ( 'handler' , false ) ;
     $this -> crypter = $this -> data -> get ( 'crypter' ) ;
     $this -> adaptor = serializer :: adaptor ( $this -> config ( 'plugin' ) ) ;
-    $this -> info = $this -> serializer -> sign ( $this -> get ( 'info' ) ) ;
+    $this -> info = $this -> handler -> signature ( $this -> get ( 'info' ) ) ;
     $this -> brand = new branding () ;
     $this -> arguments = $this -> get ( 'arguments' ) ;
+    // check valid
   }
 
   public function arguments ( $key = 0 ) {
@@ -34,6 +38,10 @@ class model extends handler {
       return false ;
     }
     return $this -> arguments [ $key ] ;
+  }
+
+  public function status () {
+    return $this -> status ;
   }
 
   public function config ( $key = false ) {
@@ -47,12 +55,12 @@ class model extends handler {
     }
   }
 
-  public function validSchema ( $schema , $data ) {
-    if ( ! $schema || ! is_array ( $data ) ) {
-      return false ;
-    }
-    $validated = $this -> validator -> validSchema ( $schema , $data ) ;
-    return $validated ;
+  public function validSchema ( $schema = array () , $data ) {
+    return $this -> handler -> validSchema ( $schema , $data ) ;
+  }
+
+  public function getSchema ( $schema ) {
+    return $this -> handler -> getSchema ( $schema ) ;
   }
 
   public function brand ( $key = false ) {
@@ -67,14 +75,32 @@ class model extends handler {
   }
 
   protected function curling ( $url , $data = null , $return = 1 , $header = 0 , $ssl = 0 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
-    $this -> curlResponse = false ;
+    $this -> resetCurl () ;
     $this -> debug ( $url ) ;
-    if ( $this -> curl === false ) {
-      $this -> load -> model ( 'curl' ) ;
-      $this -> curl = new model_curl () ;
+    $curlResponse = $this -> curl -> request ( $url , $data , $return , $header , $ssl , $fresh , $noreuse , $timeout ) ;
+    //-> @NOTE @CARE merchant settings should use same schema, array ( "code" => "int" , "data" => "no_object" )
+    // if ( $this -> validSchema ( 'response' , $curlResponse ) === true  ) {
+    $schemaName = 'responseSettings' ;
+    $curlSchema = $this -> getSchema ( $schemaName ) ;
+    $validated = $this -> validSchema ( $schemaName , $curlResponse ) ;
+    if ( is_array ( $validated ) === true ) {
+      $this -> curlResponse = $validated ;
+    } else {
+      $this -> warning ( 'no valid' , 'response' ) ;
+      $this -> curlResponse = array (
+        "code" => $this -> error -> errorUnexpectedCurlResponse () ,
+        "data" => 'curl schema error'
+      ) ;
     }
-    $this -> curlResponse = $this -> curl -> request ( $url , $data , $return , $header , $ssl , $fresh , $noreuse , $timeout ) ;
     return $this -> curlResponse ;
+  }
+
+  private function resetCurl () {
+    if ( $this -> curl === false ) {
+      $this -> curl = new curling () ;
+    } else {
+      $this -> curlResponse = false ;
+    }
   }
 
   public function get ( $key = false ) {
@@ -90,7 +116,7 @@ class model extends handler {
   }
 
   public function info () {
-    return $this -> info ;
+    return $this -> get ( 'info' ) ;
   }
 
   public function encode ( $decoded , $hash = false , $sanitized = false ) {

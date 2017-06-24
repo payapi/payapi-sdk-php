@@ -2,11 +2,10 @@
 
 namespace payapi ;
 
-abstract class controller extends handler {
+abstract class controller extends helper {
 
   protected
     $model                         =             false ,
-    $load                          =             false ,
     $response                      =             false ;
 
   private
@@ -14,7 +13,6 @@ abstract class controller extends handler {
     $arguments                     =             false ;
 
   protected function auto () {
-    $this -> load = new loader () ;
     $this -> cgi = $this -> data -> get ( 'cgi' ) ;
     $this -> model = $this -> data -> get ( 'model' ) ;
     $this -> data -> set ( 'model' , false ) ;
@@ -41,13 +39,6 @@ abstract class controller extends handler {
 
   protected function info () {
     return $this -> model -> info ;
-  }
-
-  public function load ( $data ) {
-    $loadable = array ( 'model' , 'schema' ) ;
-    $split = explode ( '/' , $data ) ;
-    if ( ! isset ( $split [ 0 ] ) || ! isset ( $split [ 1 ] ) || ! in_array ( $split [ 0 ] , $loadable ) )
-      $this -> error ( 'do not find loadable : ' . $data ) ;
   }
 
   protected function render ( $data , $code = false , $mode = false , $display = true ) {

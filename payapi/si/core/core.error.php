@@ -30,10 +30,50 @@ final class error {
       }
     }
     if ( ! preg_match ( '~^[0-9a-z]+$~i' , $key ) || ! in_array ( $key , array ( 'error' , 'fatal' ) ) ) {
-      $this -> error ( 'unvalid <@error>' ) ;
+      $this -> set ( 'unvalid <@error>' ) ;
       return false ;
     }
     $this -> data [ $key ] [] = $errors ;
+  }
+
+  public function errorNoValidAccount () {
+    return 403 ;
+  }
+
+  public function errorUnexpectedCurlResponse () {
+    return 406 ; // not acceptable
+  }
+
+  public function errorUnexpectedCurlSchema () {
+    return 412 ; // precondition failed
+  }
+
+  public function errorNoValidJsonPayload () {
+    return 415 ; // unsupported media type
+  }
+
+  public function errorAppSchemaNoValid () {
+    return 406 ;
+  }
+
+  public function errorCallbackNoRequest () {
+    return 404 ;
+  }
+
+  public function errorAccessNoAuthorized () {
+    return 403 ;
+  }
+
+  public function errorAppNoValidCommands () {
+    return 400 ;
+  }
+
+  public function errorMaintenance () {
+    return 503 ;
+  }
+
+  public function appError () {
+    return 600 ;
   }
 
   public function __toString () {

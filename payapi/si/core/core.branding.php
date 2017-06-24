@@ -4,7 +4,7 @@ namespace payapi ;
 
 // @NOTE we will handle merchant personalitations
 
-class branding extends handler {
+class branding extends helper {
 
   private
     $default                  =  'payapi' ,
@@ -21,16 +21,16 @@ class branding extends handler {
       $this -> key = $this -> default ;
       $this -> brand = $this -> getBrand ( $this -> key ) ;
       $this -> defaulted = true ;
-      $this -> warning ( 'brand not found, using default' ) ;
+      $this -> warning ( 'not found, using default' , 'brand' ) ;
     }
     $this -> set ( 'brand' , $this -> brand ) ;
-    $this -> debug ( '[brand] ' . $this -> key ) ;
+    $this -> debug ( $this -> key , 'brand' ) ;
   }
 
   private function getBrand ( $key ) {
-    $brand = $this -> serializer -> jsonToArray ( file_get_contents ( router :: brandingFile ( $key ) ) , true ) ;
+    $brand = json_decode ( file_get_contents ( router :: brandingFile ( $key ) ) , true ) ;
     if ( $brand === false ) {
-      $this -> warning ( 'no valid brand schema' ) ;
+      $this -> warning ( 'no valid schema' , 'brand' ) ;
     }
     return $brand ;
   }

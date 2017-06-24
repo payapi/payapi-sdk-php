@@ -11,7 +11,7 @@
     } ,
     "data" : {
       "___mandatory___" : true,
-      "___type___" : "string"
+      "___type___" : "undefined"
     }
   }
 }

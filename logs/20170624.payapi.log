@@ -1,16 +1,19 @@
-2017-06-24 05:47:17 [info] handler->construct [debugger] enabled
-2017-06-24 05:47:17 [info] payapi->construct [autoload] cgi
-2017-06-24 05:47:17 [warning] cgi->auto staging mode
-2017-06-24 05:47:17 [info] handler->construct [server_load] 0%
-2017-06-24 05:47:17 [info] payapi->call [command] settings
-2017-06-24 05:47:17 [info] payapi->model [autoload] settings
-2017-06-24 05:47:17 [info] model->auto [autoload] branding
-2017-06-24 05:47:17 [info] handler->construct [brand] payapi
-2017-06-24 05:47:17 [info] payapi->controller [autoload] settings
-2017-06-24 05:47:17 [info] controller->response [rendering] info
-2017-06-24 05:47:17 [info] controller->response [mode] string
-2017-06-24 05:47:17 [info] controller->response [code] 400
-2017-06-24 05:47:17 [info] cgi->render [headers] string
-2017-06-24 05:47:17 [info] payapi->destruct [destructed]
-2017-06-24 05:47:17 [info] debugger->destruct ___0.02138ms___
+2017-06-24 22:28:18 [info] payapi->configure [debugger] enabled
+2017-06-24 22:28:18 [info] payapi->autoload debug enabled
+2017-06-24 22:28:18 [info] payapi->autoload [autoload] cgi
+2017-06-24 22:28:18 [info] helper->construct [server_load] 0%
+2017-06-24 22:28:18 [info] payapi->autoload [autoload] loader
+2017-06-24 22:28:18 [info] payapi->autoload [autoload] handler
+2017-06-24 22:28:18 [info] payapi->construct handler loaded
+2017-06-24 22:28:18 [info] payapi->info [command] info
+2017-06-24 22:28:18 [info] payapi->model [autoload] model
+2017-06-24 22:28:18 [info] model->auto [autoload] branding
+2017-06-24 22:28:18 [info] helper->construct payapi
+2017-06-24 22:28:18 [info] payapi->controller [autoload] info
+2017-06-24 22:28:18 [info] controller->render [rendering] info
+2017-06-24 22:28:18 [info] controller->render [mode] json
+2017-06-24 22:28:18 [info] controller->render [code] 200
+2017-06-24 22:28:18 [info] cgi->render [headers] json
+2017-06-24 22:28:18 [info] payapi->destruct [destructed] success
+2017-06-24 22:28:18 [info] debugger->destruct ___0.02194ms___
 

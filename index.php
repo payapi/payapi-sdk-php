@@ -43,5 +43,6 @@ function example ( $key ) {
   }
   unset ( $app ) ;
 }
+//-> @TODO review cgi retur array/object
 // test
-$foo = example ( 'settings' ) ;
+$foo = example ( 'info' ) ;

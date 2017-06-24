@@ -10,16 +10,10 @@ namespace payapi ;
 
 final class serializer {
 
-  public static
-    $single                   =     false ;
-
   protected
     $version                  =   '0.0.1' ;
 
-  private
-    $info                     =  array () ;
-
-  protected function validate ( $schema , $data ) {
+  public function validate ( $schema , $data ) {
     if ( ! is_array ( $schema ) || ! $data )
       return false ;
     foreach ( $schema as $key => $value ) {
@@ -35,6 +29,10 @@ final class serializer {
       }
     }
     return true ;
+  }
+
+  public function responses () {
+    return $this -> responses ;
   }
 
   public function arrayToJson ( $array ) {
@@ -69,21 +67,6 @@ final class serializer {
     return array_merge ( $array , $this -> info () ) ;
   }
 
-  public function info ( $populate = false ) {
-    $info = array_merge ( $this -> info ,
-      array (
-        "___ip"    => $this -> getIp () ,
-        "___serializer__v" => $this -> version ,
-        "___stamp" => date ( 'Y-m-d H:i:s T' , time () )
-      )
-    ) ;
-    if ( is_array ( $populate ) ) {
-      return array_merge ( $info , $populate ) ;
-    } else {
-      return $info ;
-    }
-  }
-
   public function getIp () {
     if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_CLIENT_IP' ) ) )
       if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED_FOR' ) ) )
@@ -102,8 +85,20 @@ final class serializer {
     return filter_var ( $ip , FILTER_VALIDATE_IP ) ;
   }
 
-  function commandLineInterfaceAccess () {
-    return ( php_sapi_name () === 'cli' ) ;
+  public function commandLineInterfaceAccess () {
+    if ( function_exists ( 'php_sapi_name' ) ) {
+      if ( php_sapi_name () === 'cli' ) {
+        return true ;
+      }
+    } //-> else { /** this should trigger a alert/warning **/ }
+    return false ;
+  }
+
+  public function intLenght ( $int ) {
+    if ( preg_match ( "/^\d{10}$/" , $int ) === true ) {
+      return true ;
+    }
+    return false ;
   }
 
   // @TODO move to loader
@@ -126,7 +121,7 @@ final class serializer {
     return false ;
   }
 
-  public static function cleanNamespace ( $route ) {
+  public static function cleanLogNamespace ( $route ) {
     return str_replace ( array ( 'payapi\\' , 'controller_' , 'model_' ) , null , $route ) ;
   }
 
@@ -134,21 +129,21 @@ final class serializer {
     return 'undefined' ;
   }
 
+  public static function undefinedToString () {
+    return json_encode ( array (
+      "error" => "undefined"
+    )  ) ;
+  }
+
   public static function toString ( $data ) {
-    if ( ! is_array ( $data ) )
-      return $this -> undefined () ;
-    return $this -> arrayToJson ( $data ) ;
+    if ( is_array ( $data ) === true ) {
+      return json_encode ( $data ) ;
+    }
+    return self :: undefinedToString () ;
   }
 
   public function __toString () {
-    return $this -> toString ( $this -> info () ) ;
-  }
-
-  public static function single () {
-    if ( self :: $single === false ) {
-      self :: $single = new self () ;
-    }
-    return self :: $single ;
+    return self :: toString ( $this -> version ) ;
   }
 
 

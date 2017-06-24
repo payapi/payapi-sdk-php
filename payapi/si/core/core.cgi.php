@@ -1,10 +1,10 @@
 <?php
 
 namespace payapi ;
-
-final class cgi extends handler {
+final class cgi extends helper {
 
   protected
+    $version                  =   '0.0.1' ,
     $responses =    array (
       // @NOTE PHP ZEND INTERNAL STATUS HEADERS
 
@@ -70,6 +70,7 @@ final class cgi extends handler {
     $headers               =   false ,
     $buffer                =    null ,
     $serverLoad            =   false ,
+    $production            =    true ,
     $modes                   = array (
       "json"    => 'application/json' ,
       "html"    => 'text/html' ,
@@ -79,15 +80,17 @@ final class cgi extends handler {
     );
 
   public function auto () {
-    if ( $this -> config ( 'mode' ) ) {
+    $this -> set ( 'responses' , $this -> responses ) ;
+    if ( $this -> config ( 'mode' ) === true ) {
       $this -> mode ( $this -> config ( 'mode' ) ) ;
     }
     if ( $this -> config ( 'headers' ) ) {
       $this -> headers = true ;
     }
-    if ( $this -> config ( 'production' ) === false ) {
-      $this -> warning ( 'staging mode' ) ;
+    if ( $this -> config ( 'production' ) !== true ) {
+      $this -> production = true ;
     }
+
     if ( function_exists ( 'sys_getloadavg' ) ) {
       $this -> serverLoad = sys_getloadavg () ;
       $this -> debug ( '[server_load] ' . ( $this -> serverLoad [ 0 ] * 100 ) . '%' ) ;
@@ -95,13 +98,13 @@ final class cgi extends handler {
         $this -> render ( $this -> response ( 503 ) , 503 ) ;
       }
     } else {
-      $this -> warning ( 'cannot check server load' ) ;
+      $this -> warning ( 'cannot check load' , 'server' ) ;
     }
   }
 
   public function render ( $data , $code = false , $mode = false , $headers = 'undefined' ) {
-    if ( $mode ) $this -> mode ( $mode ) ;
-    if ( $code ) $this -> code ( $code ) ;
+    $this -> mode ( $mode ) ;
+    $this -> code ( $code ) ;
     $this -> debug ( '[rendering] info' ) ;
     $this -> debug ( '[mode] ' . $this -> mode ) ;
     $this -> debug ( '[code] ' . $this -> code ) ;
@@ -176,7 +179,7 @@ final class cgi extends handler {
       return true ;
     }
     end ( $this -> responses ) ;
-    $this -> code = current ( $this -> responses ) ;
+    $this -> code = key ( $this -> responses ) ;
     return false ;
   }
 

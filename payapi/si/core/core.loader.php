@@ -2,7 +2,7 @@
 
 namespace payapi ;
 
-final class loader {
+final class loader extends helper {
 
   protected
     $root                =      false ,
@@ -13,7 +13,7 @@ final class loader {
       "schema"           =>  array ()
     ) ;
 
-  public function __construct () {
+  protected function auto () {
     $this -> root = str_replace ( basename ( str_replace ( basename ( __FILE__ ) , null , __FILE__ ) ) . DIRECTORY_SEPARATOR . basename ( __FILE__ ) , null , __FILE__ ) ;
   }
 
@@ -21,7 +21,7 @@ final class loader {
     if ( isset ( $this -> loaded [ 'model' ] [ $key ] ) ) {
       return true ;
     }
-    $file = router :: dirCore ( 'model' ) . 'model' . '.' . $key . '.' . 'php' ;
+    $file = router :: dirSi ( 'model' ) . 'model' . '.' . $key . '.' . 'php' ;
     if ( is_file ( $file ) ) {
       return require ( $file ) ;
     }
