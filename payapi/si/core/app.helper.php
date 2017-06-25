@@ -52,6 +52,10 @@ abstract class helper {
     return false ;
   }
 
+  public function info () {
+    return $this -> get ( 'info' ) ;
+  }
+
   public function load ( $data ) {
     $loadable = array ( 'model' , 'schema' ) ;
     $split = explode ( '/' , $data ) ;

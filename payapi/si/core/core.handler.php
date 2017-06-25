@@ -22,12 +22,12 @@ final class handler extends helper {
     $this -> info = array_merge (
       $this -> data -> get ( 'info' ) ,
       array (
-      "___ip"             => $this -> serialized -> getIp () ,
-      "_____filter_v"     => ( string ) $this -> filtered ,
-      "_____serializer_v" => ( string ) $this -> serialized ,
-      "_____sanitizer_v"  => ( string ) $this -> sanitized ,
-      "_____validator_v"  => ( string ) $this -> validated ,
-      "___stamp"          => date ( 'Y-m-d H:i:s T' , time () )
+      "___filter_v"     => ( string ) $this -> filtered ,
+      "___serializer_v" => ( string ) $this -> serialized ,
+      "___sanitizer_v"  => ( string ) $this -> sanitized ,
+      "___validator_v"  => ( string ) $this -> validated ,
+      "___ip"             => $this -> serialized -> getIp () , // tomove
+      "___stamp"          => $this -> serialized -> timestamp ()
     ) ) ;
     $this -> set ( 'info' , $this -> info ) ;
   }
@@ -41,7 +41,7 @@ final class handler extends helper {
 
   public function signature ( $populate = false ) {
     if ( is_array ( $populate ) === true ) {
-      return array_merge ( $this -> info , $populate ) ;
+      return array_merge ( $populate, $this -> get ( 'info' ) ) ;
     } else {
       return $this -> info ;
     }

@@ -31,7 +31,11 @@ final class serializer {
     return true ;
   }
 
-  public function responses () {
+  public function timestamp () {
+    return date ( 'Y-m-d H:i:s T' , time () ) ;
+  }
+  //->
+  private function responses () {
     return $this -> responses ;
   }
 

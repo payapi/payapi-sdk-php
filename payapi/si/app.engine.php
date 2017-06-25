@@ -21,9 +21,9 @@
 
 require ( "/opt/php-jwt/vendor/autoload.php" ) ;
 
+use \payapi\error as error ;
 use \payapi\cgi as cgi ;
 use \payapi\debugger as debugger ;
-use \payapi\error as error ;
 use \payapi\crypter as crypter ;
 use \payapi\loader as loader ;
 use \payapi\handler as handler ;
@@ -34,13 +34,13 @@ final class payapi {
   public
     $info                          =              array (
       "___app"                     => 'PayApi Payments' ,
-      "___v"                       =>           '0.0.1'
+      "___v"                       =>           '0.0.0'
     ) ;
 
   private
     $debugger                      =              false ,
     $loader                        =              false ,
-    $handler                     =              false ,
+    $handler                       =              false ,
     $crypter                       =              false ,
     $cgi                           =              false ,
     $command                       =              false ,
@@ -58,18 +58,17 @@ final class payapi {
                                           "transaction" ,
                                              "callback" ,
                                              "validate" ,
-                                                "error"
+                                                "error" ,
+                                                "brand"
                                                       ) ;
 
   public function __construct ( $config = array () ) {
     $configConstruct = ( is_array ( $config ) === true ) ? $config : array () ;
     //-todo
     foreach ( glob ( __DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . '*' . '.' . 'php' ) as $core ) {
-      //echo $core . '<br>' ;
       require $core ;
     }
     $this -> data = data :: single () ;
-    $this -> data -> set ( 'info' , $this -> info ) ;
     $this -> autoload ( $configConstruct ) ;
   }
 
@@ -108,27 +107,35 @@ final class payapi {
 
   private function configure ( $config ) {
     if ( is_array ( $config ) ) {
+      //-> tofilter
       $validated = array (
-        "mode" => ( ( isset ( $config [ 'mode' ] ) && in_array ( $config [ 'mode' ] , array ( 'json' , 'html' , 'string' , 'array' , 'object' , 'dump' ) ) ) ? $config [ 'mode' ] : 'json' ) ,
-        "branding" => ( ( isset ( $config [ 'branding' ] ) && is_string ( $config [ 'branding' ] ) ) ? $config [ 'branding' ] : false ) ,
-        "plugin" => ( ( isset ( $config [ 'plugin' ] ) && is_string ( $config [ 'plugin' ] ) && in_array ( $config [ 'plugin' ] , array ( 'opencart' , 'magento' , 'prestashop' , 'default' ) ) ) ? $config [ 'plugin' ] : 'default' ) ,
-        "headers" => ( ( isset ( $config [ 'headers' ] ) && $config [ 'headers' ] !== false ) ? true : false ) ,
-        "archival" => ( ( isset ( $config [ 'archival' ] ) && $config [ 'archival' ] !== false ) ? true : false ) ,
-        "production" => ( ( isset ( $config [ 'production' ] ) && $config [ 'production' ] !== false ) ? true : false ) ,
-        "debug" => ( ( isset ( $config [ 'debug' ] ) && $config [ 'debug' ] !== false ) ? true : false ) ,
-        "payapi_public_id" => ( isset ( $config [ 'payapi_public_id' ] ) && is_string ( $config [ 'payapi_public_id' ] ) && preg_match ( '~^[0-9a-z]+$~i' , $config [ 'payapi_public_id' ] ) ) ? $config [ 'payapi_public_id' ] : null
+        "mode"             => ( ( isset ( $config [ 'mode' ] ) === true && in_array ( $config [ 'mode' ] , array ( 'json' , 'html' , 'string' , 'array' , 'object' , 'dump' ) ) === true ) ? $config [ 'mode' ] : 'json' ) ,
+        "branding"         => ( ( isset ( $config [ 'branding' ] ) === true && is_string ( $config [ 'branding' ] ) ) ? $config [ 'branding' ] : false ) ,
+        "plugin"           => ( ( isset ( $config [ 'plugin' ] ) === true && is_string ( $config [ 'plugin' ] ) && in_array ( $config [ 'plugin' ] , array ( 'opencart' , 'magento' , 'prestashop' , 'default' ) ) === true ) ? $config [ 'plugin' ] : 'default' ) ,
+        "headers"          => ( ( isset ( $config [ 'headers' ] ) === true && $config [ 'headers' ] !== false ) ? true : false ) ,
+        "archival"         => ( ( isset ( $config [ 'archival' ] ) === true && $config [ 'archival' ] !== false ) ? true : false ) ,
+        "production"       => ( ( isset ( $config [ 'production' ] ) === true && $config [ 'production' ] !== false ) ? true : false ) ,
+        "debug"            => ( ( isset ( $config [ 'debug' ] ) === true && $config [ 'debug' ] !== false ) ? true : false ) ,
+        "payapi_public_id" => ( ( isset ( $config [ 'payapi_public_id' ] ) === true && is_string ( $config [ 'payapi_public_id' ] ) !== false && preg_match ( '~^[0-9a-z]+$~i' , $config [ 'payapi_public_id' ] ) !== false ) ? $config [ 'payapi_public_id' ] : null )
       ) ;
       if ( $validated [ 'debug' ] === true ) {
         $this -> debugger = debugger :: single () ;
         $this -> debug ( 'debug enabled' ) ;
       }
       $this -> crypter = new crypter ( md5 ( $validated [ 'payapi_public_id' ] ) ) ;
+      $this -> info [ '___crypter_v' ] = ( string ) $this -> crypter ;
+      $this -> data -> set ( 'info' , array_merge (
+        $this -> info ,
+        array (
+          "___crypter_v" => ( string ) $this -> crypter
+        )
+      ) ) ;
       $configApp = array_merge ( $validated ,
         array (
-          "encoded_payapi_api_key" => ( isset ( $config [ 'payapi_api_key' ] ) && is_string ( $config [ 'payapi_api_key' ] ) ) ? $this -> crypter -> encode ( $config [ 'payapi_api_key' ] , $validated [ 'payapi_public_id' ] , true ) : null
+          "encoded_payapi_api_key" => ( isset ( $config [ 'payapi_api_key' ] ) === true && is_string ( $config [ 'payapi_api_key' ] ) === true ) ? $this -> crypter -> encode ( $config [ 'payapi_api_key' ] , $validated [ 'payapi_public_id' ] , true ) : null
         )
       ) ;
-      if ( is_array ( $configApp ) ) {
+      if ( is_array ( $configApp ) !== false ) {
         $this -> config = $configApp ;
         return true ;
       }
@@ -144,7 +151,7 @@ final class payapi {
   }
 
   public function __call ( $command , $arguments = array () ) {
-    if ( is_object ( $this -> handler ) === true && is_object ( $this -> cgi ) === true && $this -> handler -> validated -> isString ( $this -> config [ 'payapi_public_id' ] ) === true && $this -> handler -> validated -> isPayload ( $this -> config [ 'encoded_payapi_api_key' ] , true ) === true ) {
+    if ( $this -> autoloaded () === true && $this -> handler -> validated -> isString ( $this -> config [ 'payapi_public_id' ] ) === true && $this -> handler -> validated -> isPayload ( $this -> config [ 'encoded_payapi_api_key' ] , true ) === true ) {
       $this -> validate ( $command , $arguments ) ;
       $this -> debug ( '[command] ' . $this -> command );
       $this -> data -> set ( 'arguments' , $arguments ) ;

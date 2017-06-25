@@ -135,7 +135,7 @@ final class cgi extends helper {
         return $this -> buffer ;
       break ;
       case 'dump' :
-        return var_dump ( $data ) ;
+        return $data ;
       break ;
       default :
         $this -> buffer = $data ;

@@ -21,7 +21,8 @@ function example ( $key ) {
     "validate" ,
     "settings" ,
     "tostring" ,
-    "callback"
+    "callback" ,
+    "brand"
   ) ;
   // app config
   $config = array (

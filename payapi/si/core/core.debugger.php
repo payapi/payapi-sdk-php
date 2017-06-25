@@ -74,7 +74,7 @@ final class debugger {
   }
 
   public function __destruct () {
-    $this -> add ( '___' . round ( ( microtime ( true ) - $this -> microtime ) , 5 ) . 'ms___' ) ;
+    $this -> add ( '___' . round ( ( ( microtime ( true ) - $this -> microtime ) ) , 3 ) * 1000 . 'ms___' ) ;
     $this -> set ( null ) ;
   }
 

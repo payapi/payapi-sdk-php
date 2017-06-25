@@ -37,10 +37,6 @@ abstract class controller extends helper {
     return $this -> model -> arguments ( $key ) ;
   }
 
-  protected function info () {
-    return $this -> model -> info ;
-  }
-
   protected function render ( $data , $code = false , $mode = false , $display = true ) {
     return $this -> cgi -> render ( $data , $code , $mode , $display ) ;
   }

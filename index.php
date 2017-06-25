@@ -19,11 +19,11 @@ $app = new payapi ( array (
   "debug"            =>     true , // bool true/false
   "archival"         =>     true , // bool true/false
   "plugin"           =>    false , // string [opencart,magento,prestashop,default] OR bool false
-  "mode"             => 'object' , // string [json,object,array,dump,string,html] OR bool false
+  "mode"             =>   'dump' , // string [json,object,array,dump,string,html] OR bool false
   "headers"          =>    false , // bool true/false
   "branding"         => 'payapi' , // string [payapi] OR bool false
   "payapi_public_id" => 'multimerchantshop' , // *MANDATORY PayApi public id (PayApi backend)
   "payapi_api_key"   => 'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9'  // *MANDATORY PayApi api key (PayApi backend)
 ) ) ;
 
-var_dump ( $app -> settings () ) ;
+var_dump ( $app -> info () ) ;

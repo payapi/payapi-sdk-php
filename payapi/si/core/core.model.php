@@ -7,9 +7,10 @@ use \payapi\cgi as cgi ;
 class model extends helper {
 
   public
-    $arguments                     =             false ;
+    $key                           =             false ;
 
   protected
+    $arguments                     =             false ,
     $info                          =             false ,
     $adaptor                       =             false ,
     $handler                       =             false ,
@@ -19,13 +20,23 @@ class model extends helper {
     $brand                         =             false ;
 
   private
-    $crypter                       =             false ;
+    $crypter                       =             false ,
+    $token                         =             false ;
 
   protected function auto () {
     $this -> status = false ;
     $this -> handler = $this -> data -> get ( 'handler' ) ;
     $this -> data -> set ( 'handler' , false ) ;
     $this -> crypter = $this -> data -> get ( 'crypter' ) ;
+    $this -> token = $this -> crypter -> randomToken () ; //-> unique
+    $this -> key = $this -> crypter -> publicKey ( $this -> config ( 'payapi_public_id' ) ) ;
+    $this -> info = array_merge (
+      $this -> get ( 'info' ) ,
+      array (
+        "___pk" => $this -> publicKey ()
+      )
+    ) ;
+    $this -> set ( 'info' , $this -> info ) ;
     $this -> adaptor = serializer :: adaptor ( $this -> config ( 'plugin' ) ) ;
     $this -> info = $this -> handler -> signature ( $this -> get ( 'info' ) ) ;
     $this -> brand = new branding () ;
@@ -38,6 +49,14 @@ class model extends helper {
       return false ;
     }
     return $this -> arguments [ $key ] ;
+  }
+
+  public function publicKey () {
+    return strtok ( $this -> key , '.' ) ;
+  }
+
+  protected function token () {
+    return $this -> token ;
   }
 
   public function status () {
@@ -64,14 +83,7 @@ class model extends helper {
   }
 
   public function brand ( $key = false ) {
-    if ( $key === false  ) {
-      return $this -> brand ;
-    }
-    if ( isset ( $this -> brand [ $key ] ) ) {
-      return $this -> brand [ $key ] ;
-    } else {
-      return false ;
-    }
+    return $this -> get ( 'brand' ) ;
   }
 
   protected function curling ( $url , $data = null , $return = 1 , $header = 0 , $ssl = 0 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
@@ -104,7 +116,7 @@ class model extends helper {
   }
 
   public function get ( $key = false ) {
-    return $this -> data -> get ( $key ) ;
+    return $this -> handler -> signature ( $this -> data -> get ( $key ) ) ;
   }
 
   public function has ( $key ) {
@@ -113,10 +125,6 @@ class model extends helper {
 
   public function set ( $key , $value = false ) {
     return $this -> data -> set ( $key , $value ) ;
-  }
-
-  public function info () {
-    return $this -> get ( 'info' ) ;
   }
 
   public function encode ( $decoded , $hash = false , $sanitized = false ) {
