@@ -23,10 +23,10 @@ final class handler extends helper {
       $this -> data -> get ( 'info' ) ,
       array (
       "___ip"             => $this -> serialized -> getIp () ,
-      "_____filter_v"     => json_decode ( ( string ) $this -> filtered , true ) ,
-      "_____serializer_v" => json_decode ( ( string ) $this -> serialized , true ) ,
-      "_____sanitizer_v"  => json_decode ( ( string ) $this -> sanitized , true ) ,
-      "_____validator_v"  => json_decode ( ( string ) $this -> validated , true ) ,
+      "_____filter_v"     => ( string ) $this -> filtered ,
+      "_____serializer_v" => ( string ) $this -> serialized ,
+      "_____sanitizer_v"  => ( string ) $this -> sanitized ,
+      "_____validator_v"  => ( string ) $this -> validated ,
       "___stamp"          => date ( 'Y-m-d H:i:s T' , time () )
     ) ) ;
     $this -> set ( 'info' , $this -> info ) ;
@@ -39,14 +39,12 @@ final class handler extends helper {
     return false ;
   }
 
-  public function signature ( $populate ) {
-    if ( is_array ( $populate ) ) {
+  public function signature ( $populate = false ) {
+    if ( is_array ( $populate ) === true ) {
       return array_merge ( $this -> info , $populate ) ;
     } else {
-      return $info ;
+      return $this -> info ;
     }
-
-    return $this -> serialized -> sign ( $this -> get ( 'info' ) ) ;
   }
 
   public function getSchema ( $schemaKey ) {

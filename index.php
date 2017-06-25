@@ -2,7 +2,7 @@
 /**
 *  Testing PayApi Payments PHP
 *
-*  @debug  payapi/logs
+*  @debug  /logs
 *
 **/
 
@@ -45,4 +45,4 @@ function example ( $key ) {
 }
 //-> @TODO review cgi retur array/object
 // test
-$foo = example ( 'info' ) ;
+$foo = example ( 'settings' ) ;

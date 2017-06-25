@@ -1,0 +1,20 @@
+2017-06-25 05:56:36 [info] payapi->configure [debugger] enabled
+2017-06-25 05:56:36 [info] payapi->autoload debug enabled
+2017-06-25 05:56:36 [info] payapi->autoload [autoload] cgi
+2017-06-25 05:56:36 [info] helper->construct [server_load] 0%
+2017-06-25 05:56:36 [info] payapi->autoload [autoload] loader
+2017-06-25 05:56:36 [info] payapi->autoload [autoload] handler
+2017-06-25 05:56:36 [info] payapi->construct handler loaded
+2017-06-25 05:56:36 [info] payapi->settings [command] settings
+2017-06-25 05:56:36 [info] payapi->model [autoload] settings
+2017-06-25 05:56:36 [info] model->auto [autoload] branding
+2017-06-25 05:56:36 [info] helper->construct payapi
+2017-06-25 05:56:36 [info] payapi->controller [autoload] settings
+2017-06-25 05:56:36 [info] model_settings->getMerchantSettings https://staging-input.payapi.io/v1/api/merchantSettings/multimerchantshop
+2017-06-25 05:56:36 [info] controller->render [rendering] info
+2017-06-25 05:56:36 [info] controller->render [mode] json
+2017-06-25 05:56:36 [info] controller->render [code] 200
+2017-06-25 05:56:36 [info] cgi->render [headers] json
+2017-06-25 05:56:36 [info] payapi->destruct [destructed] success
+2017-06-25 05:56:36 [info] debugger->destruct ___0.38614ms___
+

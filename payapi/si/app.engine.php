@@ -13,7 +13,6 @@
 *
 *  @REQUIRE
 *              JWT
-*              curl
 *
 * @TODO
 *       move class content to engine

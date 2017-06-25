@@ -136,8 +136,11 @@ final class serializer {
   }
 
   public static function toString ( $data ) {
+    if ( is_string ( $data ) === true ) {
+      return $data ;
+    } else
     if ( is_array ( $data ) === true ) {
-      return json_encode ( $data ) ;
+      return json_encode ( $data , true ) ;
     }
     return self :: undefinedToString () ;
   }

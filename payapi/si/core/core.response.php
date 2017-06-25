@@ -5,9 +5,9 @@
 final class response {
 
   protected
-    $code                 =  false ,
-    $data                 =  false ,
-    $responses =    array (
+    $code                             =  false ,
+    $data                             =  false ,
+    $responses                        =  array (
       // @NOTE PHP ZEND INTERNAL STATUS HEADERS
 
       // Informational 1xx
@@ -67,13 +67,12 @@ final class response {
     ) ;
 
   private
-    $default              =    600 ;
+    $default                          =    501 ;
 
   public function construct ( $code = false , $data = false ) {
-    $this -> code  = ( in_array ( $code , $this -> responses ) ) ? $code : $this -> default ;
-    $this -> data = $data ;
-
-    return ( string ) $this ;
+    $this -> code  = ( in_array ( $code , $this -> responses ) === true ) ? $code : $this -> default ;
+    $this -> data = ( is_string ( $data ) === true && strlen ( $data ) <= 250 ) ? $data : $this -> responses [ $this -> code ] ;
+    return json_decode ( ( string ) $this , true ) ;
   }
 
   public function __toString () {
