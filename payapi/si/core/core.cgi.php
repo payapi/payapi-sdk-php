@@ -75,20 +75,21 @@ final class cgi extends helper {
       "json"    => 'application/json' ,
       "html"    => 'text/html' ,
       "string"  => 'text/plain' ,
+      "dump"    => '' ,
       "array"   => '' ,
       "object"  => ''
     );
 
   public function auto () {
     $this -> set ( 'responses' , $this -> responses ) ;
-    if ( $this -> config ( 'mode' ) === true ) {
+    if ( is_string ( $this -> config ( 'mode' ) ) === true ) {
       $this -> mode ( $this -> config ( 'mode' ) ) ;
     }
-    if ( $this -> config ( 'headers' ) ) {
+    if ( $this -> config ( 'headers' ) === true ) {
       $this -> headers = true ;
     }
     if ( $this -> config ( 'production' ) !== true ) {
-      $this -> production = true ;
+      $this -> production = false ;
     }
 
     if ( function_exists ( 'sys_getloadavg' ) ) {
@@ -103,30 +104,38 @@ final class cgi extends helper {
   }
 
   public function render ( $data , $code = false , $mode = false , $headers = 'undefined' ) {
-    $this -> mode ( $mode ) ;
-    $this -> code ( $code ) ;
+    if ( is_string ( $mode ) === true ) {
+      $this -> mode ( $mode ) ;
+    }
+    if ( is_int ( $code ) === true ) {
+      $this -> code ( $code ) ;
+    }
     $this -> debug ( '[rendering] info' ) ;
     $this -> debug ( '[mode] ' . $this -> mode ) ;
     $this -> debug ( '[code] ' . $this -> code ) ;
-    if ( is_bool ( $headers ) && $headers != 'undefined' && $headers !== false ) $this -> headers = true ;
+    if ( is_bool ( $headers ) === true && $headers != 'undefined' && $headers !== false ) $this -> headers = true ;
     switch ( $this -> mode ) {
       case 'json' :
-        $this -> buffer = ( is_array ( $data ) ) ? json_encode ( $data , true ) : $data ;
+        $this -> buffer = ( is_array ( $data ) !== false ) ? json_encode ( $data , true ) : $data ;
       break ;
       case 'html' :
         if ( is_array ( $data ) )
-        $this -> buffer = ( is_array ( $data ) ) ? json_encode ( $data , true ) : $data ;
+        $this -> buffer = ( is_array ( $data ) !== false ) ? json_encode ( $data , true ) : $data ;
       break ;
       case 'string' :
-        $this -> buffer = ( ! is_array ( $this -> buffer ) ) ? var_dump ( $data ) : $data ;
+        $this -> buffer = ( is_array ( $this -> buffer ) !== false ) ? print ( $data ) : print_r ( $data , true ) ;
+        return $this -> buffer ;
       break ;
       case 'object' :
-        $this -> buffer = ( ! is_object ( $data ) ) ? ( object ) $data  : $data ;
+        $this -> buffer = ( is_object ( $data ) !== false ) ? $data  : ( object ) $data ;
         return $this -> buffer ;
       break ;
       case 'array' :
-        $this -> buffer = ( ! is_array ( $data ) ) ? ( array ) $data : $data ;
+        $this -> buffer = ( is_array ( $data ) !== false ) ? $data : ( array ) $data ;
         return $this -> buffer ;
+      break ;
+      case 'dump' :
+        return var_dump ( $data ) ;
       break ;
       default :
         $this -> buffer = $data ;
