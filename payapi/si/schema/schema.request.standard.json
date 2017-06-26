@@ -1,0 +1,17 @@
+{
+  "___info___" : {
+    "version" : "0.0.1",
+    "createdAt" : "20170621",
+    "updateddAt" : "20170621"
+  } ,
+  "___schema___" : {
+    "code" : {
+      "___mandatory___" : true,
+      "___type___" : "int"
+    } ,
+    "data" : {
+      "___mandatory___" : true,
+      "___type___" : "undefined"
+    }
+  }
+}

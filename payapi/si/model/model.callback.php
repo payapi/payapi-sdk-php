@@ -10,17 +10,14 @@ final class model_callback extends model {
     $decoded               =   false ;
 
 
-    public function knock () {
-      $received = file_get_contents ( "php://input" ) ;
-      if ( is_array ( $received ) === true ) {
-        $this -> received = $requested ;
-        return true ;
-      }
-      return false ;
-    }
+  public function isRequested () {
+    $this -> received = $this -> knock () ;
+    return $this -> received ;
+  }
 
   public function validate () {
     $requested = json_decode ( $this -> received , true ) ;
+    $this -> debug ( 'validating data' ) ;
     if ( is_array ( $requested ) === true && isset ( $requested [ 'data' ] ) === true && is_array ( $requested [ 'data' ] ) === true ) {
       $decoded = $this -> crypter -> decode ( $requested [ 'data' ] , $this -> config ( 'payapi_api_key' ) ) ;
       if ( $this -> validate ( 'endpoint.callback' , $decoded ) ) {

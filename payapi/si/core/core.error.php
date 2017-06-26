@@ -60,6 +60,14 @@ final class error {
     return 404 ;
   }
 
+  public function errorUnexpectedCallbackInput () {
+    return 412 ; // precondition failed
+  }
+
+  public function errorUnexpectedCallbackSchema () {
+    return 412 ; // precondition failed
+  }
+
   public function errorAccessNoAuthorized () {
     return 403 ;
   }

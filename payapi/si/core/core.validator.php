@@ -126,8 +126,20 @@ final class validator {
     return false ;
   }
 
+  protected function isEmail ( $email ) {
+    return filter_var ( $data , FILTER_VALIDATE_EMAIL ) ;
+  }
+
   protected function isUrl ( $unvalidatedUrl ) {
     return $this -> check ( $unvalidatedUrl , 'url' ) ;
+  }
+
+  public function knock () {
+    $knock = file_get_contents ( "php://input" ) ;
+    if ( is_string ( $knock ) === true ) {
+      return $knock ;
+    }
+    return false ;
   }
 
   private function check ( $data , $type = 'string' ) {
@@ -142,34 +154,34 @@ final class validator {
         return false ;
       break;
       case 'string':
-        return is_string ( $data ) ;
+        return ( is_string ( $data ) === true ) ;
       break;
       case 'url':
       return ( filter_var ( $data , FILTER_VALIDATE_URL ) === true ) ;
       break;
       case 'email':
-        return filter_var ( $data , FILTER_VALIDATE_EMAIL ) ;
+        return ( filter_var ( $data , FILTER_VALIDATE_EMAIL ) === true ) ;
       break;
       case 'phone':
         return $this -> isPhoneNumber ( $data ) ;
       break;
       case 'int':
-        return is_int ( $data ) ;
+        return ( is_int ( $data ) === true ) ;
       break;
       case 'float':
-        return is_float ( $data ) ;
+        return ( is_float ( $data ) === true ) ;
       break;
       case 'number':
-        return is_numeric ( $data ) ;
+        return ( is_numeric ( $data ) === true ) ;
       break;
       case 'boolean':
-        return is_bool ( $data ) ;
+        return ( is_bool ( $data ) === true ) ;
       break;
       case 'array':
-        return is_array ( $data ) ;
+        return ( is_array ( $data ) !== false ) ;
       break;
       case 'object':
-        return is_object ( $data ) ;
+        return ( is_object ( $data ) === true ) ;
       break;
       default:
         return false ;

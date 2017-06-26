@@ -12,7 +12,9 @@ final class adaptor extends plugin {
   }
 
   public function order ( $order ) {
-
+    $fields = array (
+      "etc"
+    ) ;
   }
 
 

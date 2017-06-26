@@ -50,15 +50,15 @@ final class curling extends helper {
     if ( $this -> isCleanCodeInt ( $code ) === true ) {
       $this -> code = $code ;
       if ( $this -> code === 200 ) {
-        if ( $this -> isCleanData ( $response ) === true ) {
+        if ( $this -> isCleanArray ( $response ) === true ) {
           $this -> response = $response ;
         } else {
-          $his -> warning ( 'object blocked' , 'curl' ) ;
+          $this -> warning ( 'object blocked' , 'curl' ) ;
           $this -> response = $this -> unvalidCurlResponse () ;
         }
       } else {
         $this -> warning ( 'unexpected response' ) ;
-        $this -> response = $this -> errorCurlResponse ( $this -> code ) ;
+        $this -> response = $this -> unvalidCurlResponse ( $this -> code ) ;
       }
     } else {
       $this -> response = $this -> unvalidCurlResponse () ;
@@ -83,24 +83,17 @@ final class curling extends helper {
   }
 
   private function isCleanCodeInt ( $int ) {
-    if ( is_int ( $int ) == true && $int >= 200 && $int <= 600 ) {
+    if ( is_int ( $int ) === true && $int >= 200 && $int <= 600 ) {
       return true ;
     }
     return false ;
   }
 
-  public function errorCurlResponse ( $code ) {
+  public function unvalidCurlResponse ( $responseCode = false ) {
+    $responseCode = ( is_numeric ( $responseCode ) === true ) ? $responseCode : 'error' ;
     $response = array (
       "code"  => $this -> error -> errorUnexpectedCurlResponse () ,
-      "data"  => "error"
-    ) ;
-    return $response ;
-  }
-
-  public function unvalidCurlResponse () {
-    $response = array (
-      "code"  => $this -> error -> errorUnexpectedCurlResponse () ,
-      "data"  => "error"
+      "data"  => "error." . ( string ) $responseCode
     ) ;
     return $response ;
   }
@@ -114,7 +107,7 @@ final class curling extends helper {
     $this -> buffer = false ;
   }
 
-  private function isCleanData ( $data ) {
+  private function isCleanArray ( $data ) {
     if ( is_array ( $data ) === true && $this -> noObjectsAndFloats ( $data ) === true ) {
       return true ;
     }

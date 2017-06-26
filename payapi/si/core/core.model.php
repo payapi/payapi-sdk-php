@@ -42,14 +42,11 @@ class model extends helper {
     // check valid
   }
 
-  public function arguments ( $key = 0 ) {
-    if ( ! isset ( $this -> arguments [ $key ] ) ) {
-      return false ;
-    }
-    return $this -> arguments [ $key ] ;
+  protected function arguments ( $key = 0 ) {
+    return $this -> handler -> arguments ( $key ) ;
   }
 
-  protected function publicKey () {
+  private function publicKey () {
     return strtok ( $this -> key , '.' ) ;
   }
 
@@ -60,7 +57,7 @@ class model extends helper {
     return false ;
   }
 
-  protected function token () {
+  private function token () {
     return $this -> token ;
   }
 
@@ -91,14 +88,14 @@ class model extends helper {
     return $this -> get ( 'brand' ) ;
   }
 
+  protected function knock () {
+    return $this -> handler -> knock () ;
+  }
+
   protected function curling ( $url , $data = null , $return = 1 , $header = 0 , $ssl = 0 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
     $this -> resetCurl () ;
     $curlResponse = $this -> curl -> request ( $url , $data , $return , $header , $ssl , $fresh , $noreuse , $timeout ) ;
-    //-> @NOTE @CARE merchant settings should use same schema, array ( "code" => "int" , "data" => "no_object" )
-    // if ( $this -> validSchema ( 'response' , $curlResponse ) === true  ) {
-    $schemaName = 'response' ;
-    $curlSchema = $this -> getSchema ( $schemaName ) ;
-    $validated = $this -> validSchema ( $schemaName , $curlResponse ) ;
+    $validated = $this -> validSchema ( 'response.standard' , $curlResponse ) ;
     if ( is_array ( $validated ) === true ) {
       $this -> curlResponse = $validated ;
     } else {
@@ -117,7 +114,11 @@ class model extends helper {
   }
 
   public function get ( $key = false ) {
-    return $this -> handler -> signature ( $this -> data -> get ( $key ) ) ;
+    return $this -> signOutput ( $this -> data -> get ( $key ) ) ;
+  }
+
+  protected function signOutput ( $outputData ) {
+    return $this -> handler -> signature ( $outputData ) ;
   }
 
   public function has ( $key ) {

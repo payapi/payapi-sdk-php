@@ -15,6 +15,15 @@ final class filterer {
     return $this -> filteredArray ( $unfilteredSchemaData ) ;
   }
 
+  public function knock () {
+    $array = json_decode ( $knock , true ) ;
+    // @NOTE-> should be great if data always came encoded
+    if ( isset ( $array [ 'data' ] ) && is_object ( $array [ 'data' ] ) === false ) { // is_string ( $array [ 'data' ] ) && substr_count ( $array [ 'data' ] , '.' ) == 2
+      return $array [ 'data' ] ;
+    }
+    return false ;
+  }
+
   public function filteredArray ( $array ) {
     if ( is_array ( $array ) === true && $this -> noObjectsAndFloats ( $array ) === true ) {
       return $array ;

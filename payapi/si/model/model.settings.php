@@ -11,7 +11,9 @@ final class model_settings extends model {
         //-> @TODO if partialPayments === false
         $validated = $this -> validSchema ( 'merchant.settings' , $this -> curlResponse [ 'data' ] [ 'partialPayments' ] ) ;
         if ( is_array ( $validated ) === true ) {
-          return $validated ;
+          $this -> status = 200 ;
+          $this -> set ( 'MerchantSettings' , $validated ) ;
+          return $this -> get ( 'MerchantSettings' ) ;
         } else {
           $this -> status = $this -> error -> errorUnexpectedCurlSchema () ;
         }

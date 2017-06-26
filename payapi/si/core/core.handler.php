@@ -41,14 +41,64 @@ final class handler extends helper {
 
   public function signature ( $populate = false ) {
     if ( is_array ( $populate ) === true ) {
-      return array_merge ( $populate, $this -> get ( 'info' ) ) ;
+      return array_merge ( $populate, $this -> extradata () ) ;
     } else {
-      return $this -> info ;
+      return $this -> extradata () ;
     }
+  }
+
+  public function extradata () {
+    /*
+    return array (
+      "___extradata" => $this -> get ( 'info' )
+    ) ;
+    */
+    return $this -> get ( 'info' ) ;
+  }
+
+  public function arguments ( $key = 0 ) {
+    if ( ! isset ( $this -> arguments [ $key ] ) ) {
+      return false ;
+    }
+    return $this -> arguments [ $key ] ;
   }
 
   public function getSchema ( $schemaKey ) {
     return $this -> validated -> getSchema ( $schemaKey ) ;
+  }
+
+  public function knock () {
+    $received = json_decode ( file_get_contents ( "php://input" ) , true ) ;
+    $debugged = ( ( is_string ( $received ) === true ) ? $received : json_encode ( $received , true ) ) ;
+    if ( $received !== false ) {
+      $this -> debug ( '[ACK] success : ' . $debugged ) ;
+    }
+    //-> @TODO
+    $filtered = $received ;
+    if ( is_array ( $received ) === true && $this -> validate ( 'request.standard' , $received ) !== false ) {
+      return $filtered ;
+    }
+    return false ;
+  }
+
+  public function NEWknock () {
+    $received = $this -> validated -> knocked () ;
+    if ( $received !== false ) {
+      $filtered = $this -> filtered -> knock () ;
+      if ( $filtered !== false ) {
+        $this -> debug ( '[ACK] success' ) ;
+        return $filtered ;
+      } else {
+        unset ( $received ) ;
+        $this -> warning ( 'unexpected ' , 'ack' ) ;
+        return $this -> error -> errorUnexpectedCallbackInput () ;
+      }
+    } else {
+      unset ( $received ) ;
+      $this -> debug ( '[ACK] empty ' ) ;
+      return $this -> error -> errorCallbackNoRequest () ;
+    }
+    return false ;
   }
 
   public function validSchema ( $unknownSchemaKey , $unvalidatedData ) {

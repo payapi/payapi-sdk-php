@@ -160,6 +160,7 @@ final class cgi extends helper {
   }
 
   private function display () {
+    $this -> debug ( ' [display] success ' ) ;
     return die ( $this -> buffer ) ;
   }
 
