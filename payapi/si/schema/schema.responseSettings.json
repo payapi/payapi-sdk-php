@@ -9,7 +9,7 @@
       "___mandatory___" : true,
       "___type___" : "int"
     } ,
-    "partialPayments" : {
+    "data" : {
       "___mandatory___" : true,
       "___type___" : "undefined"
     }

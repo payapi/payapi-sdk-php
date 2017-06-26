@@ -7,9 +7,9 @@ final class model_settings extends model {
   public function getMerchantSettings () {
     $this -> curling ( $this -> endpoint () , $this -> payload () ) ;
     if ( $this -> curlResponse [ 'code' ] === 200 ) {
-      if ( isset ( $this -> curlResponse [ 'partialPayments' ] ) === true && is_array ( $this -> curlResponse [ 'partialPayments' ] ) === true ) {
+      if ( isset ( $this -> curlResponse [ 'data' ] [ 'partialPayments' ] ) === true && is_array ( $this -> curlResponse [ 'data' ] [ 'partialPayments' ] ) === true ) {
         //-> @TODO if partialPayments === false
-        $validated = $this -> validSchema ( 'merchantSettings' , $this -> curlResponse [ 'partialPayments' ] ) ;
+        $validated = $this -> validSchema ( 'merchant.settings' , $this -> curlResponse [ 'data' ] [ 'partialPayments' ] ) ;
         if ( is_array ( $validated ) === true ) {
           return $validated ;
         } else {

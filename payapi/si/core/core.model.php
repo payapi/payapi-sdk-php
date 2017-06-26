@@ -42,7 +42,7 @@ class model extends helper {
     // check valid
   }
 
-  protected function arguments ( $key = 0 ) {
+  public function arguments ( $key = 0 ) {
     if ( ! isset ( $this -> arguments [ $key ] ) ) {
       return false ;
     }
@@ -96,7 +96,7 @@ class model extends helper {
     $curlResponse = $this -> curl -> request ( $url , $data , $return , $header , $ssl , $fresh , $noreuse , $timeout ) ;
     //-> @NOTE @CARE merchant settings should use same schema, array ( "code" => "int" , "data" => "no_object" )
     // if ( $this -> validSchema ( 'response' , $curlResponse ) === true  ) {
-    $schemaName = 'responseSettings' ;
+    $schemaName = 'response' ;
     $curlSchema = $this -> getSchema ( $schemaName ) ;
     $validated = $this -> validSchema ( $schemaName , $curlResponse ) ;
     if ( is_array ( $validated ) === true ) {

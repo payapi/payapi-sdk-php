@@ -1,19 +1,20 @@
-2017-06-26 06:48:07 [info] payapi->configure [debugger] enabled
-2017-06-26 06:48:07 [info] payapi->autoload debug enabled
-2017-06-26 06:48:07 [info] payapi->autoload [autoload] cgi
-2017-06-26 06:48:07 [info] helper->construct [server_load] 0%
-2017-06-26 06:48:07 [info] payapi->autoload [autoload] loader
-2017-06-26 06:48:07 [info] payapi->autoload [autoload] handler
-2017-06-26 06:48:07 [info] payapi->construct handler loaded
-2017-06-26 06:48:07 [info] payapi->settings [command] settings
-2017-06-26 06:48:07 [info] payapi->model [autoload] settings
-2017-06-26 06:48:07 [info] model->auto [autoload] branding
-2017-06-26 06:48:07 [info] helper->construct payapi
-2017-06-26 06:48:07 [info] payapi->controller [autoload] settings
-2017-06-26 06:48:07 [info] model->curling staging-input.payapi.io
-2017-06-26 06:48:07 [info] controller->render [rendering] info
-2017-06-26 06:48:07 [info] controller->render [mode] dump
-2017-06-26 06:48:07 [info] controller->render [code] 200
-2017-06-26 06:48:07 [info] payapi->destruct [destructed] success
-2017-06-26 06:48:07 [info] debugger->destruct ___348ms___
+2017-06-26 08:34:59 [info] payapi->configure [debugger] enabled
+2017-06-26 08:34:59 [info] payapi->autoload debug enabled
+2017-06-26 08:34:59 [info] payapi->autoload [autoload] cgi
+2017-06-26 08:34:59 [info] helper->construct [server_load] 0%
+2017-06-26 08:34:59 [info] payapi->autoload [autoload] loader
+2017-06-26 08:34:59 [info] payapi->autoload [autoload] handler
+2017-06-26 08:34:59 [info] payapi->construct handler loaded
+2017-06-26 08:34:59 [info] payapi->settings [command] settings
+2017-06-26 08:34:59 [info] payapi->model [autoload] settings
+2017-06-26 08:34:59 [info] model->auto [autoload] branding
+2017-06-26 08:34:59 [info] helper->construct payapi
+2017-06-26 08:34:59 [info] payapi->controller [autoload] settings
+2017-06-26 08:34:59 [info] model->curling staging-input.payapi.io
+2017-06-26 08:34:59 [info] model->curling timing 310ms.
+2017-06-26 08:34:59 [info] controller->render [rendering] info
+2017-06-26 08:34:59 [info] controller->render [mode] dump
+2017-06-26 08:34:59 [info] controller->render [code] 200
+2017-06-26 08:34:59 [info] payapi->destruct [destructed] success
+2017-06-26 08:34:59 [info] debugger->destruct ___341ms___
 

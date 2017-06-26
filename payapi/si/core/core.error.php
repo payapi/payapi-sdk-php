@@ -77,9 +77,10 @@ final class error {
   }
 
   public function __toString () {
-    if ( ! is_array ( $this -> data ) )
-      return 'null' ;
-    return json_encode ( $this -> data , true ) ;
+    if ( is_array ( $this -> data ) !==  false ) {
+      return json_encode ( $this -> data , true ) ;
+    }
+    return 'null' ;
   }
 
   public static function single () {

@@ -23,7 +23,7 @@ final class model_callback extends model {
     $requested = json_decode ( $this -> received , true ) ;
     if ( is_array ( $requested ) === true && isset ( $requested [ 'data' ] ) === true && is_array ( $requested [ 'data' ] ) === true ) {
       $decoded = $this -> crypter -> decode ( $requested [ 'data' ] , $this -> config ( 'payapi_api_key' ) ) ;
-      if ( $this -> validate ( 'endpointCallback' , $decoded ) ) {
+      if ( $this -> validate ( 'endpoint.callback' , $decoded ) ) {
         $this -> requested = $requested ;
         $this -> decoded = $decoded ;
       }

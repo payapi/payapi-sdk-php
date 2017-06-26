@@ -21,6 +21,7 @@ final class curling extends helper {
     $timeout                    =      15 ;
 
   public function request ( $url , $post = false , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
+    $timeStart = microtime ( true ) ;
     $this -> debug ( $this -> getHostNameFromUrl ( $url ) ) ;
     $this -> reset () ;
     $options = array
@@ -45,6 +46,7 @@ final class curling extends helper {
     }
     $response = json_decode ( curl_exec ( $this -> buffer ) , true ) ;
     $code = ( int ) addslashes ( curl_getinfo ( $this -> buffer , CURLINFO_HTTP_CODE ) ) ;
+    $this -> debug ( 'timing ' . ( round ( ( microtime ( true ) - $timeStart ) , 3 ) * 1000 ) . 'ms.' ) ;
     if ( $this -> isCleanCodeInt ( $code ) === true ) {
       $this -> code = $code ;
       if ( $this -> code === 200 ) {

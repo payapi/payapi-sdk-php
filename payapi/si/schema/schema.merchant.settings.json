@@ -11,6 +11,12 @@
       "___min___": 2,
       "___max___": 250
     } ,
+    "numberOfInstallments": {
+      "___mandatory___": true,
+      "___type___": "int",
+      "___min___": 1,
+      "___max___": 50
+    } ,
     "minimumAmountAllowedInCents": {
       "___mandatory___": true,
       "___type___": "int",
@@ -35,9 +41,9 @@
       "___min___": 2,
       "___max___": 15
     } ,
-    "nominalAnnualInterestRate": {
+    "nominalAnnualInterestRateInCents": {
       "___mandatory___": true,
-      "___type___": "float",
+      "___type___": "int",
       "___min___": 1,
       "___max___": 50
     } ,

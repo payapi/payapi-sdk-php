@@ -80,7 +80,7 @@ abstract class helper {
     return $this -> debugger -> add ( $info , $label ) ;
   }
 
-  public function error (  $errors , $key = 'error' ) {
+  public function error ( $errors , $key = 'error' ) {
     $this -> debug ( $errors , $key ) ;
     return $this -> error -> set (  $errors , $key ) ;
   }

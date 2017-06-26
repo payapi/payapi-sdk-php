@@ -7,7 +7,8 @@ final class crypter {
 
   protected
     $version                   =  '0.0.1' ,
-    $crypted                   =    false ;
+    $error                     =    false ,
+    $publicKey                 =    false ;
 
   private
     $mode                      =  'HS256' ,
@@ -25,8 +26,8 @@ final class crypter {
   }
 
   public function decode ( $encoded , $hash = false , $crypted = false ) {
-    $hash_update = ( $hash !== false ) ? $hash : $this -> hash ;
     $this -> sanitized = ( $crypted !== false ) ? true : false ;
+    $hash_update = ( is_string ( $hash ) === true ) ? $hash : $this -> hash ;
     $build = $this -> build ( $encoded ) ;
     try {
       $decoded = JWT :: decode ( $build , $hash_update , array ( $this -> mode ) ) ;
@@ -39,7 +40,7 @@ final class crypter {
 
   public function encode ( $decoded , $hash = false , $crypted = false ) {
     $this -> sanitized = ( $crypted !== false ) ? true : false ;
-    $hash_update = ( $hash !== false ) ? $hash : $this -> hash ;
+    $hash_update = ( is_string ( $hash ) === true ) ? $hash : $this -> hash ;
     try {
       $encoded = $this -> clean ( JWT :: encode ( $decoded , $hash_update , $this -> mode ) ) ;
     } catch ( Exception $e ) {
@@ -92,7 +93,10 @@ final class crypter {
   }
 
   public function publicKey ( $public ) {
-    return $this -> encode ( $this -> hashed ( $public , $public . md5 ( $public ) ) , false , true ) ;
+    if ( $this -> publicKey === false ) {
+      $this -> publicKey = $this -> encode ( $this -> hashed ( $public , $public . md5 ( $public ) ) , false , true ) ;
+    }
+    return $this -> publicKey ;
   }
 
   public function privateHash ( $hash ) {
@@ -106,10 +110,17 @@ final class crypter {
   private function hashedRandom ( $token , $hash ) {
     return $this -> hashed ( $token , $hash ) . '.' . $this -> hashed ( $this -> randomToken () ) . $this -> hashed ( $this -> randomToken () ) . '.' . $this -> publicKey ( $token ) ;
   }
-
-  private function error ( $error ) {
-    // @TODO
-    return true ;
+  //-> debug errors?
+  public function error (  $errors = false ) {
+    if ( $errors === false ) {
+      return $this -> error ;
+    } else
+    if ( is_array ( $errors ) === true ) {
+      foreach ( $erros as $error ) {
+        $this -> error ( $error ) ;
+      }
+    }
+    $this -> error [] = ( string ) $errors ;
   }
 
   public function __toString () {
