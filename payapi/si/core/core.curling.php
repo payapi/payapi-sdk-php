@@ -21,6 +21,7 @@ final class curling extends helper {
     $timeout                    =      15 ;
 
   public function request ( $url , $post = false , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
+    $this -> debug ( $this -> getHostNameFromUrl ( $url ) ) ;
     $this -> reset () ;
     $options = array
       (
@@ -62,6 +63,21 @@ final class curling extends helper {
     }
     curl_close ( $this -> buffer ) ;
     return $this -> response ;
+  }
+
+  public function getHostNameFromUrl ( $url ) {
+    $parse = parse_url ( $url ) ;
+    if ( isset ( $parse [ 'host' ] ) === true ) {
+      return $parse [ 'host' ] ;
+    }
+    return false ;
+  }
+
+  public function curlErrorUnexpectedCurlResponse () {
+    return array (
+      "code" => $this -> error -> errorUnexpectedCurlResponse () ,
+      "data" => 'curl schema error'
+    ) ;
   }
 
   private function isCleanCodeInt ( $int ) {

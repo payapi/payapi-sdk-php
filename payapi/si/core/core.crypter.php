@@ -73,9 +73,14 @@ final class crypter {
     return $encodejsonized ;
   }
 
-  public function uniqueToken () {
+  public function uniqueServerToken () {
+    return $this -> hashed ( getenv ( 'SERVER_SIGNATURE' ) , getenv ( 'SERVER_NAME' ) ) ;
+  }
+
+  public function uniqueAccessToken () {
     //->
-    return 'ooops' ;
+    $signature = '...' ;
+    return $this -> hashed ( $signature , 'access' ) ;
   }
 
   public function randomToken () {

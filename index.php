@@ -26,4 +26,4 @@ $app = new payapi ( array (
   "payapi_api_key"   => 'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9'  // *MANDATORY PayApi api key (PayApi backend)
 ) ) ;
 
-var_dump ( $app -> info () ) ;
+var_dump ( $app -> settings () ) ;

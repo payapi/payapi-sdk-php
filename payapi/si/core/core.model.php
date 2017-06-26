@@ -6,10 +6,8 @@ use \payapi\cgi as cgi ;
 
 class model extends helper {
 
-  public
-    $key                           =             false ;
-
   protected
+    $key                           =             false ,
     $arguments                     =             false ,
     $info                          =             false ,
     $adaptor                       =             false ,
@@ -44,15 +42,22 @@ class model extends helper {
     // check valid
   }
 
-  public function arguments ( $key = 0 ) {
+  protected function arguments ( $key = 0 ) {
     if ( ! isset ( $this -> arguments [ $key ] ) ) {
       return false ;
     }
     return $this -> arguments [ $key ] ;
   }
 
-  public function publicKey () {
+  protected function publicKey () {
     return strtok ( $this -> key , '.' ) ;
+  }
+
+  protected function validPublicId ( $publicKey ) {
+    if ( is_string ( $publicKey ) === true && $publicKey === $this -> publicKey () ) {
+      return true ;
+    }
+    return false ;
   }
 
   protected function token () {
@@ -88,7 +93,6 @@ class model extends helper {
 
   protected function curling ( $url , $data = null , $return = 1 , $header = 0 , $ssl = 0 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
     $this -> resetCurl () ;
-    $this -> debug ( $url ) ;
     $curlResponse = $this -> curl -> request ( $url , $data , $return , $header , $ssl , $fresh , $noreuse , $timeout ) ;
     //-> @NOTE @CARE merchant settings should use same schema, array ( "code" => "int" , "data" => "no_object" )
     // if ( $this -> validSchema ( 'response' , $curlResponse ) === true  ) {
@@ -99,10 +103,7 @@ class model extends helper {
       $this -> curlResponse = $validated ;
     } else {
       $this -> warning ( 'no valid' , 'response' ) ;
-      $this -> curlResponse = array (
-        "code" => $this -> error -> errorUnexpectedCurlResponse () ,
-        "data" => 'curl schema error'
-      ) ;
+      $this -> curlResponse = $this -> curl -> curlErrorUnexpectedCurlResponse () ;
     }
     return $this -> curlResponse ;
   }
