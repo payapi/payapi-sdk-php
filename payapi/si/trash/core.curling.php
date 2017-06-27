@@ -2,10 +2,12 @@
 
 namespace payapi ;
 
+//-> unify curl and callback in api
+
 final class curling extends helper {
 
   protected
-    $version                    =   '0.1' ;
+    $version                    = '0.0.1' ;
 
   private
     $response                   =   false ,
@@ -21,7 +23,6 @@ final class curling extends helper {
     $timeout                    =      15 ;
 
   public function request ( $url , $post = false , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
-    $timeStart = microtime ( true ) ;
     $this -> debug ( $this -> getHostNameFromUrl ( $url ) ) ;
     $this -> reset () ;
     $options = array
@@ -44,8 +45,9 @@ final class curling extends helper {
       $curlPost = http_build_query ( array ( "data" => $post ) ) ;
       curl_setopt ( $this -> buffer , CURLOPT_POSTFIELDS , $curlPost ) ;
     }
+    $timeStart = microtime ( true ) ;
     $response = json_decode ( curl_exec ( $this -> buffer ) , true ) ;
-    $code = ( int ) addslashes ( curl_getinfo ( $this -> buffer , CURLINFO_HTTP_CODE ) ) ;
+    $code = ( int ) curl_getinfo ( $this -> buffer , CURLINFO_HTTP_CODE ) ;
     $this -> debug ( 'timing ' . ( round ( ( microtime ( true ) - $timeStart ) , 3 ) * 1000 ) . 'ms.' ) ;
     if ( $this -> isCleanCodeInt ( $code ) === true ) {
       $this -> code = $code ;
@@ -114,8 +116,8 @@ final class curling extends helper {
     return false ;
   }
   //-> duplicated in filterer
-  private function noObjectsAndFloats ( $unfilteredArray ) {
-    foreach ( $unfilteredArray as $filtering ) {
+  private function noObjectsAndFloats ( $unfiltererArray ) {
+    foreach ( $unfiltererArray as $filtering ) {
       if ( is_array ( $filtering ) === true ) {
         if ( $this -> noObjectsAndFloats ( $filtering ) !== true ) {
           return false ;

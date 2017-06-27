@@ -9,22 +9,22 @@ class branding extends helper {
   private
     $default                  =  'payapi' ,
     $defaulted                =     false ,
-    $key                      =     false ,
+    $brandKey                 =     false ,
     $brand                    =     false ;
 
   public function auto () {
     if ( $this -> config ( 'branding' ) && is_file ( router :: brandingFile ( $this -> config ( 'branding' ) ) ) ) {
-      $this -> key = $this -> config ( 'branding' ) ;
-      $this -> brand = $this -> getBrand ( $this -> key ) ;
+      $this -> brandKey = $this -> config ( 'branding' ) ;
+      $this -> brand = $this -> getBrand ( $this -> brandKey ) ;
     }
     if ( $this -> brand === false ) {
-      $this -> key = $this -> default ;
-      $this -> brand = $this -> getBrand ( $this -> key ) ;
+      $this -> brandKey = $this -> default ;
+      $this -> brand = $this -> getBrand ( $this -> brandKey ) ;
       $this -> defaulted = true ;
       $this -> warning ( 'not found, using default' , 'brand' ) ;
     }
     $this -> set ( 'brand' , $this -> brand ) ;
-    $this -> debug ( $this -> key , 'brand' ) ;
+    $this -> debug ( $this -> brandKey , 'brand' ) ;
   }
 
   private function getBrand ( $key ) {
@@ -33,6 +33,10 @@ class branding extends helper {
       $this -> warning ( 'no valid schema' , 'brand' ) ;
     }
     return $brand ;
+  }
+
+  public function getBrandKey () {
+    return $this -> brandKey ;
   }
 
 

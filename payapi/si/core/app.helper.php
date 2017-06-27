@@ -15,11 +15,10 @@ abstract class helper {
     $this -> data = data :: single () ;
     $this -> config = $this -> data -> get ( 'config' ) ;
     $this -> load = $this -> data -> get ( 'loader' ) ;
-    if ( $this -> config ( 'debug' ) ) {
-      $this -> debugger = debugger :: single () ;
-    }
+    $this -> debugger = $this -> data -> get ( 'debug' , false ) ;
     if ( method_exists ( $this , 'auto' ) ) {
       $this -> debug ( '[autoload] ' . serializer :: cleanLogNamespace ( get_called_class () ) ) ;
+      //$this -> addInfo () ;
       return $this -> auto () ;
     }
   }
@@ -56,6 +55,19 @@ abstract class helper {
     return $this -> get ( 'info' ) ;
   }
 
+  protected function autoVersionSign () {
+    if ( is_string ( $this -> version ) === true && is_string ( get_called_class () ) === true ) {
+      $version = $this -> version ;
+      $label = get_called_class ( $label . '_' . 'v' , $version ) ;
+      $info = $this -> addInfo ( $label , $version ) ;
+    }
+  }
+
+  public function addInfo ( $key , $info ) {
+    //-> filter/validate
+    return $this -> data -> addInfo ( $key , $info ) ;
+  }
+
   public function load ( $data ) {
     $loadable = array ( 'model' , 'schema' ) ;
     $split = explode ( '/' , $data ) ;
@@ -77,7 +89,7 @@ abstract class helper {
     if ( $this -> debugger === false ) {
       return true ;
     }
-    return $this -> debugger -> add ( $info , $label ) ;
+    return $this -> debugger -> add ( trim ( $info ) , $label ) ;
   }
 
   public function error ( $errors , $key = 'error' ) {

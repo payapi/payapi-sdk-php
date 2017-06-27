@@ -1,13 +1,22 @@
 <?php
 namespace payapi ;
 
-abstract class plugin extends helper {
+final class plugin extends helper {
 
   protected
     $error                     =   false ;
 
+  private
+    $key                       =   false ,
+    $adaptor                   =   false ;
+
   public function auto () {
+    /*
+    $this -> key = ( is_string ( $this -> config ( 'plugin' ) ) === true ) ? $this -> config ( 'plugin' ) : 'default' ;
+
+    }
     //$this -> key ;
+    */
   }
 
   public function info () {

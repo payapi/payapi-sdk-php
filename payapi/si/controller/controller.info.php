@@ -4,7 +4,7 @@ namespace payapi ;
 final class controller_info extends controller {
 
   public function run () {
-     return $this -> render ( $this -> model -> info () , 200 ) ;
+     return $this -> render ( $this -> data -> extradata () , 200 ) ;
   }
 
 }

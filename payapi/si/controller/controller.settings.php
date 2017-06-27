@@ -5,11 +5,17 @@ namespace payapi ;
 final class controller_settings extends controller {
 
   public function run () {
-    $settings = $this -> model -> getMerchantSettings () ;
-    if ( is_array ( $settings ) === true ) {
-      return $this -> render ( $settings , 200 ) ;
+    $merchantSettings = $this -> curl ( $this -> model -> endpoint () , $this -> model -> payload () ) ;
+    if ( $merchantSettings !== false ) {
+      $validatedMerchantSettings = $this -> model -> validateMerchantSettings ( $merchantSettings ) ;
+      if ( $validatedMerchantSettings !== false && is_array ( $validatedMerchantSettings ) !== false ) {
+        return $this -> render ( $validatedMerchantSettings , 200 ) ;
+      } else {
+        return $this -> response ( $this -> error -> errorUnexpectedCurlSchema () ) ;
+      }
+    } else {
+      return $this -> response ( $this -> error -> errorUnexpectedCurlResponse () ) ;
     }
-    return $this -> response ( $this -> model -> status () ) ;
   }
 
 

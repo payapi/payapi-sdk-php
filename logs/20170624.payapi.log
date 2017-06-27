@@ -3,8 +3,8 @@
 2017-06-24 22:58:49 [info] payapi->autoload [autoload] cgi
 2017-06-24 22:58:49 [info] helper->construct [server_load] 0%
 2017-06-24 22:58:49 [info] payapi->autoload [autoload] loader
-2017-06-24 22:58:49 [info] payapi->autoload [autoload] handler
-2017-06-24 22:58:49 [info] payapi->construct handler loaded
+2017-06-24 22:58:49 [info] payapi->autoload [autoload] framework
+2017-06-24 22:58:49 [info] payapi->construct framework loaded
 2017-06-24 22:58:49 [info] payapi->info [command] info
 2017-06-24 22:58:49 [info] payapi->model [autoload] model
 2017-06-24 22:58:49 [info] model->auto [autoload] branding

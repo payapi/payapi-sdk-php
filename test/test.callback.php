@@ -131,26 +131,15 @@ class testing {
       curl_setopt ( $buffer , CURLOPT_POSTFIELDS , $curlPost ) ;
     }
     $responsed = json_decode ( curl_exec ( $buffer ) , true ) ;
+    //$responsed = curl_exec ( $buffer ) ;
     $code = ( int ) addslashes ( curl_getinfo ( $buffer , CURLINFO_HTTP_CODE ) ) ;
-    $this -> debug ( 'timing ' . ( round ( ( microtime ( true ) - $timeStart ) , 3 ) * 1000 ) . 'ms.' ) ;
-    if ( $this -> isCleanCodeInt ( $code ) === true ) {
-      $this -> code = $code ;
-      if ( $this -> code === 200 ) {
-        if ( $this -> isCleanArray ( $responsed ) === true ) {
-          $response = $responsed ;
-        } else {
-          $this -> warning ( 'object blocked' , 'curl' ) ;
-          $response = $this -> unvalidCurlResponse () ;
-        }
-      } else {
-        $this -> warning ( 'unexpected response' ) ;
-        $response = $this -> unvalidCurlResponse ( $this -> code ) ;
-      }
-    } else {
-      $response = $this -> unvalidCurlResponse () ;
-    }
+    $testResponse = array (
+      "code" => $code ,
+      "response" => $responsed
+    ) ;
     curl_close ( $buffer ) ;
-    return $response ;
+    $testJsonResponse = json_encode ( $testResponse , true ) ;
+    return $testResponse ;
   }
 
   public function getHostNameFromUrl ( $url ) {
@@ -200,8 +189,8 @@ class testing {
     return false ;
   }
   //-> duplicated in filterer
-  private function noObjectsAndFloats ( $unfilteredArray ) {
-    foreach ( $unfilteredArray as $filtering ) {
+  private function noObjectsAndFloats ( $unfiltererArray ) {
+    foreach ( $unfiltererArray as $filtering ) {
       if ( is_array ( $filtering ) === true ) {
         if ( $this -> noObjectsAndFloats ( $filtering ) !== true ) {
           return false ;

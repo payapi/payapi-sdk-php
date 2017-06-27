@@ -1,22 +1,24 @@
-2017-06-26 18:48:45 [info] payapi->configure [debugger] enabled
-2017-06-26 18:48:45 [info] payapi->autoload debug enabled
-2017-06-26 18:48:45 [info] payapi->autoload [autoload] cgi
-2017-06-26 18:48:45 [info] helper->construct [server_load] 0%
-2017-06-26 18:48:45 [info] payapi->autoload [autoload] loader
-2017-06-26 18:48:45 [info] payapi->autoload [autoload] handler
-2017-06-26 18:48:45 [info] payapi->construct handler loaded
-2017-06-26 18:48:45 [info] payapi->settings [command] settings
-2017-06-26 18:48:45 [info] payapi->model [autoload] settings
-2017-06-26 18:48:45 [info] model->auto [autoload] branding
-2017-06-26 18:48:45 [info] helper->construct payapi
-2017-06-26 18:48:45 [info] payapi->controller [autoload] settings
-2017-06-26 18:48:45 [info] model->curling staging-input.payapi.io
-2017-06-26 18:48:46 [info] model->curling timing 249ms.
-2017-06-26 18:48:46 [info] controller->render [rendering] info
-2017-06-26 18:48:46 [info] controller->render [mode] json
-2017-06-26 18:48:46 [info] controller->render [code] 200
-2017-06-26 18:48:46 [info] cgi->render [headers] json
-2017-06-26 18:48:46 [info] cgi->render  [display] success 
-2017-06-26 18:48:46 [info] payapi->destruct [destructed] success
-2017-06-26 18:48:46 [info] debugger->destruct ___281ms___
+2017-06-26 22:14:41 [info] payapi->configure [debugger] enabled
+2017-06-26 22:14:41 [info] payapi->autoload debug enabled
+2017-06-26 22:14:41 [info] payapi->autoload [autoload] cgi
+2017-06-26 22:14:41 [info] helper->construct [server_load] 0%
+2017-06-26 22:14:41 [info] payapi->autoload [autoload] loader
+2017-06-26 22:14:41 [info] payapi->autoload [autoload] framework
+2017-06-26 22:14:41 [warning] helper->warning [__get] not allowed serializer
+2017-06-26 22:14:41 [warning] helper->warning [__get] not allowed sanitizer
+2017-06-26 22:14:41 [info] payapi->construct framework loaded
+2017-06-26 22:14:41 [info] payapi->settings [command] settings
+2017-06-26 22:14:41 [info] payapi->model [autoload] settings
+2017-06-26 22:14:41 [info] model->auto [autoload] branding
+2017-06-26 22:14:41 [info] helper->construct payapi
+2017-06-26 22:14:41 [info] payapi->controller [autoload] settings
+2017-06-26 22:14:41 [info] model->curling staging-input.payapi.io
+2017-06-26 22:14:41 [info] model->curling timing 224ms.
+2017-06-26 22:14:41 [info] controller->render [rendering] info
+2017-06-26 22:14:41 [info] controller->render [mode] json
+2017-06-26 22:14:41 [info] controller->render [code] 200
+2017-06-26 22:14:41 [info] cgi->render [headers] json
+2017-06-26 22:14:41 [info] cgi->render  [display] success 
+2017-06-26 22:14:41 [info] payapi->destruct [destructed] success
+2017-06-26 22:14:41 [info] debugger->destruct ___253ms___
 

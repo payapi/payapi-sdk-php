@@ -5,33 +5,26 @@ namespace payapi ;
 final class model_callback extends model {
 
   private
-    $received              =   false ,
-    $requested             =   false ,
-    $decoded               =   false ;
+    $received              =   false ;
 
-
-  public function isRequested () {
-    $this -> received = $this -> knock () ;
-    return $this -> received ;
-  }
-
-  public function validate () {
-    $requested = json_decode ( $this -> received , true ) ;
-    $this -> debug ( 'validating data' ) ;
-    if ( is_array ( $requested ) === true && isset ( $requested [ 'data' ] ) === true && is_array ( $requested [ 'data' ] ) === true ) {
-      $decoded = $this -> crypter -> decode ( $requested [ 'data' ] , $this -> config ( 'payapi_api_key' ) ) ;
-      if ( $this -> validate ( 'endpoint.callback' , $decoded ) ) {
-        $this -> requested = $requested ;
-        $this -> decoded = $decoded ;
+  public function decodedCallback ( $encodedPayload ) {
+    $decodedJsonData = $this -> decode ( $encodedPayload , $this -> getDecodedApiKey ( $this -> config ( 'encoded_payapi_api_key' ) ) ) ;
+    if ( $decodedJsonData !== false && is_string ( $decodedJsonData ) === true ) {
+      $decodedData = json_decode ( $decodedJsonData , true ) ;
+      if ( $decodedData !== false && is_array ( $decodedData ) !== false  ) {
+        return $decodedData ;
       }
-    } else {
-      $this -> error ( 'no valid callback' ) ;
     }
-    return $this -> decoded ;
+    return false ;
   }
 
-  public function decoded () {
-    return $this -> decoded ;
+  public function validateCallbackSchema ( $callbackData ) {
+    if ( $this -> validSchema ( 'endpoint.callback' , $callbackData ) !== false ) {
+      return true ;
+    } else {
+      $this -> error ( '[schema] no valid' ) ;
+      return false ;
+    }
   }
 
 

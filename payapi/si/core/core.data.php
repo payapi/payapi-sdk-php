@@ -5,10 +5,13 @@ namespace payapi ;
 final class data {
 
   public static
-    $single            =      false ;
+    $single            =    false ;
 
   private
-    $data              =   array () ;
+    $data              =   array (
+      "debugger"       =>   false ,
+      "info"           =>  array ()
+    ) ;
 
   protected function __construct () {}
 
@@ -41,6 +44,23 @@ final class data {
       return false ;
     }
     return ( $this -> data [ $key ] = $value ) ;
+  }
+
+  public function addInfo ( $key , $info ) {
+    $info = array_merge (
+      array (
+      "___" . ( string ) $key => ( string ) $info
+      ) ,
+      $this -> get ( 'info' )
+    ) ;
+    $this -> set ( 'info' , $info ) ;
+  }
+
+  public function extradata () {
+    return array (
+      "___extradata" => $this -> get ( 'info' )
+    ) ;
+    return $this -> get ( 'info' ) ;
   }
 
   public function reset ( $fullReset = false) {

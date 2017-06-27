@@ -8,11 +8,11 @@ final class filterer {
     $version                  =   '0.0.1' ;
 
   public function schemaKey ( $schemaKey ) {
-    return $this -> filteredString ( $schemaKey ) ;
+    return $this -> filtererString ( $schemaKey ) ;
   }
 
-  public function filteredSchemaData ( $unfilteredSchemaData ) {
-    return $this -> filteredArray ( $unfilteredSchemaData ) ;
+  public function filtererSchemaData ( $unfiltererSchemaData ) {
+    return $this -> filtererArray ( $unfiltererSchemaData ) ;
   }
 
   public function knock () {
@@ -24,25 +24,33 @@ final class filterer {
     return false ;
   }
 
-  public function filteredArray ( $array ) {
-    if ( is_array ( $array ) === true && $this -> noObjectsAndFloats ( $array ) === true ) {
+  public function getHostNameFromUrl ( $url ) {
+    $parse = parse_url ( $url ) ;
+    if ( isset ( $parse [ 'host' ] ) === true ) {
+      return $parse [ 'host' ] ;
+    }
+    return false ;
+  }
+
+  public function filtererArray ( $array ) {
+    if ( is_array ( $array ) !== false && $this -> noObjectsAndFloats ( $array ) === true ) {
       return $array ;
     }
     return false ;
   }
 
-  public function filteredString ( $string ) {
+  public function filtererString ( $string ) {
     if ( is_string ( $string ) === true ) {
       return $string ;
     }
     return false ;
   }
 
-  public function filteredInt ( $unfilteredInt ) {
-    if ( is_int ( $unfilteredInt ) === true ) {
-      $filteredMaximumInt = $this -> filterMaximumInt ( $unfilteredInt ) ;
-      if ( is_int ( $filteredMaximumInt ) ) {
-        return $filteredMaximumInt ;
+  public function filtererInt ( $unfiltererInt ) {
+    if ( is_int ( $unfiltererInt ) === true ) {
+      $filtererMaximumInt = $this -> filterMaximumInt ( $unfiltererInt ) ;
+      if ( is_int ( $filtererMaximumInt ) ) {
+        return $filtererMaximumInt ;
       }
     }
     return false ;
@@ -55,21 +63,23 @@ final class filterer {
     return false ;
   }
 
-  public function filteredBool ( $unfilteredBool ) {
-    if ( is_bool ( $unfilteredBool ) === true && $unfilteredBool === true ) {
+  public function filtererBool ( $unfiltererBool ) {
+    if ( is_bool ( $unfiltererBool ) === true && $unfiltererBool === true ) {
       return true ;
     }
     return false ;
   }
 
-  private function noObjectsAndFloats ( $unfilteredArray ) {
-    foreach ( $unfilteredArray as $filtering ) {
+  private function noObjectsAndFloats ( $unfiltererArray ) {
+    return true ;
+    //-> @NOTE @CARE @FIXME
+    foreach ( $unfiltererArray as $filtering ) {
       if ( is_array ( $filtering ) === true ) {
         if ( $this -> noObjectsAndFloats ( $filtering ) !== true ) {
           return false ;
         }
-      }
-      if ( is_string ( $filtering ) === true || is_int ( $filtering ) === true || is_bool ( $filtering ) ) {
+      } else
+      if ( is_string ( $filtering ) === true || is_array ( $filtering ) !== false || is_int ( $filtering ) === true || is_bool ( $filtering ) === true ) {
         return true ;
       }
     }

@@ -9,9 +9,8 @@ class model extends helper {
   protected
     $key                           =             false ,
     $arguments                     =             false ,
-    $info                          =             false ,
     $adaptor                       =             false ,
-    $handler                       =             false ,
+    $framework                     =             false ,
     $curl                          =             false ,
     $curlResponse                  =             false ,
     $status                        =             false ,
@@ -23,27 +22,18 @@ class model extends helper {
 
   protected function auto () {
     $this -> status = false ;
-    $this -> handler = $this -> data -> get ( 'handler' ) ;
-    $this -> data -> set ( 'handler' , false ) ;
-    $this -> crypter = $this -> data -> get ( 'crypter' ) ;
+    $this -> framework = $this -> data -> get ( 'framework' , false ) ;
+    $this -> data -> set ( 'framework' , false ) ;
+    $this -> crypter = $this -> data -> get ( 'crypter' , false ) ;
     $this -> token = $this -> crypter -> randomToken () ; //-> unique
     $this -> key = $this -> crypter -> publicKey ( $this -> config ( 'payapi_public_id' ) ) ;
-    $this -> info = array_merge (
-      $this -> get ( 'info' ) ,
-      array (
-        "___pk" => $this -> publicKey ()
-      )
-    ) ;
-    $this -> set ( 'info' , $this -> info ) ;
-    $this -> adaptor = serializer :: adaptor ( $this -> config ( 'plugin' ) ) ;
-    $this -> info = $this -> handler -> signature ( $this -> get ( 'info' ) ) ;
+    //$this -> adaptor = serializer :: adaptor ( $this -> config ( 'plugin' ) ) ;
+    $this -> adaptor = new plugin () ;
+    $this -> addInfo ( 'pk' , $this -> key ) ;
     $this -> brand = new branding () ;
+    $this -> addInfo ( 'brand' , $this -> brand -> getBrandKey () ) ;
     $this -> arguments = $this -> get ( 'arguments' ) ;
     // check valid
-  }
-
-  protected function arguments ( $key = 0 ) {
-    return $this -> handler -> arguments ( $key ) ;
   }
 
   private function publicKey () {
@@ -77,48 +67,31 @@ class model extends helper {
   }
 
   public function validSchema ( $schema = array () , $data ) {
-    return $this -> handler -> validSchema ( $schema , $data ) ;
+    return $this -> framework -> validSchema ( $schema , $data ) ;
   }
 
   public function getSchema ( $schema ) {
-    return $this -> handler -> getSchema ( $schema ) ;
+    return $this -> framework -> getSchema ( $schema ) ;
   }
 
   public function brand ( $key = false ) {
     return $this -> get ( 'brand' ) ;
   }
 
-  protected function knock () {
-    return $this -> handler -> knock () ;
-  }
-
-  protected function curling ( $url , $data = null , $return = 1 , $header = 0 , $ssl = 0 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
-    $this -> resetCurl () ;
-    $curlResponse = $this -> curl -> request ( $url , $data , $return , $header , $ssl , $fresh , $noreuse , $timeout ) ;
-    $validated = $this -> validSchema ( 'response.standard' , $curlResponse ) ;
-    if ( is_array ( $validated ) === true ) {
-      $this -> curlResponse = $validated ;
+  public function get ( $key = false , $signed = true ) {
+    if ( $signed !== false ) {
+      return $this -> signOutput ( $this -> data -> get ( $key ) ) ;
     } else {
-      $this -> warning ( 'no valid' , 'response' ) ;
-      $this -> curlResponse = $this -> curl -> curlErrorUnexpectedCurlResponse () ;
-    }
-    return $this -> curlResponse ;
-  }
-
-  private function resetCurl () {
-    if ( $this -> curl === false ) {
-      $this -> curl = new curling () ;
-    } else {
-      $this -> curlResponse = false ;
+      return $this -> data -> get ( $key ) ;
     }
   }
-
-  public function get ( $key = false ) {
-    return $this -> signOutput ( $this -> data -> get ( $key ) ) ;
+  //-> @NOTE @FIXME this shoudl not to be public
+  public function signOutput ( $outputData ) {
+      return $this -> framework -> signature ( $outputData ) ;
   }
 
-  protected function signOutput ( $outputData ) {
-    return $this -> handler -> signature ( $outputData ) ;
+  protected function getDecodedApiKey ( $encodedApiKey ) {
+    return $this -> decode ( $encodedApiKey , $this -> config ( 'payapi_public_id' ) , true ) ;
   }
 
   public function has ( $key ) {
@@ -129,12 +102,12 @@ class model extends helper {
     return $this -> data -> set ( $key , $value ) ;
   }
 
-  public function encode ( $decoded , $hash = false , $sanitized = false ) {
-    return $this -> crypter -> encode ( $decoded , $hash , $sanitized ) ;
+  protected function encode ( $decoded , $hash = false , $sanitizer = false ) {
+    return $this -> crypter -> encode ( $decoded , $hash , $sanitizer ) ;
   }
 
-  public function decode ( $encoded , $hash = false , $sanitized = false ) {
-    return $this -> crypter -> decode ( $encoded , $hash , $sanitized ) ;
+  protected function decode ( $encoded , $hash = false , $sanitizer = false ) {
+    return $this -> crypter -> decode ( $encoded , $hash , $sanitizer ) ;
   }
 
   public function __destruct () {}

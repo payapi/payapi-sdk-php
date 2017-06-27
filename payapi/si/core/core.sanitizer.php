@@ -17,6 +17,21 @@ final class sanitizer {
     return $data ;
   }
 
+  public function outputData ( $data ) {
+    /*
+    if ( isset ( $data [ '___extradata' ] ) === true ) {
+      unset ( $data [ '___extradata' ] ) ;
+    }*/
+    return $data ;
+  }
+
+  public function parseDomain ( $url ) {
+    $parsed = parse_url ( $url ) ;
+    if ( ! isset ( $parsed [ 'host' ] ) )
+      return false ;
+    return $parsed [ 'host' ] ;
+  }
+
   public function __toString () {
     return serializer :: toString ( $this -> version ) ;
   }

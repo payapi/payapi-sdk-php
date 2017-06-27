@@ -52,15 +52,23 @@ final class error {
     return 415 ; // unsupported media type
   }
 
+  public function errorCallbackNoValidJwtPayload () {
+    return 404 ; // unsupported media type
+  }
+
   public function errorAppSchemaNoValid () {
     return 406 ;
+  }
+
+  public function errorValidatorNoDataFound () {
+    return 404 ;
   }
 
   public function errorCallbackNoRequest () {
     return 404 ;
   }
 
-  public function errorUnexpectedCallbackInput () {
+  public function errorUnexpectedCallbackData () {
     return 412 ; // precondition failed
   }
 

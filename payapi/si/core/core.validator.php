@@ -6,7 +6,7 @@ namespace payapi ;
 * returns
 *         true/false
 *
-* @TODO sanitize, unset not expected and to use sanitized data
+* @TODO sanitize, unset not expected and to use sanitizer data
 *
 ***/
 
@@ -81,8 +81,8 @@ final class validator {
     return preg_match ( '~^[0-9a-z]+$~i' , $string ) ;
   }
 
-  public function isFilteredSchema ( $filteredSchema ) {
-    return $this -> isArray ( $filteredSchema ) ;
+  public function isfiltererSchema ( $filtererSchema ) {
+    return $this -> isArray ( $filtererSchema ) ;
   }
 
   public function isPayload ( $payload , $crypted = false ) {
@@ -104,23 +104,23 @@ final class validator {
     return false ;
   }
 
-  public function isAlphaNumeric ( $unvalidatedKey ) {
-    return preg_match ( '~^[0-9a-z]+$~i' , $unvalidatedKey ) ;
+  public function isAlphaNumeric ( $unvalidatorKey ) {
+    return preg_match ( '~^[0-9a-z]+$~i' , $unvalidatorKey ) ;
   }
 
-  public function isNumeric ( $unvalidatedNumber ) {
-    return $this -> check ( $unvalidatedNumber , 'number' ) ;
+  public function isNumeric ( $unvalidatorNumber ) {
+    return $this -> check ( $unvalidatorNumber , 'number' ) ;
   }
 
-  public function isValidCode ( $unvalidatedCode ) {
-    if ( is_int ( $unvalidatedCode ) && preg_match ( '/^\d{3}$/' , $unvalidatedCode ) && $unvalidatedCode <= 600 && $unvalidatedCode >= 200 ) {
+  public function isValidCode ( $unvalidatorCode ) {
+    if ( is_int ( $unvalidatorCode ) && preg_match ( '/^\d{3}$/' , $unvalidatorCode ) && $unvalidatorCode <= 600 && $unvalidatorCode >= 200 ) {
       return true ;
     }
     return false ;
   }
 
-  protected function isPhoneNumber ( $unvalidatedPhone ) {
-    if ( $this -> check ( $unvalidatedPhone , 'int' ) === true && $unvalidatedPhone > 9999999 && $unvalidatedPhone < 9999999999999999999 ) {
+  protected function isPhoneNumber ( $unvalidatorPhone ) {
+    if ( $this -> check ( $unvalidatorPhone , 'int' ) === true && $unvalidatorPhone > 9999999 && $unvalidatorPhone < 9999999999999999999 ) {
       return true ;
     }
     return false ;
@@ -130,8 +130,8 @@ final class validator {
     return filter_var ( $data , FILTER_VALIDATE_EMAIL ) ;
   }
 
-  protected function isUrl ( $unvalidatedUrl ) {
-    return $this -> check ( $unvalidatedUrl , 'url' ) ;
+  protected function isUrl ( $unvalidatorUrl ) {
+    return $this -> check ( $unvalidatorUrl , 'url' ) ;
   }
 
   public function knock () {

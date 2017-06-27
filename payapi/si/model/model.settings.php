@@ -4,15 +4,14 @@ namespace payapi ;
 
 final class model_settings extends model {
 
-  public function getMerchantSettings () {
-    $this -> curling ( $this -> endpoint () , $this -> payload () ) ;
-    if ( $this -> curlResponse [ 'code' ] === 200 ) {
-      if ( isset ( $this -> curlResponse [ 'data' ] [ 'partialPayments' ] ) === true && is_array ( $this -> curlResponse [ 'data' ] [ 'partialPayments' ] ) === true ) {
+  public function validateMerchantSettings ( $settings ) {
+    if ( $settings [ 'code' ] === 200 ) {
+      if ( isset ( $settings [ 'data' ] [ 'partialPayments' ] ) === true && is_array ( $settings [ 'data' ] [ 'partialPayments' ] ) === true ) {
         //-> @TODO if partialPayments === false
-        $validated = $this -> validSchema ( 'merchant.settings' , $this -> curlResponse [ 'data' ] [ 'partialPayments' ] ) ;
-        if ( is_array ( $validated ) === true ) {
+        $validator = $this -> validSchema ( 'merchant.settings' , $settings [ 'data' ] [ 'partialPayments' ] ) ;
+        if ( is_array ( $validator ) === true ) {
           $this -> status = 200 ;
-          $this -> set ( 'MerchantSettings' , $validated ) ;
+          $this -> set ( 'MerchantSettings' , $validator ) ;
           return $this -> get ( 'MerchantSettings' ) ;
         } else {
           $this -> status = $this -> error -> errorUnexpectedCurlSchema () ;
@@ -21,7 +20,7 @@ final class model_settings extends model {
         $this -> status = $this -> error -> errorNoValidJsonPayload () ;
       }
     } else {
-      $this -> status = $this -> curlResponse [ 'code' ] ;
+      $this -> status = $settings [ 'code' ] ;
     }
     return false ;
   }

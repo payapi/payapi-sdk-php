@@ -5,22 +5,26 @@ namespace payapi ;
 final class controller_callback extends controller {
 
   public function run () {
-    if ( $this -> model -> isRequested () !== false ) {
-      if ( $this -> model -> validateRequested () !== false ) {
-        $request = $this -> model -> decoded () ;
-        $this -> debug ( 'OOOOOOOOOOOOOOOOOOOOOK' ) ;
-        var_dump ( $request ) ;
-        die ( 'callback' ) ;
-
-
+    $knock = $this -> knock () ;
+    if ( $knock !== false ) {
+      $decodedData = $this -> model -> decodedCallback ( $knock ) ;
+      if ( $decodedData !== false ) {
+        if ( $this -> model -> validateCallbackSchema ( $decodedData ) === true ) {
+          //-> @TODO check transaction was created previously, validate and include id in response? (internal id)
+          return $this -> render ( $decodedData , 200 ) ;
+        } else {
+          $this -> debug ( '[callback] undecoded' ) ;
+          return $this -> response ( $this -> error -> errorUnexpectedCallbackData () ) ;
+        }
       } else {
-        return $this -> response ( $this -> error -> errorUnexpectedCurlSchema () ) ;
-        $this -> debug ( 'has unexpected data' ) ;
+        $this -> debug ( '[callback] unexpected data' ) ;
+        return $this -> response ( $this -> error -> errorCallbackNoValidJwtPayload () ) ;
       }
     } else {
-      $this -> debug ( 'has no request data' ) ;
+      $this -> debug ( '[callback] no request' ) ;
       return $this -> response ( $this -> error -> errorCallbackNoRequest () ) ;
     }
   }
+
 
 }

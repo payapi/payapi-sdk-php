@@ -26,7 +26,7 @@ final class crypter {
   }
 
   public function decode ( $encoded , $hash = false , $crypted = false ) {
-    $this -> sanitized = ( $crypted !== false ) ? true : false ;
+    $this -> sanitizer = ( $crypted !== false ) ? true : false ;
     $hash_update = ( is_string ( $hash ) === true ) ? $hash : $this -> hash ;
     $build = $this -> build ( $encoded ) ;
     try {
@@ -39,7 +39,7 @@ final class crypter {
   }
 
   public function encode ( $decoded , $hash = false , $crypted = false ) {
-    $this -> sanitized = ( $crypted !== false ) ? true : false ;
+    $this -> sanitizer = ( $crypted !== false ) ? true : false ;
     $hash_update = ( is_string ( $hash ) === true ) ? $hash : $this -> hash ;
     try {
       $encoded = $this -> clean ( JWT :: encode ( $decoded , $hash_update , $this -> mode ) ) ;
@@ -55,12 +55,12 @@ final class crypter {
   }
 
   protected function clean ( $data ) {
-    $payload = ( $this -> sanitized !== true ) ? $data : str_replace ( $this -> prefix . '.' , null , $data ) ;
+    $payload = ( $this -> sanitizer !== true ) ? $data : str_replace ( $this -> prefix . '.' , null , $data ) ;
     return $payload ;
   }
 
   protected function build ( $data ) {
-    $jwt = ( $this -> sanitized !== true ) ? $data : $this -> prefix . '.' . $data ;
+    $jwt = ( $this -> sanitizer !== true ) ? $data : $this -> prefix . '.' . $data ;
     return $jwt ;
   }
 
