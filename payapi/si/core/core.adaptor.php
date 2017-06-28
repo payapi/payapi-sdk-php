@@ -1,34 +1,50 @@
 <?php
 namespace payapi ;
 
-final class plugin extends helper {
+final class adaptor extends helper {
 
-  protected
-    $error                     =   false ;
+  public
+    $key                       =     false ;
 
   private
-    $key                       =   false ,
-    $adaptor                   =   false ;
+    $plugin                    =     false ,
+    $default                   = 'default' ;
 
   public function auto () {
-    /*
-    $this -> key = ( is_string ( $this -> config ( 'plugin' ) ) === true ) ? $this -> config ( 'plugin' ) : 'default' ;
-
+    if ( is_string ( $this -> config ( 'plugin' ) ) === true && $this -> config ( 'plugin' ) != $this -> default ) {
+      if ( router :: adaptorPlugin ( $this -> config ( 'plugin' ) ) === true ) {
+        $this -> key = $this -> config ( 'plugin' ) ;
+      } else {
+        $this -> warning ( 'defaulted' , 'plugin' ) ;
+      }
+    } else
+    if ( $this -> key === false && router :: adaptorPlugin ( $this -> default ) === true ) {
+      $this -> key = $this -> default ;
     }
-    //$this -> key ;
-    */
+    $this -> plugin = new plugin () ;
+    $this -> addInfo ( 'plugin_v' , ( string ) $this -> plugin ) ;
+    $this -> addInfo ( 'plugin' , $this -> key ) ;
+    $this -> debug ( '[adaptor] ' . $this -> key ) ;
   }
 
-  public function info () {
+  public function getKey () {
     return $this -> key ;
   }
 
   public function product ( $product ) {
-    return $this -> adaptor -> product ( $product ) ;
+    return $this -> plugin -> product ( $product ) ;
   }
 
   public function order ( $order ) {
-    return $this -> adaptor -> order ( $product ) ;
+    return $this -> plugin -> order ( $product ) ;
+  }
+
+  public function customer ( $customer ) {
+    return $this -> plugin -> customer ( $customer ) ;
+  }
+
+  public function address ( $address ) {
+    return $this -> plugin -> address ( $address ) ;
   }
 
 
