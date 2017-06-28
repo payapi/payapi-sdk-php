@@ -5,7 +5,7 @@ namespace payapi ;
 final class cgi extends helper {
 
   protected
-    $version                       =   '0.0.1' ,
+    $version                       =   '0.0.0' ,
     $id                            =     false ,
     $responses =    array (
       // @NOTE PHP ZEND INTERNAL STATUS HEADERS
@@ -124,27 +124,48 @@ final class cgi extends helper {
     return $this -> ssl ;
   }
 
+  private function filteredStream () {
+    //-> @FIXME add filtered block
+    $blocked = false ;
+    $stream = '' ;
+    $foo = fopen ( "php://input" , "r" ) ;
+    while ( ( $line = fread ( $foo , 128 ) ) && $blocked === false ) {
+      if ( $stream === '' && $blocked === false && md5 ( substr ( $line , 0, 8 ) ) != md5 ( '{"data":' ) ) {
+        $blocked = true ;
+      }
+      $stream .= $line ;
+    }
+    fclose ( $foo ) ;
+    return $stream ;
+  }
+
   public function knock () {
-    $jsonExpected = file_get_contents ( "php://input" ) ;
-    $this -> debug ( '[ACK] knocked' ) ;
-    if ( is_bool ( $jsonExpected ) === false && is_string ( $jsonExpected ) === true && strlen ( $jsonExpected ) > 12 ) {
-      $dataExpected = json_decode ( $jsonExpected , true ) ;
-      if ( isset ( $dataExpected [ 'data' ] ) && is_object ( $dataExpected [ 'data' ] ) === false && is_string ( $dataExpected [ 'data' ] ) !== false && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2 ) { // && is_string ( $array [ 'data' ] ) === true && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2
-        $this -> debug ( '[ACK] success' ) ;
-        return $dataExpected [ 'data' ] ;
+    if ( getenv ( 'REQUEST_METHOD' ) == 'POST' ) {
+      $this -> debug ( '[ACK] success' ) ;
+      $timeStart = microtime ( true ) ;
+      $jsonExpected = $this -> filteredStream () ;
+      $this -> debug ( 'timing ' . ( round ( ( microtime ( true ) - $timeStart ) , 3 ) * 1000 ) . 'ms.' ) ;
+      //->$jsonExpected = file_get_contents ( "php://input" ) ;
+      if ( is_bool ( $jsonExpected ) === false && is_string ( $jsonExpected ) === true && strlen ( $jsonExpected ) > 12 ) {
+        $dataExpected = json_decode ( $jsonExpected , true ) ;
+        if ( isset ( $dataExpected [ 'data' ] ) && is_object ( $dataExpected [ 'data' ] ) === false && is_string ( $dataExpected [ 'data' ] ) !== false && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2 ) { // && is_string ( $array [ 'data' ] ) === true && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2
+          $this -> debug ( '[ACK] success' ) ;
+          return $dataExpected [ 'data' ] ;
+        } else {
+          $this -> warning ( 'unexpected ' , 'knock' ) ;
+        }
       } else {
-        unset ( $jsonExpected ) ;
-        $this -> warning ( 'unexpected ' , 'knock' ) ;
+        $this -> warning ( 'empty ' , 'knock' ) ;
       }
     } else {
-      unset ( $jsonExpected ) ;
-      $this -> warning ( 'empty ' , 'knock' ) ;
+      $this -> debug ( 'method not allowed' ) ;
     }
+    unset ( $jsonExpected ) ;
     return false ;
   }
 
   public function curl ( $url , $post = false , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 , $timeout = 15 ) {
-    $this -> debug ( '[CURL]' . $this -> filterer -> getHostNameFromUrl ( $url ) ) ;
+    $this -> debug ( '[' . $this -> method ( $post ) . '] ' . $this -> filterer -> getHostNameFromUrl ( $url ) ) ;
     $options = array (
       CURLOPT_URL              => $url ,
       CURLOPT_RETURNTRANSFER   => $return ,
@@ -158,8 +179,9 @@ final class cgi extends helper {
     ) ) ;
     $buffer = curl_init () ;
     curl_setopt_array ( $buffer , $options ) ;
-    if ( $post != false ) {
+    if ( $post !== false ) {
       $curlPost = http_build_query ( array ( "data" => $post ) ) ;
+      //->
       curl_setopt ( $buffer , CURLOPT_POSTFIELDS , $curlPost ) ;
     }
     $timeStart = microtime ( true ) ;
@@ -178,7 +200,7 @@ final class cgi extends helper {
           $this -> warning ( 'object blocked' , 'curl' ) ;
         }
       } else {
-        $this -> warning ( 'unexpected response' ) ;
+        $this -> warning ( 'unexpected response' , 'curl' ) ;
       }
     }
     curl_close ( $buffer ) ;
@@ -186,19 +208,21 @@ final class cgi extends helper {
   }
 
   public function curlErrorUnexpectedCurlResponse () {
-    return array (
-      "code" => $this -> error -> errorUnexpectedCurlResponse () ,
-      "data" => 'curl schema error'
-    ) ;
+    return $this -> unvalidCurlResponse ( $this -> error -> errorUnexpectedCurlResponse () , 'curl schema error' ) ;
   }
 
-  public function unvalidCurlResponse ( $responseCode = false ) {
-    $responseCode = ( is_numeric ( $responseCode ) === true ) ? $responseCode : 'error' ;
+  public function unvalidCurlResponse ( $responseCode = false , $responseInfo = false ) {
+    $responseCode = ( is_numeric ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) === true ) ? $responseCode : $this -> error -> errorUnexpectedCurlResponse () ;
+    $responseData = ( is_string ( $responseInfo ) === true ) ? $responseInfo : $this -> responses [ $responseCode ] ;
     $response = array (
-      "code"  => $this -> error -> errorUnexpectedCurlResponse () ,
-      "data"  => "error." . ( string ) $responseCode
+      "code"  => $responseCode ,
+      "data"  => ( string ) $responseData
     ) ;
     return $response ;
+  }
+
+  private function method ( $post ) {
+    return ( ( $post ===  false ) ? 'GET' : 'POST' ) ;
   }
 
   public function render ( $bufferData , $code = false , $mode = false , $headers = 'undefined' ) {
@@ -224,6 +248,7 @@ final class cgi extends helper {
       break ;
       case 'string' :
         $this -> buffer = ( is_array ( $this -> buffer ) !== false ) ? print ( $data ) : print_r ( $data , true ) ;
+        $this -> dumpVar () ;
         return $this -> buffer ;
       break ;
       case 'object' :
@@ -243,11 +268,12 @@ final class cgi extends helper {
       break ;
     }
     $this -> headers () ;
+    //if ( $var OR $display )
     return $this -> display () ;
   }
 
   private function headers () {
-    if ( ! $this -> headers ) {
+    if ( $this -> headers == false ) {
       return true ;
     }
     $this -> debug ( '[headers] ' . $this -> mode ) ;
@@ -262,6 +288,10 @@ final class cgi extends helper {
   private function display () {
     $this -> debug ( '[display] success ' ) ;
     return die ( $this -> buffer ) ;
+  }
+
+  private function dumpVar () {
+    $this -> debug ( '[return] success ' ) ;
   }
 
   private function getServerDomain () {
