@@ -29,8 +29,8 @@ final class loader extends helper {
   }
 
   public function library ( $key ) {
-    $dir = str_replace ( 'core' , 'achival' , __DIR__ ) ;
-    $library = $dir . 'library' . '.' . $key . '.' . 'php' ;
+    $dir = str_replace ( 'core' , 'library' , __DIR__ ) ;
+    $library = $dir . DIRECTORY_SEPARATOR . 'library' . '.' . $key . '.' . 'php' ;
     if ( is_file ( $library ) === true ) {
       require ( $library ) ;
       if ( class_exists ( $key ) ) {
