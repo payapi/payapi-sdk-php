@@ -12,7 +12,8 @@ final class controller_callback extends controller {
         if ( $this -> model -> validateCallbackSchema ( $decodedData ) === true ) {
           //-> archive data
           //$key = null ;
-          $this -> model -> setArchiveData ( $key , $decodedData , 'transaction'  ) ;
+          //-> @TODO
+          //$this -> model -> setArchiveData ( $key , $decodedData , 'transaction'  ) ;
           //-> @TODO check transaction was created previously, validate and include id in response? (internal id)
           return $this -> render ( $decodedData , 200 ) ;
         } else {

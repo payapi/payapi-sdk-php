@@ -20,15 +20,15 @@ $app = new payapi ( array (
   "archival"         =>       true , // bool true/false
   "plugin"           => 'opencart' , // string [opencart,magento,prestashop,default] OR bool false
   "mode"             =>    'json' , // string [json,object,array,dump,string,html] OR bool false
-  "headers"          =>       true , // bool true/false
+  "headers"          =>       false , // bool true/false
   "branding"         =>   'payapi' , // string [payapi/internetcreatives/nets] OR bool false
   "payapi_public_id" =>   'multimerchantshop' , // PayApi public id (PayApi backend) *MANDATORY
   "payapi_api_key"   =>   'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9'  // PayApi api key (PayApi backend) *MANDATORY
 ) ) ;
 
-//var_dump ( $app -> callback () ) ;
+var_dump ( $app -> callback () ) ;
 
-//***
+/***
 $product = array (
   "id"                 => 'id001' ,
   "quantity"           => 1 ,
