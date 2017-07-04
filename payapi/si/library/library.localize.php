@@ -1,6 +1,6 @@
 <?php
 
-namespace payapi ;
+//-> just basic model
 
 final class localize {
 
@@ -8,23 +8,27 @@ final class localize {
     $localization        =    array () ;
 
   private
-    $ip                  =        null ,              ,
+    $ip                  =        null ,
     $endPoint            =       false ,
-    $cache               =        true ,
-    $folder              =       false ,
-    $file                =       false ,
-    $expiration          =        '30' ; //-> days
+    $schema              =       array (
+      "ip"               => 1 ,
+      "countryCode"      => 1 ,
+      "countryName"      => 1 ,
+      "regionName"       => 1 ,
+      "regionCode"       => 1 ,
+      "postalCode"       => 1 ,
+      "timezone"         => 1 ,
+      "isp"              => 1
+    ) ;
 
   public function __construct ( $ip = false , $production = false ) {
-    if ( filter_var ( $ip  , FILTER_VALIDATE_IP ) === true ) {
-      $this -> endPoint = 'https://' . ( ( $production !== true ) ? 'staging-' : null ) . 'input.payapi.io/v1/api/fraud/ipdata/' . $this -> ip ;
-      $this -> file =  $this -> folder . 'ip' . md5 ( $this -> ip ) . '.' . 'log' ;
-      if ( is_string ( $ip ) === true ) {
-        $this -> ip = $ip ;
-      } else {
-        $this -> ip = $this -> getIp () ;
-      }
-      $this -> folder = PATH_PRIVATE_IP . md5 ( $this -> ip ) . DIRECTORY_SEPARATOR ;
+    if ( filter_var ( $ip  , FILTER_VALIDATE_IP ) !== false ) {
+      $this -> ip = $ip ;
+    } else {
+      $this -> ip = $this -> getIp () ;
+    }
+    if ( filter_var ( $this -> ip  , FILTER_VALIDATE_IP ) !== false ) {
+      $this -> endPoint = ( 'https://' . ( ( $production != true ) ? 'staging-' : null ) . 'input.payapi.io/v1/api/fraud/ipdata/' ) ;
       $this -> localization = $this -> getInfo () ;
     } else {
       $this -> localization = $this -> undefinedIpInfo () ;
@@ -34,28 +38,20 @@ final class localize {
 
   public function getInfo () {
     $call = $this -> endPoint . $this -> ip ;
-    $cached = $this -> checkCache () ;
-    if ( $cached === false ) {
-      $output = false ;
-      $curl = curl_init();
-      curl_setopt ( $curl , CURLOPT_URL , $call ) ;
-      curl_setopt ( $curl , CURLOPT_RETURNTRANSFER , 1 ) ;
-      $output = curl_exec( $curl ) ;
-      curl_close( $curl );
-      $ipInfo = false ;
-      if ( $output ) {
-        $ipInfo = json_decode ( $output , true ) ;
+    $output = false ;
+    $curl = curl_init();
+    curl_setopt ( $curl , CURLOPT_URL , $call ) ;
+    curl_setopt ( $curl , CURLOPT_RETURNTRANSFER , 1 ) ;
+    $output = curl_exec( $curl ) ;
+    curl_close( $curl );
+    $ipInfo = false ;
+    if ( $output ) {
+      $ipInfo = json_decode ( $output , true ) ;
+      if ( $ipInfo != false ) {
+        return $ipInfo ;
       }
-      if ( $output == false || $ipInfo === false || isset ( $ipInfo [ 'error' ] ) === true ) {
-        $output = $this -> undefinedIpInfo () ;
-      }
-      if ( $this -> cache === true ) {
-        $this -> saveIpData ( $output ) ;
-      }
-    } else {
-      $output = $cached ;
     }
-    return $output ;
+    return $this -> undefinedIpInfo () ;
   }
 
   public static function getIp () {
@@ -75,52 +71,23 @@ final class localize {
       $ipAddress = null ;
     }
     //-> @NOTE @CARE!!! @TODELETE after DEV
-    if ( $ipAddress == '192.168.10.1' && STAGING == 1 ) {
-      $ipAddress = '83.49.192.216' ;
+    if ( $ipAddress == '192.168.10.1' ) {
+      $ipAddress = '84.79.234.58' ;
     }
 
     return $ipAddress;
   }
 
-  private function saveIpData ( $ipdata ) {
-    if ( ! is_dir ( $this -> folder ) ) {
-      mkdir ( $this -> folder , 0750 ) ;
-    }
-    //-> has to be json ( string )
-    file_put_contents ( $this -> file , $ipdata ) ;
-  }
-
-  private function checkCache () {
-    //-> @NOTE @CARE @2TEST
-    return false ;
-    if ( is_file ( $this -> file ) === true && filemtime ( $this -> file ) > strtotime ( $this -> expiration . ' days' ) ) {
-      $cached = file_get_contents ( $this -> file ) ;
-      if ( is_array ( json_decode ( $cached , true ) ) !== false ) {
-        return $cached ;
+  private function undefinedIpInfo () {
+    $undefined = array () ;
+    foreach ( $this -> schema as $key => $value ) {
+      if ( $key !== 'ip' ) {
+        $undefined [ $key ] = 'undefined' ;
+      } else {
+        $undefined [ $key ] = $this -> ip ;
       }
     }
-    return false ;
-  }
-
-  private function undefinedIpInfo () {
-    return array (
-      "ip"           => $this -> ip ,
-      "countryCode"  => "undefined" ,
-      "countryName"  => "undefined" ,
-      "regionName"   => "undefined" ,
-      "regionCode"   => "undefined" ,
-      "postalCode"   => "undefined" ,
-      "timezone"     => "undefined" ,
-      "isp"          => "undefined"
-    ) ;
-  }
-  //-> to adaptor
-  public function getNativeConuntryId () {
-    return $_SESSION  [ 'ip' ] [ 'country_id' ] ;
-  }
-
-  public function getNativeZoneId () {
-    return $_SESSION  [ 'ip' ] [ 'zone_id' ] ;
+    return $undefined ;
   }
 
   public function __toString () {
