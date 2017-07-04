@@ -1,7 +1,5 @@
 <?php
 
-namespace payapi ;
-
 final class partialpayment {
 
   public function calculatePartialPayment ( $productPrice , $productHandlingExcludingVate , $productCurrency ) {

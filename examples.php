@@ -18,6 +18,7 @@ function example ( $key ) {
   $examples = array (
     "error" ,
     "info" ,
+    "localize" ,
     "validate" ,
     "settings" ,
     "tostring" ,

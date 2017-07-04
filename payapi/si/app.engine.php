@@ -57,6 +57,7 @@ final class payapi {
                                                     "info" ,
                                                 "settings" ,
                                              "transaction" ,
+                                                "localize" ,
                                                 "callback" ,
                                                 "validate" ,
                                                    "error" ,

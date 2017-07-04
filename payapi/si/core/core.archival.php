@@ -17,7 +17,7 @@ final class archival extends helper {
 
   protected function auto () {
     $this -> dirArchival = router :: dirArchival () ;
-    $this -> warning ( $this -> dirArchival , 'arch' ) ;
+    //->$this -> warning ( $this -> dirArchival , 'arch' ) ;
   }
 
   public function getArchiveData ( $key , $type ) {

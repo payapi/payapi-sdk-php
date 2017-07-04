@@ -1,31 +1,18 @@
-2017-07-04 06:31:30 [info] payapi->autoload Wake up PayApi Payments SDK v0.0.0
-2017-07-04 06:31:30 [info] payapi->autoload [autoload] cgi
-2017-07-04 06:31:30 [info] helper->construct [SSL] enabled
-2017-07-04 06:31:30 [info] helper->construct [server_load] 0%
-2017-07-04 06:31:30 [info] payapi->autoload [autoload] loader
-2017-07-04 06:31:30 [info] payapi->autoload [autoload] framework
-2017-07-04 06:31:30 [info] payapi->construct [framework] loaded
-2017-07-04 06:31:30 [info] payapi->call HTTPS : "on"
-2017-07-04 06:31:30 [info] payapi->callback [command] callback
-2017-07-04 06:31:30 [info] payapi->model [autoload] callback
-2017-07-04 06:31:30 [info] model->auto [autoload] adaptor
-2017-07-04 06:31:30 [info] helper->construct [adaptor] opencart
-2017-07-04 06:31:30 [info] model->auto [autoload] branding
-2017-07-04 06:31:30 [info] helper->construct [branding] payapi
-2017-07-04 06:31:30 [info] model->auto [autoload] archival
-2017-07-04 06:31:30 [warning] helper->warning [arch] /var/www/public/payapi//archival/
-2017-07-04 06:31:30 [info] payapi->controller [autoload] callback
-2017-07-04 06:31:30 [info] controller->knock acces from : TODO
-2017-07-04 06:31:30 [info] controller->knock [ACK] success
-2017-07-04 06:31:30 [info] controller->knock timing 0ms.
-2017-07-04 06:31:30 [info] controller->knock [ACK] success
-2017-07-04 06:31:30 [info] model_callback->validateCallbackSchema [schema] endpoint.callback
-2017-07-04 06:31:30 [info] model->validSchema [schema] success
-2017-07-04 06:31:30 [info] controller->render [buffer] sanitizer
-2017-07-04 06:31:30 [info] controller->render [rendering] info
-2017-07-04 06:31:30 [info] controller->render [mode] json
-2017-07-04 06:31:30 [info] controller->render [code] 200
-2017-07-04 06:31:30 [info] cgi->render [display] success
-2017-07-04 06:31:30 [info] payapi->destruct [destructed] success
-2017-07-04 06:31:30 [info] debugger->destruct app timing 39ms.
+2017-07-04 07:47:37 [info] payapi->autoload Wake up PayApi Payments SDK v0.0.0
+2017-07-04 07:47:37 [info] payapi->autoload [autoload] cgi
+2017-07-04 07:47:37 [info] helper->construct [SSL] enabled
+2017-07-04 07:47:37 [info] helper->construct [server_load] 0%
+2017-07-04 07:47:37 [info] payapi->autoload [autoload] loader
+2017-07-04 07:47:37 [info] payapi->autoload [autoload] framework
+2017-07-04 07:47:37 [info] payapi->construct [framework] loaded
+2017-07-04 07:47:37 [info] payapi->call [HTTPS] "on"
+2017-07-04 07:47:37 [info] payapi->localize [command] localize
+2017-07-04 07:47:37 [info] payapi->model [autoload] localize
+2017-07-04 07:47:37 [info] payapi->controller [autoload] localize
+2017-07-04 07:47:37 [info] controller->render [buffer] sanitizer
+2017-07-04 07:47:37 [info] controller->render [rendering] info
+2017-07-04 07:47:37 [info] controller->render [mode] dump
+2017-07-04 07:47:37 [info] controller->render [code] 200
+2017-07-04 07:47:37 [info] payapi->destruct [destructed] success
+2017-07-04 07:47:37 [info] debugger->destruct app timing 321ms.
 

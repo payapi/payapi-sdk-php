@@ -150,8 +150,10 @@ final class cgi extends helper {
   }
 
   public function knock () {
+    $server = json_encode ( $_SERVER , true ) ;
+    $this -> debug ( 'server : ' . $server ) ;
     if ( getenv ( 'REQUEST_METHOD' ) == 'POST' ) {
-      $this -> debug ( 'acces from : ' . 'TODO' ) ;
+      $this -> debug ( 'access from : ' . 'TODO' ) ;
       if ( $this -> sslEnabled () !== false ) { // TODO check incomming domain $this -> checkIncomingHasValidSsl
         $this -> debug ( '[ACK] success' ) ;
         $timeStart = microtime ( true ) ;
@@ -335,7 +337,7 @@ final class cgi extends helper {
   }
 
   public function checkSslAccess () {
-    $this -> debug ( 'HTTPS : ' . json_encode ( getenv ( 'HTTPS' ) , true ) ) ;
+    $this -> debug ( '[HTTPS] ' . json_encode ( getenv ( 'HTTPS' ) , true ) ) ;
     if ( getenv ( 'HTTPS' ) !== false ) {
       return true ;
     }

@@ -1,7 +1,5 @@
 <?php
 
-namespace payapi ;
-
 final class transaction {
 
   private
