@@ -13,7 +13,7 @@ namespace payapi ;
 final class validator {
 
   protected
-    $version                  =   '0.0.1' ;
+    $version                  =   '0.0.0' ;
 
   private
     $schemas                   = array () ,
@@ -67,6 +67,13 @@ final class validator {
 
   public function isString ( $string ) {
     return $this -> check ( $string , 'string' ) ;
+  }
+
+  public function isArrayCheck ( $array ) {
+    if ( key ( $array ) ==! false ) {
+      return true ;
+    }
+    return false ;
   }
 
   public function isArray ( $array ) {

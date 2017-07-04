@@ -63,7 +63,7 @@ final class framework extends helper {
         if ( $this -> validator -> isArray ( $filtererData ) === true ) {
           $validatorData = $this -> validator -> schema ( $filtererSchemaKey , $filtererData ) ;
           if ( $this -> validator -> isArray ( $validatorData ) === true ) {
-            $this -> debug ( '[schema] valid' ) ;
+            $this -> debug ( '[schema] success' ) ;
             return $validatorData ;
           } else {
             $this -> warning ( 'data' , 'validator' ) ;

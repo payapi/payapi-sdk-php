@@ -5,15 +5,20 @@ namespace payapi ;
 final class data {
 
   public static
-    $single            =    false ;
+    $single            =       false ;
 
   private
-    $data              =   array (
-      "debugger"       =>   false ,
-      "info"           =>  array ()
+    $signatureKey      = 'extradata' ,
+    $prefix            =       '___' ,
+    $signature         =       false ,
+    $data              =     array (
+      "debugger"       =>      false ,
+      "info"           =>     array ()
     ) ;
 
-  protected function __construct () {}
+  protected function __construct () {
+    $this -> signature = $this -> prefix . $this -> signatureKey ;
+  }
 
   public function config ( $key = false ) {
     if ( $key === false ) {
@@ -49,7 +54,7 @@ final class data {
   public function addInfo ( $key , $info ) {
     $info = array_merge (
       array (
-      "___" . ( string ) $key => ( string ) $info
+        $this -> prefix . ( string ) $key => ( string ) $info
       ) ,
       $this -> get ( 'info' )
     ) ;
@@ -58,9 +63,36 @@ final class data {
 
   public function extradata () {
     return array (
-      "___extradata" => $this -> get ( 'info' )
+      $this -> signature => $this -> get ( 'info' )
     ) ;
-    return $this -> get ( 'info' ) ;
+  }
+
+  public function sanitizeSignature ( $array ) {
+    if ( isset ( $array [ $this -> signature ] ) ) {
+      unset ( $array [ $this -> signature ] ) ;
+    }
+    return $array ;
+  }
+  //-> sanitize output privates2
+  public function sanitizePrivate ( $array ) {
+    $sanitizing = array ( 'tk' , 'sign' ) ;
+    foreach ( $sanitizing as $sanitize ) {
+      if ( isset ( $array [ $this -> signature ] [ $this -> prefix . $sanitize ] ) ) {
+        unset ( $array [ $this -> signature ] [ $this -> prefix . $sanitize ] ) ;
+      }
+    }
+    return $array ;
+  }
+
+  public function addSignature ( $array ) {
+    return array_merge (
+      $this -> sanitizeSignature ( $array ) ,
+      $this -> extradata
+    ) ;
+  }
+
+  public function signature () {
+    return $this -> signature ;
   }
 
   public function reset ( $fullReset = false) {

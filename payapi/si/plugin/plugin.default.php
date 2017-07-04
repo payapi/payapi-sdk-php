@@ -2,7 +2,7 @@
 
 namespace payapi ;
 
-// Default (do not translate just pass variables)
+//-> Default translator (do not translate just pass variables)
 
 final class plugin {
 
@@ -21,8 +21,8 @@ final class plugin {
     return $this -> version ;
   }
 
-  public function customer ( $customer ) {
-    return $customer ;
+  public function consumer ( $consumer ) {
+    return $consumer ;
   }
 
   public function address ( $address ) {

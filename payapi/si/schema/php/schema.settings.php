@@ -2,7 +2,7 @@
 
 $schema = array (
   "___info___" => array (
-    "version"    => '0.0.1' ,
+    "version"    => '0.0.0' ,
     "createdAt"  => date ( 'Ymd' , time () ) ,
     "updateddAt" => date ( 'Ymd' , time () )
   ) ,

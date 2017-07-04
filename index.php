@@ -15,20 +15,20 @@ error_reporting ( E_ALL ) ;
 require ( __DIR__ . DIRECTORY_SEPARATOR . 'payapi' . DIRECTORY_SEPARATOR . 'si' . DIRECTORY_SEPARATOR . 'app' . '.' . 'engine' . '.' . 'php' ) ;
 
 $app = new payapi ( array (
-  "production"       =>    false , // bool true/false
-  "debug"            =>     true , // bool true/false
-  "archival"         =>     true , // bool true/false
-  "plugin"           =>    false , // string [opencart,magento,prestashop,default] OR bool false
-  "mode"             =>  'array' , // string [json,object,array,dump,string,html] OR bool false
-  "headers"          =>     true , // bool true/false
-  "branding"         => 'payapi' , // string [payapi/internetcreatives/nets] OR bool false
-  "payapi_public_id" => 'multimerchantshop' , // PayApi public id (PayApi backend) *MANDATORY
-  "payapi_api_key"   => 'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9'  // PayApi api key (PayApi backend) *MANDATORY
+  "production"       =>      false , // bool true/false
+  "debug"            =>       true , // bool true/false
+  "archival"         =>       true , // bool true/false
+  "plugin"           => 'opencart' , // string [opencart,magento,prestashop,default] OR bool false
+  "mode"             =>    'json' , // string [json,object,array,dump,string,html] OR bool false
+  "headers"          =>       true , // bool true/false
+  "branding"         =>   'payapi' , // string [payapi/internetcreatives/nets] OR bool false
+  "payapi_public_id" =>   'multimerchantshop' , // PayApi public id (PayApi backend) *MANDATORY
+  "payapi_api_key"   =>   'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9'  // PayApi api key (PayApi backend) *MANDATORY
 ) ) ;
 
-var_dump ( $app -> settings () ) ;
+//var_dump ( $app -> callback () ) ;
 
-/***
+//***
 $product = array (
   "id"                 => 'id001' ,
   "quantity"           => 1 ,
@@ -46,4 +46,4 @@ $product = array (
 ) ;
 
 var_dump ( $app -> validate ( 'product' , $product ) ) ;
-/**/
+//**/

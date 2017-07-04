@@ -40,6 +40,10 @@ final class error {
     return 403 ;
   }
 
+  public function errorUnsecureEnviroment () {
+    return 505 ;
+  }
+
   public function errorUnexpectedCurlResponse () {
     return 406 ; // not acceptable
   }

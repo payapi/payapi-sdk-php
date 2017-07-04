@@ -6,6 +6,7 @@ final class cgi extends helper {
 
   protected
     $version                       =   '0.0.0' ,
+    $timeout                       =        30 ,
     $id                            =     false ,
     $responses =    array (
       // @NOTE PHP ZEND INTERNAL STATUS HEADERS
@@ -88,7 +89,7 @@ final class cgi extends helper {
       "object"           => ''
     );
 
-  public function auto () {
+  protected function auto () {
     $this -> addInfo ( 'cgi_v' , $this -> version ) ;
     $this -> addInfo ( 'ip' , ( string ) $this -> ip () ) ;
     $this -> filterer = new filterer () ;
@@ -98,6 +99,11 @@ final class cgi extends helper {
     $this -> domain = $this -> getServerDomain () ;
     $this -> ip = $this -> getIp () ;
     $this -> ssl = $this -> checkSsl () ;
+    if ( $this -> ssl !== true ) {
+      $this -> error ( '[SSL] no valid' ) ;
+    } else {
+      $this -> debug ( '[SSL] enabled' ) ;
+    }
     //->
     $this -> set ( 'responses' , $this -> responses ) ;
     if ( is_string ( $this -> config ( 'mode' ) ) === true ) {
@@ -118,19 +124,23 @@ final class cgi extends helper {
     } else {
       $this -> warning ( 'cannot check load' , 'server' ) ;
     }
+    /*
+    $test = $this -> checkSsl ( 'payapi.io' ) ;
+    var_dump ( $test ) ;
+    exit () ;
+    */
   }
 
   public function sslEnabled () {
     return $this -> ssl ;
   }
 
-  private function filteredStream () {
-    //-> @FIXME add filtered block
+  private function stream ( $foo ) {
     $blocked = false ;
-    $stream = '' ;
-    $foo = fopen ( "php://input" , "r" ) ;
-    while ( ( $line = fread ( $foo , 128 ) ) && $blocked === false ) {
-      if ( $stream === '' && $blocked === false && md5 ( substr ( $line , 0, 8 ) ) != md5 ( '{"data":' ) ) {
+    $stream = null ;
+    while ( ( $line = fread ( $foo , 64 ) ) && $blocked === false ) {
+      if ( isset ( $stream ) === null && $blocked === false && md5 ( substr ( $line , 0, 9 ) ) != md5 ( '{"data":"' ) ) {
+        $this -> warning ( 'stream blocked' , 'filter' ) ;
         $blocked = true ;
       }
       $stream .= $line ;
@@ -141,21 +151,26 @@ final class cgi extends helper {
 
   public function knock () {
     if ( getenv ( 'REQUEST_METHOD' ) == 'POST' ) {
-      $this -> debug ( '[ACK] success' ) ;
-      $timeStart = microtime ( true ) ;
-      $jsonExpected = $this -> filteredStream () ;
-      $this -> debug ( 'timing ' . ( round ( ( microtime ( true ) - $timeStart ) , 3 ) * 1000 ) . 'ms.' ) ;
-      //->$jsonExpected = file_get_contents ( "php://input" ) ;
-      if ( is_bool ( $jsonExpected ) === false && is_string ( $jsonExpected ) === true && strlen ( $jsonExpected ) > 12 ) {
-        $dataExpected = json_decode ( $jsonExpected , true ) ;
-        if ( isset ( $dataExpected [ 'data' ] ) && is_object ( $dataExpected [ 'data' ] ) === false && is_string ( $dataExpected [ 'data' ] ) !== false && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2 ) { // && is_string ( $array [ 'data' ] ) === true && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2
-          $this -> debug ( '[ACK] success' ) ;
-          return $dataExpected [ 'data' ] ;
+      $this -> debug ( 'acces from : ' . 'TODO' ) ;
+      if ( $this -> sslEnabled () !== false ) { // TODO check incomming domain $this -> checkIncomingHasValidSsl
+        $this -> debug ( '[ACK] success' ) ;
+        $timeStart = microtime ( true ) ;
+        // @NOTE @CARE "php://input" is not available with enctype="multipart/form-data"
+        $jsonExpected = $this -> stream ( fopen ( "php://input" , "r" ) ) ;
+        $this -> debug ( 'timing ' . ( round ( ( microtime ( true ) - $timeStart ) , 3 ) * 1000 ) . 'ms.' ) ;
+        if ( is_bool ( $jsonExpected ) === false && is_string ( $jsonExpected ) === true && strlen ( $jsonExpected ) > 12 ) {
+          $dataExpected = json_decode ( $jsonExpected , true ) ;
+          if ( isset ( $dataExpected [ 'data' ] ) && is_object ( $dataExpected [ 'data' ] ) === false && is_string ( $dataExpected [ 'data' ] ) !== false && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2 ) { // && is_string ( $array [ 'data' ] ) === true && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2
+            $this -> debug ( '[ACK] success' ) ;
+            return $dataExpected [ 'data' ] ;
+          } else {
+            $this -> warning ( 'unexpected ' , 'knock' ) ;
+          }
         } else {
-          $this -> warning ( 'unexpected ' , 'knock' ) ;
+          $this -> warning ( 'empty ' , 'knock' ) ;
         }
       } else {
-        $this -> warning ( 'empty ' , 'knock' ) ;
+        $this -> warning ( 'no valid ' , 'SSL' ) ;
       }
     } else {
       $this -> debug ( 'method not allowed' ) ;
@@ -233,7 +248,7 @@ final class cgi extends helper {
       $this -> code ( $code ) ;
     }
     $this -> debug ( '[buffer] sanitizer' ) ;
-    $data = $this -> sanitizer -> outputData ( $bufferData ) ;
+    $data = $this -> data -> sanitizePrivate ( $bufferData ) ;
     $this -> debug ( '[rendering] info' ) ;
     $this -> debug ( '[mode] ' . $this -> mode ) ;
     $this -> debug ( '[code] ' . $this -> code ) ;
@@ -277,6 +292,7 @@ final class cgi extends helper {
       return true ;
     }
     $this -> debug ( '[headers] ' . $this -> mode ) ;
+    //@header( "X-Robots-Tag: noindex,nofollow" ) ;
     header ( 'Content-type: ' . $this -> modes [ $this -> mode ] ) ;
     return http_response_code ( $this -> code ) ;
   }
@@ -298,29 +314,39 @@ final class cgi extends helper {
     return $this -> sanitizer -> parseDomain ( getenv ( 'SERVER_NAME' ) ) ;
   }
 
-  public function checkSsl () {
-    return true ;
-    $timeout = 30 ;
-    $domain = $this -> domain ;
+  private function checkSsl ( $checkDomain = false ) {
+    return true ; //-> @NOTE @CARE @TODELETE just fro DEV
+    $domain = ( is_string ( $checkDomain ) === true ) ? $checkDomain : $this -> domain ;
     $socket = stream_context_create ( array ( "ssl" => array ( "capture_peer_cert" => true ) ) ) ;
     if ( $this -> sslChecked === false && $socket === false ) {
-      return $this -> reCheckSsl ( $url ) ;
+      return $this -> reCheckSsl ( $checkDomain ) ;
     }
-    $conexion = @stream_socket_client ( "ssl://{$domain}:443" , $errno , $errstr , $timeout , STREAM_CLIENT_CONNECT , $socket ) ;
+    $conexion = @stream_socket_client ( "ssl://{$domain}:443" , $errno , $errstr , $this -> timeout , STREAM_CLIENT_CONNECT , $socket ) ;
     $certificate = @stream_context_get_params ( $conexion ) ;
     //->
-    if ( $this -> sslChecked === 0 && ! isset ( $conexion ) || ! isset ( $certificate ) || ! isset ( $certificate [ "options" ] [ "ssl" ] [ "peer_certificate" ] ) )
-      return $this -> reCheckSsl ( $url ) ;
-    $valid = ( isset ( $certificate [ "options" ] [ "ssl" ] [ "peer_certificate" ] ) ) ? $certificate [ "options" ] [ "ssl" ] [ "peer_certificate" ] : false ;
-    return $valid ;
+    if ( $this -> sslChecked === 0 && isset ( $conexion ) !== true || isset ( $certificate ) !== true || isset ( $certificate [ "options" ] [ "ssl" ] [ "peer_certificate" ] ) !== true ) {
+      return $this -> reCheckSsl ( $checkDomain ) ;
+    }
+    return $certificate [ "options" ] [ "ssl" ] [ "peer_certificate" ] ;
   }
 
+  public function checkIncomingHasValidSsl ( $url ) {
+    return $this -> checkSsl ( $url ) ;
+  }
+
+  public function checkSslAccess () {
+    $this -> debug ( 'HTTPS : ' . json_encode ( getenv ( 'HTTPS' ) , true ) ) ;
+    if ( getenv ( 'HTTPS' ) !== false ) {
+      return true ;
+    }
+    $this -> error ( '[HTTP] insecure access' ) ;
+    return false ;
+  }
 
   public function reCheckSsl () {
     if ( $this -> sslChecked === true ) {
       $this -> sslChecked = true ;
-      // @NOTE adds microseconds to avoid same timeout
-      usleep ( 100000 ) ;
+      usleep ( 100000 ) ; // @NOTE adds microseconds to avoid same timeout
       return $this -> checkSsl () ;
     }
     return false ;

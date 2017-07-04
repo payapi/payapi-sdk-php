@@ -7,7 +7,7 @@ namespace payapi ;
 final class curling extends helper {
 
   protected
-    $version                    = '0.0.1' ;
+    $version                    = '0.0.0' ;
 
   private
     $response                   =   false ,

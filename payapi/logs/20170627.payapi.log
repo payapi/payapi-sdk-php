@@ -1,0 +1,24 @@
+2017-06-27 22:00:23 [info] payapi->autoload Wake up PayApi Payments SDK v0.0.0
+2017-06-27 22:00:23 [info] payapi->autoload [autoload] cgi
+2017-06-27 22:00:23 [info] helper->construct [server_load] 2%
+2017-06-27 22:00:23 [info] payapi->autoload [autoload] loader
+2017-06-27 22:00:23 [info] payapi->autoload [autoload] framework
+2017-06-27 22:00:23 [info] payapi->construct [framework] loaded
+2017-06-27 22:00:23 [info] payapi->callback [command] callback
+2017-06-27 22:00:23 [info] payapi->model [autoload] callback
+2017-06-27 22:00:23 [info] model->auto [autoload] plugin
+2017-06-27 22:00:23 [info] model->auto [autoload] branding
+2017-06-27 22:00:23 [info] helper->construct payapi
+2017-06-27 22:00:23 [info] payapi->controller [autoload] callback
+2017-06-27 22:00:23 [info] controller->knock [ACK] success
+2017-06-27 22:00:23 [info] controller->knock method not allowed
+2017-06-27 22:00:23 [info] payapi->call [callback] no request
+2017-06-27 22:00:23 [info] controller->response [buffer] sanitizer
+2017-06-27 22:00:23 [info] controller->response [rendering] info
+2017-06-27 22:00:23 [info] controller->response [mode] json
+2017-06-27 22:00:23 [info] controller->response [code] 404
+2017-06-27 22:00:23 [info] cgi->render [headers] json
+2017-06-27 22:00:23 [info] cgi->render [display] success
+2017-06-27 22:00:23 [info] payapi->destruct [destructed] success
+2017-06-27 22:00:23 [info] debugger->destruct app timing 31ms.
+

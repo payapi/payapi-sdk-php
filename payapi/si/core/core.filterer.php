@@ -5,7 +5,7 @@ namespace payapi ;
 final class filterer {
 
   protected
-    $version                  =   '0.0.1' ;
+    $version                  =   '0.0.0' ;
 
   public function schemaKey ( $schemaKey ) {
     return $this -> filtererString ( $schemaKey ) ;
@@ -22,6 +22,10 @@ final class filterer {
       return $array [ 'data' ] ;
     }
     return false ;
+  }
+
+  public function filteredUrl ( $url ) {
+    return filter_var ( $url , FILTER_SANITIZE_URL ) ;
   }
 
   public function getHostNameFromUrl ( $url ) {

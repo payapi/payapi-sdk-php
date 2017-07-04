@@ -1,16 +1,20 @@
 <?php
 namespace payapi ;
 
+//-> @TODO filter/validate store inputs
+
 final class adaptor extends helper {
 
   public
-    $key                       =     false ;
+    $key                       =      false ;
 
   private
-    $plugin                    =     false ,
-    $default                   = 'default' ;
+    $plugin                    =      false ,
+    $default                   =  'default' ,
+    $transaction               =      false ,
+    $consumer                  =      false ;
 
-  public function auto () {
+  protected function auto () {
     if ( is_string ( $this -> config ( 'plugin' ) ) === true && $this -> config ( 'plugin' ) != $this -> default ) {
       if ( router :: adaptorPlugin ( $this -> config ( 'plugin' ) ) === true ) {
         $this -> key = $this -> config ( 'plugin' ) ;
@@ -39,8 +43,8 @@ final class adaptor extends helper {
     return $this -> plugin -> order ( $product ) ;
   }
 
-  public function customer ( $customer ) {
-    return $this -> plugin -> customer ( $customer ) ;
+  public function consumer ( $consumer ) {
+    return $this -> plugin -> consumer ( $consumer ) ;
   }
 
   public function address ( $address ) {

@@ -6,9 +6,8 @@ use \Firebase\JWT\JWT;
 final class crypter {
 
   protected
-    $version                   =  '0.0.1' ,
-    $error                     =    false ,
-    $publicKey                 =    false ;
+    $version                   =  '0.0.0' ,
+    $error                     =    false ;
 
   private
     $mode                      =  'HS256' ,
@@ -74,14 +73,14 @@ final class crypter {
     return $encodejsonized ;
   }
 
-  public function uniqueServerToken () {
-    return $this -> hashed ( getenv ( 'SERVER_SIGNATURE' ) , getenv ( 'SERVER_NAME' ) ) ;
+  public function uniqueServerSignature ( $hash ) {
+    $signature = $this -> hashed ( $this -> uniqueAccessToken () , md5 ( $hash ) ) ;
+    return $this -> encode ( $signature , false , true ) ;
   }
 
-  public function uniqueAccessToken () {
-    //->
-    $signature = '...' ;
-    return $this -> hashed ( $signature , 'access' ) ;
+  private function uniqueAccessToken () {
+    //-> @NOTE if 'SERVER_NAME' OR 'USER' changes will not be able to access previous data
+    return md5 ( getenv ( 'SERVER_NAME' ) . md5 ( getenv ( 'USER' ) ) ) ;
   }
 
   public function randomToken () {
@@ -93,10 +92,8 @@ final class crypter {
   }
 
   public function publicKey ( $public ) {
-    if ( $this -> publicKey === false ) {
-      $this -> publicKey = $this -> encode ( $this -> hashed ( $public , $public . md5 ( $public ) ) , false , true ) ;
-    }
-    return $this -> publicKey ;
+    $publicKey = $this -> encode ( $this -> hashed ( $public , $public . md5 ( $public ) ) , false , true ) ;
+    return $publicKey ;
   }
 
   public function privateHash ( $hash ) {

@@ -1,0 +1,29 @@
+2017-07-04 06:13:17 [info] payapi->autoload Wake up PayApi Payments SDK v0.0.0
+2017-07-04 06:13:17 [info] payapi->autoload [autoload] cgi
+2017-07-04 06:13:17 [info] helper->construct [SSL] enabled
+2017-07-04 06:13:17 [info] helper->construct [server_load] 0%
+2017-07-04 06:13:17 [info] payapi->autoload [autoload] loader
+2017-07-04 06:13:17 [info] payapi->autoload [autoload] framework
+2017-07-04 06:13:17 [info] payapi->construct [framework] loaded
+2017-07-04 06:13:17 [info] payapi->call HTTPS : "on"
+2017-07-04 06:13:17 [info] payapi->validate [command] validate
+2017-07-04 06:13:17 [info] payapi->model [autoload] model
+2017-07-04 06:13:17 [info] model->auto [autoload] adaptor
+2017-07-04 06:13:17 [info] helper->construct [adaptor] opencart
+2017-07-04 06:13:17 [info] model->auto [autoload] branding
+2017-07-04 06:13:17 [info] helper->construct [branding] payapi
+2017-07-04 06:13:17 [info] model->auto [autoload] archival
+2017-07-04 06:13:17 [warning] helper->warning [arch] /var/www/public/payapi//archival/
+2017-07-04 06:13:17 [info] payapi->controller [autoload] validate
+2017-07-04 06:13:17 [info] controller_validate->run adapted : {"id":"id001","quantity":1,"title":"title","description":"description","imageUrl":"","category":"","options":[],"model":"model","priceInCentsIncVat":10000,"priceInCentsExcVat":10000,"vatInCents":0,"vatPercentage":0,"extraData":""}
+2017-07-04 06:13:17 [info] controller_validate->run [schema] product
+2017-07-04 06:13:17 [info] model->validSchema [schema] success
+2017-07-04 06:13:17 [info] controller->response [buffer] sanitizer
+2017-07-04 06:13:17 [info] controller->response [rendering] info
+2017-07-04 06:13:17 [info] controller->response [mode] json
+2017-07-04 06:13:17 [info] controller->response [code] 200
+2017-07-04 06:13:17 [info] cgi->render [headers] json
+2017-07-04 06:13:17 [info] cgi->render [display] success
+2017-07-04 06:13:17 [info] payapi->destruct [destructed] success
+2017-07-04 06:13:17 [info] debugger->destruct app timing 38ms.
+

@@ -123,7 +123,7 @@ final class payapi {
       if ( $validator [ 'debug' ] === true ) {
         $this -> debugger = debugger :: single () ;
         $this -> data -> set ( 'debugger' , $this -> debugger ) ;
-        $this -> debug ( 'debug enabled' ) ;
+        $this -> debug ( 'Wake up ' . $this -> info [ 'app' ] . ' v' . $this -> info [ 'v' ] ) ;
       }
       $this -> data -> set ( 'debug' , $this -> debugger ) ;
       $this -> crypter = new crypter ( md5 ( $validator [ 'payapi_public_id' ] ) ) ;
@@ -156,14 +156,18 @@ final class payapi {
 
   public function __call ( $command , $arguments = array () ) {
     if ( $this -> autoloaded () === true && $this -> framework -> validator -> isString ( $this -> config [ 'payapi_public_id' ] ) === true && $this -> framework -> validator -> isPayload ( $this -> config [ 'encoded_payapi_api_key' ] , true ) === true ) {
-      $this -> validate ( $command , $arguments ) ;
-      $this -> debug ( '[command] ' . $this -> command );
-      $this -> data -> set ( 'arguments' , $arguments ) ;
-      $this -> model () ;
-      $this -> data -> set ( 'cgi' , $this -> cgi ) ;
-      $this -> controller () ;
-      if ( method_exists ( $this -> controller , 'run' ) ) {
-        return $this -> controller -> run () ;
+      if ( $this -> cgi -> sslEnabled () === true && $this -> cgi -> checkSslAccess () ) {
+        $this -> validate ( $command , $arguments ) ;
+        $this -> debug ( '[command] ' . $this -> command );
+        $this -> data -> set ( 'arguments' , $arguments ) ;
+        $this -> model () ;
+        $this -> data -> set ( 'cgi' , $this -> cgi ) ;
+        $this -> controller () ;
+        if ( method_exists ( $this -> controller , 'run' ) ) {
+          return $this -> controller -> run () ;
+        }
+      } else {
+        return $this -> unsecure () ;
       }
     } else {
       if ( $this -> autoloaded () === true ) {
@@ -195,7 +199,7 @@ final class payapi {
     $this -> error [] = 'undefined' ;
 
   }
-  //-> for DEV
+
   private function booBoo () {
     header ( 'Content-type: ' . $this -> modes [ $this -> mode ] ) ;
     http_response_code ( 503 ) ;
@@ -208,6 +212,11 @@ final class payapi {
   protected function unauthorized () {
     $this -> debug ( 'no valid payapi account' ) ;
     return $this -> cgi -> render ( $this -> cgi -> response ( 403 ) , 403 ) ;
+  }
+
+  protected function unsecure () {
+    $this -> debug ( 'no valid SSL certificate' ) ;
+    return $this -> cgi -> render ( $this -> cgi -> response ( 505 ) , 505 ) ;
   }
 
   private function model () {

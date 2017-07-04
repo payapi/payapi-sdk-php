@@ -11,7 +11,7 @@ namespace payapi ;
 final class serializer {
 
   protected
-    $version                  =   '0.0.1' ;
+    $version                  =   '0.0.0' ;
 
   public function validate ( $schema , $data ) {
     if ( ! is_array ( $schema ) || ! $data )

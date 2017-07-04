@@ -1,0 +1,32 @@
+2017-06-29 14:06:44 [info] payapi->autoload Wake up PayApi Payments SDK v0.0.0
+2017-06-29 14:06:44 [info] payapi->autoload [autoload] cgi
+2017-06-29 14:06:44 [info] helper->construct [SSL] enabled
+2017-06-29 14:06:44 [info] helper->construct [server_load] 3%
+2017-06-29 14:06:44 [info] payapi->autoload [autoload] loader
+2017-06-29 14:06:44 [info] payapi->autoload [autoload] framework
+2017-06-29 14:06:44 [info] payapi->construct [framework] loaded
+2017-06-29 14:06:44 [info] payapi->call HTTPS : "on"
+2017-06-29 14:06:44 [info] payapi->callback [command] callback
+2017-06-29 14:06:44 [info] payapi->model [autoload] callback
+2017-06-29 14:06:44 [info] model->auto [autoload] adaptor
+2017-06-29 14:06:44 [info] helper->construct [adaptor] opencart
+2017-06-29 14:06:44 [info] model->auto [autoload] branding
+2017-06-29 14:06:44 [info] helper->construct [branding] payapi
+2017-06-29 14:06:44 [info] model->auto [autoload] archival
+2017-06-29 14:06:44 [info] payapi->controller [autoload] callback
+2017-06-29 14:06:44 [info] controller->knock acces from : TODO
+2017-06-29 14:06:44 [info] controller->knock [ACK] success
+2017-06-29 14:06:44 [info] controller->knock timing 0ms.
+2017-06-29 14:06:44 [info] controller->knock [ACK] success
+2017-06-29 14:06:44 [info] model_callback->validateCallbackSchema [schema] endpoint.callback
+2017-06-29 14:06:44 [info] model->validSchema [schema] success
+2017-06-29 14:06:44 [info] archival->setArchiveData archival file : /var/www/public/payapi//archival/transaction/archive.transaction..log
+2017-06-29 14:06:44 [info] controller->render [buffer] sanitizer
+2017-06-29 14:06:44 [info] controller->render [rendering] info
+2017-06-29 14:06:44 [info] controller->render [mode] json
+2017-06-29 14:06:44 [info] controller->render [code] 200
+2017-06-29 14:06:44 [info] cgi->render [headers] json
+2017-06-29 14:06:44 [info] cgi->render [display] success
+2017-06-29 14:06:44 [info] payapi->destruct [destructed] success
+2017-06-29 14:06:44 [info] debugger->destruct app timing 45ms.
+

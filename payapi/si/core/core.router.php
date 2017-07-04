@@ -19,27 +19,46 @@ final class router {
   }
 
   public static function dirPrivate ( $key = false ) {
-    $dir = self :: validFolder ( $key , true ) ;
+    $dir = self :: validString ( $key , true ) ;
     return self :: dirPayapi ( 'private' ) . $dir ;
   }
 
   public static function dirSi ( $key = false ) {
-    $dir = self :: validFolder ( $key , true ) ;
+    $dir = self :: validString ( $key , true ) ;
     return self :: parentDir ( __DIR__ ) . $dir ;
   }
 
   public static function dirPayapi ( $key = false ) {
-    $dir = self :: validFolder ( $key , true ) ;
+    $dir = self :: validString ( $key , true ) ;
+    return self :: parentDir ( self :: dirSi () ) . $dir ;
+  }
+
+  public static function dirArchival ( $file = false ) {
+    $isFile = self :: validString ( $file , true ) ;
+    return self :: dirPayapi ( 'archival' ) . $isFile ;
+  }
+
+  public static function adaptorPlugin ( $pluginKey ) {
+    if ( is_string ( $pluginKey ) === true ) {
+      $pluginFile = self :: dirSi ( 'plugin' ) . 'plugin' . '.' . $pluginKey . '.' . 'php' ;
+      if ( is_file ( $pluginFile ) === true ) {
+        if ( require ( $pluginFile ) ) {
+          return true ;
+        }
+      }
+      return false ;
+    }
+    $dir = self :: validString ( $key , true ) ;
     return self :: parentDir ( self :: dirSi () ) . $dir ;
   }
 
   public static function dirCore ( $key = false ) {
-    $dir = self :: validFolder ( $key , true ) ;
+    $dir = self :: validString ( $key , true ) ;
     return __DIR__ . $dir  ;
   }
 
   public static function dirLogs () {
-    return self :: dirRoot () . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR ;
+    return self :: dirPayapi () . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR ;
   }
 
   private static function dirRoot ()  {
@@ -50,9 +69,9 @@ final class router {
     return str_replace ( DIRECTORY_SEPARATOR . basename ( $dir ) , null , $dir ) . DIRECTORY_SEPARATOR ;
   }
 
-  private static function validFolder ( $folder , $separator = false ) {
-    if ( is_string ( $folder ) ) {
-      return strtolower ( trim ( $folder ) ) . ( ( $separator ) ? DIRECTORY_SEPARATOR : null ) ;
+  private static function validString ( $string , $separator = false ) {
+    if ( is_string ( $string ) === true ) {
+      return strtolower ( trim ( $string ) ) . ( ( $separator ) ? DIRECTORY_SEPARATOR : null ) ;
     } else {
       return null ;
     }
