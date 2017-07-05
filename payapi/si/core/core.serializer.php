@@ -71,24 +71,6 @@ final class serializer {
     return array_merge ( $array , $this -> info () ) ;
   }
 
-  public function getIp () {
-    if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_CLIENT_IP' ) ) )
-      if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED_FOR' ) ) )
-        if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED' ) ) )
-          if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED_FOR' ) ) )
-            if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED' ) ) )
-              if ( ! $access = $this -> validateIp ( getenv ( 'REMOTE_ADDR' ) ) )
-                $access = $this -> undefined () ;
-    // @NOTE @TODELETE just for developing
-    $access = ( $access == '192.168.10.1' ) ? '88.27.211.244' : $access ;
-    $ip = htmlspecialchars ( $access , ENT_COMPAT , 'UTF-8' ) ;
-    return $ip ;
-  }
-
-  public function validateIp ( $ip ) {
-    return filter_var ( $ip , FILTER_VALIDATE_IP ) ;
-  }
-
   public function commandLineInterfaceAccess () {
     if ( function_exists ( 'php_sapi_name' ) ) {
       if ( php_sapi_name () === 'cli' ) {

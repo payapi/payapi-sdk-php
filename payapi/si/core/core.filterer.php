@@ -50,6 +50,19 @@ final class filterer {
     return false ;
   }
 
+  public function filtererIp ( $ip ){
+    return preg_replace ( "/[^0-0.\d ]/i" , '' , $string ) ;
+  }
+
+
+  public function filtererAlphaNumeric ( $string ) {
+    return preg_replace ( "/[^[:alnum:][:space:]]/u" , '' , $string ) ;
+  }
+
+  public function filtererUnicode ( $string ) {
+    return $this -> filtererAlphaNumeric ( $string ) ;
+  }
+
   public function filtererInt ( $unfiltererInt ) {
     if ( is_int ( $unfiltererInt ) === true ) {
       $filtererMaximumInt = $this -> filterMaximumInt ( $unfiltererInt ) ;
