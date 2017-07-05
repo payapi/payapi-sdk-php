@@ -54,28 +54,25 @@ final class localize {
     return $this -> undefinedIpInfo () ;
   }
 
-  public static function getIp () {
-    if ( getenv ( 'HTTP_CLIENT_IP' ) !== false ) {
-      $ipAddress = getenv ( 'HTTP_CLIENT_IP' ) ;
-    } else if ( getenv ( 'HTTP_X_FORWARDED_FOR' ) !== false ) {
-      $ipAddress = getenv ( 'HTTP_X_FORWARDED_FOR' ) ;
-    } else if ( getenv ( 'HTTP_X_FORWARDED' ) !== false ) {
-      $ipAddress = getenv ( 'HTTP_X_FORWARDED' ) ;
-    } else if ( getenv ( 'HTTP_FORWARDED_FOR' ) !== false ) {
-      $ipAddress = getenv ( 'HTTP_FORWARDED_FOR' ) ;
-    } else if ( getenv ( 'HTTP_FORWARDED' ) !== false ) {
-      $ipAddress = getenv ( 'HTTP_FORWARDED' ) ;
-    } else if ( getenv ( 'REMOTE_ADDR' ) !== false ) {
-      $ipAddress = getenv ( 'REMOTE_ADDR' ) ;
-    } else {
-      $ipAddress = null ;
-    }
-    //-> @NOTE @CARE!!! @TODELETE after DEV
-    if ( $ipAddress == '192.168.10.1' ) {
-      $ipAddress = '84.79.234.58' ;
-    }
+  private function getIp () {
+    if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_CLIENT_IP' ) ) ) == false )
+      if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED_FOR' ) ) ) == false )
+        if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED' ) ) ) == false )
+          if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED_FOR' ) ) ) == false )
+            if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED' ) ) ) == false )
+              if ( ( $access = $this -> validateIp ( getenv ( 'REMOTE_ADDR' ) ) ) == false )
+                $access = null ;
+    //-> @NOTE @TODELETE just for developing
+    $access = ( $access == '192.168.10.1' ) ? '84.79.234.58' : $access ;
+    $ip = htmlspecialchars ( $access , ENT_COMPAT , 'UTF-8' ) ;
+    return $ip ;
+  }
 
-    return $ipAddress;
+  public function validateIp ( $env ) {
+    if ( filter_var ( $env , FILTER_VALIDATE_IP ) !== false && ip2long ( $env ) !== false ) {
+      return preg_replace ( "/[^0-0.\d ]/i" , '' , $env ) ;
+    }
+    return false ;
   }
 
   private function undefinedIpInfo () {
