@@ -98,7 +98,7 @@ final class cgi extends helper {
     $this -> addInfo ( 'sanitizer_v' , ( string ) $this -> sanitizer ) ;
     $this -> domain = $this -> getServerDomain () ;
     $this -> ip = $this -> getIp () ;
-    $this -> ssl = $this -> checkSsl () ;
+    $this -> ssl = $this -> checkSsl ( false, false , true ) ;
     if ( $this -> ssl !== true ) {
       $this -> error ( '[SSL] no valid' ) ;
     } else {
@@ -128,7 +128,7 @@ final class cgi extends helper {
     $test = $this -> checkSsl ( 'payapi.io' ) ;
     var_dump ( $test ) ;
     exit () ;
-    */
+    //*/
   }
 
   public function sslEnabled () {
@@ -150,8 +150,9 @@ final class cgi extends helper {
   }
 
   public function knock () {
-    $server = json_encode ( $_SERVER , true ) ;
-    $this -> debug ( 'server : ' . $server ) ;
+    //-> CHECK SSL ( IP )
+    //$server = json_encode ( stream_get_wrappers () , true ) ;
+    //$this -> debug ( '[server] ___stream : ' . $server ) ;
     if ( getenv ( 'REQUEST_METHOD' ) == 'POST' ) {
       $this -> debug ( 'access from : ' . 'TODO' ) ;
       if ( $this -> sslEnabled () !== false ) { // TODO check incomming domain $this -> checkIncomingHasValidSsl
@@ -209,19 +210,18 @@ final class cgi extends helper {
     $response = false ;
     if ( $this -> isCleanCodeInt ( $code ) === true ) {
       if ( $code === 200 ) {
-        if ( 1 === 1 ) {
-        //-> fixme
-        //if ( $this -> filterer -> filtererArray ( $dataExpected ) === true ) {
-          $response = $dataExpected ;
+        if ( isset ( $dataExpected [ 'data' ] ) === true && is_string ( $dataExpected [ 'data' ] ) === true ) { // check payload ( $dataExpected )
+          curl_close ( $buffer ) ;
+          return $dataExpected ;
         } else {
-          $this -> warning ( 'object blocked' , 'curl' ) ;
+          $this -> warning ( 'unexpected data' , 'curl' ) ;
         }
       } else {
         $this -> warning ( 'unexpected response' , 'curl' ) ;
       }
     }
     curl_close ( $buffer ) ;
-    return $response ;
+    return false ;
   }
 
   public function curlErrorUnexpectedCurlResponse () {
@@ -294,7 +294,7 @@ final class cgi extends helper {
       return true ;
     }
     $this -> debug ( '[headers] ' . $this -> mode ) ;
-    //@header( "X-Robots-Tag: noindex,nofollow" ) ;
+    header ( "X-Robots-Tag: noindex,nofollow" ) ;
     header ( 'Content-type: ' . $this -> modes [ $this -> mode ] ) ;
     return http_response_code ( $this -> code ) ;
   }
@@ -316,20 +316,35 @@ final class cgi extends helper {
     return $this -> sanitizer -> parseDomain ( getenv ( 'SERVER_NAME' ) ) ;
   }
 
-  private function checkSsl ( $checkDomain = false ) {
-    return true ; //-> @NOTE @CARE @TODELETE just fro DEV
+  private function checkSsl ( $checkDomain = false , $checked = false , $allowSelfsigned = false ) {
+    //-> @NOTE @CARE @TODELETE just fro DEV -> ( false, false , true )
+    return true ;
+    $selfsigned = ( $allowSelfsigned === true ) ? true : false ;
+    $verifyPeer = ( $selfsigned === true ) ? false : true ;
     $domain = ( is_string ( $checkDomain ) === true ) ? $checkDomain : $this -> domain ;
-    $socket = stream_context_create ( array ( "ssl" => array ( "capture_peer_cert" => true ) ) ) ;
-    if ( $this -> sslChecked === false && $socket === false ) {
-      return $this -> reCheckSsl ( $checkDomain ) ;
+    $socket = stream_context_create ( [ 'http' => [ 'method' => 'GET' ] , 'ssl' => [
+      'capture_peer_cert'       => true ,
+      'capture_peer_cert_chain' => true ,
+      'disable_compression'     => true , //-> anti CRIME
+      'verify_depth'            => 3 ,
+      //'passphrase'              => '' ,
+      'verify_expiry'           => $verifyPeer ,
+      'allow_cert_self_signed'  => $selfsigned ,
+      "verify_peer_name"        => $verifyPeer ,
+      'verify_peer'             => $verifyPeer ,
+      'ciphers'                 => 'TLSv1.2'
+    ] ] ) ;
+    if ( $checked === false && $socket === false ) {
+      return $this -> CheckSsl ( $checkDomain , true ) ;
     }
-    $conexion = @stream_socket_client ( "ssl://{$domain}:443" , $errno , $errstr , $this -> timeout , STREAM_CLIENT_CONNECT , $socket ) ;
-    $certificate = @stream_context_get_params ( $conexion ) ;
-    //->
-    if ( $this -> sslChecked === 0 && isset ( $conexion ) !== true || isset ( $certificate ) !== true || isset ( $certificate [ "options" ] [ "ssl" ] [ "peer_certificate" ] ) !== true ) {
-      return $this -> reCheckSsl ( $checkDomain ) ;
+    $stream = @stream_socket_client ( "ssl://{$domain}:443" , $errno , $errstr , $this -> timeout , STREAM_CLIENT_CONNECT , $socket ) ;
+    $streamParams = @stream_context_get_params ( $stream ) ;
+    //->var_dump ( $streamParams [ "options" ] ) ;
+    if ( isset ( $streamParams [ "options" ] [ "ssl" ] [ "peer_certificate" ] ) === true ) {
+      $this -> debug ( '[CHECK] access ssl ' . json_encode ( $streamParams  , true ) ) ;
+      return $streamParams [ "options" ] [ "ssl" ] [ "peer_certificate" ] ;
     }
-    return $certificate [ "options" ] [ "ssl" ] [ "peer_certificate" ] ;
+    return false ;
   }
 
   public function checkIncomingHasValidSsl ( $url ) {
@@ -359,21 +374,24 @@ final class cgi extends helper {
   }
 
   private function getIp () {
-    if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_CLIENT_IP' ) ) )
-      if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED_FOR' ) ) )
-        if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED' ) ) )
-          if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED_FOR' ) ) )
-            if ( ! $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED' ) ) )
-              if ( ! $access = $this -> validateIp ( getenv ( 'REMOTE_ADDR' ) ) )
+    if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_CLIENT_IP' ) ) ) == false )
+      if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED_FOR' ) ) ) == false )
+        if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED' ) ) ) == false )
+          if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED_FOR' ) ) ) == false )
+            if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED' ) ) ) == false )
+              if ( ( $access = $this -> validateIp ( getenv ( 'REMOTE_ADDR' ) ) ) == false )
                 $access = $this -> undefinedIp () ;
     //-> @NOTE @TODELETE just for developing
-    $access = ( $access == '192.168.10.1' ) ? '88.27.211.244' : $access ;
+    $access = ( $access == '192.168.10.1' ) ? '84.79.234.58' : $access ;
     $ip = htmlspecialchars ( $access , ENT_COMPAT , 'UTF-8' ) ;
     return $ip ;
   }
 
   public function validateIp ( $env ) {
-    return filter_var ( $env , FILTER_VALIDATE_IP ) ;
+    if ( filter_var ( $env , FILTER_VALIDATE_IP ) !== false && ip2long ( $env ) !== false ) {
+      return preg_replace ( "/[^0-0.\d ]/i" , '' , $env ) ;
+    }
+    return false ;
   }
 
   public function response ( $code = false ) {
