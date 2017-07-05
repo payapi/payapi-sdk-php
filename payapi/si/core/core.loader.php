@@ -17,6 +17,19 @@ final class loader extends helper {
     $this -> root = str_replace ( basename ( str_replace ( basename ( __FILE__ ) , null , __FILE__ ) ) . DIRECTORY_SEPARATOR . basename ( __FILE__ ) , null , __FILE__ ) ;
   }
 
+  public function checkCommand ( $command ) {
+    if ( is_string ( $command ) === true ) {
+      $check = strtolower ( trim ( preg_replace ( "/[^a-z\d ]/i" , '' , $command ) ) ) ;
+      if ( md5 ( $check ) === md5 ( $command) ) {
+        $file = router :: dirSi ( 'controller' ) . 'controller' . '.' . $command . '.' . 'php' ;
+        if ( is_file ( $file ) === true ) {
+          return true ;
+        }
+      }
+    }
+    return false ;
+  }
+
   public function model ( $key ) {
     if ( isset ( $this -> loaded [ 'model' ] [ $key ] ) ) {
       return true ;
