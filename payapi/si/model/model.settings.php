@@ -4,11 +4,12 @@ namespace payapi ;
 
 final class model_settings extends model {
 
-  public function validateMerchantSettings ( $settings ) {
-    if ( $settings [ 'code' ] === 200 ) {
-      if ( isset ( $settings [ 'data' ] [ 'partialPayments' ] ) === true && is_array ( $settings [ 'data' ] [ 'partialPayments' ] ) === true ) {
+  public function validateMerchantSettings ( $settingsEncoded ) {
+    if ( $settingsEncoded [ 'code' ] === 200 && isset ( $settingsEncoded [ 'data' ] ) ) { //-> data checked in cgi now
+      $settings = json_decode ( $this -> decode ( $settingsEncoded [ 'data' ] , $this -> getDecodedApiKey ( $this -> config ( 'encoded_payapi_api_key' ) ) ) , true ) ;
+      if ( isset ( $settings [ 'partialPayments' ] ) === true && is_array ( $settings[ 'partialPayments' ] ) === true ) {
         //-> @TODO if partialPayments === false
-        $validator = $this -> validSchema ( 'merchant.settings' , $settings [ 'data' ] [ 'partialPayments' ] ) ;
+        $validator = $this -> validSchema ( 'merchant.settings' , $settings [ 'partialPayments' ] ) ;
         if ( is_array ( $validator ) === true ) {
           $this -> status = 200 ;
           $this -> set ( 'MerchantSettings' , $validator ) ;
