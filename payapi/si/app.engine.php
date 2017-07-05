@@ -11,11 +11,11 @@
 *  @copyright  PayApi Ltd
 *  @license    GPL v3.0?
 *
-*  @REQUIRE
+*  @REQUIRES
 *              JWT
 *
 * @TODO
-*       move class content to engine
+*       many!
 *
 **/
 
@@ -41,7 +41,7 @@ final class payapi {
   private
     $debugger                      =                 false ,
     $loader                        =                 false ,
-    $framework                       =                 false ,
+    $framework                     =                 false ,
     $crypter                       =                 false ,
     $cgi                           =                 false ,
     $command                       =                 false ,
@@ -52,17 +52,7 @@ final class payapi {
     $controller                    =                 false ,
     $error                         =                 false ,
     $autoloaded                    =                 false ,
-    $configs                       =                 false ,
-    $commands                      =                 array (
-                                                    "info" ,
-                                                "settings" ,
-                                             "transaction" ,
-                                                "localize" ,
-                                                "callback" ,
-                                                "validate" ,
-                                                   "error" ,
-                                                   "brand"
-                                                         ) ;
+    $configs                       =                 false ;
 
   public function __construct ( $config = array () ) {
     $configConstruct = ( is_array ( $config ) === true ) ? $config : array () ;
@@ -89,6 +79,7 @@ final class payapi {
             $this -> debug ( '[framework] loaded' ) ;
             $this -> data -> set ( 'loader' , $this -> loader ) ;
             $this -> data -> set ( 'framework' , $this -> framework ) ;
+            session_start () ;
             $this -> autoloaded = true ;
           } else {
             $this -> error ( '[framework] failed' ) ;
@@ -179,7 +170,7 @@ final class payapi {
   }
 
   private function validate ( $command , $arguments ) {
-    if ( in_array ( $command , $this -> commands ) ) {
+    if ( $this -> loader -> checkCommand ( $command ) === true ) {
       $this -> command = $command ;
       $this -> arguments = $arguments ;
     } else {
