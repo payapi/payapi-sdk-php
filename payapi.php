@@ -1,40 +1,43 @@
 <?php
 /**
 *
-*  CORE PayApi OC v2.3 plugin v0.2 (BOC)
-*  PHP +v5.x
-*  https://payapi.io/
+*  @package    PayApi PHP SDK
+*              https://payapi.io/
 *
-*  @package  PayApi OC v2.3 plugin v0.2 (BOC)
-*  @category Payments, Social Sharing
-*  @version  v0.0.0.2 (20170704)
+*  @uses       PHP +v5.x
+*              JWT
 *
-*  @param constant     ___error___           defined undefined string
-*  @param constant     ___HTTPS___           defined https url prefix string
-*  @param constant     STAGING               BOC PROD/STAG servers FLAG
-*  @param constant     DEBUGGING             BOC writte info into log FLAG
-*  @param constant     BOC_VERSION           BOC version string
-*  @param constant     DIR_PRIVATE           OC system log dir string
-*  @param constant     DIR_SEP               OC system DIRECTORY_SEPARATOR string
-*  @param object       $oc                   OC $registry
+*  @category   Payments, Social Sharing
+*  @version    v0.0.0.2 (20170704)
 *
-*  @uses   OC $registry
-*  @uses   \Log
-*          if DEBUGGING == true
+*  @param      ( object ) native = ( main sdk config || native model for plugin )
+*
+*  @NOTE
+*        - 1. to log into sdk thought :
+*              $sdk -> settings ( $payapi_public_id , $payapi_api_enc_key ) ;
+*              * this returns merchantSettings payload if valid
+*                and creates an encrypted cache for both:
+*                payapi/cache/<instanceKey>/account
+*                payapi/cache/<instanceKey>/settings
+*
+*        - 2. commands :
+*              $this -> localize () ;
+*              $this -> settings ( 'public_id' , 'api_key' ) ;         //-> gets merchantSettings
+*              $this -> settings ( 'public_id' , 'api_key' , true ) ;  //-> refresh & gets merchantSettings
+*              $this -> partialPayment ( $totalInCents , $currency ) ; //-> calculate partialPayment from merchantSettings
+*              $this -> response ( <standard_response_code_int> ) ;    //-> get response info
+*              $this -> info () ;                                      //-> gets sdk debug info
 *
 *
-*  @author florin
-*  @copyright PayApi Ltd
-*  @license GPL v3.0
+*  @author     florin
+*  @copyright  PayApi Ltd
+*  @license    GPL v3.0
 *
-*  @todo ever!
-*        move debug load here, pass debugging set
 *
-*  $this -> localize () ;
-*  $this -> settings ( 'public_id' , 'api_key' , true ) ;
-*  $this -> partialPayment ( $totalInCents , $currency ) ;
-*  $this -> response ( 600 ) ;
-*  $this -> info () ;
+*  @TODO       ever!
+*              finish OC isolation
+*              sdk default noplugin settings
+*
 *
 **/
 
