@@ -102,16 +102,21 @@ final class api extends helper {
   }
 
   public function curl ( $url , $secured = true , $post = false , $timeout = 1 , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 ) {
-    $this -> curl = new curl () ;
+    if ( $this -> curl === false ) {
+      $this -> curl = new curl () ;
+    }
     $response = $this -> curl -> proccess ( $url , $secured , $post , $timeout , $return , $header , $ssl , $fresh , $noreuse ) ;
-    $this -> curl = false ;
+    //->
     return $response ;
   }
 
   public function knock () {
-    $this -> knock = new knock () ;
+    if ( $this -> knock === false ) {
+      $this -> knock = new knock () ;
+    }
+    $knock = $this -> knock -> listen () ;
     //->
-    return $this -> knock -> listen () ;
+    return $knock ;
   }
 
   public function defaultCode () {
@@ -138,11 +143,12 @@ final class api extends helper {
   }
 
   private function headers ( $code ) {
-    if ( $this -> headers == false ) {
+    if ( $this -> headers !== true ) {
       return true ;
     }
     $this -> debug ( '[headers] ' . $this -> mode ) ;
     //header ( 'Content-type: ' . $this -> modes [ $this -> mode ] ) ;
+    header ( "X-Robots-Tag: noindex,nofollow" ) ;
     return http_response_code ( $code ) ;
   }
 
