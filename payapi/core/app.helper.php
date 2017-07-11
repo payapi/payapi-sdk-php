@@ -7,6 +7,7 @@ abstract class helper {
   protected
     $default                   = 'payapi' ,
     $debug                     =    false ,
+    $serializer                =    false ,
     $error                     =    false ,
     $route                     =    false ,
     $data                      =    false ;
@@ -15,12 +16,14 @@ abstract class helper {
     $buffer                    =    false ;
 
   public function __construct ( $entity = false , $native = false ) {
+    $this -> serialize = serializer :: single () ;
     $this -> error = error :: single () ;
     $this -> route = router :: single () ;
     set_error_handler ( array ( $this , 'error_handler' ) ) ;
     $this -> debug = debug :: single ( true ) ;
     if ( method_exists ( $this , '___autoload' ) ) {
-      $this -> debug ( '[autoload] ' . strtolower ( str_replace ( array ( 'payapi\\command' , 'payapi\\' ) , null , get_called_class() ) ) ) ;
+      $version = ( isset ( $this -> version ) === true ) ? ' v' . $this -> version : null ;
+      $this -> debug ( '[autoload] ' . strtolower ( str_replace ( array ( 'payapi\\command' , 'payapi\\' ) , null , get_called_class() ) . $version ) ) ;
       $this -> ___autoload ( $entity , $native ) ;
     }
   }
