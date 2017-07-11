@@ -12,43 +12,46 @@ final class commandSettings extends engine {
       $publicId = $this -> publicId () ;
       $apiKey = $this -> apiKey () ;
     }
-    $cached = $this -> cache ( 'read' , 'settings' , $publicId ) ;
-    if ( $this -> arguments ( 2 ) === false && $cached !== false ) {
-      return $this -> render ( $cached ) ;
-    } else {
-      $endPoint = $this -> route -> endPointSettings ( $publicId ) ;
-      $request = $this -> curl ( $endPoint , $this -> payload ( $apiKey ) , true ) ;
-      if ( $request !== false && isset ( $request [ 'code' ] ) === true ) {
-        if ( $request [ 'code' ] === 200 ) {
-          $decodedData = json_decode ( $this -> decode ( $request [ 'data' ] , $this -> apiKey () ) , true ) ;
-          if ( $this -> validate -> schema ( $decodedData , $this -> load -> schema ( 'settings' ) ) === true ) {
-            $this -> debug ( '[settings] valid schema' ) ;
-            if ( $decodedData [ 'partialPayments' ] !== false ) {
-              if ( $this -> validate -> schema ( $decodedData [ 'partialPayments' ] , $this -> load -> schema ( 'partialPayments' ) ) === true ) {
-                $this -> debug ( '[partialPayments] valid schema' ) ;
-              } else {
-                $decodedData [ 'partialPayments' ] = false ;
-                $this -> error ( '[partialPayments] no valid schema' , 'warning' ) ;
+    if ( $this -> validate -> publicId ( $publicId ) === true && $this -> validate -> apiKey ( $apiKey ) === true ) {
+      $cached = $this -> cache ( 'read' , 'settings' , $this -> instance () ) ;
+      if ( $this -> arguments ( 2 ) !== true && $cached !== false ) {
+        return $this -> render ( $cached ) ;
+      } else {
+        $endPoint = $this -> route -> endPointSettings ( $publicId ) ;
+        $request = $this -> curl ( $endPoint , $this -> payload ( $apiKey ) , true ) ;
+        if ( $request !== false && isset ( $request [ 'code' ] ) === true ) {
+          if ( $request [ 'code' ] === 200 ) {
+            $decodedData = json_decode ( $this -> decode ( $request [ 'data' ] , $apiKey ) , true ) ;
+            if ( $this -> validate -> schema ( $decodedData , $this -> load -> schema ( 'settings' ) ) === true ) {
+              $this -> debug ( '[settings] valid schema' ) ;
+              if ( $decodedData [ 'partialPayments' ] !== false ) {
+                if ( $this -> validate -> schema ( $decodedData [ 'partialPayments' ] , $this -> load -> schema ( 'partialPayments' ) ) === true ) {
+                  $this -> debug ( '[partialPayments] valid schema' ) ;
+                } else {
+                  $decodedData [ 'partialPayments' ] = false ;
+                  $this -> error ( '[partialPayments] no valid schema' , 'warning' ) ;
+                }
               }
+              $this -> cache ( 'writte' , 'account' , $this -> instance () , array (
+                "publicId" => $publicId ,
+                "apiKey"   => $this -> encode ( $apiKey , false , true )
+              ) ) ;
+              $this -> cache ( 'writte' , 'settings' , $this -> instance () , $decodedData ) ;
+              return $this -> render ( $this -> cache ( 'read' , 'settings' , $this -> instance () ) ) ;
+            } else {
+              //-> not valid schema from PA
+              $this -> error ( 'no valid settings' , 'warning' ) ;
+              return $this -> returnResponse ( $this -> error -> notValidSchema () ) ;
             }
-            $this -> cache ( 'writte' , 'account' , $publicId , array (
-              "publicId" => $publicId ,
-              "apiKey"   => $this -> encode ( $apiKey , false , true )
-            ) ) ;
-            $this -> cache ( 'writte' , 'settings' , $publicId , $decodedData ) ;
-            return $this -> render ( $this -> cache ( 'read' , 'settings' , $publicId ) ) ;
-            return $decodedData ;
           } else {
-            //-> not valid schema from PA
-            $this -> error ( 'no valid settings' , 'warning' ) ;
-            return $this -> returnResponse ( $this -> error -> notValidSchema () ) ;
+            return $this -> returnResponse ( $request [ 'code' ] ) ;
           }
         } else {
-          return $this -> returnResponse ( $request [ 'code' ] ) ;
+          return $this -> returnResponse ( $this -> error -> badRequest () ) ;
         }
-      } else {
-        return $this -> returnResponse ( $this -> error -> badRequest () ) ;
       }
+    } else {
+      return $this -> returnResponse ( $this -> error -> badRequest () ) ;
     }
     return $this -> returnResponse ( $this -> error -> timeout () ) ;
   }

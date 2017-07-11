@@ -29,6 +29,7 @@ abstract class engine extends helper {
     $arguments             =     false ;
 
   protected function ___autoload ( $entity , $native ) {
+    $this -> crypter = new crypter () ;
     $this -> cache = new cache () ;
     $this -> config = $entity -> appConfig () ;
     $this -> entity = $entity ;
@@ -37,6 +38,7 @@ abstract class engine extends helper {
   }
 
   private function sdk () {
+    $this -> account = $this -> cache ( 'read' , 'account' , $this -> instance () ) ;
     $this -> arguments = $this -> entity -> get ( 'arguments' ) ;
     $this -> validate = $this -> entity -> get ( 'validate' ) ;
     $this -> entity -> remove ( 'validate' ) ;
@@ -44,10 +46,15 @@ abstract class engine extends helper {
     $this -> entity -> remove ( 'load' ) ;
     $this -> api = $this -> entity -> get ( 'api' ) ;
     $this -> entity -> remove ( 'api' ) ;
-    $this -> crypter = new crypter () ;
-    $this -> token = $this -> crypter -> instanceToken ( $this -> publicId () ) ;
-    $this -> account = $this -> cache ( 'read' , 'account' , $this -> publicId ) ;
-    $this -> settings = $this -> cache ( 'read' , 'settings' , $this -> publicId ) ;
+    $this -> publicId = $this -> publicId () ;
+    if ( $this -> validate -> publicId ( $this -> publicId ) === true ) {
+      $this -> settings = $this -> cache ( 'read' , 'settings' , $this -> instance () ) ;
+      $this -> token = $this -> crypter -> instanceToken ( $this -> publicId () ) ;
+      $this -> entity -> addInfo ( 'public' , $this -> publicId () ) ;
+      $this -> entity -> addInfo ( 'tk' , $this -> token () ) ;
+    } else {
+      $this -> entity -> addInfo ( 'public' , 'anonymous' ) ;
+    }
     $this -> info () ;
   }
 
@@ -61,12 +68,6 @@ abstract class engine extends helper {
 
   private function native ( $native ) {
     $this -> adaptor = new adaptor ( $this -> entity , $native ) ;
-    $this -> session = $this -> adaptor -> session () ;
-    $this -> db = $this -> adaptor -> db () ;
-    $this -> config = $this -> adaptor -> config () ;
-    $this -> customer = $this -> adaptor -> customer () ;
-    //-> @TODO update to use internal cache
-    $this -> publicId = $this -> adaptor -> publicId () ;
   }
 
   private function info () {
@@ -76,8 +77,6 @@ abstract class engine extends helper {
     $this -> entity -> addInfo ( 'crypter_v' , ( string ) $this -> crypter ) ;
     $this -> entity -> addInfo ( 'validator_v' , ( string ) $this -> validate ) ;
     $this -> entity -> addInfo ( 'serializer_v' , ( string ) $this -> serialize ) ;
-    $this -> entity -> addInfo ( 'tk' , $this -> token () ) ;
-    $this -> entity -> addInfo ( 'public' , $this -> publicId ) ;
   }
   //-> SDK config
   protected function app ( $key = false ) {
@@ -111,7 +110,7 @@ abstract class engine extends helper {
   }
   //-> account login
   public function publicId () {
-    $this -> account ( 'publicId' ) ;
+    return $this -> account ( 'publicId' ) ;
   }
 
   protected function apiKey () {
@@ -170,19 +169,19 @@ abstract class engine extends helper {
   }
 
   protected function cache ( $action , $type , $token , $data = false ) {
-    $tokenCoded = $this -> encode ( $token , $this -> token , true ) ;
+    $tokenCoded = $this -> encode ( $token , false , true ) ;
     $cacheKey = str_replace ( strtok ( $tokenCoded , '.' ) . '.' , null , $tokenCoded ) ;
     switch ( $action ) {
       case 'writte' :
         if ( is_array ( $data ) !== false ) {
           $data [ 'timestamp' ] = $this -> timestamp () ;
         }
-        $encryptedData = $this -> encode ( $data , $this -> token , true ) ;
+        $encryptedData = $this -> encode ( $data , false , true ) ;
         return $this -> cache -> writte ( $type , $cacheKey , $encryptedData ) ;
       case 'read' :
         $cached = $this -> cache -> read ( $type , $cacheKey ) ;
         if ( $cached !== false ) {
-          return $this -> decode ( $cached , $this -> token , true ) ;
+          return $this -> decode ( $cached , false , true ) ;
         }
       break ;
       default :

@@ -6,9 +6,7 @@
   "___schema": {
     "partialPayments": {
       "___mandatory": true,
-      "___type": "setting",
-      "___min": 1,
-      "___max": 100
+      "___type": "setting"
     }
   }
 }

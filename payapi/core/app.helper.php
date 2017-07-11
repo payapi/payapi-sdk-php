@@ -30,6 +30,10 @@ abstract class helper {
     }
   }
 
+  protected function instance () {
+    return $this -> instance ;
+  }
+
   protected function debug ( $data , $label = 'info' ) {
     if ( $this -> debug !== false ) {
 			return $this -> debug -> add ( $data , $label ) ;

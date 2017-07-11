@@ -79,7 +79,7 @@ final class curl extends helper {
   }
 
   private function method ( $post ) {
-    return ( ( $post ===  false ) ? 'GET' : 'POST' ) ;
+    return ( ( $post ===  false ) ? 'get' : 'post' ) ;
   }
 
   private function parseDomain ( $url ) {

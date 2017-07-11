@@ -23,8 +23,8 @@
 *        - 2. commands :
 *              $sdk -> callback () ;                                  //-> gets/cache callback decoded transaction
 *              $sdk -> localize () ;                                  //-> gets/cache ip decoded localization (plugin adds native country and zone ids)
-*              $sdk -> settings ( 'public_id' , 'api_key' ) ;         //-> gets cached merchantSettings
-*              $sdk -> settings ( 'public_id' , 'api_key' , true ) ;  //-> refresh & gets merchantSettings
+*              $sdk -> settings () ;                                  //-> gets instance cached merchantSettings
+*              $sdk -> settings ( 'public_id' , 'api_key' , true ) ;  //-> refresh & gets instance merchantSettings
 *              $sdk -> partialPayment ( $totalInCents , $currency ) ; //-> calculate partialPayment from merchantSettings
 *                                                                          @TODO review using cached/plugin
 *              $sdk -> response ( <standard_response_code_int> ) ;    //-> get response info
@@ -123,7 +123,12 @@ class payapi {
     $this -> entity -> set ( 'api' , $this -> api ) ;
     $command = new $controller ( $this -> entity , $this -> native ) ;
     if ( method_exists ( $command , 'run' ) === true ) {
-      return $command -> run () ;
+      $public = array ( 'info' , 'settings' ) ;
+      if ( $this -> validate -> publicId ( $command -> publicId () ) === true || in_array ( $this -> command , $public ) === true ) {
+        return $command -> run () ;
+      } else {
+        return $this -> api -> returnResponse ( 403 ) ;
+      }
     }
   }
 

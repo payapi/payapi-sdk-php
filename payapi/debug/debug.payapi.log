@@ -1,14 +1,14 @@
  
-2017-07-11 16:07:24 [info] payapi->worker [debugger] enabled
-2017-07-11 16:07:24 [info] Loader->library [app] payapi SDK v0.0.0
-2017-07-11 16:07:24 [info] payapi->worker [autoload] api v0.0.1
-2017-07-11 16:07:24 [info] payapi->run [autoload] partialpayment
-2017-07-11 16:07:24 [info] engine->_autoload [autoload] cache v0.0.1
-2017-07-11 16:07:24 [info] engine->native [autoload] adaptor
-2017-07-11 16:07:24 [info] helper->construct [plugin] opencart2
-2017-07-11 16:07:24 [info] engine->cache [account] cached
-2017-07-11 16:07:24 [info] engine->cache [settings] cached
-2017-07-11 16:07:24 [info] engine->sdk [run] partialpayment
-2017-07-11 16:07:24 [info] engine->render [200] rendering
-2017-07-11 16:07:24 [info] debug->destruct [app] timing 253ms.
+2017-07-11 18:45:50 [info] payapi->worker [debugger] enabled
+2017-07-11 18:45:50 [info] Loader->library [app] payapi SDK v0.0.0
+2017-07-11 18:45:50 [info] payapi->worker [autoload] api v0.0.1
+2017-07-11 18:45:50 [info] payapi->run [autoload] partialpayment
+2017-07-11 18:45:50 [info] engine->_autoload [autoload] cache v0.0.1
+2017-07-11 18:45:50 [info] engine->native [autoload] adaptor
+2017-07-11 18:45:50 [info] helper->construct [plugin] opencart2
+2017-07-11 18:45:50 [info] engine->cache [account] cached
+2017-07-11 18:45:50 [info] engine->cache [settings] cached
+2017-07-11 18:45:50 [info] engine->sdk [run] partialpayment
+2017-07-11 18:45:50 [info] engine->render [200] rendering
+2017-07-11 18:45:50 [info] debug->destruct [app] timing 211ms.
  
