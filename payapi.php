@@ -74,19 +74,18 @@ class payapi {
 
   private function worker () {
     $this -> entity = new entity () ;
+    $this -> debug = debug :: single ( true ) ;
+    $this -> entity -> set ( '___info' , ( string ) $this ) ;
+    $this -> debug -> add ( '[app] ' . $this -> entity -> get ( '___info' ) ) ;
     $this -> validate = new validator () ;
     $this -> load = new load () ;
     $this -> api = new api () ;
-    $this -> debug = debug :: single ( true ) ;
     $this -> error = error :: single () ;
-    $this -> entity -> set ( '___info' , ( string ) $this ) ;
     $this -> entity -> set ( 'validate' , $this -> validate ) ;
     $this -> entity -> set ( 'load' , $this -> load ) ;
     $this -> entity -> set ( 'plugin' , $this -> plugin ) ;
     $this -> entity -> addInfo ( 'sdk_' . __CLASS__ . '_v' , $this -> version ) ;
-    $this -> debug -> add ( '[app] ' . $this -> entity -> get ( '___info' ) ) ;
-    $this -> debug -> add ( '[app] validator v' . ( string ) $this -> validate ) ;
-    $this -> debug -> add ( '[app] api v' . ( string ) $this -> api ) ;
+    //var_dump ( $this -> localize () ) ; exit () ;
   }
 
   private function configuration () {

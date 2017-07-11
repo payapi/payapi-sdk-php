@@ -7,11 +7,16 @@ class router {
   public static
     $single                     =   false ;
 
+  protected
+    $version                    = '0.0.1' ;
+
   private
-    $root                       =   false ;
+    $root                       =   false ,
+    $instance                   =   false ;
 
   protected function __construct () {
     $this -> root = $this -> parentDir ( __DIR__ ) . DIRECTORY_SEPARATOR ;
+    $this -> instance = instance :: this () ;
   }
 
   public function endPointLocalization ( $ip ) {
@@ -65,7 +70,7 @@ class router {
   }
 
   private function routeCache () {
-    return $this -> root ( 'cache' ) ;
+    return $this -> root ( 'cache' ) . $this -> instance . DIRECTORY_SEPARATOR ;
   }
 
   private function routeSchema () {
@@ -114,6 +119,10 @@ class router {
       self :: $single = new self () ;
     }
     return self :: $single ;
+  }
+
+  public function __toString () {
+    return $this -> version ;
   }
 
 

@@ -23,15 +23,17 @@ abstract class engine extends helper {
     $crypter               =     false ,
     $publicId              =     false ,
     $apiKey                =     false ,
+    $instance              =     false ,
     $settings              =     false ,
     $config                =  array () ,
     $arguments             =     false ;
 
   protected function ___autoload ( $entity , $native ) {
+    $this -> instance = instance :: this () ;
+    $this -> cache = new cache () ;
     $this -> config = $entity -> appConfig () ;
     $this -> entity = $entity ;
     $this -> native ( $native ) ;
-    $this -> cache = new cache () ;
     $this -> sdk () ;
   }
 
@@ -70,6 +72,7 @@ abstract class engine extends helper {
     $this -> entity -> addInfo ( 'api_v' , ( string ) $this -> api ) ;
     $this -> entity -> addInfo ( 'crypter_v' , ( string ) $this -> crypter ) ;
     $this -> entity -> addInfo ( 'validator_v' , ( string ) $this -> validate ) ;
+    $this -> entity -> addInfo ( 'serializer_v' , ( string ) $this -> serialize ) ;
     $this -> entity -> addInfo ( 'tk' , $this -> token () ) ;
     $this -> entity -> addInfo ( 'public' , $this -> publicId ) ;
   }
