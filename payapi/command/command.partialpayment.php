@@ -5,22 +5,19 @@ namespace payapi ;
 final class commandPartialPayment extends engine {
 
   public function run () {
+    //->
     if ( $this -> partialPayments () === true ) {
       if ( is_numeric ( $this -> arguments ( 0 ) ) === true && is_string ( $this -> arguments ( 1 ) ) === true && is_string ( $this -> arguments ( 2 ) ) === true ) {
         //$partialPayment = $this -> calculatePartialPayment ( ( int ) $this -> arguments ( 0 ) ,  $this -> arguments ( 1 ) , $this -> arguments ( 2 ) ) ;
         $partialPayment = $this -> calculatePartialPayment ( ( int ) $this -> arguments ( 0 ) ,  $this -> arguments ( 1 ) , 'FI' ) ;
         if ( is_array ( $partialPayment ) !== false ) {
           return $this -> render ( $partialPayment ) ;
-        } else {
-          return $this -> render (false ) ;
         }
       } else {
-        return $this -> returnError ( $this -> error -> badRequest () ) ;
+        return $this -> returnResponse ( $this -> error -> badRequest () ) ;
       }
-    } else {
-      return $this -> returnError ( $this -> error -> notImplemented () ) ;
     }
-    return false ;
+    return $this -> returnResponse ( $this -> error -> notImplemented () ) ;
   }
 
   private function calculatePartialPayment ( $paymentPriceInCents , $paymentCurrency , $country = false ) {

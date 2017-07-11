@@ -13,11 +13,12 @@ final class crypter {
   private
     $mode                      =  'HS256' ,
     $hash                      =    false ,
+    $instance                  =    false ,
     $prefix                    =    false ;
 
-  public function __construct ( $hash , $mode = false ) {
-    if ( is_string ( $hash ) === true ) $this -> hash = $hash ;
-    if ( is_string ( $mode ) === true ) $this -> mode = $mode ;
+  public function __construct () {
+    $this -> instance = instance :: this () ;
+    $this -> hash = $this -> uniqueInstanceToken ( $this -> instance ) ;
     try {
       $this -> prefix = strtok ( JWT :: encode ( ' ' , $this -> hash ) , '.' ) ;
     } catch ( \Exception $e ) {
@@ -27,7 +28,8 @@ final class crypter {
 
   public function decode ( $encoded , $hash = false , $crypted = false ) {
     $this -> sanitizer = ( $crypted !== false ) ? true : false ;
-    $hash_update = ( is_string ( $hash ) === true ) ? $hash : $this -> hash ;
+    //->
+    $hash_update = ( is_string ( $hash ) === true && $crypted !== true ) ? $hash : $this -> hash ;
     $build = $this -> build ( $encoded ) ;
     try {
       $decoded = JWT :: decode ( $build , $hash_update , array ( $this -> mode ) ) ;
@@ -37,6 +39,19 @@ final class crypter {
     }
     $this -> serialized ( $decoded , $serialized ) ;
     return $serialized ;
+  }
+
+  public function encode ( $decoded , $hash = false , $crypted = false ) {
+    $this -> sanitizer = ( $crypted !== false ) ? true : false ;
+    //->
+    $hash_update = ( is_string ( $hash ) === true && $crypted !== true  ) ? $hash : $this -> hash ;
+    try {
+      $encoded = $this -> clean ( JWT :: encode ( $decoded , $hash_update , $this -> mode ) ) ;
+    } catch ( \Exception $e ) {
+      $this -> error ( 'cannot encode payload' ) ;
+      $encoded = false ;
+    }
+    return $encoded ;
   }
 
   private function serialized ( $object , &$array ) {
@@ -53,18 +68,6 @@ final class crypter {
       }
     }
     return $array ;
-  }
-
-  public function encode ( $decoded , $hash = false , $crypted = false ) {
-    $this -> sanitizer = ( $crypted !== false ) ? true : false ;
-    $hash_update = ( is_string ( $hash ) === true ) ? $hash : $this -> hash ;
-    try {
-      $encoded = $this -> clean ( JWT :: encode ( $decoded , $hash_update , $this -> mode ) ) ;
-    } catch ( \Exception $e ) {
-      $this -> error ( 'cannot encode payload' ) ;
-      $encoded = false ;
-    }
-    return $encoded ;
   }
 
   public function sanitize ( $status = true ) {
@@ -91,30 +94,24 @@ final class crypter {
     return $encodejsonized ;
   }
 
-  public function uniqueServerSignature ( $hash ) {
-    $signature = $this -> hashed ( $this -> uniqueAccessToken () , md5 ( $hash ) ) ;
-    return $this -> encode ( $signature , false , true ) ;
+  public function uniqueServerSignature () {
+    //-> @NOTE if 'SERVER_NAME' OR 'USER' changes will not be able to access previous data
+    return $this -> encode ( md5 ( getenv ( 'SERVER_NAME' ) . md5 ( getenv ( 'USER' ) ) ) , md5 ( getenv ( 'USER' ) ) ) ;
   }
 
-  private function uniqueAccessToken () {
-    //-> @NOTE if 'SERVER_NAME' OR 'USER' changes will not be able to access previous data
-    return md5 ( getenv ( 'SERVER_NAME' ) . md5 ( getenv ( 'USER' ) ) ) ;
+  private function uniqueInstanceToken ( $instance ) {
+    return ( md5 ( $instance ) . '-' . $this -> uniqueServerSignature () ) ;
   }
 
   public function randomToken () {
     return bin2hex ( mcrypt_create_iv ( 22, MCRYPT_DEV_URANDOM ) ) ;
   }
-  //->
-  private function getModelToken ( $token , $hash ) {
-    return $this -> decode ( $token , $this -> hashed ( $token , md5 ( $hash ) ) , true ) ;
+
+  public function instanceToken ( $publicId ) {
+    return $this -> encode ( $this -> hashed ( $publicId , md5 ( $this -> instance . $publicId ) ) , false , true ) ;
   }
 
-  public function publicKey ( $public ) {
-    $publicKey = $this -> encode ( $this -> hashed ( $public , $this -> uniqueAccessToken () . md5 ( $public ) ) , false , true ) ;
-    return $publicKey ;
-  }
-
-  public function privateHash ( $hash ) {
+  private function privateHash ( $hash ) {
     return $this -> hashed ( $hash . md5 ( $hash ) , $hash ) ;
   }
 

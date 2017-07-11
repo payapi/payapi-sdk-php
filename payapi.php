@@ -85,7 +85,6 @@ class payapi {
     $this -> entity -> set ( 'load' , $this -> load ) ;
     $this -> entity -> set ( 'plugin' , $this -> plugin ) ;
     $this -> entity -> addInfo ( 'sdk_' . __CLASS__ . '_v' , $this -> version ) ;
-    //var_dump ( $this -> localize () ) ; exit () ;
   }
 
   private function configuration () {

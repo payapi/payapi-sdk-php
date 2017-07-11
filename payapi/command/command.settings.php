@@ -31,6 +31,11 @@ final class commandSettings extends engine {
                 $this -> error ( '[partialPayments] no valid schema' , 'warning' ) ;
               }
             }
+
+            $this -> cache ( 'writte' , 'account' , $publicId , array (
+              "publicId" => $publicId ,
+              "apiKey"   => $this -> encode ( $apiKey , false , true )
+            ) ) ;
             $this -> cache ( 'writte' , 'settings' , $publicId , $decodedData ) ;
             return $this -> render ( $this -> cache ( 'read' , 'settings' , $publicId ) ) ;
             return $decodedData ;

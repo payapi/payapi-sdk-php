@@ -6,8 +6,9 @@ abstract class helper {
 
   protected
     $default                   = 'payapi' ,
+    $instance                  =    false ,
     $debug                     =    false ,
-    $serializer                =    false ,
+    $serialize                 =    false ,
     $error                     =    false ,
     $route                     =    false ,
     $data                      =    false ;
@@ -16,6 +17,7 @@ abstract class helper {
     $buffer                    =    false ;
 
   public function __construct ( $entity = false , $native = false ) {
+    $this -> instance = instance :: this () ;
     $this -> serialize = serializer :: single () ;
     $this -> error = error :: single () ;
     $this -> route = router :: single () ;

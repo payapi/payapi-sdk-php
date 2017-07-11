@@ -23,13 +23,11 @@ abstract class engine extends helper {
     $crypter               =     false ,
     $publicId              =     false ,
     $apiKey                =     false ,
-    $instance              =     false ,
     $settings              =     false ,
     $config                =  array () ,
     $arguments             =     false ;
 
   protected function ___autoload ( $entity , $native ) {
-    $this -> instance = instance :: this () ;
     $this -> cache = new cache () ;
     $this -> config = $entity -> appConfig () ;
     $this -> entity = $entity ;
@@ -45,11 +43,15 @@ abstract class engine extends helper {
     $this -> entity -> remove ( 'load' ) ;
     $this -> api = $this -> entity -> get ( 'api' ) ;
     $this -> entity -> remove ( 'api' ) ;
-    $this -> crypter = new crypter ( $this -> publicId ) ;
-    $this -> token = $this -> crypter -> publicKey ( $this -> publicId ) ;
+    $this -> crypter = new crypter () ;
+    $this -> token = $this -> crypter -> instanceToken ( $this -> publicId ) ;
     $this -> apiKey = $this -> encode ( $this -> adaptor -> apiKey () , $this -> token , true ) ;
     $this -> settings = $this -> cache ( 'read' , 'settings' , $this -> publicId ) ;
     $this -> info () ;
+  }
+
+  public function instance () {
+    return $this -> instance ;
   }
 
   protected function token () {
