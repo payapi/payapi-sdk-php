@@ -46,6 +46,7 @@ abstract class engine extends helper {
     $this -> crypter = new crypter ( $this -> publicId ) ;
     $this -> token = $this -> crypter -> publicKey ( $this -> publicId ) ;
     $this -> apiKey = $this -> encode ( $this -> adaptor -> apiKey () , $this -> token , true ) ;
+    $this -> settings = $this -> cache ( 'read' , 'settings' , $this -> publicId ) ;
     $this -> info () ;
   }
 
@@ -61,7 +62,6 @@ abstract class engine extends helper {
     $this -> customer = $this -> adaptor -> customer () ;
     //-> @TODO update to use internal cache
     $this -> publicId = $this -> adaptor -> publicId () ;
-    $this -> settings = $this -> adaptor -> settings () ;
   }
 
   private function info () {
