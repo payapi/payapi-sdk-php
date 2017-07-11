@@ -4,15 +4,24 @@ namespace payapi ;
 
 final class cache extends helper {
 
+  protected
+    $version               = '0.0.1' ;
+
   private
+    $intance               =   false ,
     $dir                   =   false ,
     $cache                 =   array (
       //             expiration days
       "transaction"        =>     30 ,
       "localize"           =>     30 ,
-      "settings"           =>  false ,
-      "callback"           =>     90
+      "callback"           =>     90 ,
+      "account"            =>  false ,
+      "settings"           =>  false
     ) ;
+
+  public function ___autoload () {
+    $this -> instance = instance :: this () ;
+  }
 
   public function read ( $key , $token ) {
     $file = $this -> validate ( $key , $token ) ;
@@ -48,6 +57,7 @@ final class cache extends helper {
     if ( is_string ( $file = $this -> validate ( $key , $token ) ) === true ) {
       //-> checks data is encrypted
       if ( is_string ( $data ) === true && substr_count ( $data , '.' ) === 1 ) {
+        $this -> checkDir ( str_replace ( basename ( $file ) , null , $file ) ) ;
         return file_put_contents ( $file , $data , LOCK_EX ) ;
       } else {
         $this -> error ( 'cache data not properly encrypted' ) ;
@@ -67,6 +77,13 @@ final class cache extends helper {
       $this -> error ( '[cache] key no valid' ) ;
     }
     return false ;
+  }
+
+  private function checkDir ( $dir ) {
+    if ( is_dir ( $dir ) === true ) {
+      return true ;
+    }
+    return mkdir ( $dir , 0755 , true ) ;
   }
 
 
