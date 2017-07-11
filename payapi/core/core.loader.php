@@ -10,7 +10,7 @@ final class loader extends helper {
 
   public function checkCommand ( $command ) {
     //->
-    if ( is_string ( $command ) === true ) {
+    if ( is_string ( $command ) === true && $this -> checkCommandFile ( $command ) === true ) {
       return true ;
     }
     return false ;
@@ -21,6 +21,7 @@ final class loader extends helper {
     if ( isset ( $commadFile ) === true ) {
       return true ;
     }
+    $this -> warning ( 'not available' , 'command' ) ;
     return false ;
   }
 
@@ -44,6 +45,7 @@ final class loader extends helper {
       $this -> schema [ $key ] = $schema ;
       return $schema ;
     }
+    $this -> warning ( 'not available' , 'schema' ) ;
     return false ;
   }
 

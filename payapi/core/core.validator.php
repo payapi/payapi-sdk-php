@@ -16,28 +16,34 @@ final class validator extends helper {
   }
 
   public function schema ( $data , $schema ) {
-    if ( $this -> checkNoObjects ( $data ) === true ) {
-      if ( isset ( $schema [ '___schema' ] ) === true && is_array ( $schema [ '___schema' ] ) !== false ) {
-        $error = 0 ;
-        foreach ( $schema [ '___schema' ] as $key => $value ) {
-          if ( isset ( $data [ $key ] ) === true ) {
-            $min = ( ( isset ( $value [ '___min' ] ) === true && is_int ( $value [ '___min' ] ) === true ) ? $value [ '___min' ] : false ) ;
-            $max = ( ( isset ( $value [ '___max' ] ) === true && is_int ( $value [ '___max' ] ) === true ) ? $value [ '___max' ] : false ) ;
-            if ( $this -> check ( $data [ $key ] , $value [ '___type' ] , $min , $max ) !== true ) {
+    if ( is_array ( $schema ) !== false ) {
+      if ( $this -> checkNoObjects ( $data ) === true ) {
+        if ( isset ( $schema [ '___schema' ] ) === true && is_array ( $schema [ '___schema' ] ) !== false ) {
+          $error = 0 ;
+          foreach ( $schema [ '___schema' ] as $key => $value ) {
+            if ( isset ( $data [ $key ] ) === true ) {
+              $min = ( ( isset ( $value [ '___min' ] ) === true && is_int ( $value [ '___min' ] ) === true ) ? $value [ '___min' ] : false ) ;
+              $max = ( ( isset ( $value [ '___max' ] ) === true && is_int ( $value [ '___max' ] ) === true ) ? $value [ '___max' ] : false ) ;
+              if ( $this -> check ( $data [ $key ] , $value [ '___type' ] , $min , $max ) !== true ) {
+                $error ++ ;
+                $this -> warning ( '[' . $key . '] no valid value' , 'schema' ) ;
+              }
+            } else if ( $value [ '___mandatory' ] !== false ) {
               $error ++ ;
-              $this -> error ( 'no valid value : ' . $key , 'warning' ) ;
+              $this -> warning ( '[' . $key . '] mandatory missed' , 'schema' ) ;
             }
-          } else if ( $value [ '___mandatory' ] !== false ) {
-            $error ++ ;
-            $this -> error ( 'mandatory field missed' , 'warning' ) ;
           }
-        }
-        if ( $error === 0 ) {
-          return true ;
+          if ( $error === 0 ) {
+            return true ;
+          }
+        } else {
+          $this -> warning ( 'no valid schema' , 'schema' ) ;
         }
       } else {
-        $this -> error ( 'no valid schema' , 'warning' ) ;
+        $this -> warning ( 'object blocked' , 'schema' ) ;
       }
+    } else {
+      $this -> warning ( 'no valid schema' , 'schema' ) ;
     }
     return false ;
   }
@@ -54,6 +60,13 @@ final class validator extends helper {
       if ( $error === 0 ) {
         return true ;
       }
+    }
+    return false ;
+  }
+
+  public function isUrl ( $url ) {
+    if ( $this -> isString ( $url , 11 , 1000 ) === true && strpos ( $url , 'http' ) !== false && md5 ( filter_var ( $url , FILTER_VALIDATE_URL ) ) === md5 ( $url ) ) {
+      return true ;
     }
     return false ;
   }
@@ -76,6 +89,37 @@ final class validator extends helper {
 
   private function isSetting ( $setting , $min , $max ) {
     if ( $setting === false || $this -> isArray ( $setting , $min , $max ) === true ) {
+      return true ;
+    }
+    return false ;
+  }
+
+  public function callbackStatuses () {
+    return array (
+      "processing" ,
+      "successful" ,
+      "failed" ,
+      "chargeback"
+    ) ;
+  }
+
+  public function returnStatuses () {
+    return array (
+      "success" ,
+      "cancel" ,
+      "failed"
+    ) ;
+  }
+
+  private function isCallbackStatus ( $status ) {
+    if ( in_array ( $status , $this -> callbackStatuses () ) ) {
+      return true ;
+    }
+    return false ;
+  }
+
+  private function isReturnStatus ( $status ) {
+    if ( in_array ( $status , $this -> returnStatuses () ) ) {
       return true ;
     }
     return false ;
@@ -108,7 +152,7 @@ final class validator extends helper {
 
   public function isNumber ( $number , $min = false , $max = false ) {
     if ( is_numeric ( $number ) === true ) {
-      return $this -> integer ( (int ) $number ) ;
+      return $this -> isInteger ( ( int ) $number ) ;
     }
     return false ;
   }
@@ -120,25 +164,21 @@ final class validator extends helper {
     return false ;
   }
 
-  protected function isPhoneNumber ( $phone ) {
+  private function isPhoneNumber ( $phone ) {
     if ( is_numeric ( $phone ) === true && $phone > 9999999 && $phone < 9999999999999999999 ) {
       return true ;
     }
     return false ;
   }
 
-  protected function isUrl ( $url ) {
-    if ( filter_var ( $url , FILTER_VALIDATE_URL ) === true ) {
+  private function isEmail ( $email ) {
+    if ( md5 ( filter_var ( $email , FILTER_VALIDATE_EMAIL ) ) === md5 ( $email ) ) {
       return true ;
     }
     return false ;
   }
 
-  protected function isEmail ( $email ) {
-    return filter_var ( $email , FILTER_VALIDATE_EMAIL ) ;
-  }
-
-  private function check ( $data , $type , $min = false , $max = false ) {
+  public function check ( $data , $type , $min = false , $max = false ) {
     switch ( $type ) {
       case 'string':
         return $this -> isString ( $data , $min , $max ) ;
@@ -154,6 +194,15 @@ final class validator extends helper {
       break;
       case 'phone':
         return $this -> isPhoneNumber ( $data ) ;
+      break;
+      case 'callbackStatus':
+        return $this -> isCallbackStatus ( $data ) ;
+      break;
+      case 'returnStatus':
+        return $this -> isReturnStatus ( $data ) ;
+      break;
+      case 'url':
+        return $this -> isUrl ( $data ) ;
       break;
       case 'email':
         return $this -> isEmail ( $data ) ;

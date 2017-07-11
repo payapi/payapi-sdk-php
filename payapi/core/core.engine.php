@@ -23,6 +23,7 @@ abstract class engine extends helper {
     $crypter               =     false ,
     $publicId              =     false ,
     $apiKey                =     false ,
+    $account               =     false ,
     $settings              =     false ,
     $config                =  array () ,
     $arguments             =     false ;
@@ -44,8 +45,8 @@ abstract class engine extends helper {
     $this -> api = $this -> entity -> get ( 'api' ) ;
     $this -> entity -> remove ( 'api' ) ;
     $this -> crypter = new crypter () ;
-    $this -> token = $this -> crypter -> instanceToken ( $this -> publicId ) ;
-    $this -> apiKey = $this -> encode ( $this -> adaptor -> apiKey () , $this -> token , true ) ;
+    $this -> token = $this -> crypter -> instanceToken ( $this -> publicId () ) ;
+    $this -> account = $this -> cache ( 'read' , 'account' , $this -> publicId ) ;
     $this -> settings = $this -> cache ( 'read' , 'settings' , $this -> publicId ) ;
     $this -> info () ;
   }
@@ -78,6 +79,23 @@ abstract class engine extends helper {
     $this -> entity -> addInfo ( 'tk' , $this -> token () ) ;
     $this -> entity -> addInfo ( 'public' , $this -> publicId ) ;
   }
+  //-> SDK config
+  protected function app ( $key = false ) {
+    if ( is_string ( $key ) === true ) {
+      if ( isset ( $this -> config [ $key ] ) === true ) {
+        return $this -> config [ $key ] ;
+      }
+    }
+    return false ;
+  }
+  //-> SDK passed argument(s)
+  protected function arguments ( $key ) {
+    //-> to filter
+    if ( isset ( $this -> arguments [ $key ] ) ) {
+      return $this -> arguments [ $key ] ;
+    }
+    return false ;
+  }
   //-> merchantSettings
   protected function settings ( $key = false ) {
     if ( $this -> settings == false ) {
@@ -91,27 +109,21 @@ abstract class engine extends helper {
     }
     return false ;
   }
-
+  //-> account login
   public function publicId () {
-    return $this -> publicId ;
+    $this -> account ( 'publicId' ) ;
   }
 
   protected function apiKey () {
-    return $this -> decode ( $this -> apiKey , $this -> token , true ) ;
+    $this -> debug ( 'encKey decoded ' ) ;
+    return $this -> decode ( $this -> account ( 'apiKey' ) , false , true ) ;
   }
 
-  public function app ( $key = false ) {
-    if ( is_string ( $key ) === true ) {
-      if ( isset ( $this -> config [ $key ] ) === true ) {
-        return $this -> config [ $key ] ;
+  private function account ( $key ) {
+    if ( is_array ( $this -> account ) !== false ) {
+      if ( isset ( $this -> account [ $key ] ) === true ) {
+        return $this -> account [ $key ] ;
       }
-    }
-    return false ;
-  }
-
-  protected function arguments ( $key ) {
-    if ( isset ( $this -> arguments [ $key ] ) ) {
-      return $this -> arguments [ $key ] ;
     }
     return false ;
   }
@@ -122,6 +134,10 @@ abstract class engine extends helper {
 
   protected function curl ( $url , $post = false , $secured = true , $timeout = 1 , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 ) {
     return $this -> api -> curl ( $url , $post , $secured , $timeout , $return , $header , $ssl , $fresh , $noreuse ) ;
+  }
+
+  protected function knock () {
+    return $this -> api -> knock () ;
   }
 
   protected function partialPayments () {

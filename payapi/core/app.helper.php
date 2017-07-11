@@ -74,9 +74,14 @@ abstract class helper {
     return $this -> data [ $key ] ;
   }
 
-  protected function error ( $error , $label = 'undefined' ) {
+  protected function error ( $error , $label = 'error' ) {
     $this -> debug ( '[' . $label . '] ' . $error , 'error' ) ;
     return $this -> error -> add ( $error , $label ) ;
+  }
+
+  protected function warning ( $warning , $info = false ) {
+    $label = ( is_string ( $info ) === true ) ? '[' . $info . '] ' : null ;
+    return $this -> error ( $label . $warning , 'warning' ) ;
   }
 
   protected function alert () {

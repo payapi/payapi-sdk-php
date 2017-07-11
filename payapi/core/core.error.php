@@ -52,12 +52,16 @@ class error {
     return 504 ;
   }
 
-  public function notValidKnock () {
+  public function knockNotValid () {
     return 404 ;
   }
 
-  public function unexpectedKnock () {
-    return 400 ;
+  public function transactionDuplicated () {
+    return 401 ;
+  }
+
+  public function knockUnexpectedSignature () {
+    return 403 ;
   }
 
   public function notValidSchema () {

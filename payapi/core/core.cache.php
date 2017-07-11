@@ -12,9 +12,8 @@ final class cache extends helper {
     $dir                   =   false ,
     $cache                 =   array (
       //             expiration days
-      "transaction"        =>     30 ,
+      "transaction"        =>     90 ,
       "localize"           =>     30 ,
-      "callback"           =>     90 ,
       "account"            =>  false ,
       "settings"           =>  false
     ) ;
