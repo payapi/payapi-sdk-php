@@ -21,14 +21,14 @@
 *                payapi/cache/<instanceKey>/settings
 *
 *        - 2. commands :
-*              $this -> callback () ;                                  //-> gets/cache callback decoded transaction
-*              $this -> localize () ;                                  //-> gets/cache ip decoded localization (plugin adds native country and zone ids)
-*              $this -> settings ( 'public_id' , 'api_key' ) ;         //-> gets merchantSettings
-*              $this -> settings ( 'public_id' , 'api_key' , true ) ;  //-> refresh & gets merchantSettings
-*              $this -> partialPayment ( $totalInCents , $currency ) ; //-> calculate partialPayment from merchantSettings
-*                                                                           @TODO review using cached/plugin
-*              $this -> response ( <standard_response_code_int> ) ;    //-> get response info
-*              $this -> info () ;                                      //-> gets sdk debug info
+*              $sdk -> callback () ;                                  //-> gets/cache callback decoded transaction
+*              $sdk -> localize () ;                                  //-> gets/cache ip decoded localization (plugin adds native country and zone ids)
+*              $sdk -> settings ( 'public_id' , 'api_key' ) ;         //-> gets cached merchantSettings
+*              $sdk -> settings ( 'public_id' , 'api_key' , true ) ;  //-> refresh & gets merchantSettings
+*              $sdk -> partialPayment ( $totalInCents , $currency ) ; //-> calculate partialPayment from merchantSettings
+*                                                                          @TODO review using cached/plugin
+*              $sdk -> response ( <standard_response_code_int> ) ;    //-> get response info
+*              $sdk -> info () ;                                      //-> gets sdk debug info
 *
 *  @return
 *        - success :
