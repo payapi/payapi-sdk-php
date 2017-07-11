@@ -19,7 +19,7 @@ abstract class engine extends helper {
     $db                    =     false ;
 
   private
-    $cgi                   =     false ,
+    $api                   =     false ,
     $crypter               =     false ,
     $publicId              =     false ,
     $apiKey                =     false ,
@@ -41,8 +41,8 @@ abstract class engine extends helper {
     $this -> entity -> remove ( 'validate' ) ;
     $this -> load = $this -> entity -> get ( 'load' ) ;
     $this -> entity -> remove ( 'load' ) ;
-    $this -> cgi = $this -> entity -> get ( 'cgi' ) ;
-    $this -> entity -> remove ( 'cgi' ) ;
+    $this -> api = $this -> entity -> get ( 'api' ) ;
+    $this -> entity -> remove ( 'api' ) ;
     $this -> crypter = new crypter ( $this -> publicId ) ;
     $this -> token = $this -> crypter -> publicKey ( $this -> publicId ) ;
     $this -> apiKey = $this -> encode ( $this -> adaptor -> apiKey () , $this -> token , true ) ;
@@ -59,7 +59,7 @@ abstract class engine extends helper {
     $this -> db = $this -> adaptor -> db () ;
     $this -> config = $this -> adaptor -> config () ;
     $this -> customer = $this -> adaptor -> customer () ;
-    //->
+    //-> @TODO update to use internal cache
     $this -> publicId = $this -> adaptor -> publicId () ;
     $this -> settings = $this -> adaptor -> settings () ;
   }
@@ -67,7 +67,7 @@ abstract class engine extends helper {
   private function info () {
     $this -> debug ( '[run] ' . strtolower ( $this -> entity -> get ( 'command' ) ) ) ;
     $this -> entity -> addInfo ( 'adaptor_' . $this -> entity -> get ( 'plugin' ) . '_v' , $this -> adaptor -> version () ) ;
-    $this -> entity -> addInfo ( 'cgi_v' , ( string ) $this -> cgi ) ;
+    $this -> entity -> addInfo ( 'api_v' , ( string ) $this -> api ) ;
     $this -> entity -> addInfo ( 'crypter_v' , ( string ) $this -> crypter ) ;
     $this -> entity -> addInfo ( 'validator_v' , ( string ) $this -> validate ) ;
     $this -> entity -> addInfo ( 'tk' , $this -> token () ) ;
@@ -112,11 +112,11 @@ abstract class engine extends helper {
   }
 
   protected function ip () {
-    return $this -> cgi -> ip () ;
+    return $this -> api -> ip () ;
   }
 
   protected function curl ( $url , $post = false , $secured = true , $timeout = 1 , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 ) {
-    return $this -> cgi -> curl ( $url , $post , $secured , $timeout , $return , $header , $ssl , $fresh , $noreuse ) ;
+    return $this -> api -> curl ( $url , $post , $secured , $timeout , $return , $header , $ssl , $fresh , $noreuse ) ;
   }
 
   protected function partialPayments () {
@@ -127,17 +127,17 @@ abstract class engine extends helper {
   }
 
   protected function render ( $data ) {
-    $render = $this -> cgi -> render ( $data , 200 ) ;
+    $render = $this -> api -> render ( $data , 200 ) ;
     $return = ( ( DEBUGGING ) ? $this -> entity -> addExtradata ( $render ) : $render ) ;
     return $return ;
   }
 
   protected function response ( $code ) {
-    return $this -> cgi -> response ( $code ) ;
+    return $this -> api -> response ( $code ) ;
   }
 
   protected function returnResponse ( $code ) {
-    return $this -> cgi -> returnResponse ( $code ) ;
+    return $this -> api -> returnResponse ( $code ) ;
   }
 
   public function decode ( $encoded , $hash = false , $crypted = false ) {

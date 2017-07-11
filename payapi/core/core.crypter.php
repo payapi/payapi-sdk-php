@@ -19,8 +19,8 @@ final class crypter {
     if ( is_string ( $hash ) === true ) $this -> hash = $hash ;
     if ( is_string ( $mode ) === true ) $this -> mode = $mode ;
     try {
-      $this -> prefix = strtok ( @JWT :: encode ( ' ' , $this -> hash ) , '.' ) ;
-    } catch ( Exception $e ) {
+      $this -> prefix = strtok ( JWT :: encode ( ' ' , $this -> hash ) , '.' ) ;
+    } catch ( \Exception $e ) {
       $this -> error ( 'JWT is not loaded' ) ;
     }
   }
@@ -30,8 +30,8 @@ final class crypter {
     $hash_update = ( is_string ( $hash ) === true ) ? $hash : $this -> hash ;
     $build = $this -> build ( $encoded ) ;
     try {
-      $decoded = @JWT :: decode ( $build , $hash_update , array ( $this -> mode ) ) ;
-    } catch ( Exception $e ) {
+      $decoded = JWT :: decode ( $build , $hash_update , array ( $this -> mode ) ) ;
+    } catch ( \Exception $e ) {
       $this -> error ( 'cannot decode payload : ' . json_encode ( $e -> getMessage () ) ) ;
       $decoded = false ;
     }
@@ -59,8 +59,8 @@ final class crypter {
     $this -> sanitizer = ( $crypted !== false ) ? true : false ;
     $hash_update = ( is_string ( $hash ) === true ) ? $hash : $this -> hash ;
     try {
-      $encoded = $this -> clean ( @JWT :: encode ( $decoded , $hash_update , $this -> mode ) ) ;
-    } catch ( Exception $e ) {
+      $encoded = $this -> clean ( JWT :: encode ( $decoded , $hash_update , $this -> mode ) ) ;
+    } catch ( \Exception $e ) {
       $this -> error ( 'cannot encode payload' ) ;
       $encoded = false ;
     }

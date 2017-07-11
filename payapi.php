@@ -43,7 +43,7 @@ use \payapi\debug as debug ;
 use \payapi\error as error ;
 use \payapi\validator as validator ;
 use \payapi\loader as load ;
-use \payapi\cgi as cgi ;
+use \payapi\api as api ;
 
 class payapi {
 
@@ -56,6 +56,7 @@ class payapi {
     $router                    =       false ,
     $validate                  =       false ,
     $load                      =       false ,
+    $api                       =       false ,
     $command                   =       false ,
     $arguments                 =       false ;
 
@@ -75,7 +76,7 @@ class payapi {
     $this -> entity = new entity () ;
     $this -> validate = new validator () ;
     $this -> load = new load () ;
-    $this -> cgi = new cgi () ;
+    $this -> api = new api () ;
     $this -> debug = debug :: single ( true ) ;
     $this -> error = error :: single () ;
     $this -> entity -> set ( '___info' , ( string ) $this ) ;
@@ -85,7 +86,7 @@ class payapi {
     $this -> entity -> addInfo ( 'sdk_' . __CLASS__ . '_v' , $this -> version ) ;
     $this -> debug -> add ( '[app] ' . $this -> entity -> get ( '___info' ) ) ;
     $this -> debug -> add ( '[app] validator v' . ( string ) $this -> validate ) ;
-    $this -> debug -> add ( '[app] cgi v' . ( string ) $this -> cgi ) ;
+    $this -> debug -> add ( '[app] api v' . ( string ) $this -> api ) ;
   }
 
   private function configuration () {
@@ -98,12 +99,12 @@ class payapi {
       $this -> command = $command ;
       $this -> arguments = $arguments ;
     } else {
-      return $this -> cgi -> returnResponse ( $this -> error -> notValidMethod () ) ;
+      return $this -> api -> returnResponse ( $this -> error -> notValidMethod () ) ;
     }
     $this -> entity -> set ( 'command' , $this -> command ) ;
     $this -> entity -> set ( 'arguments' , $this -> arguments ) ;
     $controller = '\\' . __CLASS__ . '\\command' . $this -> command ;
-    $this -> entity -> set ( 'cgi' , $this -> cgi ) ;
+    $this -> entity -> set ( 'api' , $this -> api ) ;
     $command = new $controller ( $this -> entity , $this -> native ) ;
     if ( method_exists ( $command , 'run' ) === true ) {
       return $command -> run () ;

@@ -2,7 +2,7 @@
 
 namespace payapi ;
 
-final class cgi extends helper {
+final class api extends helper {
 
   public
     $version                       =   '0.0.1' ;
@@ -88,7 +88,7 @@ final class cgi extends helper {
       $label => $data
     ) ;
     $this -> headers ( $code ) ;
-    $this -> debug ( '[' . $code . '] rendering' , 'cgi' ) ;
+    $this -> debug ( '[' . $code . '] rendering' , 'api' ) ;
     return $this -> buffer ;
   }
 
@@ -150,7 +150,7 @@ final class cgi extends helper {
     if ( $this -> isCleanCodeInt ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) ) {
       $code = $responseCode ;
     } else {
-      $this -> debug ( 'response code no valid' , 'cgi' ) ;
+      $this -> debug ( 'response code no valid' , 'api' ) ;
       $code = $this -> error -> notAcceptable () ;
     }
     return $this -> responses [ $code ] ;
