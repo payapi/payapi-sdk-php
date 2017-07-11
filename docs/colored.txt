@@ -1,1 +1,0 @@
-# e.g: tail -f -n200 <log_file>.log | perl colored.pl

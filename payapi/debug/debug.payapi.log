@@ -1,0 +1,13 @@
+ 
+2017-07-11 05:50:06 [info] helper->construct [debugger] enabled
+2017-07-11 05:50:06 [info] payapi->worker [autoload] cgi
+2017-07-11 05:50:06 [info] Loader->library [app] payapi SDK v0.0.0
+2017-07-11 05:50:06 [info] Loader->library [app] validator v0.0.1
+2017-07-11 05:50:06 [info] Loader->library [app] cgi v0.0.1
+2017-07-11 05:50:06 [info] payapi->run [autoload] partialpayment
+2017-07-11 05:50:06 [info] engine->native [autoload] adaptor
+2017-07-11 05:50:06 [info] helper->construct [plugin] opencart2
+2017-07-11 05:50:06 [info] engine->sdk [run] partialpayment
+2017-07-11 05:50:06 [info] engine->render [200] rendering
+2017-07-11 05:50:06 [info] debug->destruct [app] timing 203ms.
+ 

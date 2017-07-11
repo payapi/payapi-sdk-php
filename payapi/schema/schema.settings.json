@@ -1,0 +1,14 @@
+{
+  "___info": {
+    "___version": "0.0.1",
+    "___date": "20170710"
+  },
+  "___schema": {
+    "partialPayments": {
+      "___mandatory": true,
+      "___type": "setting",
+      "___min": 1,
+      "___max": 100
+    }
+  }
+}

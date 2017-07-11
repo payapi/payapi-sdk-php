@@ -1,8 +1,0 @@
-2017-07-04 20:17:57 [info] payapi->autoload Wake up PayApi Payments SDK v0.0.0
-2017-07-04 20:17:57 [info] payapi->autoload [autoload] cgi
-2017-07-04 20:17:57 [info] helper->construct [SSL] enabled
-2017-07-04 20:17:57 [info] helper->construct [server_load] 0%
-2017-07-04 20:17:57 [info] cgi->auto ___params
-2017-07-04 20:17:57 [info] payapi->destruct [destructed] success
-2017-07-04 20:17:57 [info] debugger->destruct app timing 191ms.
-

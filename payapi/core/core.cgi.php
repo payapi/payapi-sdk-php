@@ -1,0 +1,193 @@
+<?php
+
+namespace payapi ;
+
+final class cgi extends helper {
+
+  public
+    $version                       =   '0.0.1' ;
+
+  private
+    $curl                          =     false ,
+    $knock                         =     false ,
+    $headers                       =     false ,
+    $timeout                       =         1 ,
+    $id                            =     false ,
+    $responses =    array (
+      // @NOTE PHP ZEND INTERNAL STATUS HEADERS
+
+      // Informational 1xx
+      100 =>                        'continue' ,
+      101 =>             'switching Protocols' ,
+
+      // Success 2xx
+      200 =>                         'success' ,
+      201 =>                         'created' ,
+      202 =>                        'accepted' ,
+      203 =>   'non-Authoritative Information' ,
+      204 =>                      'no Content' ,
+      205 =>                   'reset Content' ,
+      206 =>                 'partial Content' ,
+
+      // Redirection 3xx
+      300 =>                'multiple choices' ,
+      301 =>               'moved permanently' ,
+      302 =>                           'found' ,  // 1.1
+      303 =>                       'see Other' ,
+      304 =>                    'not modified' ,
+      305 =>                       'use proxy' ,
+      // 306 is deprecated but reserved
+      307 =>              'temporary redirect' ,
+
+      // Client Error 4xx
+      400 =>                     'bad request' ,
+      401 =>                    'unauthorized' ,
+      402 =>                'payment required' ,
+      403 =>                       'forbidden' ,
+      404 =>                       'not found' ,
+      405 =>              'method not allowed' ,
+      406 =>                  'not acceptable' ,
+      407 =>   'proxy authentication required' ,
+      408 =>                 'request timeout' ,
+      409 =>                        'conflict' ,
+      410 =>                            'gone' ,
+      411 =>                 'length required' ,
+      412 =>             'precondition failed' ,
+      413 =>        'request entity too large' ,
+      414 =>            'request-uri too long' ,
+      415 =>          'unsupported media type' ,
+      416 => 'requested range not satisfiable' ,
+      417 =>              'expectation failed' ,
+
+      // Server Error 5xx
+      500 =>           'internal server error' ,
+      501 =>                 'not implemented' ,
+      502 =>                     'bad gateway' ,
+      503 =>             'service unavailable' ,
+      504 =>                 'gateway timeout' ,
+      505 =>      'http version not supported' ,
+      509 =>        'bandwidth limit exceeded' ,
+
+      // @NOTE Extra One(s) 6xx  :)
+      600 =>                         'boo boo'
+    ) ;
+
+  protected function ___autoload () {
+    $this -> ip = $this -> getIp () ;
+  }
+
+  public function ip () {
+    return $this -> ip ;
+  }
+
+  public function render ( $data , $code ) {
+    //->
+    $label = ( ( $code === 200 ) ? 'data' : 'error' ) ;
+    $this -> buffer = array (
+      "code" => $code ,
+      $label => $data
+    ) ;
+    $this -> headers ( $code ) ;
+    $this -> debug ( '[' . $code . '] rendering' , 'cgi' ) ;
+    return $this -> buffer ;
+  }
+
+  public function response ( $code = false ) {
+    return $this -> getCgiResponse ( $code ) ;
+  }
+
+  public function returnResponse ( $code ) {
+    $code = ( $this -> checkCode ( $code ) === true ) ? $code : 600 ;
+    return $this -> render ( $this -> responses [ $code ] , $code ) ;
+  }
+
+  public function curl ( $url , $secured = true , $post = false , $timeout = 1 , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 ) {
+    $this -> curl = new curl () ;
+    $response = $this -> curl -> proccess ( $url , $secured , $post , $timeout , $return , $header , $ssl , $fresh , $noreuse ) ;
+    $this -> curl = false ;
+    return $response ;
+  }
+
+  public function knock () {
+    $this -> knock = new knock () ;
+    //->
+    return $this -> knock -> listen () ;
+  }
+
+  public function defaultCode () {
+    end ( $this -> responses ) ;
+    return key ( $this -> responses ) ;
+  }
+
+  private function undefinedIp () {
+    return 'undefined' ;
+  }
+
+  public function code ( $responseCode ) {
+    if ( $this -> isCleanCodeInt ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) ) {
+      return $responseCode ;
+    }
+    return $this -> error -> notAcceptable () ;
+  }
+
+  public function checkCode ( $responseCode ) {
+    if ( $this -> isCleanCodeInt ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) ) {
+      return true ;
+    }
+    return false ;
+  }
+
+  private function headers ( $code ) {
+    if ( $this -> headers == false ) {
+      return true ;
+    }
+    $this -> debug ( '[headers] ' . $this -> mode ) ;
+    //header ( 'Content-type: ' . $this -> modes [ $this -> mode ] ) ;
+    return http_response_code ( $code ) ;
+  }
+
+  private function getCgiResponse ( $responseCode ) {
+    if ( $this -> isCleanCodeInt ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) ) {
+      $code = $responseCode ;
+    } else {
+      $this -> debug ( 'response code no valid' , 'cgi' ) ;
+      $code = $this -> error -> notAcceptable () ;
+    }
+    return $this -> responses [ $code ] ;
+  }
+
+  private function getIp () {
+    if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_CLIENT_IP' ) ) ) == false )
+      if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED_FOR' ) ) ) == false )
+        if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED' ) ) ) == false )
+          if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED_FOR' ) ) ) == false )
+            if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED' ) ) ) == false )
+              if ( ( $access = $this -> validateIp ( getenv ( 'REMOTE_ADDR' ) ) ) == false )
+                $access = $this -> undefinedIp () ;
+    //-> @NOTE @TODELETE just for developing
+    $access = ( $access == '192.168.10.1' ) ? '84.79.234.58' : $access ;
+    //$access = ( $access == '192.168.10.1' ) ? '84.79.234.' . rand ( 10 , 250 ) : $access ;
+    $ip = htmlspecialchars ( $access , ENT_COMPAT , 'UTF-8' ) ;
+    return $ip ;
+  }
+
+  public function validateIp ( $env ) {
+    if ( filter_var ( $env , FILTER_VALIDATE_IP ) !== false && ip2long ( $env ) !== false ) {
+      return preg_replace ( "/[^0-0.\d ]/i" , '' , $env ) ;
+    }
+    return false ;
+  }
+
+  private function isCleanCodeInt ( $int ) {
+    if ( is_int ( $int ) === true && $int >= 200 && $int <= 600 ) {
+      return true ;
+    }
+    return false ;
+  }
+
+  public function __toString () {
+    return $this -> version ;
+  }
+
+
+}
