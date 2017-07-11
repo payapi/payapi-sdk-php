@@ -8,7 +8,7 @@
 *              JWT
 *
 *  @category   Payments, Social Sharing
-*  @version    v0.0.0.2 (20170704)
+*  @version    v0.0.0.0 (20170711)
 *
 *  @param      ( object ) native = ( main sdk config || native model for plugin )
 *
