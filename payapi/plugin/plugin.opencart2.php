@@ -62,17 +62,10 @@ final class plugin {
     return $this -> version ;
   }
 
-  public function settings () {
-     if ( $this -> config -> has ( 'payapi_payments_merchantSettings' ) ) {
-       return $this -> config -> get ( 'payapi_payments_merchantSettings' ) ;
-     }
-     return false ;
-  }
-
   public function localized ( $localized ) {
-    $resultCountry = $this -> db -> query ( "SELECT country_id FROM " . DB_PREFIX . "country WHERE iso_code_2 = '" . $localized [ 'countryCode' ] . "'  LIMIT 1" ) ;
+    $resultCountry = $this -> db -> query ( "SELECT `country_id` FROM `" . DB_PREFIX . "country` WHERE `iso_code_2` = '" . $localized [ 'countryCode' ] . "'  LIMIT 1" ) ;
     if ( isset ( $resultCountry ) === true && $resultCountry -> num_rows > 0 ) {
-      $resultZone = $this -> db -> query ( "SELECT zone_id FROM " . DB_PREFIX . "zone WHERE country_id = '" . $resultCountry -> row [ 'country_id' ] . "' LIMIT 1" ) ;
+      $resultZone = $this -> db -> query ( "SELECT `zone_id` FROM `" . DB_PREFIX . "zone` WHERE `country_id` = '" . $resultCountry -> row [ 'country_id' ] . "' LIMIT 1" ) ;
       if ( isset ( $resultZone ) === true && $resultZone -> num_rows > 0 ) {
         return array_merge (
           $localized ,
@@ -84,19 +77,6 @@ final class plugin {
       }
     }
     return $localized ;
-  }
-
-  public function publicId () {
-    return $this -> config -> get ( 'payapi_payments_merchant_id' ) ;
-  }
-
-  public function apiKey () {
-    return $this -> config -> get ( 'payapi_payments_api_key' ) ;
-  }
-
-  public function encKey () {
-    //-> this should be encoded
-    return $this -> config -> get ( 'payapi_payments_enc_key' ) ;
   }
 
   public function __toString () {

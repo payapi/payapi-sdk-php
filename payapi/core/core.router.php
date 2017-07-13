@@ -2,7 +2,7 @@
 
 namespace payapi ;
 
-class router {
+final class router {
 
   public static
     $single                     =   false ;
@@ -12,9 +12,13 @@ class router {
 
   private
     $root                       =   false ,
+    $staging                    =   false ,
     $instance                   =   false ;
 
-  protected function __construct () {
+  private function __construct ( $staging ) {
+    if ( $staging === true ) {
+      $this -> staging = true ;
+    }
     $this -> root = $this -> parentDir ( __DIR__ ) . DIRECTORY_SEPARATOR ;
     $this -> instance = instance :: this () ;
   }
@@ -37,9 +41,8 @@ class router {
     return 'https' . ':' . '//' ;
   }
 
-  // update STAGING
   private function staging () {
-    $route = ( STAGING ) ? 'staging' . '-' : null ;
+    $route = ( $this -> staging === true ) ? 'staging' . '-' : null ;
     return $route ;
   }
 
@@ -70,11 +73,15 @@ class router {
   }
 
   private function routeCache () {
-    return $this -> root ( 'cache' ) . $this -> instance . DIRECTORY_SEPARATOR ;
+    return $this -> root ( 'cache' ) ;
   }
 
   private function routeSchema () {
     return $this -> root ( 'schema' ) ;
+  }
+
+  public static function routeError () {
+    return str_replace ( DIRECTORY_SEPARATOR . basename ( __DIR__ ) , null , __DIR__ ) . DIRECTORY_SEPARATOR . 'debug' . DIRECTORY_SEPARATOR . 'error' . DIRECTORY_SEPARATOR ;
   }
 
   public function routeDebug () {
@@ -110,13 +117,15 @@ class router {
   }
 
   public function cache ( $type , $key ) {
-    $cacheFile = $this -> routeCache () . $type . DIRECTORY_SEPARATOR . 'cache' . '.' . $key . '.' . 'data' ;
+    $common = array ( 'localize' ) ;
+    $isolated = ( in_array ( $type , $common ) === true ) ? null : $this -> instance . DIRECTORY_SEPARATOR ;
+    $cacheFile = $this -> routeCache () . $isolated . $type . DIRECTORY_SEPARATOR . 'cache' . '.' . $key . '.' . 'data' ;
     return $cacheFile ;
   }
 
-  public static function single () {
+  public static function single ( $staging = false ) {
     if ( self :: $single === false ) {
-      self :: $single = new self () ;
+      self :: $single = new self ( $staging ) ;
     }
     return self :: $single ;
   }

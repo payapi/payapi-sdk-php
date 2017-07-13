@@ -13,21 +13,10 @@ final class entity {
     $data              =    array () ,
     $config            =    array () ;
 
-  public function __construct () {
+  private function __construct () {
     $this -> signature = $this -> prefix . 'extradata' ;
     $this -> set ( $this -> signature , array () ) ;
     $this -> addInfo ( 'stamp' , microtime ( true ) ) ;
-  }
-
-  public function config ( $key , $value = false ) {
-    if ( is_string ( $key ) === true ) {
-      return $this -> config [ $key ] = $value ;
-    }
-    return false ;
-  }
-
-  public function appConfig () {
-    return $this -> config ;
   }
 
   public function get ( $key ) {

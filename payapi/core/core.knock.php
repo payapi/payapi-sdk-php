@@ -1,21 +1,20 @@
 <?php
 
 namespace payapi ;
-
+//-> @NOTE @CARE "php://input" is not available with enctype="multipart/form-data"
 final class knock extends helper {
 
   public function listen () {
-    //-> CHECK SSL ( IP )
+    //-> CHECK SSL ( IP ) on api
     //$server = json_encode ( stream_get_wrappers () , true ) ;
     //$this -> debug ( '[server] ___stream : ' . $server ) ;
     if ( getenv ( 'REQUEST_METHOD' ) == 'POST' ) {
       $this -> debug ( 'access from : ' . 'TODO' ) ;
       if ( $this -> sslEnabled () !== false ) { // TODO check incomming domain $this -> checkIncomingHasValidSsl
         $this -> debug ( '[ACK] success' ) ;
-        $timeStart = microtime ( true ) ;
-        //-> @NOTE @CARE "php://input" is not available with enctype="multipart/form-data"
+        $this -> debug -> lapse ( 'knock' , true ) ;
         $jsonExpected = $this -> stream ( fopen ( "php://input" , "r" ) ) ;
-        $this -> debug ( 'timing ' . ( round ( ( microtime ( true ) - $timeStart ) , 3 ) * 1000 ) . 'ms.' ) ;
+        $this -> debug -> lapse ( 'knock' ) ;
         if ( is_bool ( $jsonExpected ) === false && is_string ( $jsonExpected ) === true && strlen ( $jsonExpected ) > 12 ) {
           $dataExpected = json_decode ( $jsonExpected , true ) ;
           if ( isset ( $dataExpected [ 'data' ] ) && is_object ( $dataExpected [ 'data' ] ) === false && is_string ( $dataExpected [ 'data' ] ) !== false && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2 ) { // && is_string ( $array [ 'data' ] ) === true && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2

@@ -5,7 +5,7 @@ namespace payapi ;
 abstract class helper {
 
   protected
-    $default                   = 'payapi' ,
+    $config                    =    false ,
     $instance                  =    false ,
     $debug                     =    false ,
     $serialize                 =    false ,
@@ -16,17 +16,18 @@ abstract class helper {
   private
     $buffer                    =    false ;
 
-  public function __construct ( $entity = false , $native = false ) {
+  public function __construct ( $native = false , $plugin = false ) {
+    $this -> config = config :: single () ;
     $this -> instance = instance :: this () ;
     $this -> serialize = serializer :: single () ;
     $this -> error = error :: single () ;
     $this -> route = router :: single () ;
     set_error_handler ( array ( $this , 'error_handler' ) ) ;
-    $this -> debug = debug :: single ( true ) ;
+    $this -> debug = debug :: single () ;
     if ( method_exists ( $this , '___autoload' ) ) {
       $version = ( isset ( $this -> version ) === true ) ? ' v' . $this -> version : null ;
       $this -> debug ( '[autoload] ' . strtolower ( str_replace ( array ( 'payapi\\command' , 'payapi\\' ) , null , get_called_class() ) . $version ) ) ;
-      $this -> ___autoload ( $entity , $native ) ;
+      $this -> ___autoload ( $native , $plugin ) ;
     }
   }
 

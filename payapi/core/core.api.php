@@ -10,6 +10,9 @@ final class api extends helper {
   private
     $curl                          =     false ,
     $knock                         =     false ,
+    $code                          =     false ,
+    $mode                          =     'sdk' ,
+    $entity                        =     false ,
     $headers                       =     false ,
     $timeout                       =         1 ,
     $id                            =     false ,
@@ -87,13 +90,20 @@ final class api extends helper {
       "code" => $code ,
       $label => $data
     ) ;
+    $this -> code = ( $this -> checkCode ( $code ) === true ) ? $code : 600 ;
     $this -> headers ( $code ) ;
-    $this -> debug ( '[' . $code . '] rendering' , 'api' ) ;
+    $this -> listening () ;
+    $this -> debug -> blank ( '//=== LISTENING ==>' ) ;
     return $this -> buffer ;
   }
 
+  private function listening () {
+    $this -> debug ( '[' . $this -> code . '] rendering' , 'api' ) ;
+    $this -> debug -> run () ;
+  }
+
   public function response ( $code = false ) {
-    return $this -> getCgiResponse ( $code ) ;
+    return $this -> getApiResponse ( $code ) ;
   }
 
   public function returnResponse ( $code ) {
@@ -105,7 +115,8 @@ final class api extends helper {
     if ( $this -> curl === false ) {
       $this -> curl = new curl () ;
     }
-    $response = $this -> curl -> proccess ( $url , $secured , $post , $timeout , $return , $header , $ssl , $fresh , $noreuse ) ;
+    $checkTimeout = ( $this -> config -> staging () === true ) ? 5 : $timeout ;
+    $response = $this -> curl -> proccess ( $url , $secured , $post , $checkTimeout , $return , $header , $ssl , $fresh , $noreuse ) ;
     //->
     return $response ;
   }
@@ -136,24 +147,24 @@ final class api extends helper {
   }
 
   public function checkCode ( $responseCode ) {
-    if ( $this -> isCleanCodeInt ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) ) {
+    if ( $this -> isCleanCodeInt ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) === true ) {
       return true ;
     }
     return false ;
   }
 
-  private function headers ( $code ) {
+  private function headers () {
     if ( $this -> headers !== true ) {
       return true ;
     }
     $this -> debug ( '[headers] ' . $this -> mode ) ;
     //header ( 'Content-type: ' . $this -> modes [ $this -> mode ] ) ;
     header ( "X-Robots-Tag: noindex,nofollow" ) ;
-    return http_response_code ( $code ) ;
+    return http_response_code ( $this -> code ) ;
   }
 
-  private function getCgiResponse ( $responseCode ) {
-    if ( $this -> isCleanCodeInt ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) ) {
+  private function getApiResponse ( $responseCode ) {
+    if ( $this -> isCleanCodeInt ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) === true ) {
       $code = $responseCode ;
     } else {
       $this -> debug ( 'response code no valid' , 'api' ) ;
@@ -163,12 +174,12 @@ final class api extends helper {
   }
 
   private function getIp () {
-    if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_CLIENT_IP' ) ) ) == false )
-      if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED_FOR' ) ) ) == false )
-        if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_X_FORWARDED' ) ) ) == false )
-          if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED_FOR' ) ) ) == false )
-            if ( ( $access = $this -> validateIp ( getenv ( 'HTTP_FORWARDED' ) ) ) == false )
-              if ( ( $access = $this -> validateIp ( getenv ( 'REMOTE_ADDR' ) ) ) == false )
+    if ( ( $access = $this -> filterIp ( getenv ( 'HTTP_CLIENT_IP' ) ) ) == false )
+      if ( ( $access = $this -> filterIp ( getenv ( 'HTTP_X_FORWARDED_FOR' ) ) ) == false )
+        if ( ( $access = $this -> filterIp ( getenv ( 'HTTP_X_FORWARDED' ) ) ) == false )
+          if ( ( $access = $this -> filterIp ( getenv ( 'HTTP_FORWARDED_FOR' ) ) ) == false )
+            if ( ( $access = $this -> filterIp ( getenv ( 'HTTP_FORWARDED' ) ) ) == false )
+              if ( ( $access = $this -> filterIp ( getenv ( 'REMOTE_ADDR' ) ) ) == false )
                 $access = $this -> undefinedIp () ;
     //-> @NOTE @TODELETE just for developing
     $access = ( $access == '192.168.10.1' ) ? '84.79.234.58' : $access ;
@@ -177,9 +188,9 @@ final class api extends helper {
     return $ip ;
   }
 
-  public function validateIp ( $env ) {
-    if ( filter_var ( $env , FILTER_VALIDATE_IP ) !== false && ip2long ( $env ) !== false ) {
-      return preg_replace ( "/[^0-0.\d ]/i" , '' , $env ) ;
+  public function filterIp ( $ip ) {
+    if ( md5 ( filter_var ( $ip , FILTER_VALIDATE_IP ) ) === md5 ( $ip ) && ip2long ( $ip ) !== false ) {
+      return preg_replace ( "/[^0-0.\d ]/i" , '' , $ip ) ;
     }
     return false ;
   }
@@ -189,6 +200,10 @@ final class api extends helper {
       return true ;
     }
     return false ;
+  }
+
+  public function checkIncomingHasValidSsl ( $url ) {
+    return $this -> checkSsl ( $url ) ;
   }
 
   public function __toString () {

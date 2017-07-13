@@ -5,9 +5,14 @@ namespace payapi ;
 final class commandLocalize extends engine {
 
   public function run () {
-    $ip = $this -> ip () ;
+    if ( $this -> validate -> ip ( $this -> arguments ( 1 ) ) === true ) {
+      $ip = $this -> arguments ( 1 ) ;
+    } else {
+      $ip = $this -> ip () ;
+    }
+    $this -> debug ( '[check] ' . $ip ) ;
     $cached = $this -> cache ( 'read' , 'localize' , $ip ) ;
-    if ( $cached !== false ) {
+    if ( $this -> arguments ( 0 ) !== true && $cached !== false ) {
       return $this -> render ( $cached ) ;
     } else {
       $endPoint = $this -> route -> endPointLocalization ( $ip ) ;
@@ -22,7 +27,7 @@ final class commandLocalize extends engine {
           } else {
             //-> not valid schema from PA
             $this -> error ( 'no valid localization' , 'warning' ) ;
-            return $this -> returnResponse ( $this -> error -> notValidSchema () ) ;
+            return $this -> returnResponse ( $this -> error -> notValidLocalizationSchema () ) ;
           }
         } else {
           return $this -> returnResponse ( $request [ 'code' ] ) ;

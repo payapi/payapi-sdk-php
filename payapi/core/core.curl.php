@@ -8,8 +8,9 @@ final class curl extends helper {
     $version               = '0.0.1' ,
     $code                  =   false ;
   //-> @TODO add retry on timeout
+
   public function proccess ( $url , $post = false , $secured = true , $timeout = 1 , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 , $retried = false ) {
-    $this -> debug ( '[' . $this -> method ( $post ) . '] ' . $this -> parseDomain ( $url ) ) ;
+    $this -> debug ( '[' . ( ( $retried !== false ) ?  'retry' : $this -> method ( $post ) ) . '] ' . $this -> parseDomain ( $url ) ) ;
     $options = array (
       CURLOPT_URL              => $url ,
       CURLOPT_RETURNTRANSFER   => $return ,
@@ -27,12 +28,12 @@ final class curl extends helper {
       $curlPost = http_build_query ( array ( "data" => $post ) ) ;
       curl_setopt ( $buffer , CURLOPT_POSTFIELDS , $curlPost ) ;
     }
-    $timeStart = microtime ( true ) ;
+    $this -> debug -> lapse ( $this -> method ( $post ) , true ) ;
     $jsonExpected = curl_exec ( $buffer ) ;
+    $this -> debug -> lapse ( $this -> method ( $post ) ) ;
     if ( $jsonExpected != false ) {
       $dataExpected = json_decode ( $jsonExpected , true ) ;
       $code = curl_getinfo ( $buffer , CURLINFO_HTTP_CODE ) ;
-      $this -> debug ( 'timing ' . ( round ( ( microtime ( true ) - $timeStart ) , 3 ) * 1000 ) . 'ms.' ) ;
       if ( $this -> isCleanCodeInt ( $code ) === true ) {
         if ( $code === 200 ) {
           if ( $secured !== false ) {
@@ -63,10 +64,12 @@ final class curl extends helper {
           $this -> error ( 'unexpected response' , 'curl' ) ;
         }
       }
-    } else {
+    } else if ( $retried === false ) {
+      $this -> warning ( 'timeout' , 'curl' ) ;
       curl_close ( $buffer ) ;
       return  $this -> proccess ( $url , $post , $secured , $timeout , $return , $header , $ssl , $fresh , $noreuse , true ) ;
     }
+    $this -> error ( $url , 'timeout' ) ;
     curl_close ( $buffer ) ;
     return false ;
   }

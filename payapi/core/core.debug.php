@@ -5,19 +5,23 @@ namespace payapi ;
 final class debug {
 
   public static
-    $single                =   false ;
+    $single                  =    false ;
 
   protected
-    $history               =   false ;
+    $history                 =    false ;
 
   private
-    $enabled               =   false ,
-    $microtime             =   false ,
-    $fullTrace             =   false ,
-    $dir                   =   false ,
-    $file                  =   false ,
-    $labels                =   array (
+    $enabled                 =    false ,
+    $microtime               =    false ,
+    $lapses                  =        0 ,
+    $run                     =        0 ,
+    $lapse                   = array () ,
+    $fullTrace               =    false ,
+    $dir                     =    false ,
+    $file                    =    false ,
+    $labels                  =    array (
       'info' ,
+      'time' ,
       'error' ,
       'warning' ,
       'fatal'
@@ -28,29 +32,80 @@ final class debug {
     if ( $enabled !== true ) {
       return false ;
     }
-    $this -> enabled = $enabled ;
     $this -> microtime = microtime ( true ) ;
+    $this -> enabled = $enabled ;
+    $this -> lapse ( 'execution' , true ) ;
+    $this -> lapse ( 'app' , true ) ;
     $this -> dir = str_replace ( 'core' , 'debug' , __DIR__ ) . DIRECTORY_SEPARATOR ;
     $this -> file = $this -> dir . 'debug.' . __NAMESPACE__ . '.' . 'log' ;
     $this -> reset () ;
-    $this -> blank () ;
-    $this -> add ( '[debugger] enabled' ) ;
+    $this -> set ( '//=== DEBUG === ' . $this -> timestamp () . ' ==>' ) ;
+  }
+
+  public function load () {
+    return $this -> timing ( 'load' , ( microtime ( true ) - $this -> microtime ) ) ;
+  }
+
+  public function run ( $refresh = false ) {
+    if ( $refresh === true ) {
+      $this -> run = microtime ( true ) ;
+    } else {
+      $microseconds = ( microtime ( true ) - $this -> run ) ;
+      return $this -> timing ( 'run' , $microseconds ) ;
+    }
+  }
+
+  public function lapse ( $key , $refresh = false ) {
+    if ( isset ( $this -> lapse [ $key ] ) === true && is_numeric ( $this -> lapse [ $key ] ) && $refresh !== true ) {
+      $lapse = ( microtime ( true ) - $this -> lapse [ $key ] ) ;
+      switch ( $key ) {
+        case 'app':
+          $microseconds = ( $lapse - $this -> lapses ) ;
+        break;
+        case 'execution':
+        $microseconds = $lapse ;
+        break;
+        default:
+          $this -> lapses += $lapse ;
+          $this -> run += $lapse ;
+          $microseconds = $lapse ;
+        break;
+      }
+      return $this -> timing ( $key , $microseconds ) ;
+    }
+    $this -> lapse [ $key ] = microtime ( true ) ;
+  }
+
+  private function milisecons ( $microseconds ) {
+    $miliseconds = ( round ( $microseconds , 3 ) * 1000 ) ;
+    return $miliseconds ;
   }
 
   private function reset () {
     $this -> history = false ;
-    return file_put_contents ( $this -> file , '' ) ;
+    file_put_contents ( $this -> file , '' ) ;
+    return $this -> blank () ;
+  }
+
+  private function timing  ( $key , $microseconds ) {
+    $timing = '[' . $key . '] timing ' . $this -> milisecons ( $microseconds ) . 'ms.' ;
+    return $this -> add ( $timing  , 'time' ) ;
+  }
+
+  private function timestamp () {
+    return date ( 'Y-m-d H:i:s e' , time () ) ;
   }
 
   public function add ( $info , $label = 'info' ) {
     $trace = $this -> trace ( debug_backtrace () ) ;
-    $entry = ( date ( 'Y-m-d H:i:s' , time () ) . ' [' . $this -> label ( $label ) . '] ' . $trace . ' ' . ( ( is_string ( $info ) ) ? $info : ( ( is_array ( $info ) ? json_encode ( $info ) : ( ( is_bool ( $info ) || is_object ( $info ) ) ? ( string ) $info : serializer :: undefined () ) ) ) ) ) ;
+    $miliseconds = str_pad ( round ( ( microtime ( true ) - $this -> microtime ) * 1000 , 0 ) , 4 , '0' , STR_PAD_LEFT ) ;
+    $entry = ( $miliseconds . ' [' . $this -> label ( $label ) . '] ' . $trace . ' ' . ( ( is_string ( $info ) ) ? $info : ( ( is_array ( $info ) ? json_encode ( $info ) : ( ( is_bool ( $info ) || is_object ( $info ) ) ? ( string ) $info : 'undefined' ) ) ) ) ) ;
     $this -> history [] = $entry ;
     return $this -> set ( $entry ) ;
   }
 
-  private function blank () {
-    $this -> set ( ' ' ) ;
+  public function blank ( $info = null ) {
+    $this -> set ( $info ) ;
   }
 
   public function trace ( $traced ) {
@@ -97,11 +152,12 @@ final class debug {
   }
 
   public function __toString () {
-    return serializer :: toString ( $this -> labels ) ;
+    return json_encode ( $this -> history , true ) ;
   }
 
   public function __destruct () {
-    $this -> add ( '[app] timing ' . round ( ( ( microtime ( true ) - $this -> microtime ) ) , 3 ) * 1000 . 'ms.' ) ;
+    $this -> lapse ( 'app' ) ;
+    $this -> set ( '//=== ' . $this -> milisecons ( microtime ( true ) - $this -> microtime ) . 'ms. === ' . $this -> timestamp () . ' ==>' ) ;
     $this -> blank () ;
   }
 

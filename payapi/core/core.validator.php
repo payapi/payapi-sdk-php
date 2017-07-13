@@ -26,7 +26,7 @@ final class validator extends helper {
               $max = ( ( isset ( $value [ '___max' ] ) === true && is_int ( $value [ '___max' ] ) === true ) ? $value [ '___max' ] : false ) ;
               if ( $this -> check ( $data [ $key ] , $value [ '___type' ] , $min , $max ) !== true ) {
                 $error ++ ;
-                $this -> warning ( '[' . $key . '] no valid value' , 'schema' ) ;
+                $this -> warning ( '[' . $key . '] no valid value' . $data [ $key ] , 'schema' ) ;
               }
             } else if ( $value [ '___mandatory' ] !== false ) {
               $error ++ ;
@@ -220,8 +220,45 @@ final class validator extends helper {
     return false ;
   }
 
+  //-> @NOTE @CARE @TODELETE just fro DEV -> $devHack
+  public function ssl ( $checkDomain = false , $checked = false , $selfsigned = false , $devHack = true ) {
+    if ( $devHack === true ) {
+      return true ;
+    }
+    $selfsigned = ( $allowSelfsigned === true ) ? true : false ;
+    $verifyPeer = ( $selfsigned === true ) ? false : true ;
+    $domain = ( is_string ( $checkDomain ) === true ) ? $this -> sanitizer -> parseDomain ( $checkDomain ) : $this -> domain ;
+    $socket = stream_context_create ( [ 'http' => [ 'method' => 'GET' ] , 'ssl' => [
+      'capture_peer_cert'       => true ,
+      'capture_peer_cert_chain' => true ,
+      'disable_compression'     => true , //-> anti CRIME
+      'verify_depth'            => 3 ,
+      //'passphrase'              => '' ,
+      'verify_expiry'           => $verifyPeer ,
+      'allow_cert_self_signed'  => $selfsigned ,
+      "verify_peer_name"        => $verifyPeer ,
+      'verify_peer'             => $verifyPeer ,
+      'ciphers'                 => 'TLSv1.2'
+    ] ] ) ;
+    $this -> debug ( '[SSL] ' . $domain ) ;
+    $stream = stream_socket_client ( "ssl://{$domain}:443" , $errno , $errstr , $this -> timeout , STREAM_CLIENT_CONNECT , $socket ) ;
+    if ( $stream != false ) {
+      $streamParams = stream_context_get_params ( $stream ) ;
+      $streamMetas = stream_get_meta_data ( $stream ) ;
+      if ( isset ( $streamParams [ "options" ] [ "ssl" ] [ "peer_certificate" ] ) === true && isset ( $streamMetas [ 'stream_type' ] ) === true && md5 ( $streamMetas [ 'stream_type' ] ) === md5 ( 'tcp_socket/ssl' ) ) {
+        $this -> debug ( ( '[VALID] ' . $streamMetas [ 'stream_type' ] ) ) ;
+        return $streamParams [ "options" ] [ "ssl" ] [ "peer_certificate" ] ;
+      }
+    } else {
+      sleep ( 100 ) ; //-> avoiding timeout
+      return $this -> CheckSsl ( $checkDomain , true ) ;
+    }
+    $this -> warning ( 'ssl certificate' , 'NOVALID' ) ;
+    return false ;
+  }
+
   public function ip ( $ip ) {
-    if ( filter_var ( $ip , FILTER_VALIDATE_IP ) !== false && ip2long ( $ip ) !== false ) {
+    if ( md5 ( filter_var ( $ip , FILTER_VALIDATE_IP ) ) === md5 ( $ip ) && ip2long ( $ip ) !== false ) {
       return true ;
     }
     return false ;

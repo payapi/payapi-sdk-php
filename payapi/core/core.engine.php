@@ -25,16 +25,17 @@ abstract class engine extends helper {
     $apiKey                =     false ,
     $account               =     false ,
     $settings              =     false ,
-    $config                =  array () ,
     $arguments             =     false ;
 
-  protected function ___autoload ( $entity , $native ) {
+  protected function ___autoload ( $native ) {
     $this -> crypter = new crypter () ;
     $this -> cache = new cache () ;
-    $this -> config = $entity -> appConfig () ;
-    $this -> entity = $entity ;
-    $this -> native ( $native ) ;
+    $this -> entity = entity :: single () ;
+    $this -> adaptor = $this -> entity -> get ( 'adaptor' ) ;
     $this -> sdk () ;
+    if ( $this -> publicId === false ) {
+      return $this -> returnResponse ( $this -> error ( $this -> error -> forbidden () ) ) ;
+    }
   }
 
   private function sdk () {
@@ -66,10 +67,6 @@ abstract class engine extends helper {
     return str_replace ( strtok ( $this -> token , '.' ) . '.' , null , $this -> token ) ;
   }
 
-  private function native ( $native ) {
-    $this -> adaptor = new adaptor ( $this -> entity , $native ) ;
-  }
-
   private function info () {
     $this -> debug ( '[run] ' . strtolower ( $this -> entity -> get ( 'command' ) ) ) ;
     $this -> entity -> addInfo ( 'adaptor_' . $this -> entity -> get ( 'plugin' ) . '_v' , $this -> adaptor -> version () ) ;
@@ -77,15 +74,6 @@ abstract class engine extends helper {
     $this -> entity -> addInfo ( 'crypter_v' , ( string ) $this -> crypter ) ;
     $this -> entity -> addInfo ( 'validator_v' , ( string ) $this -> validate ) ;
     $this -> entity -> addInfo ( 'serializer_v' , ( string ) $this -> serialize ) ;
-  }
-  //-> SDK config
-  protected function app ( $key = false ) {
-    if ( is_string ( $key ) === true ) {
-      if ( isset ( $this -> config [ $key ] ) === true ) {
-        return $this -> config [ $key ] ;
-      }
-    }
-    return false ;
   }
   //-> SDK passed argument(s)
   protected function arguments ( $key ) {

@@ -15,7 +15,7 @@
       "___max": 2
     },
     "countryName": {
-      "___mandatory": true,
+      "___mandatory": false,
       "___type": "string",
       "___min": 2,
       "___max": 250
@@ -24,10 +24,10 @@
       "___mandatory": true,
       "___type": "string",
       "___min": 2,
-      "___max": 2
+      "___max": 3
     },
     "regionName": {
-      "___mandatory": true,
+      "___mandatory": false,
       "___type": "string",
       "___min": 2,
       "___max": 250
