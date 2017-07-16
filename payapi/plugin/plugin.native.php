@@ -4,6 +4,9 @@ namespace payapi ;
 
 final class plugin {
 
+  public static
+    $single                    =     false ;
+
   public
     $version                   =        '0.0.0' ;
 
@@ -14,6 +17,16 @@ final class plugin {
 
   public function __construct ( $config ) {
     $this -> config = $config ;
+  }
+
+  public function validated () {
+    //->
+    return true ;
+  }
+
+  public function product ( $product ) {
+    //->
+    return $product ;
   }
 
   public function loadLog () {
@@ -41,7 +54,7 @@ final class plugin {
     return false ;
   }
 
-  public function debugging () {
+  public function debug () {
     if ( isset ( $this -> config [ 'debug' ] ) === true && $this -> config [ 'debug' ] === true ) {
       return true ;
     }
@@ -65,6 +78,13 @@ final class plugin {
 
   public function localized ( $localized ) {
     return $localized ;
+  }
+
+  public static function single ( $adapt ) {
+    if ( self :: $single === false ) {
+      self :: $single = new self ( $adapt ) ;
+    }
+    return self :: $single ;
   }
 
   public function __toString () {

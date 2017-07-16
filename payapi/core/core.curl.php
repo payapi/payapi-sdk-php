@@ -7,7 +7,6 @@ final class curl extends helper {
   private
     $version               = '0.0.1' ,
     $code                  =   false ;
-  //-> @TODO add retry on timeout
 
   public function proccess ( $url , $post = false , $secured = true , $timeout = 1 , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 , $retried = false ) {
     $this -> debug ( '[' . ( ( $retried !== false ) ?  'retry' : $this -> method ( $post ) ) . '] ' . $this -> parseDomain ( $url ) ) ;
@@ -30,6 +29,7 @@ final class curl extends helper {
     }
     $this -> debug -> lapse ( $this -> method ( $post ) , true ) ;
     $jsonExpected = curl_exec ( $buffer ) ;
+    $this -> debug ( ( string ) $jsonExpected , 'debug' ) ;
     $this -> debug -> lapse ( $this -> method ( $post ) ) ;
     if ( $jsonExpected != false ) {
       $dataExpected = json_decode ( $jsonExpected , true ) ;

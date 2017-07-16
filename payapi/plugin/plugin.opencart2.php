@@ -4,6 +4,9 @@ namespace payapi ;
 
 final class plugin {
 
+  public static
+    $single                    =     false ;
+
   public
     $version                   =        '0.0.1' ;
 
@@ -12,16 +15,26 @@ final class plugin {
     $config                    =          false ,
     $db                        =          false ;
 
-  public function __construct ( $native ) {
+  private function __construct ( $native ) {
     $this -> native = $native ;
     $this -> db = $this -> native -> get ( 'db' ) ;
     $this -> config = $this -> native -> get ( 'config' ) ;
     $this -> loadLog () ;
   }
 
+  public function validated () {
+    //->
+    return true ;
+  }
+
+  public function product ( $product ) {
+    //->
+    return $product ;
+  }
+
   public function loadLog () {
-    if ( $this -> debugging () === true ) {
-      return new \Log ( strtolower ( __NAMESPACE__ ) . '.' . date ( 'YmdHis' , time () ) . '.' . $this -> default . '.' . 'log' ) ;
+    if ( $this -> debug () === true ) {
+      return new \Log ( strtolower ( __NAMESPACE__ ) . '.' . date ( 'YmdHis' , time () ) . '.' . __NAMESPACE__ . '.' . 'log' ) ;
     }
     return false ;
   }
@@ -46,8 +59,11 @@ final class plugin {
     return $this -> native -> get ( 'customer' ) ;
   }
 
-  public function debugging () {
-    return DEBUGGING ;
+  public function debug () {
+    if ( DEBUGGING === 1 ) {
+      return true ;
+    }
+    return false ;
   }
 
   public function nativeVersion () {
@@ -55,7 +71,10 @@ final class plugin {
   }
 
   public function staging () {
-    return STAGING ;
+    if ( STAGING === 1 ) {
+      return true ;
+    }
+    return false ;
   }
 
   public function version () {
@@ -79,8 +98,16 @@ final class plugin {
     return $localized ;
   }
 
+  public static function single ( $adapt ) {
+    if ( self :: $single === false ) {
+      self :: $single = new self ( $adapt ) ;
+    }
+    return self :: $single ;
+  }
+
   public function __toString () {
     return $this -> version ;
   }
+
 
 }

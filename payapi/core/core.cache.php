@@ -10,10 +10,12 @@ final class cache extends helper {
   private
     $intance               =   false ,
     $dir                   =   false ,
+    $caches                =   false ,
     $cache                 =   array (
       //             expiration days
       "transaction"        =>     90 ,
       "localize"           =>     30 ,
+      "ssl"                =>      1 ,
       "account"            =>  false ,
       "settings"           =>  false
     ) ;
@@ -22,22 +24,32 @@ final class cache extends helper {
     $this -> instance = instance :: this () ;
   }
 
+  public function caches () {
+    return $this -> cache ;
+  }
+
   public function read ( $key , $token ) {
+    if ( isset ( $this -> caches [ $key ] [ $token ] ) ) {
+      return $this -> caches [ $key ] [ $token ] ;
+    }
     $file = $this -> validate ( $key , $token ) ;
     if ( is_string ( $file ) === true ) {
       if ( is_file ( $file ) ) {
         $this -> debug ( '[' . $key . '] cached' ) ;
         $cacheInfo = date ( '' ,filemtime ( $file ) ) ;
         if ( $this -> cache [ $key ] === false || filemtime ( $file ) > strtotime ( "-" . $this -> cache [ $key ] . " days" ) ) {
-          return file_get_contents ( $file ) ;
+          $cache = file_get_contents ( $file ) ;
+          $this -> caches [ $key ] [ $token ] = $cache ;
+          return $cache ;
         } else {
           $this -> debug ( '[' . $key . '] cache expired' ) ;
         }
       } else {
         $this -> debug ( '[' . $key . '] uncached' ) ;
       }
+    } else {
+      $this -> debug ( '[' . $key . '] no valid key' ) ;
     }
-    $this -> debug ( '[' . $key . '] no valid key' ) ;
     return false ;
   }
 
@@ -82,7 +94,7 @@ final class cache extends helper {
     if ( is_dir ( $dir ) === true ) {
       return true ;
     }
-    return mkdir ( $dir , 0755 , true ) ;
+    return mkdir ( $dir , 0700 , true ) ;
   }
 
 

@@ -2,7 +2,7 @@
 
 namespace payapi ;
 
-final class commandSettings extends engine {
+final class commandSettings extends controller {
 
   public function run () {
     if ( $this -> validate -> publicId ( $this -> arguments ( 0 ) ) === true && $this -> validate -> apiKey ( $this -> arguments ( 1 ) ) === true ) {
@@ -17,7 +17,7 @@ final class commandSettings extends engine {
       if ( $this -> arguments ( 2 ) !== true && $cached !== false ) {
         return $this -> render ( $cached ) ;
       } else {
-        $endPoint = $this -> route -> endPointSettings ( $publicId ) ;
+        $endPoint = $this -> endPointSettings ( $publicId ) ;
         $request = $this -> curl ( $endPoint , $this -> payload ( $apiKey ) , true ) ;
         if ( $request !== false && isset ( $request [ 'code' ] ) === true ) {
           if ( $request [ 'code' ] === 200 ) {
@@ -47,7 +47,7 @@ final class commandSettings extends engine {
             return $this -> returnResponse ( $request [ 'code' ] ) ;
           }
         } else {
-          return $this -> returnResponse ( $this -> error -> badRequest () ) ;
+          return $this -> returnResponse ( $this -> error -> unexpectedResponse () ) ;
         }
       }
     } else {

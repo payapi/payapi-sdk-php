@@ -21,7 +21,7 @@
       "___max": 250
     },
     "regionCode": {
-      "___mandatory": true,
+      "___mandatory": false,
       "___type": "string",
       "___min": 2,
       "___max": 3

@@ -93,7 +93,7 @@ final class api extends helper {
     $this -> code = ( $this -> checkCode ( $code ) === true ) ? $code : 600 ;
     $this -> headers ( $code ) ;
     $this -> listening () ;
-    $this -> debug -> blank ( '//=== LISTENING ==>' ) ;
+    $this -> debug -> blank ( '=== LISTENING ==>' ) ;
     return $this -> buffer ;
   }
 
@@ -115,7 +115,7 @@ final class api extends helper {
     if ( $this -> curl === false ) {
       $this -> curl = new curl () ;
     }
-    $checkTimeout = ( $this -> config -> staging () === true ) ? 5 : $timeout ;
+    $checkTimeout = ( $this -> config -> staging () === true ) ? 2 : $timeout ;
     $response = $this -> curl -> proccess ( $url , $secured , $post , $checkTimeout , $return , $header , $ssl , $fresh , $noreuse ) ;
     //->
     return $response ;
@@ -182,7 +182,7 @@ final class api extends helper {
               if ( ( $access = $this -> filterIp ( getenv ( 'REMOTE_ADDR' ) ) ) == false )
                 $access = $this -> undefinedIp () ;
     //-> @NOTE @TODELETE just for developing
-    $access = ( $access == '192.168.10.1' ) ? '84.79.234.58' : $access ;
+    $access = ( $access == '192.168.10.1' || $access == $this -> undefinedIp () ) ? '84.79.234.58' : $access ;
     //$access = ( $access == '192.168.10.1' ) ? '84.79.234.' . rand ( 10 , 250 ) : $access ;
     $ip = htmlspecialchars ( $access , ENT_COMPAT , 'UTF-8' ) ;
     return $ip ;

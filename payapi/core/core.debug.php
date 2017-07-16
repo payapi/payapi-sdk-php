@@ -22,6 +22,9 @@ final class debug {
     $labels                  =    array (
       'info' ,
       'time' ,
+      'api' ,
+      'run' ,
+      'debug' ,
       'error' ,
       'warning' ,
       'fatal'
@@ -39,7 +42,7 @@ final class debug {
     $this -> dir = str_replace ( 'core' , 'debug' , __DIR__ ) . DIRECTORY_SEPARATOR ;
     $this -> file = $this -> dir . 'debug.' . __NAMESPACE__ . '.' . 'log' ;
     $this -> reset () ;
-    $this -> set ( '//=== DEBUG === ' . $this -> timestamp () . ' ==>' ) ;
+    $this -> set ( '=== DEBUG === ' . $this -> timestamp () . ' ==>' ) ;
   }
 
   public function load () {
@@ -66,7 +69,9 @@ final class debug {
         $microseconds = $lapse ;
         break;
         default:
-          $this -> lapses += $lapse ;
+          if ( $key != 'run' ) {
+            $this -> lapses += $lapse ;
+          }
           $this -> run += $lapse ;
           $microseconds = $lapse ;
         break;
@@ -157,7 +162,7 @@ final class debug {
 
   public function __destruct () {
     $this -> lapse ( 'app' ) ;
-    $this -> set ( '//=== ' . $this -> milisecons ( microtime ( true ) - $this -> microtime ) . 'ms. === ' . $this -> timestamp () . ' ==>' ) ;
+    $this -> set ( '=== ' . $this -> milisecons ( microtime ( true ) - $this -> microtime ) . 'ms. === ' . $this -> timestamp () . ' ===' ) ;
     $this -> blank () ;
   }
 

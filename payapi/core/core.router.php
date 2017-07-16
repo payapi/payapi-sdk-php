@@ -12,38 +12,11 @@ final class router {
 
   private
     $root                       =   false ,
-    $staging                    =   false ,
     $instance                   =   false ;
 
-  private function __construct ( $staging ) {
-    if ( $staging === true ) {
-      $this -> staging = true ;
-    }
+  private function __construct () {
     $this -> root = $this -> parentDir ( __DIR__ ) . DIRECTORY_SEPARATOR ;
     $this -> instance = instance :: this () ;
-  }
-
-  public function endPointLocalization ( $ip ) {
-    $api = $this -> https () . $this -> staging () . 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'api' . '/' . 'fraud' . '/' . 'ipdata' . '/' . $ip ;
-    return $api ;
-  }
-
-  public function endPointSettings ( $publicId ) {
-    $api = $this -> https () . $this -> staging () . $this -> api () . 'merchantSettings' . '/' . $publicId ;
-    return $api ;
-  }
-
-  private function api () {
-    return 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'api' . '/' ;
-  }
-
-  private function https () {
-    return 'https' . ':' . '//' ;
-  }
-
-  private function staging () {
-    $route = ( $this -> staging === true ) ? 'staging' . '-' : null ;
-    return $route ;
   }
 
   private function parentDir ( $dir ) {
@@ -117,15 +90,19 @@ final class router {
   }
 
   public function cache ( $type , $key ) {
-    $common = array ( 'localize' ) ;
+    $common = array ( 'localize' , 'ssl' ) ;
     $isolated = ( in_array ( $type , $common ) === true ) ? null : $this -> instance . DIRECTORY_SEPARATOR ;
     $cacheFile = $this -> routeCache () . $isolated . $type . DIRECTORY_SEPARATOR . 'cache' . '.' . $key . '.' . 'data' ;
     return $cacheFile ;
   }
 
-  public static function single ( $staging = false ) {
+  public function brand ( $key ) {
+    return $this -> routeCache () . 'brand' . DIRECTORY_SEPARATOR . 'brand' . '.' . $key . '.' . 'json' ;
+  }
+
+  public static function single () {
     if ( self :: $single === false ) {
-      self :: $single = new self ( $staging ) ;
+      self :: $single = new self () ;
     }
     return self :: $single ;
   }

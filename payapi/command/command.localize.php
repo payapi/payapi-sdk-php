@@ -2,7 +2,7 @@
 
 namespace payapi ;
 
-final class commandLocalize extends engine {
+final class commandLocalize extends controller {
 
   public function run () {
     if ( $this -> validate -> ip ( $this -> arguments ( 1 ) ) === true ) {
@@ -15,7 +15,7 @@ final class commandLocalize extends engine {
     if ( $this -> arguments ( 0 ) !== true && $cached !== false ) {
       return $this -> render ( $cached ) ;
     } else {
-      $endPoint = $this -> route -> endPointLocalization ( $ip ) ;
+      $endPoint = $this -> endPointLocalization ( $ip ) ;
       $request = $this -> curl ( $endPoint , false , false ) ;
       if ( $request !== false && isset ( $request [ 'code' ] ) === true ) {
         if ( $request [ 'code' ] === 200) {

@@ -10,32 +10,19 @@ final class config {
   private
     $settings                   =      false ,
     $instance                   =      false ,
-    $plugins                    =      array (
-      "native"                               ,
-      "opencart2"                            ,
-    )                                        ,
     $schema                     =      array (
       "debug"                   =>     false ,
-      "staging"                 =>     false ,
-      "plugin"                  =>   'native'
+      "staging"                 =>     false
     )                                        ;
 
   private function __construct ( $config ) {
     $this -> instance = instance :: this () ;
     foreach ( $this -> schema as $key => $value ) {
-      if ( isset ( $config [ $key ] ) ===  true ) {
-        if ( $key === 'plugin' ) {
-          if ( is_string ( $config [ $key ] ) === true && in_array ( $config [ $key ] , $this -> plugins ) === true ) {
-            $this -> settings [ $key ] = $config [ $key ] ;
-          } else {
-            $this -> settings [ $key ] == $value ;
-          }
+      if ( isset ( $config [ $key ] ) === true ) {
+        if ( $config [ $key ] === true ) {
+          $this -> settings [ $key ] = true ;
         } else {
-          if ( $config [ $key ] === true ) {
-            $this -> settings [ $key ] = true ;
-          } else {
-            $this -> settings [ $key ] == $value ;
-          }
+          $this -> settings [ $key ] = $value ;
         }
       }
     }
@@ -45,6 +32,7 @@ final class config {
     if ( $arguments === array () && is_string ( $key ) === true && isset ( $this -> settings [ $key ] ) === true ) {
       return $this -> settings [ $key ] ;
     }
+    //->  @NOTE
     return null ;
   }
 
@@ -58,5 +46,6 @@ final class config {
   public function __toString () {
     return $this -> data ;
   }
+
 
 }

@@ -83,12 +83,20 @@ final class error {
     return 404 ;
   }
 
+  public function unexpectedResponse () {
+    return 406 ;
+  }
+
   public function timeout () {
     return 504 ;
   }
 
   public function knockNotValid () {
     return 404 ;
+  }
+
+  public function unauthorized () {
+    return 401 ;
   }
 
   public function transactionDuplicated () {

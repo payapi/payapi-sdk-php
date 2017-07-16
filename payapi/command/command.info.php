@@ -2,7 +2,7 @@
 
 namespace payapi ;
 
-final class commandInfo extends engine {
+final class commandInfo extends controller {
 
   public function run () {
     return $this -> render ( $this -> entity -> get ( '___info' ) ) ;

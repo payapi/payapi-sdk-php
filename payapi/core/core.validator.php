@@ -164,14 +164,14 @@ final class validator extends helper {
     return false ;
   }
 
-  private function isPhoneNumber ( $phone ) {
+  public function isPhoneNumber ( $phone ) {
     if ( is_numeric ( $phone ) === true && $phone > 9999999 && $phone < 9999999999999999999 ) {
       return true ;
     }
     return false ;
   }
 
-  private function isEmail ( $email ) {
+  public function isEmail ( $email ) {
     if ( md5 ( filter_var ( $email , FILTER_VALIDATE_EMAIL ) ) === md5 ( $email ) ) {
       return true ;
     }
@@ -220,14 +220,11 @@ final class validator extends helper {
     return false ;
   }
 
-  //-> @NOTE @CARE @TODELETE just fro DEV -> $devHack
-  public function ssl ( $checkDomain = false , $checked = false , $selfsigned = false , $devHack = true ) {
-    if ( $devHack === true ) {
-      return true ;
-    }
-    $selfsigned = ( $allowSelfsigned === true ) ? true : false ;
+  public function ssl ( $checkDomain = false , $selfsigned = false , $timeout = 1 , $checked = false ) {
     $verifyPeer = ( $selfsigned === true ) ? false : true ;
-    $domain = ( is_string ( $checkDomain ) === true ) ? $this -> sanitizer -> parseDomain ( $checkDomain ) : $this -> domain ;
+    $domain = ( is_string ( $checkDomain ) === true ) ? $this -> sanitize -> parseDomain ( $checkDomain ) : $this -> domain ;
+    //-> @NOTE @CARE @TODELETE
+    if ( $domain == false || $domain == 'store.multimerchantshop.dev' ) { $domain = 'store.multimerchantshop.xyz' ; }
     $socket = stream_context_create ( [ 'http' => [ 'method' => 'GET' ] , 'ssl' => [
       'capture_peer_cert'       => true ,
       'capture_peer_cert_chain' => true ,
@@ -241,7 +238,7 @@ final class validator extends helper {
       'ciphers'                 => 'TLSv1.2'
     ] ] ) ;
     $this -> debug ( '[SSL] ' . $domain ) ;
-    $stream = stream_socket_client ( "ssl://{$domain}:443" , $errno , $errstr , $this -> timeout , STREAM_CLIENT_CONNECT , $socket ) ;
+    $stream = stream_socket_client ( "ssl://{$domain}:443" , $errno , $errstr , 1 , STREAM_CLIENT_CONNECT , $socket ) ;
     if ( $stream != false ) {
       $streamParams = stream_context_get_params ( $stream ) ;
       $streamMetas = stream_get_meta_data ( $stream ) ;
@@ -251,7 +248,8 @@ final class validator extends helper {
       }
     } else {
       sleep ( 100 ) ; //-> avoiding timeout
-      return $this -> CheckSsl ( $checkDomain , true ) ;
+      $this -> debug ( '[SSL] retry' ) ;
+      return $this -> CheckSsl ( $checkDomain , $selfsigned , $timeout , true ) ;
     }
     $this -> warning ( 'ssl certificate' , 'NOVALID' ) ;
     return false ;

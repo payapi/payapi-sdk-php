@@ -13,7 +13,10 @@ final class instance {
   }
 
   public static function domain () {
-    //->
+    //-> @NOTE @CARE @TODELETE
+    if ( is_string ( getenv ( 'SERVER_NAME' ) ) !== true ) {
+      putenv ( 'SERVER_NAME=store.multimerchantshop.dev' ) ;
+    }
     return getenv ( 'SERVER_NAME' ) ;
   }
 

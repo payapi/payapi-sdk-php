@@ -2,7 +2,7 @@
 
 namespace payapi ;
 
-final class commandCallback extends engine {
+final class commandCallback extends controller {
 
   public function run () {
     //-> returnResponse should display a json response and send headers

@@ -5,9 +5,12 @@ namespace payapi ;
 abstract class helper {
 
   protected
+    $default                   = 'payapi' ,
     $config                    =    false ,
-    $instance                  =    false ,
+    $instance                  =    false , //-> md5 ( <domain> )
+    $domain                    =    false ,
     $debug                     =    false ,
+    $sanitizer                 =    false ,
     $serialize                 =    false ,
     $error                     =    false ,
     $route                     =    false ,
@@ -18,7 +21,11 @@ abstract class helper {
 
   public function __construct ( $native = false , $plugin = false ) {
     $this -> config = config :: single () ;
+    $this -> sanitize = new sanitizer () ;
+    $this -> route = router :: single () ;
     $this -> instance = instance :: this () ;
+    $this -> domain = instance :: domain () ;
+    $this -> sanitize = sanitizer :: single () ;
     $this -> serialize = serializer :: single () ;
     $this -> error = error :: single () ;
     $this -> route = router :: single () ;

@@ -40,6 +40,12 @@
       "___mandatory": true,
       "___type": "integer"
     },
+    "paymentTermInDays": {
+      "___mandatory": true,
+      "___type": "integer",
+      "___min": 1,
+      "___max": 1000
+    },
     "whitelistedCountries": {
       "___mandatory": true,
       "___type": "array",

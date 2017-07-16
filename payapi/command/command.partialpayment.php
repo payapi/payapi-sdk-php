@@ -2,7 +2,7 @@
 
 namespace payapi ;
 
-final class commandPartialPayment extends engine {
+final class commandPartialPayment extends controller {
 
   public function run () {
     //->
@@ -41,7 +41,7 @@ final class commandPartialPayment extends engine {
         $partial [ 'pricePerMonthInCents' ] = round ( $partial [ 'priceInCents' ] / $partial [ 'paymentMonths'] , 0 ) ;
         $partial [ 'invoiceFeeInCents' ] = $partialPaymentSettings [ 'invoiceFeeInCents' ] ;
         $partial [ 'paymentMethod' ] = $partialPaymentSettings [ 'preselectedPartialPayment' ] ;
-        $partial [ 'invoiceFeeDays' ] = 8 ;
+        $partial [ 'invoiceFeeDays' ] = $partialPaymentSettings [ 'paymentTermInDays' ] ;
         $partial [ 'currency' ] = $paymentCurrency ;
         return $partial ;
       }

@@ -2,12 +2,18 @@
 
 namespace payapi ;
 
-final class adaptor extends helper {
+final class adaptor {
+
+  public static
+    $single                    =     false ;
 
   private
     $plugin                    =     false ,
     $adapt                     =     false ,
-    $entity                    =     false ,
+    $error                     =     false ,
+    $route                     =     false ,
+    $config                    =     false ,
+    $debug                     =     false ,
     $adaptors                  =    array (
       "native"                             ,
       "opencart2"                          ,
@@ -16,7 +22,12 @@ final class adaptor extends helper {
   protected
     $log                       =     false ;
 
-  protected function ___autoload ( $native , $plugin ) {
+  private function __construct ( $adapt , $plugin ) {
+    if ( self :: $single !== false ) {
+      return self :: $single ;
+    }
+    $this -> error = error :: single () ;
+    $this -> route = router :: single () ;
     //->
     if ( in_array ( $plugin , $this -> adaptors ) !== false ) {
       $this -> plugin = $plugin ;
@@ -24,8 +35,24 @@ final class adaptor extends helper {
       $this -> error ( '[adaptor] not available' , 'warning' ) ;
       $this -> plugin = 'native' ;
     }
-    $this -> debug ( '[plugin] ' . $this -> plugin ) ;
-    $this -> plugin ( $native ) ;
+    $pluginRoute = $this -> route -> plugin ( $this -> plugin ) ;
+    if ( is_string ( $pluginRoute ) === true ) {
+      require ( $pluginRoute ) ;
+      $this -> adapt = plugin :: single ( $adapt ) ;
+      $this -> config = config :: single ( $this -> config () ) ;
+      $this -> debug = debug :: single ( $this -> debug () ) ;
+      $this -> debug ( '[plugin] ' . $this -> plugin ) ;
+    } else {
+      $this -> error ( 'cannot load plugin' , 'fatal' ) ;
+    }
+  }
+
+  private function validated () {
+    return $this -> adapt -> validated () ;
+  }
+
+  public function product ( $product ) {
+    return $this -> adapt -> product ( $product ) ;
   }
 
   public function log ( $info ) {
@@ -44,42 +71,39 @@ final class adaptor extends helper {
     return $this -> adapt -> customer () ;
   }
 
-  public function debugging () {
-    return $this -> adapt -> debugging () ;
+  public function debug () {
+    return $this -> adapt -> debug () ;
+  }
+
+  public function staging () {
+    return $this -> adapt -> staging () ;
   }
 
   public function version () {
     return $this -> adapt -> version () ;
   }
 
-  public function settings () {
-    return $this -> adapt -> settings () ;
-  }
-
-  public function publicId () {
-    return $this -> adapt -> publicId () ;
-  }
-
-  public function apiKey () {
-    return $this -> adapt -> apiKey () ;
+  private function config () {
+    $config = array (
+      "debug"    => $this -> debug () ,
+      "staging"  => $this -> staging ()
+    ) ;
+    return $config ;
   }
 
   public function localized ( $localized ) {
     return $this -> adapt -> localized ( $localized ) ;
   }
 
-  private function plugin ( $native ) {
-    $pluginRoute = $this -> route -> plugin ( $this -> plugin ) ;
-    if ( is_string ( $pluginRoute ) === true ) {
-      require_once ( $pluginRoute ) ;
-      $this -> adapt = new plugin ( $native ) ;
-    } else {
-      $this -> error ( 'cannot load plugin' , 'fatal' ) ;
+  public static function single ( $adapt , $plugin ) {
+    if ( self :: $single === false ) {
+      self :: $single = new self ( $adapt , $plugin ) ;
     }
+    return self :: $single ;
   }
 
   public function __toString () {
-    return $this -> version () ;
+    return $this -> plugin ;
   }
 
 
