@@ -4,6 +4,9 @@ namespace payapi ;
 
 class brand extends helper {
 
+  protected
+    $version                   =  '0.0.1' ;
+
   private
     $brand                     = array () ,
     $brands                    =    false ;

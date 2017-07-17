@@ -21,6 +21,9 @@
 *                payapi/cache/<instanceKey>/settings
 *
 *        - 2. commands :
+*              $sdk -> instantPayment ( $data ) ;                     //-> validate/sanitize/cache product/payment data
+*                                                                          returns array ( "metadata" , "endPointPayment" , "endPointProductPayment" ) ;
+*              $sdk -> brand () ;                                     //-> gets brand/partner info
 *              $sdk -> callback () ;                                  //-> gets/cache callback decoded transaction
 *              $sdk -> localize () ;                                  //-> gets/cache ip decoded localization (plugin adds adapt country and zone ids)
 *              $sdk -> localize ( true ) ;                            //-> gets & refresh ip decoded localization cache (plugin adds adapt country and zone ids)
@@ -28,7 +31,6 @@
 *              $sdk -> settings ( false , false , true ) ;            //-> refresh & gets instance merchantSettings
 *              $sdk -> settings () ;                                  //-> gets instance cached merchantSettings
 *              $sdk -> partialPayment ( $totalInCents , $currency ) ; //-> calculate partialPayment from merchantSettings
-*                                                                          @TODO review using cached/plugin
 *              $sdk -> response ( <standard_response_code_int> ) ;    //-> get response info
 *              $sdk -> info () ;                                      //-> gets sdk debug info
 *
