@@ -13,16 +13,48 @@ class serializer {
 
   protected function __construct () {
     $this -> instance = instance :: this () ;
+    $this -> domain = instance :: domain () ;
+    $this -> config = config :: single () ;
   }
 
-  //-> to core instance
-  public function instance () {
-    return md5 ( $this -> domain () ) ;
+  public function endPointLocalization ( $ip ) {
+    $api = $this -> https () . $this -> staging () . 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'api' . '/' . 'fraud' . '/' . 'ipdata' . '/' . $ip ;
+    return $api ;
   }
-  //-> to core instance
-  public function domain () {
-    //->
-    return getenv ( 'SERVER_NAME' ) ;
+
+  public function endPointSettings ( $publicId ) {
+    $api = $this -> https () . $this -> staging () . $this -> api () . 'merchantSettings' . '/' . $publicId ;
+    return $api ;
+  }
+
+  public function endPointInstantBuy ( $publicId ) {
+    $api = $this -> https () . $this -> staging () . $this -> webshop () . $publicId . '/' ;
+    return $api ;
+  }
+
+  private function webshop () {
+    return 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'webshop' . '/' ;
+  }
+
+  private function api () {
+    return 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'api' . '/' ;
+  }
+
+  private function https () {
+    return 'https' . ':' . '//' ;
+  }
+
+  private function staging () {
+    $route = ( ( $this -> config -> staging () === true ) ? 'staging' . '-' : null ) ;
+    return $route ;
+  }
+
+  public function instantPaymentUrlEncode ( $url ) {
+    return urlencode ( html_entity_decode ( $url ) ) ;
+  }
+
+  private function microstamp () {
+    return  microtime ( true ) ;
   }
 
   public function getDomainFromUrl ( $url ) {
@@ -35,6 +67,18 @@ class serializer {
 
   public function timestamp () {
     return date ( 'Y-m-d H:i:s T' , time () ) ;
+  }
+
+  public function options ( $options ) {
+    $optionsSerialized = '' ;
+    foreach ( $options as $option => $value ) {
+      $optionsSerialized .= ( ( $optionsSerialized !== '' ) ? '&' : null ) . $option . '=' . $value ;
+    }
+    return $optionsSerialized ;
+  }
+
+  public function percentage ( $total , $part ) {
+    return round ( ( ( $part * 100 ) / ( $total - $part ) ) , 0 ) ;
   }
 
   public function arrayToJson ( $array ) {
