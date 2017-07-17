@@ -169,7 +169,7 @@ abstract class controller extends helper {
     switch ( $action ) {
       case 'writte' :
         if ( is_array ( $data ) !== false ) {
-          $data [ 'timestamp' ] = $this -> timestamp () ;
+          $data [ 'timestamp' ] = $this -> serialize -> timestamp () ;
         }
         $encryptedData = $this -> encode ( $data , false , true ) ;
         return $this -> cache -> writte ( $type , $cacheKey , $encryptedData ) ;
@@ -184,33 +184,6 @@ abstract class controller extends helper {
       break ;
     }
     return false ;
-  }
-
-  public function endPointLocalization ( $ip ) {
-    $api = $this -> https () . $this -> staging () . 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'api' . '/' . 'fraud' . '/' . 'ipdata' . '/' . $ip ;
-    return $api ;
-  }
-
-  public function endPointSettings ( $publicId ) {
-    $api = $this -> https () . $this -> staging () . $this -> api () . 'merchantSettings' . '/' . $publicId ;
-    return $api ;
-  }
-
-  private function api () {
-    return 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'api' . '/' ;
-  }
-
-  private function https () {
-    return 'https' . ':' . '//' ;
-  }
-
-  private function staging () {
-    $route = ( ( $this -> config -> staging () === true ) ? 'staging' . '-' : null ) ;
-    return $route ;
-  }
-
-  private function timestamp () {
-    return  microtime ( true ) ;
   }
 
 
