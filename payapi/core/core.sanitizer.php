@@ -10,14 +10,17 @@ final class sanitizer {
   protected
     $version                  =   '0.0.0' ;
 
-  public function sanitizeFromSchema ( $schema , $data ) {
-    $diffs = array_diff_key ( $data , $schema [ '___schema___' ] ) ;
-    foreach ( $diffs as $diff => $value ) {
-      if ( $diff != 'numberOfInstallments' ) {
-        unset ( $data [ $diff ] ) ;
+  public function schema ( $schema , $data ) {
+    if ( isset ( $schema [ '___schema' ] ) === true && is_array ( $data ) !== false ) {
+      $diffs = array_diff_key ( $data , $schema [ '___schema' ] ) ;
+      foreach ( $diffs as $diff => $value ) {
+        if ( $diff != 'numberOfInstallments' ) {
+          unset ( $data [ $diff ] ) ;
+        }
       }
+      return $data ;
     }
-    return $data ;
+    return false ;
   }
 
   public function parseDomain ( $url ) {
@@ -46,7 +49,7 @@ final class sanitizer {
   public function sanitizedInt ( $int ) {
     return filter_var ( $int , FILTER_SANITIZE_NUMBER_INT ) ;
   }
-  
+
   public function __toString () {
     return $this -> version ;
   }
