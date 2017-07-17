@@ -1,7 +1,8 @@
 <?php
 
 namespace payapi ;
-
+//-> @NOTE   $this -> schema ( $data , $schema )
+//->         also sanitize data
 final class validator extends helper {
 
   public
@@ -20,13 +21,18 @@ final class validator extends helper {
       if ( $this -> checkNoObjects ( $data ) === true ) {
         if ( isset ( $schema [ '___schema' ] ) === true && is_array ( $schema [ '___schema' ] ) !== false ) {
           $error = 0 ;
+          $validated = array () ;
           foreach ( $schema [ '___schema' ] as $key => $value ) {
             if ( isset ( $data [ $key ] ) === true ) {
               $min = ( ( isset ( $value [ '___min' ] ) === true && is_int ( $value [ '___min' ] ) === true ) ? $value [ '___min' ] : false ) ;
               $max = ( ( isset ( $value [ '___max' ] ) === true && is_int ( $value [ '___max' ] ) === true ) ? $value [ '___max' ] : false ) ;
               if ( $this -> check ( $data [ $key ] , $value [ '___type' ] , $min , $max ) !== true ) {
                 $error ++ ;
-                $this -> warning ( '[' . $key . '] no valid value' . $data [ $key ] , 'schema' ) ;
+                $this -> warning ( '[' . $key . '] no valid value' , 'schema' ) ;
+              } else {
+                if ( $value [ '___type' ] === 'url' ) {
+                  $data [ $key ] = $this -> serialize -> instantPaymentUrlEncode ( $data [ $key ] ) ;
+                }
               }
             } else if ( $value [ '___mandatory' ] !== false ) {
               $error ++ ;
@@ -34,7 +40,8 @@ final class validator extends helper {
             }
           }
           if ( $error === 0 ) {
-            return true ;
+            //-> @NOTE sanitization
+            return $this -> sanitize -> schema ( $schema , $data ) ;
           }
         } else {
           $this -> warning ( 'no valid schema' , 'schema' ) ;
@@ -64,8 +71,14 @@ final class validator extends helper {
     return false ;
   }
 
-  public function isUrl ( $url ) {
+  public function isUrl ( $url , $unsecure = false ) {
     if ( $this -> isString ( $url , 11 , 1000 ) === true && strpos ( $url , 'http' ) !== false && md5 ( filter_var ( $url , FILTER_VALIDATE_URL ) ) === md5 ( $url ) ) {
+      if ( $unsecure !== true ) {
+        if ( strpos ( $url , 'http://' ) !== false || strpos ( $url , 'https://' ) === false ) {
+          $this -> warning ( 'unsecure connection blocked' , 'url' ) ;
+          return false ;
+        }
+      }
       return true ;
     }
     return false ;
