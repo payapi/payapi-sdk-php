@@ -15,13 +15,14 @@ final class commandLocalize extends controller {
     if ( $this -> arguments ( 0 ) !== true && $cached !== false ) {
       return $this -> render ( $cached ) ;
     } else {
-      $endPoint = $this -> endPointLocalization ( $ip ) ;
+      $endPoint = $this -> serialize -> endPointLocalization ( $ip ) ;
       $request = $this -> curl ( $endPoint , false , false ) ;
       if ( $request !== false && isset ( $request [ 'code' ] ) === true ) {
         if ( $request [ 'code' ] === 200) {
-          if ( $this -> validate -> schema ( $request [ 'data' ] , $this -> load -> schema ( 'localize' ) ) === true ) {
+          $validated = $this -> validate -> schema ( $request [ 'data' ] , $this -> load -> schema ( 'localize' ) ) ;
+          if ( is_array ( $validated ) !== false ) {
             $this -> debug ( '[localize] valid schema' ) ;
-            $adaptedData = $this -> adaptor -> localized ( $request [ 'data' ] ) ;
+            $adaptedData = $this -> adaptor -> localized ( $validated ) ;
             $this -> cache ( 'writte' , 'localize' , $ip , $adaptedData ) ;
             return $this -> render ( $this -> cache ( 'read' , 'localize' , $ip ) ) ;
           } else {
