@@ -16,6 +16,7 @@ final class cache extends helper {
       "transaction"        =>     90 ,
       "localize"           =>     30 ,
       "ssl"                =>      1 ,
+      "product"            =>      1 ,
       "account"            =>  false ,
       "settings"           =>  false
     ) ;
