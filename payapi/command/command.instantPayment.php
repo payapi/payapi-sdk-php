@@ -48,7 +48,7 @@ final class commandInstantPayment extends controller {
           //"payload"            => $this -> encode ( $payloadJson , $this -> publicId () ) ,
           "metadata"           => $metaData ,
           "endPointInstantBuy" => $this -> serialize -> endPointInstantBuy ( $this -> publicId () ) ,
-          "endPointProductInstantBuy" => $this -> serialize -> endPointInstantBuy ( $this -> publicId () ) . $this -> serialize -> instantPaymentUrlEncode ( $this -> payment [ 'product' ] [ 'url' ] )
+          "endPointProductInstantBuy" => $this -> serialize -> endPointInstantBuy ( $this -> publicId () ) . $this -> serialize -> paymentUrlEncode ( $this -> payment [ 'product' ] [ 'url' ] )
         ) ;
         $this -> cache ( 'writte' , 'product' , $md5 ) ;
         return $this -> render ( $product ) ;

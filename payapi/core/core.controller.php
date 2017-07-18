@@ -169,7 +169,7 @@ abstract class controller extends helper {
     switch ( $action ) {
       case 'writte' :
         if ( is_array ( $data ) !== false ) {
-          $data [ 'timestamp' ] = $this -> serialize -> timestamp () ;
+          $data [ 'timestamp' ] = $this -> serialize -> microstamp () ;
         }
         $encryptedData = $this -> encode ( $data , false , true ) ;
         return $this -> cache -> writte ( $type , $cacheKey , $encryptedData ) ;

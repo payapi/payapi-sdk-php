@@ -97,15 +97,14 @@ class payapi {
 
 }
 
-$settings = array (
-  "debug"    => true ,
-  "staging"  => true
-) ;
-
-$sdk = new payapi ( $settings ) ;
-
-for ( $cont = 0 ; $cont < 100 ; $cont ++ ) {
-  var_dump ( '__info' , $sdk -> localize ( true , '79.159.' . rand ( 141 , 240 ) . '.' . rand ( 141 , 240 ) ) ) ;
-} exit () ;
-
-exit () ;
+//-> @NOTE TO DELETE AFTER DEV
+function test ( $key , $settings ) {
+  $sdk = new payapi ( $settings ) ;
+  $command = __DIR__ . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'test' . '.' . $key . '.' . 'php' ;
+  if ( is_file ( $command ) === true ) {
+    require ( $command ) ;
+  } else {
+    $test = $sdk -> response ( 501 ) ;
+  }
+  var_dump ( $test ) ;
+}

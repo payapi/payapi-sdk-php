@@ -1,1805 +1,216 @@
 
-=== DEBUG === 2017-07-17 14:27:52 UTC ==>
-0004 [info] engine->single PayApi SDK v0.0.1
-0005 [info] engine->load [autoload] api v0.0.1
-0006 [time] engine->load [load] timing 6ms.
-=== LISTENING ==>
-0011 [run] engine->localize ()
-0012 [info] engine->run [autoload] localize
-0013 [info] controller->_autoload [autoload] cache v0.0.1
-0014 [info] controller->_autoload [autoload] brand v0.0.1
-0018 [info] controller->cache [account] cached
-0023 [info] controller->cache [ssl] cached
-0028 [info] controller->cache [settings] cached
-0034 [info] controller->sdk [run] localize
-0035 [info] engine->run [check] 79.159.192.172
-0037 [info] controller->cache [localize] uncached
-0038 [info] api->curl [get] staging-input.payapi.io
-0537 [debug] api->curl {"ip":"79.159.192.172","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28230","timezone":"Europe/Madrid"}
-0539 [time] curl->proccess [get] timing 500ms.
-0543 [info] engine->run [localize] valid schema
-0547 [info] controller->cache [localize] cached
-0550 [api] api->render [200] rendering
-0551 [time] api->listening [run] timing 16ms.
-=== LISTENING ==>
-0558 [run] engine->localize ()
-0559 [info] engine->run [autoload] localize
-0560 [info] controller->_autoload [autoload] cache v0.0.1
-0562 [info] controller->_autoload [autoload] brand v0.0.1
-0564 [info] controller->cache [account] cached
-0567 [info] controller->cache [ssl] cached
-0571 [info] controller->cache [settings] cached
-0575 [info] controller->sdk [run] localize
-0576 [info] engine->run [check] 79.159.174.213
-0578 [info] controller->cache [localize] uncached
-0579 [info] api->curl [get] staging-input.payapi.io
-1087 [debug] api->curl {"ip":"79.159.174.213","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08001","timezone":"Europe/Madrid"}
-1088 [time] curl->proccess [get] timing 508ms.
-1089 [info] engine->run [localize] valid schema
-1093 [info] controller->cache [localize] cached
-1096 [api] api->render [200] rendering
-1097 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-1103 [run] engine->localize ()
-1104 [info] engine->run [autoload] localize
-1105 [info] controller->_autoload [autoload] cache v0.0.1
-1106 [info] controller->_autoload [autoload] brand v0.0.1
-1108 [info] controller->cache [account] cached
-1111 [info] controller->cache [ssl] cached
-1113 [info] controller->cache [settings] cached
-1115 [info] controller->sdk [run] localize
-1116 [info] engine->run [check] 79.159.193.214
-1118 [info] controller->cache [localize] uncached
-1119 [info] api->curl [get] staging-input.payapi.io
-1543 [debug] api->curl {"ip":"79.159.193.214","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28001","timezone":"Europe/Madrid"}
-1544 [time] curl->proccess [get] timing 425ms.
-1546 [info] engine->run [localize] valid schema
-1550 [info] controller->cache [localize] cached
-1553 [api] api->render [200] rendering
-1553 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-1560 [run] engine->localize ()
-1561 [info] engine->run [autoload] localize
-1561 [info] controller->_autoload [autoload] cache v0.0.1
-1562 [info] controller->_autoload [autoload] brand v0.0.1
-1565 [info] controller->cache [account] cached
-1567 [info] controller->cache [ssl] cached
-1570 [info] controller->cache [settings] cached
-1573 [info] controller->sdk [run] localize
-1574 [info] engine->run [check] 79.159.195.191
-1576 [info] controller->cache [localize] uncached
-1578 [info] api->curl [get] staging-input.payapi.io
-2133 [debug] api->curl {"ip":"79.159.195.191","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28023","timezone":"Europe/Madrid"}
-2135 [time] curl->proccess [get] timing 556ms.
-2136 [info] engine->run [localize] valid schema
-2140 [info] controller->cache [localize] cached
-2143 [api] api->render [200] rendering
-2143 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-2150 [run] engine->localize ()
-2151 [info] engine->run [autoload] localize
-2152 [info] controller->_autoload [autoload] cache v0.0.1
-2154 [info] controller->_autoload [autoload] brand v0.0.1
-2157 [info] controller->cache [account] cached
-2160 [info] controller->cache [ssl] cached
-2164 [info] controller->cache [settings] cached
-2167 [info] controller->sdk [run] localize
-2168 [info] engine->run [check] 79.159.211.226
-2169 [info] controller->cache [localize] uncached
-2170 [info] api->curl [get] staging-input.payapi.io
-2556 [debug] api->curl {"ip":"79.159.211.226","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28039","timezone":"Europe/Madrid"}
-2558 [time] curl->proccess [get] timing 387ms.
-2560 [info] engine->run [localize] valid schema
-2564 [info] controller->cache [localize] cached
-2566 [api] api->render [200] rendering
-2567 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-2575 [run] engine->localize ()
-2576 [info] engine->run [autoload] localize
-2578 [info] controller->_autoload [autoload] cache v0.0.1
-2579 [info] controller->_autoload [autoload] brand v0.0.1
-2582 [info] controller->cache [account] cached
-2587 [info] controller->cache [ssl] cached
-2590 [info] controller->cache [settings] cached
-2599 [info] controller->sdk [run] localize
-2601 [info] engine->run [check] 79.159.213.237
-2603 [info] controller->cache [localize] uncached
-2604 [info] api->curl [get] staging-input.payapi.io
-3183 [debug] api->curl {"ip":"79.159.213.237","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28100","timezone":"Europe/Madrid"}
-3184 [time] curl->proccess [get] timing 579ms.
-3186 [info] engine->run [localize] valid schema
-3189 [info] controller->cache [localize] cached
-3192 [api] api->render [200] rendering
-3193 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-3200 [run] engine->localize ()
-3201 [info] engine->run [autoload] localize
-3202 [info] controller->_autoload [autoload] cache v0.0.1
-3203 [info] controller->_autoload [autoload] brand v0.0.1
-3207 [info] controller->cache [account] cached
-3209 [info] controller->cache [ssl] cached
-3212 [info] controller->cache [settings] cached
-3214 [info] controller->sdk [run] localize
-3215 [info] engine->run [check] 79.159.219.231
-3217 [info] controller->cache [localize] uncached
-3218 [info] api->curl [get] staging-input.payapi.io
-3651 [debug] api->curl {"ip":"79.159.219.231","countryCode":"ES","countryName":"Spain","regionName":"Principality of Asturias","postalCode":"33202","timezone":"Europe/Madrid"}
-3653 [time] curl->proccess [get] timing 434ms.
-3654 [info] engine->run [localize] valid schema
-3658 [info] controller->cache [localize] cached
-3660 [api] api->render [200] rendering
-3661 [time] api->listening [run] timing 11ms.
-=== LISTENING ==>
-3668 [run] engine->localize ()
-3669 [info] engine->run [autoload] localize
-3670 [info] controller->_autoload [autoload] cache v0.0.1
-3671 [info] controller->_autoload [autoload] brand v0.0.1
-3675 [info] controller->cache [account] cached
-3678 [info] controller->cache [ssl] cached
-3682 [info] controller->cache [settings] cached
-3686 [info] controller->sdk [run] localize
-3687 [info] engine->run [check] 79.159.220.213
-3688 [info] controller->cache [localize] uncached
-3689 [info] api->curl [get] staging-input.payapi.io
-4232 [debug] api->curl {"ip":"79.159.220.213","countryCode":"ES","countryName":"Spain","regionName":"Principality of Asturias","postalCode":"33012","timezone":"Europe/Madrid"}
-4233 [time] curl->proccess [get] timing 543ms.
-4234 [info] engine->run [localize] valid schema
-4238 [info] controller->cache [localize] cached
-4241 [api] api->render [200] rendering
-4242 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-4250 [run] engine->localize ()
-4251 [info] engine->run [autoload] localize
-4253 [info] controller->_autoload [autoload] cache v0.0.1
-4254 [info] controller->_autoload [autoload] brand v0.0.1
-4257 [info] controller->cache [account] cached
-4260 [info] controller->cache [ssl] cached
-4263 [info] controller->cache [settings] cached
-4266 [info] controller->sdk [run] localize
-4267 [info] engine->run [check] 79.159.190.167
-4268 [info] controller->cache [localize] uncached
-4269 [info] api->curl [get] staging-input.payapi.io
-4760 [debug] api->curl {"ip":"79.159.190.167","countryCode":"ES","countryName":"Spain","regionName":"Canary Islands","postalCode":"38600","timezone":"Atlantic/Canary"}
-4762 [time] curl->proccess [get] timing 492ms.
-4763 [info] engine->run [localize] valid schema
-4766 [info] controller->cache [localize] cached
-4769 [api] api->render [200] rendering
-4770 [time] api->listening [run] timing 11ms.
-=== LISTENING ==>
-4777 [run] engine->localize ()
-4779 [info] engine->run [autoload] localize
-4780 [info] controller->_autoload [autoload] cache v0.0.1
-4781 [info] controller->_autoload [autoload] brand v0.0.1
-4786 [info] controller->cache [account] cached
-4789 [info] controller->cache [ssl] cached
-4794 [info] controller->cache [settings] cached
-4801 [info] controller->sdk [run] localize
-4802 [info] engine->run [check] 79.159.172.238
-4804 [info] controller->cache [localize] uncached
-4806 [info] api->curl [get] staging-input.payapi.io
-5280 [debug] api->curl {"ip":"79.159.172.238","countryCode":"ES","countryName":"Spain","regionName":"Castille-La Mancha","postalCode":"45280","timezone":"Europe/Madrid"}
-5282 [time] curl->proccess [get] timing 474ms.
-5283 [info] engine->run [localize] valid schema
-5287 [info] controller->cache [localize] cached
-5289 [api] api->render [200] rendering
-5290 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-5298 [run] engine->localize ()
-5299 [info] engine->run [autoload] localize
-5300 [info] controller->_autoload [autoload] cache v0.0.1
-5302 [info] controller->_autoload [autoload] brand v0.0.1
-5305 [info] controller->cache [account] cached
-5309 [info] controller->cache [ssl] cached
-5312 [info] controller->cache [settings] cached
-5315 [info] controller->sdk [run] localize
-5316 [info] engine->run [check] 79.159.234.159
-5317 [info] controller->cache [localize] uncached
-5318 [info] api->curl [get] staging-input.payapi.io
-5781 [debug] api->curl {"ip":"79.159.234.159","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08016","timezone":"Europe/Madrid"}
-5782 [time] curl->proccess [get] timing 464ms.
-5784 [info] engine->run [localize] valid schema
-5787 [info] controller->cache [localize] cached
-5790 [api] api->render [200] rendering
-5791 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-5798 [run] engine->localize ()
-5799 [info] engine->run [autoload] localize
-5800 [info] controller->_autoload [autoload] cache v0.0.1
-5801 [info] controller->_autoload [autoload] brand v0.0.1
-5805 [info] controller->cache [account] cached
-5808 [info] controller->cache [ssl] cached
-5810 [info] controller->cache [settings] cached
-5813 [info] controller->sdk [run] localize
-5814 [info] engine->run [check] 79.159.215.202
-5815 [info] controller->cache [localize] uncached
-5816 [info] api->curl [get] staging-input.payapi.io
-6329 [debug] api->curl {"ip":"79.159.215.202","countryCode":"ES","countryName":"Spain"}
-6331 [time] curl->proccess [get] timing 514ms.
-6332 [info] engine->run [localize] valid schema
-6336 [info] controller->cache [localize] cached
-6338 [api] api->render [200] rendering
-6339 [time] api->listening [run] timing 11ms.
-=== LISTENING ==>
-6345 [run] engine->localize ()
-6346 [info] engine->run [autoload] localize
-6347 [info] controller->_autoload [autoload] cache v0.0.1
-6348 [info] controller->_autoload [autoload] brand v0.0.1
-6351 [info] controller->cache [account] cached
-6354 [info] controller->cache [ssl] cached
-6357 [info] controller->cache [settings] cached
-6360 [info] controller->sdk [run] localize
-6361 [info] engine->run [check] 79.159.190.211
-6363 [info] controller->cache [localize] uncached
-6364 [info] api->curl [get] staging-input.payapi.io
-6761 [debug] api->curl {"ip":"79.159.190.211","countryCode":"ES","countryName":"Spain","regionName":"Canary Islands","postalCode":"38600","timezone":"Atlantic/Canary"}
-6762 [time] curl->proccess [get] timing 397ms.
-6764 [info] engine->run [localize] valid schema
-6768 [info] controller->cache [localize] cached
-6770 [api] api->render [200] rendering
-6772 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-6780 [run] engine->localize ()
-6783 [info] engine->run [autoload] localize
-6785 [info] controller->_autoload [autoload] cache v0.0.1
-6787 [info] controller->_autoload [autoload] brand v0.0.1
-6790 [info] controller->cache [account] cached
-6792 [info] controller->cache [ssl] cached
-6798 [info] controller->cache [settings] cached
-6805 [info] controller->sdk [run] localize
-6808 [info] engine->run [check] 79.159.152.151
-6810 [info] controller->cache [localize] uncached
-6811 [info] api->curl [get] staging-input.payapi.io
-7377 [debug] api->curl {"ip":"79.159.152.151","countryCode":"ES","countryName":"Spain","regionName":"Extremadura","postalCode":"10005","timezone":"Europe/Madrid"}
-7378 [time] curl->proccess [get] timing 567ms.
-7380 [info] engine->run [localize] valid schema
-7384 [info] controller->cache [localize] cached
-7386 [api] api->render [200] rendering
-7387 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-7394 [run] engine->localize ()
-7395 [info] engine->run [autoload] localize
-7397 [info] controller->_autoload [autoload] cache v0.0.1
-7398 [info] controller->_autoload [autoload] brand v0.0.1
-7401 [info] controller->cache [account] cached
-7404 [info] controller->cache [ssl] cached
-7407 [info] controller->cache [settings] cached
-7410 [info] controller->sdk [run] localize
-7411 [info] engine->run [check] 79.159.202.180
-7413 [info] controller->cache [localize] uncached
-7413 [info] api->curl [get] staging-input.payapi.io
-7848 [debug] api->curl {"ip":"79.159.202.180","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28001","timezone":"Europe/Madrid"}
-7849 [time] curl->proccess [get] timing 435ms.
-7851 [info] engine->run [localize] valid schema
-7855 [info] controller->cache [localize] cached
-7857 [api] api->render [200] rendering
-7858 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-7864 [run] engine->localize ()
-7865 [info] engine->run [autoload] localize
-7866 [info] controller->_autoload [autoload] cache v0.0.1
-7867 [info] controller->_autoload [autoload] brand v0.0.1
-7871 [info] controller->cache [account] cached
-7875 [info] controller->cache [ssl] cached
-7878 [info] controller->cache [settings] cached
-7882 [info] controller->sdk [run] localize
-7883 [info] engine->run [check] 79.159.184.154
-7885 [info] controller->cache [localize] uncached
-7886 [info] api->curl [get] staging-input.payapi.io
-8427 [debug] api->curl {"ip":"79.159.184.154","countryCode":"ES","countryName":"Spain","regionName":"Canary Islands","postalCode":"38280","timezone":"Atlantic/Canary"}
-8428 [time] curl->proccess [get] timing 541ms.
-8429 [info] engine->run [localize] valid schema
-8433 [info] controller->cache [localize] cached
-8436 [api] api->render [200] rendering
-8437 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-8444 [run] engine->localize ()
-8445 [info] engine->run [autoload] localize
-8446 [info] controller->_autoload [autoload] cache v0.0.1
-8447 [info] controller->_autoload [autoload] brand v0.0.1
-8450 [info] controller->cache [account] cached
-8453 [info] controller->cache [ssl] cached
-8456 [info] controller->cache [settings] cached
-8458 [info] controller->sdk [run] localize
-8459 [info] engine->run [check] 79.159.211.218
-8460 [info] controller->cache [localize] uncached
-8461 [info] api->curl [get] staging-input.payapi.io
-8886 [debug] api->curl {"ip":"79.159.211.218","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28039","timezone":"Europe/Madrid"}
-8888 [time] curl->proccess [get] timing 426ms.
-8889 [info] engine->run [localize] valid schema
-8894 [info] controller->cache [localize] cached
-8897 [api] api->render [200] rendering
-8899 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-8906 [run] engine->localize ()
-8907 [info] engine->run [autoload] localize
-8909 [info] controller->_autoload [autoload] cache v0.0.1
-8910 [info] controller->_autoload [autoload] brand v0.0.1
-8913 [info] controller->cache [account] cached
-8915 [info] controller->cache [ssl] cached
-8918 [info] controller->cache [settings] cached
-8921 [info] controller->sdk [run] localize
-8922 [info] engine->run [check] 79.159.226.164
-8924 [info] controller->cache [localize] cached
-8927 [info] api->curl [get] staging-input.payapi.io
-9127 [debug] api->curl {"ip":"79.159.226.164","countryCode":"ES","countryName":"Spain","regionName":"Aragon","postalCode":"22135","timezone":"Europe/Madrid"}
-9129 [time] curl->proccess [get] timing 201ms.
-9130 [info] engine->run [localize] valid schema
-9134 [api] api->render [200] rendering
-9135 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-9142 [run] engine->localize ()
-9143 [info] engine->run [autoload] localize
-9144 [info] controller->_autoload [autoload] cache v0.0.1
-9145 [info] controller->_autoload [autoload] brand v0.0.1
-9149 [info] controller->cache [account] cached
-9152 [info] controller->cache [ssl] cached
-9155 [info] controller->cache [settings] cached
-9157 [info] controller->sdk [run] localize
-9158 [info] engine->run [check] 79.159.191.180
-9160 [info] controller->cache [localize] uncached
-9161 [info] api->curl [get] staging-input.payapi.io
-9993 [debug] api->curl {"ip":"79.159.191.180","countryCode":"ES","countryName":"Spain","regionName":"Canary Islands","postalCode":"38500","timezone":"Atlantic/Canary"}
-9994 [time] curl->proccess [get] timing 833ms.
-9995 [info] engine->run [localize] valid schema
-9999 [info] controller->cache [localize] cached
-10001 [api] api->render [200] rendering
-10002 [time] api->listening [run] timing 11ms.
-=== LISTENING ==>
-10009 [run] engine->localize ()
-10010 [info] engine->run [autoload] localize
-10011 [info] controller->_autoload [autoload] cache v0.0.1
-10012 [info] controller->_autoload [autoload] brand v0.0.1
-10015 [info] controller->cache [account] cached
-10018 [info] controller->cache [ssl] cached
-10022 [info] controller->cache [settings] cached
-10025 [info] controller->sdk [run] localize
-10026 [info] engine->run [check] 79.159.215.162
-10028 [info] controller->cache [localize] uncached
-10029 [info] api->curl [get] staging-input.payapi.io
-10522 [debug] api->curl {"ip":"79.159.215.162","countryCode":"ES","countryName":"Spain"}
-10524 [time] curl->proccess [get] timing 495ms.
-10526 [info] engine->run [localize] valid schema
-10530 [info] controller->cache [localize] cached
-10533 [api] api->render [200] rendering
-10534 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-10541 [run] engine->localize ()
-10543 [info] engine->run [autoload] localize
-10545 [info] controller->_autoload [autoload] cache v0.0.1
-10546 [info] controller->_autoload [autoload] brand v0.0.1
-10549 [info] controller->cache [account] cached
-10552 [info] controller->cache [ssl] cached
-10554 [info] controller->cache [settings] cached
-10557 [info] controller->sdk [run] localize
-10558 [info] engine->run [check] 79.159.165.187
-10559 [info] controller->cache [localize] uncached
-10560 [info] api->curl [get] staging-input.payapi.io
-11013 [debug] api->curl {"ip":"79.159.165.187","countryCode":"ES","countryName":"Spain","regionName":"Andalusia","postalCode":"21410","timezone":"Europe/Madrid"}
-11014 [time] curl->proccess [get] timing 453ms.
-11015 [info] engine->run [localize] valid schema
-11020 [info] controller->cache [localize] cached
-11023 [api] api->render [200] rendering
-11024 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-11032 [run] engine->localize ()
-11033 [info] engine->run [autoload] localize
-11035 [info] controller->_autoload [autoload] cache v0.0.1
-11036 [info] controller->_autoload [autoload] brand v0.0.1
-11040 [info] controller->cache [account] cached
-11042 [info] controller->cache [ssl] cached
-11045 [info] controller->cache [settings] cached
-11050 [info] controller->sdk [run] localize
-11055 [info] engine->run [check] 79.159.159.144
-11057 [info] controller->cache [localize] uncached
-11058 [info] api->curl [get] staging-input.payapi.io
-11572 [debug] api->curl {"ip":"79.159.159.144","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08840","timezone":"Europe/Madrid"}
-11573 [time] curl->proccess [get] timing 514ms.
-11575 [info] engine->run [localize] valid schema
-11578 [info] controller->cache [localize] cached
-11581 [api] api->render [200] rendering
-11582 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-11589 [run] engine->localize ()
-11590 [info] engine->run [autoload] localize
-11591 [info] controller->_autoload [autoload] cache v0.0.1
-11592 [info] controller->_autoload [autoload] brand v0.0.1
-11596 [info] controller->cache [account] cached
-11599 [info] controller->cache [ssl] cached
-11601 [info] controller->cache [settings] cached
-11604 [info] controller->sdk [run] localize
-11605 [info] engine->run [check] 79.159.177.238
-11606 [info] controller->cache [localize] uncached
-11607 [info] api->curl [get] staging-input.payapi.io
-12033 [debug] api->curl {"ip":"79.159.177.238","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28028","timezone":"Europe/Madrid"}
-12035 [time] curl->proccess [get] timing 427ms.
-12036 [info] engine->run [localize] valid schema
-12040 [info] controller->cache [localize] cached
-12043 [api] api->render [200] rendering
-12044 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-12051 [run] engine->localize ()
-12052 [info] engine->run [autoload] localize
-12053 [info] controller->_autoload [autoload] cache v0.0.1
-12054 [info] controller->_autoload [autoload] brand v0.0.1
-12057 [info] controller->cache [account] cached
-12061 [info] controller->cache [ssl] cached
-12063 [info] controller->cache [settings] cached
-12065 [info] controller->sdk [run] localize
-12066 [info] engine->run [check] 79.159.216.227
-12068 [info] controller->cache [localize] uncached
-12069 [info] api->curl [get] staging-input.payapi.io
-12620 [debug] api->curl {"ip":"79.159.216.227","countryCode":"ES","countryName":"Spain","regionName":"Principality of Asturias","postalCode":"33200","timezone":"Europe/Madrid"}
-12622 [time] curl->proccess [get] timing 552ms.
-12623 [info] engine->run [localize] valid schema
-12627 [info] controller->cache [localize] cached
-12629 [api] api->render [200] rendering
-12630 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-12638 [run] engine->localize ()
-12638 [info] engine->run [autoload] localize
-12639 [info] controller->_autoload [autoload] cache v0.0.1
-12641 [info] controller->_autoload [autoload] brand v0.0.1
-12644 [info] controller->cache [account] cached
-12647 [info] controller->cache [ssl] cached
-12649 [info] controller->cache [settings] cached
-12652 [info] controller->sdk [run] localize
-12653 [info] engine->run [check] 79.159.165.148
-12654 [info] controller->cache [localize] uncached
-12655 [info] api->curl [get] staging-input.payapi.io
-13072 [debug] api->curl {"ip":"79.159.165.148","countryCode":"ES","countryName":"Spain","regionName":"Andalusia","postalCode":"21410","timezone":"Europe/Madrid"}
-13074 [time] curl->proccess [get] timing 417ms.
-13075 [info] engine->run [localize] valid schema
-13080 [info] controller->cache [localize] cached
-13082 [api] api->render [200] rendering
-13083 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-13090 [run] engine->localize ()
-13091 [info] engine->run [autoload] localize
-13092 [info] controller->_autoload [autoload] cache v0.0.1
-13093 [info] controller->_autoload [autoload] brand v0.0.1
-13096 [info] controller->cache [account] cached
-13099 [info] controller->cache [ssl] cached
-13102 [info] controller->cache [settings] cached
-13104 [info] controller->sdk [run] localize
-13105 [info] engine->run [check] 79.159.224.159
-13107 [info] controller->cache [localize] uncached
-13108 [info] api->curl [get] staging-input.payapi.io
-13858 [debug] api->curl {"ip":"79.159.224.159","countryCode":"ES","countryName":"Spain","regionName":"Galicia","postalCode":"15552","timezone":"Europe/Madrid"}
-13859 [time] curl->proccess [get] timing 751ms.
-13861 [info] engine->run [localize] valid schema
-13866 [info] controller->cache [localize] cached
-13869 [api] api->render [200] rendering
-13870 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-13878 [run] engine->localize ()
-13879 [info] engine->run [autoload] localize
-13881 [info] controller->_autoload [autoload] cache v0.0.1
-13882 [info] controller->_autoload [autoload] brand v0.0.1
-13887 [info] controller->cache [account] cached
-13891 [info] controller->cache [ssl] cached
-13894 [info] controller->cache [settings] cached
-13896 [info] controller->sdk [run] localize
-13897 [info] engine->run [check] 79.159.167.198
-13899 [info] controller->cache [localize] uncached
-13903 [info] api->curl [get] staging-input.payapi.io
-14382 [debug] api->curl {"ip":"79.159.167.198","countryCode":"ES","countryName":"Spain","regionName":"Andalusia","postalCode":"21410","timezone":"Europe/Madrid"}
-14384 [time] curl->proccess [get] timing 477ms.
-14385 [info] engine->run [localize] valid schema
-14390 [info] controller->cache [localize] cached
-14393 [api] api->render [200] rendering
-14393 [time] api->listening [run] timing 19ms.
-=== LISTENING ==>
-14400 [run] engine->localize ()
-14401 [info] engine->run [autoload] localize
-14402 [info] controller->_autoload [autoload] cache v0.0.1
-14404 [info] controller->_autoload [autoload] brand v0.0.1
-14407 [info] controller->cache [account] cached
-14410 [info] controller->cache [ssl] cached
-14412 [info] controller->cache [settings] cached
-14414 [info] controller->sdk [run] localize
-14415 [info] engine->run [check] 79.159.220.216
-14417 [info] controller->cache [localize] uncached
-14418 [info] api->curl [get] staging-input.payapi.io
-15110 [debug] api->curl {"ip":"79.159.220.216","countryCode":"ES","countryName":"Spain","regionName":"Principality of Asturias","postalCode":"33012","timezone":"Europe/Madrid"}
-15111 [time] curl->proccess [get] timing 692ms.
-15112 [info] engine->run [localize] valid schema
-15116 [info] controller->cache [localize] cached
-15119 [api] api->render [200] rendering
-15120 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-15128 [run] engine->localize ()
-15129 [info] engine->run [autoload] localize
-15130 [info] controller->_autoload [autoload] cache v0.0.1
-15132 [info] controller->_autoload [autoload] brand v0.0.1
-15135 [info] controller->cache [account] cached
-15140 [info] controller->cache [ssl] cached
-15143 [info] controller->cache [settings] cached
-15146 [info] controller->sdk [run] localize
-15147 [info] engine->run [check] 79.159.169.232
-15148 [info] controller->cache [localize] uncached
-15149 [info] api->curl [get] staging-input.payapi.io
-15767 [debug] api->curl {"ip":"79.159.169.232","countryCode":"ES","countryName":"Spain","regionName":"Valencia","postalCode":"03112","timezone":"Europe/Madrid"}
-15768 [time] curl->proccess [get] timing 618ms.
-15770 [info] engine->run [localize] valid schema
-15775 [info] controller->cache [localize] cached
-15778 [api] api->render [200] rendering
-15779 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-15786 [run] engine->localize ()
-15787 [info] engine->run [autoload] localize
-15788 [info] controller->_autoload [autoload] cache v0.0.1
-15790 [info] controller->_autoload [autoload] brand v0.0.1
-15793 [info] controller->cache [account] cached
-15795 [info] controller->cache [ssl] cached
-15798 [info] controller->cache [settings] cached
-15801 [info] controller->sdk [run] localize
-15802 [info] engine->run [check] 79.159.227.230
-15803 [info] controller->cache [localize] uncached
-15803 [info] api->curl [get] staging-input.payapi.io
-16182 [debug] api->curl {"ip":"79.159.227.230","countryCode":"ES","countryName":"Spain","regionName":"Aragon","postalCode":"22135","timezone":"Europe/Madrid"}
-16183 [time] curl->proccess [get] timing 379ms.
-16185 [info] engine->run [localize] valid schema
-16189 [info] controller->cache [localize] cached
-16192 [api] api->render [200] rendering
-16193 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-16199 [run] engine->localize ()
-16200 [info] engine->run [autoload] localize
-16200 [info] controller->_autoload [autoload] cache v0.0.1
-16201 [info] controller->_autoload [autoload] brand v0.0.1
-16204 [info] controller->cache [account] cached
-16207 [info] controller->cache [ssl] cached
-16209 [info] controller->cache [settings] cached
-16212 [info] controller->sdk [run] localize
-16213 [info] engine->run [check] 79.159.171.170
-16214 [info] controller->cache [localize] uncached
-16215 [info] api->curl [get] staging-input.payapi.io
-16813 [debug] api->curl {"ip":"79.159.171.170","countryCode":"ES","countryName":"Spain","regionName":"Valencia","postalCode":"03112","timezone":"Europe/Madrid"}
-16815 [time] curl->proccess [get] timing 599ms.
-16816 [info] engine->run [localize] valid schema
-16822 [info] controller->cache [localize] cached
-16826 [api] api->render [200] rendering
-16827 [time] api->listening [run] timing 16ms.
-=== LISTENING ==>
-16841 [run] engine->localize ()
-16842 [info] engine->run [autoload] localize
-16844 [info] controller->_autoload [autoload] cache v0.0.1
-16845 [info] controller->_autoload [autoload] brand v0.0.1
-16849 [info] controller->cache [account] cached
-16853 [info] controller->cache [ssl] cached
-16859 [info] controller->cache [settings] cached
-16863 [info] controller->sdk [run] localize
-16864 [info] engine->run [check] 79.159.143.142
-16867 [info] controller->cache [localize] uncached
-16868 [info] api->curl [get] staging-input.payapi.io
-17308 [debug] api->curl {"ip":"79.159.143.142","countryCode":"ES","countryName":"Spain","regionName":"Valencia","postalCode":"46001","timezone":"Europe/Madrid"}
-17309 [time] curl->proccess [get] timing 440ms.
-17311 [info] engine->run [localize] valid schema
-17315 [info] controller->cache [localize] cached
-17317 [api] api->render [200] rendering
-17318 [time] api->listening [run] timing 15ms.
-=== LISTENING ==>
-17327 [run] engine->localize ()
-17329 [info] engine->run [autoload] localize
-17330 [info] controller->_autoload [autoload] cache v0.0.1
-17331 [info] controller->_autoload [autoload] brand v0.0.1
-17337 [info] controller->cache [account] cached
-17342 [info] controller->cache [ssl] cached
-17349 [info] controller->cache [settings] cached
-17352 [info] controller->sdk [run] localize
-17353 [info] engine->run [check] 79.159.147.229
-17355 [info] controller->cache [localize] uncached
-17356 [info] api->curl [get] staging-input.payapi.io
-17864 [debug] api->curl {"ip":"79.159.147.229","countryCode":"ES","countryName":"Spain","regionName":"Galicia","postalCode":"27003","timezone":"Europe/Madrid"}
-17865 [time] curl->proccess [get] timing 508ms.
-17866 [info] engine->run [localize] valid schema
-17871 [info] controller->cache [localize] cached
-17875 [api] api->render [200] rendering
-17877 [time] api->listening [run] timing 15ms.
-=== LISTENING ==>
-17887 [run] engine->localize ()
-17888 [info] engine->run [autoload] localize
-17890 [info] controller->_autoload [autoload] cache v0.0.1
-17893 [info] controller->_autoload [autoload] brand v0.0.1
-17897 [info] controller->cache [account] cached
-17903 [info] controller->cache [ssl] cached
-17906 [info] controller->cache [settings] cached
-17909 [info] controller->sdk [run] localize
-17910 [info] engine->run [check] 79.159.165.198
-17912 [info] controller->cache [localize] uncached
-17913 [info] api->curl [get] staging-input.payapi.io
-18317 [debug] api->curl {"ip":"79.159.165.198","countryCode":"ES","countryName":"Spain","regionName":"Andalusia","postalCode":"21410","timezone":"Europe/Madrid"}
-18319 [time] curl->proccess [get] timing 405ms.
-18320 [info] engine->run [localize] valid schema
-18327 [info] controller->cache [localize] cached
-18330 [api] api->render [200] rendering
-18331 [time] api->listening [run] timing 15ms.
-=== LISTENING ==>
-18340 [run] engine->localize ()
-18341 [info] engine->run [autoload] localize
-18342 [info] controller->_autoload [autoload] cache v0.0.1
-18343 [info] controller->_autoload [autoload] brand v0.0.1
-18346 [info] controller->cache [account] cached
-18348 [info] controller->cache [ssl] cached
-18352 [info] controller->cache [settings] cached
-18355 [info] controller->sdk [run] localize
-18356 [info] engine->run [check] 79.159.168.240
-18357 [info] controller->cache [localize] uncached
-18358 [info] api->curl [get] staging-input.payapi.io
-18911 [debug] api->curl {"ip":"79.159.168.240","countryCode":"ES","countryName":"Spain","regionName":"Valencia","postalCode":"03112","timezone":"Europe/Madrid"}
-18912 [time] curl->proccess [get] timing 553ms.
-18914 [info] engine->run [localize] valid schema
-18917 [info] controller->cache [localize] cached
-18920 [api] api->render [200] rendering
-18921 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-18929 [run] engine->localize ()
-18931 [info] engine->run [autoload] localize
-18932 [info] controller->_autoload [autoload] cache v0.0.1
-18933 [info] controller->_autoload [autoload] brand v0.0.1
-18938 [info] controller->cache [account] cached
-18942 [info] controller->cache [ssl] cached
-18947 [info] controller->cache [settings] cached
-18951 [info] controller->sdk [run] localize
-18951 [info] engine->run [check] 79.159.220.193
-18953 [info] controller->cache [localize] uncached
-18953 [info] api->curl [get] staging-input.payapi.io
-19960 [debug] api->curl {"ip":"79.159.220.193","countryCode":"ES","countryName":"Spain","regionName":"Principality of Asturias","postalCode":"33012","timezone":"Europe/Madrid"}
-19961 [time] curl->proccess [get] timing 1007ms.
-19962 [info] engine->run [localize] valid schema
-19966 [info] controller->cache [localize] cached
-19968 [api] api->render [200] rendering
-19969 [time] api->listening [run] timing 11ms.
-=== LISTENING ==>
-19977 [run] engine->localize ()
-19978 [info] engine->run [autoload] localize
-19979 [info] controller->_autoload [autoload] cache v0.0.1
-19979 [info] controller->_autoload [autoload] brand v0.0.1
-19984 [info] controller->cache [account] cached
-19987 [info] controller->cache [ssl] cached
-19990 [info] controller->cache [settings] cached
-19994 [info] controller->sdk [run] localize
-19995 [info] engine->run [check] 79.159.186.238
-19998 [info] controller->cache [localize] uncached
-20000 [info] api->curl [get] staging-input.payapi.io
-20490 [debug] api->curl {"ip":"79.159.186.238","countryCode":"ES","countryName":"Spain","regionName":"Canary Islands","postalCode":"38612","timezone":"Atlantic/Canary"}
-20491 [time] curl->proccess [get] timing 490ms.
-20492 [info] engine->run [localize] valid schema
-20496 [info] controller->cache [localize] cached
-20499 [api] api->render [200] rendering
-20500 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-20507 [run] engine->localize ()
-20508 [info] engine->run [autoload] localize
-20509 [info] controller->_autoload [autoload] cache v0.0.1
-20511 [info] controller->_autoload [autoload] brand v0.0.1
-20514 [info] controller->cache [account] cached
-20518 [info] controller->cache [ssl] cached
-20521 [info] controller->cache [settings] cached
-20526 [info] controller->sdk [run] localize
-20527 [info] engine->run [check] 79.159.197.223
-20528 [info] controller->cache [localize] uncached
-20529 [info] api->curl [get] staging-input.payapi.io
-21047 [debug] api->curl {"ip":"79.159.197.223","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28009","timezone":"Europe/Madrid"}
-21048 [time] curl->proccess [get] timing 518ms.
-21050 [info] engine->run [localize] valid schema
-21054 [info] controller->cache [localize] cached
-21056 [api] api->render [200] rendering
-21057 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-21064 [run] engine->localize ()
-21065 [info] engine->run [autoload] localize
-21066 [info] controller->_autoload [autoload] cache v0.0.1
-21067 [info] controller->_autoload [autoload] brand v0.0.1
-21070 [info] controller->cache [account] cached
-21073 [info] controller->cache [ssl] cached
-21076 [info] controller->cache [settings] cached
-21079 [info] controller->sdk [run] localize
-21082 [info] engine->run [check] 79.159.236.173
-21084 [info] controller->cache [localize] uncached
-21084 [info] api->curl [get] staging-input.payapi.io
-21493 [debug] api->curl {"ip":"79.159.236.173","countryCode":"ES","countryName":"Spain","regionName":"Galicia","postalCode":"33760","timezone":"Europe/Madrid"}
-21494 [time] curl->proccess [get] timing 409ms.
-21496 [info] engine->run [localize] valid schema
-21500 [info] controller->cache [localize] cached
-21502 [api] api->render [200] rendering
-21503 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-21510 [run] engine->localize ()
-21511 [info] engine->run [autoload] localize
-21512 [info] controller->_autoload [autoload] cache v0.0.1
-21514 [info] controller->_autoload [autoload] brand v0.0.1
-21518 [info] controller->cache [account] cached
-21522 [info] controller->cache [ssl] cached
-21527 [info] controller->cache [settings] cached
-21530 [info] controller->sdk [run] localize
-21531 [info] engine->run [check] 79.159.209.160
-21533 [info] controller->cache [localize] uncached
-21535 [info] api->curl [get] staging-input.payapi.io
-22057 [debug] api->curl {"ip":"79.159.209.160","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28039","timezone":"Europe/Madrid"}
-22058 [time] curl->proccess [get] timing 522ms.
-22060 [info] engine->run [localize] valid schema
-22063 [info] controller->cache [localize] cached
-22066 [api] api->render [200] rendering
-22067 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-22075 [run] engine->localize ()
-22076 [info] engine->run [autoload] localize
-22078 [info] controller->_autoload [autoload] cache v0.0.1
-22079 [info] controller->_autoload [autoload] brand v0.0.1
-22082 [info] controller->cache [account] cached
-22087 [info] controller->cache [ssl] cached
-22091 [info] controller->cache [settings] cached
-22095 [info] controller->sdk [run] localize
-22096 [info] engine->run [check] 79.159.180.192
-22099 [info] controller->cache [localize] uncached
-22100 [info] api->curl [get] staging-input.payapi.io
-22571 [debug] api->curl {"ip":"79.159.180.192","countryCode":"ES","countryName":"Spain","regionName":"Castille and León","postalCode":"34870","timezone":"Europe/Madrid"}
-22573 [time] curl->proccess [get] timing 471ms.
-22574 [info] engine->run [localize] valid schema
-22579 [info] controller->cache [localize] cached
-22582 [api] api->render [200] rendering
-22583 [time] api->listening [run] timing 15ms.
-=== LISTENING ==>
-22590 [run] engine->localize ()
-22592 [info] engine->run [autoload] localize
-22593 [info] controller->_autoload [autoload] cache v0.0.1
-22594 [info] controller->_autoload [autoload] brand v0.0.1
-22598 [info] controller->cache [account] cached
-22601 [info] controller->cache [ssl] cached
-22604 [info] controller->cache [settings] cached
-22606 [info] controller->sdk [run] localize
-22607 [info] engine->run [check] 79.159.179.207
-22609 [info] controller->cache [localize] uncached
-22610 [info] api->curl [get] staging-input.payapi.io
-23105 [debug] api->curl {"ip":"79.159.179.207","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28001","timezone":"Europe/Madrid"}
-23107 [time] curl->proccess [get] timing 496ms.
-23108 [info] engine->run [localize] valid schema
-23112 [info] controller->cache [localize] cached
-23115 [api] api->render [200] rendering
-23116 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-23123 [run] engine->localize ()
-23124 [info] engine->run [autoload] localize
-23125 [info] controller->_autoload [autoload] cache v0.0.1
-23126 [info] controller->_autoload [autoload] brand v0.0.1
-23129 [info] controller->cache [account] cached
-23133 [info] controller->cache [ssl] cached
-23136 [info] controller->cache [settings] cached
-23139 [info] controller->sdk [run] localize
-23140 [info] engine->run [check] 79.159.150.158
-23142 [info] controller->cache [localize] uncached
-23144 [info] api->curl [get] staging-input.payapi.io
-23536 [debug] api->curl {"ip":"79.159.150.158","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08001","timezone":"Europe/Madrid"}
-23538 [time] curl->proccess [get] timing 393ms.
-23539 [info] engine->run [localize] valid schema
-23544 [info] controller->cache [localize] cached
-23547 [api] api->render [200] rendering
-23548 [time] api->listening [run] timing 15ms.
-=== LISTENING ==>
-23554 [run] engine->localize ()
-23555 [info] engine->run [autoload] localize
-23556 [info] controller->_autoload [autoload] cache v0.0.1
-23557 [info] controller->_autoload [autoload] brand v0.0.1
-23559 [info] controller->cache [account] cached
-23562 [info] controller->cache [ssl] cached
-23564 [info] controller->cache [settings] cached
-23567 [info] controller->sdk [run] localize
-23567 [info] engine->run [check] 79.159.182.178
-23569 [info] controller->cache [localize] uncached
-23570 [info] api->curl [get] staging-input.payapi.io
-24153 [debug] api->curl {"ip":"79.159.182.178","countryCode":"ES","countryName":"Spain","regionName":"Castille and León","postalCode":"34200","timezone":"Europe/Madrid"}
-24155 [time] curl->proccess [get] timing 583ms.
-24156 [info] engine->run [localize] valid schema
-24161 [info] controller->cache [localize] cached
-24163 [api] api->render [200] rendering
-24164 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-24176 [run] engine->localize ()
-24177 [info] engine->run [autoload] localize
-24179 [info] controller->_autoload [autoload] cache v0.0.1
-24180 [info] controller->_autoload [autoload] brand v0.0.1
-24184 [info] controller->cache [account] cached
-24191 [info] controller->cache [ssl] cached
-24200 [info] controller->cache [settings] cached
-24203 [info] controller->sdk [run] localize
-24206 [info] engine->run [check] 79.159.150.169
-24211 [info] controller->cache [localize] uncached
-24213 [info] api->curl [get] staging-input.payapi.io
-24678 [debug] api->curl {"ip":"79.159.150.169","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08001","timezone":"Europe/Madrid"}
-24679 [time] curl->proccess [get] timing 465ms.
-24681 [info] engine->run [localize] valid schema
-24685 [info] controller->cache [localize] cached
-24687 [api] api->render [200] rendering
-24688 [time] api->listening [run] timing 18ms.
-=== LISTENING ==>
-24695 [run] engine->localize ()
-24696 [info] engine->run [autoload] localize
-24697 [info] controller->_autoload [autoload] cache v0.0.1
-24698 [info] controller->_autoload [autoload] brand v0.0.1
-24702 [info] controller->cache [account] cached
-24705 [info] controller->cache [ssl] cached
-24708 [info] controller->cache [settings] cached
-24710 [info] controller->sdk [run] localize
-24711 [info] engine->run [check] 79.159.168.180
-24713 [info] controller->cache [localize] uncached
-24713 [info] api->curl [get] staging-input.payapi.io
-25203 [debug] api->curl {"ip":"79.159.168.180","countryCode":"ES","countryName":"Spain","regionName":"Valencia","postalCode":"03112","timezone":"Europe/Madrid"}
-25204 [time] curl->proccess [get] timing 490ms.
-25206 [info] engine->run [localize] valid schema
-25212 [info] controller->cache [localize] cached
-25215 [api] api->render [200] rendering
-25216 [time] api->listening [run] timing 15ms.
-=== LISTENING ==>
-25225 [run] engine->localize ()
-25227 [info] engine->run [autoload] localize
-25229 [info] controller->_autoload [autoload] cache v0.0.1
-25230 [info] controller->_autoload [autoload] brand v0.0.1
-25234 [info] controller->cache [account] cached
-25239 [info] controller->cache [ssl] cached
-25248 [info] controller->cache [settings] cached
-25251 [info] controller->sdk [run] localize
-25252 [info] engine->run [check] 79.159.199.171
-25256 [info] controller->cache [localize] uncached
-25257 [info] api->curl [get] staging-input.payapi.io
-25709 [debug] api->curl {"ip":"79.159.199.171","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28023","timezone":"Europe/Madrid"}
-25710 [time] curl->proccess [get] timing 452ms.
-25712 [info] engine->run [localize] valid schema
-25715 [info] controller->cache [localize] cached
-25718 [api] api->render [200] rendering
-25719 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-25726 [run] engine->localize ()
-25727 [info] engine->run [autoload] localize
-25729 [info] controller->_autoload [autoload] cache v0.0.1
-25730 [info] controller->_autoload [autoload] brand v0.0.1
-25733 [info] controller->cache [account] cached
-25738 [info] controller->cache [ssl] cached
-25745 [info] controller->cache [settings] cached
-25751 [info] controller->sdk [run] localize
-25752 [info] engine->run [check] 79.159.182.206
-25755 [info] controller->cache [localize] uncached
-25756 [info] api->curl [get] staging-input.payapi.io
-26252 [debug] api->curl {"ip":"79.159.182.206","countryCode":"ES","countryName":"Spain","regionName":"Castille and León","postalCode":"34200","timezone":"Europe/Madrid"}
-26253 [time] curl->proccess [get] timing 495ms.
-26254 [info] engine->run [localize] valid schema
-26258 [info] controller->cache [localize] cached
-26261 [api] api->render [200] rendering
-26262 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-26269 [run] engine->localize ()
-26270 [info] engine->run [autoload] localize
-26271 [info] controller->_autoload [autoload] cache v0.0.1
-26273 [info] controller->_autoload [autoload] brand v0.0.1
-26276 [info] controller->cache [account] cached
-26279 [info] controller->cache [ssl] cached
-26284 [info] controller->cache [settings] cached
-26287 [info] controller->sdk [run] localize
-26288 [info] engine->run [check] 79.159.159.207
-26290 [info] controller->cache [localize] uncached
-26291 [info] api->curl [get] staging-input.payapi.io
-26722 [debug] api->curl {"ip":"79.159.159.207","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08840","timezone":"Europe/Madrid"}
-26724 [time] curl->proccess [get] timing 431ms.
-26725 [info] engine->run [localize] valid schema
-26730 [info] controller->cache [localize] cached
-26732 [api] api->render [200] rendering
-26733 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-26741 [run] engine->localize ()
-26742 [info] engine->run [autoload] localize
-26743 [info] controller->_autoload [autoload] cache v0.0.1
-26744 [info] controller->_autoload [autoload] brand v0.0.1
-26747 [info] controller->cache [account] cached
-26750 [info] controller->cache [ssl] cached
-26753 [info] controller->cache [settings] cached
-26755 [info] controller->sdk [run] localize
-26756 [info] engine->run [check] 79.159.163.187
-26757 [info] controller->cache [localize] uncached
-26758 [info] api->curl [get] staging-input.payapi.io
-27319 [debug] api->curl {"ip":"79.159.163.187","countryCode":"ES","countryName":"Spain","regionName":"Balearic Islands","postalCode":"07001","timezone":"Europe/Madrid"}
-27321 [time] curl->proccess [get] timing 562ms.
-27322 [info] engine->run [localize] valid schema
-27326 [info] controller->cache [localize] cached
-27329 [api] api->render [200] rendering
-27329 [time] api->listening [run] timing 11ms.
-=== LISTENING ==>
-27337 [run] engine->localize ()
-27338 [info] engine->run [autoload] localize
-27339 [info] controller->_autoload [autoload] cache v0.0.1
-27340 [info] controller->_autoload [autoload] brand v0.0.1
-27343 [info] controller->cache [account] cached
-27346 [info] controller->cache [ssl] cached
-27349 [info] controller->cache [settings] cached
-27352 [info] controller->sdk [run] localize
-27353 [info] engine->run [check] 79.159.206.143
-27354 [info] controller->cache [localize] uncached
-27355 [info] api->curl [get] staging-input.payapi.io
-27769 [debug] api->curl {"ip":"79.159.206.143","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28001","timezone":"Europe/Madrid"}
-27770 [time] curl->proccess [get] timing 415ms.
-27772 [info] engine->run [localize] valid schema
-27776 [info] controller->cache [localize] cached
-27778 [api] api->render [200] rendering
-27779 [time] api->listening [run] timing 11ms.
-=== LISTENING ==>
-27787 [run] engine->localize ()
-27788 [info] engine->run [autoload] localize
-27789 [info] controller->_autoload [autoload] cache v0.0.1
-27790 [info] controller->_autoload [autoload] brand v0.0.1
-27794 [info] controller->cache [account] cached
-27797 [info] controller->cache [ssl] cached
-27800 [info] controller->cache [settings] cached
-27803 [info] controller->sdk [run] localize
-27804 [info] engine->run [check] 79.159.240.151
-27806 [info] controller->cache [localize] uncached
-27806 [info] api->curl [get] staging-input.payapi.io
-28348 [debug] api->curl {"ip":"79.159.240.151","countryCode":"ES","countryName":"Spain"}
-28349 [time] curl->proccess [get] timing 542ms.
-28351 [info] engine->run [localize] valid schema
-28355 [info] controller->cache [localize] cached
-28358 [api] api->render [200] rendering
-28361 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-28369 [run] engine->localize ()
-28370 [info] engine->run [autoload] localize
-28371 [info] controller->_autoload [autoload] cache v0.0.1
-28372 [info] controller->_autoload [autoload] brand v0.0.1
-28377 [info] controller->cache [account] cached
-28380 [info] controller->cache [ssl] cached
-28383 [info] controller->cache [settings] cached
-28386 [info] controller->sdk [run] localize
-28387 [info] engine->run [check] 79.159.240.196
-28388 [info] controller->cache [localize] uncached
-28389 [info] api->curl [get] staging-input.payapi.io
-28811 [debug] api->curl {"ip":"79.159.240.196","countryCode":"ES","countryName":"Spain"}
-28813 [time] curl->proccess [get] timing 422ms.
-28814 [info] engine->run [localize] valid schema
-28818 [info] controller->cache [localize] cached
-28821 [api] api->render [200] rendering
-28822 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-28831 [run] engine->localize ()
-28832 [info] engine->run [autoload] localize
-28835 [info] controller->_autoload [autoload] cache v0.0.1
-28836 [info] controller->_autoload [autoload] brand v0.0.1
-28839 [info] controller->cache [account] cached
-28842 [info] controller->cache [ssl] cached
-28854 [info] controller->cache [settings] cached
-28858 [info] controller->sdk [run] localize
-28860 [info] engine->run [check] 79.159.234.236
-28864 [info] controller->cache [localize] uncached
-28869 [info] api->curl [get] staging-input.payapi.io
-29399 [debug] api->curl {"ip":"79.159.234.236","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08016","timezone":"Europe/Madrid"}
-29400 [time] curl->proccess [get] timing 530ms.
-29401 [info] engine->run [localize] valid schema
-29405 [info] controller->cache [localize] cached
-29408 [api] api->render [200] rendering
-29409 [time] api->listening [run] timing 19ms.
-=== LISTENING ==>
-29416 [run] engine->localize ()
-29417 [info] engine->run [autoload] localize
-29418 [info] controller->_autoload [autoload] cache v0.0.1
-29419 [info] controller->_autoload [autoload] brand v0.0.1
-29423 [info] controller->cache [account] cached
-29426 [info] controller->cache [ssl] cached
-29430 [info] controller->cache [settings] cached
-29434 [info] controller->sdk [run] localize
-29435 [info] engine->run [check] 79.159.228.202
-29437 [info] controller->cache [localize] uncached
-29438 [info] api->curl [get] staging-input.payapi.io
-29860 [debug] api->curl {"ip":"79.159.228.202","countryCode":"ES","countryName":"Spain"}
-29861 [time] curl->proccess [get] timing 423ms.
-29862 [info] engine->run [localize] valid schema
-29867 [info] controller->cache [localize] cached
-29870 [api] api->render [200] rendering
-29871 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-29878 [run] engine->localize ()
-29880 [info] engine->run [autoload] localize
-29881 [info] controller->_autoload [autoload] cache v0.0.1
-29882 [info] controller->_autoload [autoload] brand v0.0.1
-29887 [info] controller->cache [account] cached
-29890 [info] controller->cache [ssl] cached
-29893 [info] controller->cache [settings] cached
-29902 [info] controller->sdk [run] localize
-29904 [info] engine->run [check] 79.159.156.168
-29905 [info] controller->cache [localize] uncached
-29907 [info] api->curl [get] staging-input.payapi.io
-30445 [debug] api->curl {"ip":"79.159.156.168","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08630","timezone":"Europe/Madrid"}
-30447 [time] curl->proccess [get] timing 538ms.
-30448 [info] engine->run [localize] valid schema
-30453 [info] controller->cache [localize] cached
-30456 [api] api->render [200] rendering
-30458 [time] api->listening [run] timing 16ms.
-=== LISTENING ==>
-30474 [run] engine->localize ()
-30475 [info] engine->run [autoload] localize
-30477 [info] controller->_autoload [autoload] cache v0.0.1
-30478 [info] controller->_autoload [autoload] brand v0.0.1
-30482 [info] controller->cache [account] cached
-30487 [info] controller->cache [ssl] cached
-30491 [info] controller->cache [settings] cached
-30493 [info] controller->sdk [run] localize
-30495 [info] engine->run [check] 79.159.154.194
-30497 [info] controller->cache [localize] uncached
-30498 [info] api->curl [get] staging-input.payapi.io
-30914 [debug] api->curl {"ip":"79.159.154.194","countryCode":"ES","countryName":"Spain","regionName":"Extremadura","postalCode":"10005","timezone":"Europe/Madrid"}
-30916 [time] curl->proccess [get] timing 417ms.
-30917 [info] engine->run [localize] valid schema
-30921 [info] controller->cache [localize] cached
-30925 [api] api->render [200] rendering
-30926 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-30936 [run] engine->localize ()
-30936 [info] engine->run [autoload] localize
-30938 [info] controller->_autoload [autoload] cache v0.0.1
-30939 [info] controller->_autoload [autoload] brand v0.0.1
-30942 [info] controller->cache [account] cached
-30945 [info] controller->cache [ssl] cached
-30952 [info] controller->cache [settings] cached
-30959 [info] controller->sdk [run] localize
-30960 [info] engine->run [check] 79.159.234.163
-30962 [info] controller->cache [localize] uncached
-30963 [info] api->curl [get] staging-input.payapi.io
-31496 [debug] api->curl {"ip":"79.159.234.163","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08016","timezone":"Europe/Madrid"}
-31497 [time] curl->proccess [get] timing 534ms.
-31499 [info] engine->run [localize] valid schema
-31503 [info] controller->cache [localize] cached
-31506 [api] api->render [200] rendering
-31507 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-31515 [run] engine->localize ()
-31516 [info] engine->run [autoload] localize
-31517 [info] controller->_autoload [autoload] cache v0.0.1
-31518 [info] controller->_autoload [autoload] brand v0.0.1
-31522 [info] controller->cache [account] cached
-31525 [info] controller->cache [ssl] cached
-31528 [info] controller->cache [settings] cached
-31533 [info] controller->sdk [run] localize
-31534 [info] engine->run [check] 79.159.212.176
-31536 [info] controller->cache [localize] uncached
-31537 [info] api->curl [get] staging-input.payapi.io
-31988 [debug] api->curl {"ip":"79.159.212.176","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28100","timezone":"Europe/Madrid"}
-31990 [time] curl->proccess [get] timing 452ms.
-31991 [info] engine->run [localize] valid schema
-31995 [info] controller->cache [localize] cached
-31997 [api] api->render [200] rendering
-31998 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-32006 [run] engine->localize ()
-32007 [info] engine->run [autoload] localize
-32008 [info] controller->_autoload [autoload] cache v0.0.1
-32009 [info] controller->_autoload [autoload] brand v0.0.1
-32013 [info] controller->cache [account] cached
-32016 [info] controller->cache [ssl] cached
-32018 [info] controller->cache [settings] cached
-32021 [info] controller->sdk [run] localize
-32023 [info] engine->run [check] 79.159.201.221
-32025 [info] controller->cache [localize] uncached
-32026 [info] api->curl [get] staging-input.payapi.io
-32544 [debug] api->curl {"ip":"79.159.201.221","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28001","timezone":"Europe/Madrid"}
-32545 [time] curl->proccess [get] timing 518ms.
-32546 [info] engine->run [localize] valid schema
-32581 [info] controller->cache [localize] cached
-32591 [api] api->render [200] rendering
-32592 [time] api->listening [run] timing 51ms.
-=== LISTENING ==>
-32602 [run] engine->localize ()
-32606 [info] engine->run [autoload] localize
-32607 [info] controller->_autoload [autoload] cache v0.0.1
-32608 [info] controller->_autoload [autoload] brand v0.0.1
-32611 [info] controller->cache [account] cached
-32614 [info] controller->cache [ssl] cached
-32617 [info] controller->cache [settings] cached
-32621 [info] controller->sdk [run] localize
-32622 [info] engine->run [check] 79.159.205.228
-32624 [info] controller->cache [localize] uncached
-32626 [info] api->curl [get] staging-input.payapi.io
-33017 [debug] api->curl {"ip":"79.159.205.228","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28491","timezone":"Europe/Madrid"}
-33019 [time] curl->proccess [get] timing 392ms.
-33021 [info] engine->run [localize] valid schema
-33026 [info] controller->cache [localize] cached
-33029 [api] api->render [200] rendering
-33030 [time] api->listening [run] timing 16ms.
-=== LISTENING ==>
-33037 [run] engine->localize ()
-33038 [info] engine->run [autoload] localize
-33040 [info] controller->_autoload [autoload] cache v0.0.1
-33041 [info] controller->_autoload [autoload] brand v0.0.1
-33044 [info] controller->cache [account] cached
-33047 [info] controller->cache [ssl] cached
-33051 [info] controller->cache [settings] cached
-33057 [info] controller->sdk [run] localize
-33058 [info] engine->run [check] 79.159.161.163
-33060 [info] controller->cache [localize] uncached
-33060 [info] api->curl [get] staging-input.payapi.io
-33591 [debug] api->curl {"ip":"79.159.161.163","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08860","timezone":"Europe/Madrid"}
-33592 [time] curl->proccess [get] timing 531ms.
-33594 [info] engine->run [localize] valid schema
-33597 [info] controller->cache [localize] cached
-33600 [api] api->render [200] rendering
-33601 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-33608 [run] engine->localize ()
-33609 [info] engine->run [autoload] localize
-33610 [info] controller->_autoload [autoload] cache v0.0.1
-33611 [info] controller->_autoload [autoload] brand v0.0.1
-33615 [info] controller->cache [account] cached
-33617 [info] controller->cache [ssl] cached
-33620 [info] controller->cache [settings] cached
-33625 [info] controller->sdk [run] localize
-33626 [info] engine->run [check] 79.159.158.202
-33628 [info] controller->cache [localize] uncached
-33629 [info] api->curl [get] staging-input.payapi.io
-34049 [debug] api->curl {"ip":"79.159.158.202","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08840","timezone":"Europe/Madrid"}
-34051 [time] curl->proccess [get] timing 421ms.
-34052 [info] engine->run [localize] valid schema
-34056 [info] controller->cache [localize] cached
-34059 [api] api->render [200] rendering
-34059 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-34066 [run] engine->localize ()
-34067 [info] engine->run [autoload] localize
-34068 [info] controller->_autoload [autoload] cache v0.0.1
-34070 [info] controller->_autoload [autoload] brand v0.0.1
-34073 [info] controller->cache [account] cached
-34076 [info] controller->cache [ssl] cached
-34079 [info] controller->cache [settings] cached
-34084 [info] controller->sdk [run] localize
-34086 [info] engine->run [check] 79.159.228.177
-34091 [info] controller->cache [localize] uncached
-34094 [info] api->curl [get] staging-input.payapi.io
-34639 [debug] api->curl {"ip":"79.159.228.177","countryCode":"ES","countryName":"Spain"}
-34640 [time] curl->proccess [get] timing 546ms.
-34642 [info] engine->run [localize] valid schema
-34645 [info] controller->cache [localize] cached
-34648 [api] api->render [200] rendering
-34648 [time] api->listening [run] timing 17ms.
-=== LISTENING ==>
-34655 [run] engine->localize ()
-34656 [info] engine->run [autoload] localize
-34657 [info] controller->_autoload [autoload] cache v0.0.1
-34659 [info] controller->_autoload [autoload] brand v0.0.1
-34662 [info] controller->cache [account] cached
-34665 [info] controller->cache [ssl] cached
-34668 [info] controller->cache [settings] cached
-34672 [info] controller->sdk [run] localize
-34675 [info] engine->run [check] 79.159.169.151
-34676 [info] controller->cache [localize] uncached
-34677 [info] api->curl [get] staging-input.payapi.io
-35102 [debug] api->curl {"ip":"79.159.169.151","countryCode":"ES","countryName":"Spain","regionName":"Valencia","postalCode":"03112","timezone":"Europe/Madrid"}
-35103 [time] curl->proccess [get] timing 425ms.
-35105 [info] engine->run [localize] valid schema
-35109 [info] controller->cache [localize] cached
-35112 [api] api->render [200] rendering
-35112 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-35120 [run] engine->localize ()
-35121 [info] engine->run [autoload] localize
-35122 [info] controller->_autoload [autoload] cache v0.0.1
-35124 [info] controller->_autoload [autoload] brand v0.0.1
-35127 [info] controller->cache [account] cached
-35130 [info] controller->cache [ssl] cached
-35137 [info] controller->cache [settings] cached
-35145 [info] controller->sdk [run] localize
-35146 [info] engine->run [check] 79.159.223.234
-35149 [info] controller->cache [localize] uncached
-35150 [info] api->curl [get] staging-input.payapi.io
-35770 [debug] api->curl {"ip":"79.159.223.234","countryCode":"ES","countryName":"Spain","regionName":"Principality of Asturias","postalCode":"33207","timezone":"Europe/Madrid"}
-35771 [time] curl->proccess [get] timing 618ms.
-35773 [info] engine->run [localize] valid schema
-35776 [info] controller->cache [localize] cached
-35779 [api] api->render [200] rendering
-35780 [time] api->listening [run] timing 16ms.
-=== LISTENING ==>
-35787 [run] engine->localize ()
-35788 [info] engine->run [autoload] localize
-35789 [info] controller->_autoload [autoload] cache v0.0.1
-35790 [info] controller->_autoload [autoload] brand v0.0.1
-35793 [info] controller->cache [account] cached
-35796 [info] controller->cache [ssl] cached
-35799 [info] controller->cache [settings] cached
-35802 [info] controller->sdk [run] localize
-35803 [info] engine->run [check] 79.159.153.222
-35804 [info] controller->cache [localize] uncached
-35805 [info] api->curl [get] staging-input.payapi.io
-36202 [debug] api->curl {"ip":"79.159.153.222","countryCode":"ES","countryName":"Spain","regionName":"Extremadura","postalCode":"10005","timezone":"Europe/Madrid"}
-36203 [time] curl->proccess [get] timing 398ms.
-36205 [info] engine->run [localize] valid schema
-36209 [info] controller->cache [localize] cached
-36212 [api] api->render [200] rendering
-36213 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-36219 [run] engine->localize ()
-36220 [info] engine->run [autoload] localize
-36222 [info] controller->_autoload [autoload] cache v0.0.1
-36223 [info] controller->_autoload [autoload] brand v0.0.1
-36227 [info] controller->cache [account] cached
-36230 [info] controller->cache [ssl] cached
-36235 [info] controller->cache [settings] cached
-36245 [info] controller->sdk [run] localize
-36246 [info] engine->run [check] 79.159.145.153
-36249 [info] controller->cache [localize] uncached
-36251 [info] api->curl [get] staging-input.payapi.io
-36739 [debug] api->curl {"ip":"79.159.145.153","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08220","timezone":"Europe/Madrid"}
-36740 [time] curl->proccess [get] timing 488ms.
-36741 [info] engine->run [localize] valid schema
-36746 [info] controller->cache [localize] cached
-36748 [api] api->render [200] rendering
-36749 [time] api->listening [run] timing 16ms.
-=== LISTENING ==>
-36757 [run] engine->localize ()
-36758 [info] engine->run [autoload] localize
-36759 [info] controller->_autoload [autoload] cache v0.0.1
-36761 [info] controller->_autoload [autoload] brand v0.0.1
-36764 [info] controller->cache [account] cached
-36766 [info] controller->cache [ssl] cached
-36769 [info] controller->cache [settings] cached
-36772 [info] controller->sdk [run] localize
-36774 [info] engine->run [check] 79.159.178.238
-36775 [info] controller->cache [localize] uncached
-36776 [info] api->curl [get] staging-input.payapi.io
-37226 [debug] api->curl {"ip":"79.159.178.238","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28001","timezone":"Europe/Madrid"}
-37228 [time] curl->proccess [get] timing 450ms.
-37229 [info] engine->run [localize] valid schema
-37234 [info] controller->cache [localize] cached
-37236 [api] api->render [200] rendering
-37237 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-37244 [run] engine->localize ()
-37245 [info] engine->run [autoload] localize
-37247 [info] controller->_autoload [autoload] cache v0.0.1
-37248 [info] controller->_autoload [autoload] brand v0.0.1
-37251 [info] controller->cache [account] cached
-37254 [info] controller->cache [ssl] cached
-37257 [info] controller->cache [settings] cached
-37259 [info] controller->sdk [run] localize
-37260 [info] engine->run [check] 79.159.148.166
-37261 [info] controller->cache [localize] uncached
-37262 [info] api->curl [get] staging-input.payapi.io
-37787 [debug] api->curl {"ip":"79.159.148.166","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08001","timezone":"Europe/Madrid"}
-37788 [time] curl->proccess [get] timing 525ms.
-37789 [info] engine->run [localize] valid schema
-37793 [info] controller->cache [localize] cached
-37796 [api] api->render [200] rendering
-37797 [time] api->listening [run] timing 11ms.
-=== LISTENING ==>
-37804 [run] engine->localize ()
-37805 [info] engine->run [autoload] localize
-37806 [info] controller->_autoload [autoload] cache v0.0.1
-37807 [info] controller->_autoload [autoload] brand v0.0.1
-37811 [info] controller->cache [account] cached
-37813 [info] controller->cache [ssl] cached
-37816 [info] controller->cache [settings] cached
-37819 [info] controller->sdk [run] localize
-37820 [info] engine->run [check] 79.159.200.163
-37822 [info] controller->cache [localize] uncached
-37823 [info] api->curl [get] staging-input.payapi.io
-38250 [debug] api->curl {"ip":"79.159.200.163","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28001","timezone":"Europe/Madrid"}
-38251 [time] curl->proccess [get] timing 427ms.
-38253 [info] engine->run [localize] valid schema
-38256 [info] controller->cache [localize] cached
-38259 [api] api->render [200] rendering
-38260 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-38268 [run] engine->localize ()
-38269 [info] engine->run [autoload] localize
-38271 [info] controller->_autoload [autoload] cache v0.0.1
-38272 [info] controller->_autoload [autoload] brand v0.0.1
-38275 [info] controller->cache [account] cached
-38279 [info] controller->cache [ssl] cached
-38284 [info] controller->cache [settings] cached
-38291 [info] controller->sdk [run] localize
-38294 [info] engine->run [check] 79.159.193.214
-38296 [info] controller->cache [localize] cached
-38301 [info] api->curl [get] staging-input.payapi.io
-38499 [debug] api->curl {"ip":"79.159.193.214","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28001","timezone":"Europe/Madrid"}
-38500 [time] curl->proccess [get] timing 199ms.
-38502 [info] engine->run [localize] valid schema
-38506 [api] api->render [200] rendering
-38507 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-38514 [run] engine->localize ()
-38515 [info] engine->run [autoload] localize
-38516 [info] controller->_autoload [autoload] cache v0.0.1
-38517 [info] controller->_autoload [autoload] brand v0.0.1
-38520 [info] controller->cache [account] cached
-38523 [info] controller->cache [ssl] cached
-38527 [info] controller->cache [settings] cached
-38529 [info] controller->sdk [run] localize
-38532 [info] engine->run [check] 79.159.217.187
-38534 [info] controller->cache [localize] uncached
-38535 [info] api->curl [get] staging-input.payapi.io
-39883 [debug] api->curl {"ip":"79.159.217.187","countryCode":"ES","countryName":"Spain","regionName":"Principality of Asturias","postalCode":"33201","timezone":"Europe/Madrid"}
-39884 [time] curl->proccess [get] timing 1348ms.
-39886 [info] engine->run [localize] valid schema
-39891 [info] controller->cache [localize] cached
-39894 [api] api->render [200] rendering
-39895 [time] api->listening [run] timing 15ms.
-=== LISTENING ==>
-39902 [run] engine->localize ()
-39903 [info] engine->run [autoload] localize
-39904 [info] controller->_autoload [autoload] cache v0.0.1
-39905 [info] controller->_autoload [autoload] brand v0.0.1
-39909 [info] controller->cache [account] cached
-39912 [info] controller->cache [ssl] cached
-39915 [info] controller->cache [settings] cached
-39918 [info] controller->sdk [run] localize
-39919 [info] engine->run [check] 79.159.236.188
-39921 [info] controller->cache [localize] uncached
-39923 [info] api->curl [get] staging-input.payapi.io
-40327 [debug] api->curl {"ip":"79.159.236.188","countryCode":"ES","countryName":"Spain","regionName":"Galicia","postalCode":"33760","timezone":"Europe/Madrid"}
-40329 [time] curl->proccess [get] timing 405ms.
-40335 [info] engine->run [localize] valid schema
-40340 [info] controller->cache [localize] cached
-40344 [api] api->render [200] rendering
-40345 [time] api->listening [run] timing 21ms.
-=== LISTENING ==>
-40352 [run] engine->localize ()
-40352 [info] engine->run [autoload] localize
-40353 [info] controller->_autoload [autoload] cache v0.0.1
-40354 [info] controller->_autoload [autoload] brand v0.0.1
-40357 [info] controller->cache [account] cached
-40360 [info] controller->cache [ssl] cached
-40363 [info] controller->cache [settings] cached
-40366 [info] controller->sdk [run] localize
-40368 [info] engine->run [check] 79.159.223.197
-40369 [info] controller->cache [localize] uncached
-40370 [info] api->curl [get] staging-input.payapi.io
-40932 [debug] api->curl {"ip":"79.159.223.197","countryCode":"ES","countryName":"Spain","regionName":"Principality of Asturias","postalCode":"33207","timezone":"Europe/Madrid"}
-40933 [time] curl->proccess [get] timing 562ms.
-40935 [info] engine->run [localize] valid schema
-40938 [info] controller->cache [localize] cached
-40941 [api] api->render [200] rendering
-40941 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-40948 [run] engine->localize ()
-40949 [info] engine->run [autoload] localize
-40950 [info] controller->_autoload [autoload] cache v0.0.1
-40951 [info] controller->_autoload [autoload] brand v0.0.1
-40953 [info] controller->cache [account] cached
-40956 [info] controller->cache [ssl] cached
-40959 [info] controller->cache [settings] cached
-40961 [info] controller->sdk [run] localize
-40962 [info] engine->run [check] 79.159.168.187
-40963 [info] controller->cache [localize] uncached
-40965 [info] api->curl [get] staging-input.payapi.io
-41380 [debug] api->curl {"ip":"79.159.168.187","countryCode":"ES","countryName":"Spain","regionName":"Valencia","postalCode":"03112","timezone":"Europe/Madrid"}
-41382 [time] curl->proccess [get] timing 416ms.
-41383 [info] engine->run [localize] valid schema
-41387 [info] controller->cache [localize] cached
-41389 [api] api->render [200] rendering
-41390 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-41397 [run] engine->localize ()
-41398 [info] engine->run [autoload] localize
-41399 [info] controller->_autoload [autoload] cache v0.0.1
-41400 [info] controller->_autoload [autoload] brand v0.0.1
-41404 [info] controller->cache [account] cached
-41407 [info] controller->cache [ssl] cached
-41409 [info] controller->cache [settings] cached
-41411 [info] controller->sdk [run] localize
-41412 [info] engine->run [check] 79.159.184.189
-41414 [info] controller->cache [localize] uncached
-41415 [info] api->curl [get] staging-input.payapi.io
-41981 [debug] api->curl {"ip":"79.159.184.189","countryCode":"ES","countryName":"Spain","regionName":"Canary Islands","postalCode":"38280","timezone":"Atlantic/Canary"}
-41982 [time] curl->proccess [get] timing 566ms.
-41983 [info] engine->run [localize] valid schema
-41987 [info] controller->cache [localize] cached
-41989 [api] api->render [200] rendering
-41990 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-41997 [run] engine->localize ()
-41998 [info] engine->run [autoload] localize
-41999 [info] controller->_autoload [autoload] cache v0.0.1
-42000 [info] controller->_autoload [autoload] brand v0.0.1
-42004 [info] controller->cache [account] cached
-42007 [info] controller->cache [ssl] cached
-42009 [info] controller->cache [settings] cached
-42012 [info] controller->sdk [run] localize
-42012 [info] engine->run [check] 79.159.209.202
-42014 [info] controller->cache [localize] uncached
-42015 [info] api->curl [get] staging-input.payapi.io
-42428 [debug] api->curl {"ip":"79.159.209.202","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28039","timezone":"Europe/Madrid"}
-42430 [time] curl->proccess [get] timing 414ms.
-42431 [info] engine->run [localize] valid schema
-42435 [info] controller->cache [localize] cached
-42438 [api] api->render [200] rendering
-42439 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-42446 [run] engine->localize ()
-42447 [info] engine->run [autoload] localize
-42448 [info] controller->_autoload [autoload] cache v0.0.1
-42449 [info] controller->_autoload [autoload] brand v0.0.1
-42453 [info] controller->cache [account] cached
-42456 [info] controller->cache [ssl] cached
-42458 [info] controller->cache [settings] cached
-42461 [info] controller->sdk [run] localize
-42462 [info] engine->run [check] 79.159.151.197
-42463 [info] controller->cache [localize] uncached
-42464 [info] api->curl [get] staging-input.payapi.io
-43029 [debug] api->curl {"ip":"79.159.151.197","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08001","timezone":"Europe/Madrid"}
-43030 [time] curl->proccess [get] timing 565ms.
-43031 [info] engine->run [localize] valid schema
-43036 [info] controller->cache [localize] cached
-43038 [api] api->render [200] rendering
-43039 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-43047 [run] engine->localize ()
-43048 [info] engine->run [autoload] localize
-43049 [info] controller->_autoload [autoload] cache v0.0.1
-43051 [info] controller->_autoload [autoload] brand v0.0.1
-43054 [info] controller->cache [account] cached
-43057 [info] controller->cache [ssl] cached
-43059 [info] controller->cache [settings] cached
-43061 [info] controller->sdk [run] localize
-43063 [info] engine->run [check] 79.159.238.179
-43064 [info] controller->cache [localize] uncached
-43065 [info] api->curl [get] staging-input.payapi.io
-43500 [debug] api->curl {"ip":"79.159.238.179","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28035","timezone":"Europe/Madrid"}
-43501 [time] curl->proccess [get] timing 435ms.
-43503 [info] engine->run [localize] valid schema
-43507 [info] controller->cache [localize] cached
-43510 [api] api->render [200] rendering
-43512 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-43518 [run] engine->localize ()
-43520 [info] engine->run [autoload] localize
-43521 [info] controller->_autoload [autoload] cache v0.0.1
-43522 [info] controller->_autoload [autoload] brand v0.0.1
-43526 [info] controller->cache [account] cached
-43529 [info] controller->cache [ssl] cached
-43534 [info] controller->cache [settings] cached
-43537 [info] controller->sdk [run] localize
-43538 [info] engine->run [check] 79.159.207.220
-43539 [info] controller->cache [localize] uncached
-43539 [info] api->curl [get] staging-input.payapi.io
-44078 [debug] api->curl {"ip":"79.159.207.220","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28015","timezone":"Europe/Madrid"}
-44079 [time] curl->proccess [get] timing 539ms.
-44080 [info] engine->run [localize] valid schema
-44085 [info] controller->cache [localize] cached
-44088 [api] api->render [200] rendering
-44089 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-44097 [run] engine->localize ()
-44098 [info] engine->run [autoload] localize
-44099 [info] controller->_autoload [autoload] cache v0.0.1
-44101 [info] controller->_autoload [autoload] brand v0.0.1
-44105 [info] controller->cache [account] cached
-44108 [info] controller->cache [ssl] cached
-44111 [info] controller->cache [settings] cached
-44114 [info] controller->sdk [run] localize
-44115 [info] engine->run [check] 79.159.172.220
-44117 [info] controller->cache [localize] uncached
-44118 [info] api->curl [get] staging-input.payapi.io
-44560 [debug] api->curl {"ip":"79.159.172.220","countryCode":"ES","countryName":"Spain","regionName":"Castille-La Mancha","postalCode":"45280","timezone":"Europe/Madrid"}
-44561 [time] curl->proccess [get] timing 443ms.
-44562 [info] engine->run [localize] valid schema
-44566 [info] controller->cache [localize] cached
-44569 [api] api->render [200] rendering
-44570 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-44577 [run] engine->localize ()
-44579 [info] engine->run [autoload] localize
-44581 [info] controller->_autoload [autoload] cache v0.0.1
-44582 [info] controller->_autoload [autoload] brand v0.0.1
-44587 [info] controller->cache [account] cached
-44590 [info] controller->cache [ssl] cached
-44592 [info] controller->cache [settings] cached
-44602 [info] controller->sdk [run] localize
-44603 [info] engine->run [check] 79.159.202.177
-44605 [info] controller->cache [localize] uncached
-44606 [info] api->curl [get] staging-input.payapi.io
-45125 [debug] api->curl {"ip":"79.159.202.177","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28001","timezone":"Europe/Madrid"}
-45127 [time] curl->proccess [get] timing 518ms.
-45128 [info] engine->run [localize] valid schema
-45132 [info] controller->cache [localize] cached
-45134 [api] api->render [200] rendering
-45135 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-45142 [run] engine->localize ()
-45143 [info] engine->run [autoload] localize
-45145 [info] controller->_autoload [autoload] cache v0.0.1
-45146 [info] controller->_autoload [autoload] brand v0.0.1
-45149 [info] controller->cache [account] cached
-45152 [info] controller->cache [ssl] cached
-45155 [info] controller->cache [settings] cached
-45158 [info] controller->sdk [run] localize
-45159 [info] engine->run [check] 79.159.232.239
-45160 [info] controller->cache [localize] uncached
-45161 [info] api->curl [get] staging-input.payapi.io
-45568 [debug] api->curl {"ip":"79.159.232.239","countryCode":"ES","countryName":"Spain","regionName":"Andalusia","postalCode":"04770","timezone":"Europe/Madrid"}
-45569 [time] curl->proccess [get] timing 407ms.
-45571 [info] engine->run [localize] valid schema
-45576 [info] controller->cache [localize] cached
-45579 [api] api->render [200] rendering
-45580 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-45590 [run] engine->localize ()
-45591 [info] engine->run [autoload] localize
-45592 [info] controller->_autoload [autoload] cache v0.0.1
-45593 [info] controller->_autoload [autoload] brand v0.0.1
-45601 [info] controller->cache [account] cached
-45604 [info] controller->cache [ssl] cached
-45607 [info] controller->cache [settings] cached
-45609 [info] controller->sdk [run] localize
-45610 [info] engine->run [check] 79.159.175.239
-45611 [info] controller->cache [localize] uncached
-45612 [info] api->curl [get] staging-input.payapi.io
-46258 [debug] api->curl {"ip":"79.159.175.239","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08001","timezone":"Europe/Madrid"}
-46260 [time] curl->proccess [get] timing 647ms.
-46261 [info] engine->run [localize] valid schema
-46265 [info] controller->cache [localize] cached
-46267 [api] api->render [200] rendering
-46268 [time] api->listening [run] timing 11ms.
-=== LISTENING ==>
-46276 [run] engine->localize ()
-46277 [info] engine->run [autoload] localize
-46278 [info] controller->_autoload [autoload] cache v0.0.1
-46280 [info] controller->_autoload [autoload] brand v0.0.1
-46284 [info] controller->cache [account] cached
-46288 [info] controller->cache [ssl] cached
-46291 [info] controller->cache [settings] cached
-46294 [info] controller->sdk [run] localize
-46296 [info] engine->run [check] 79.159.164.234
-46303 [info] controller->cache [localize] uncached
-46304 [info] api->curl [get] staging-input.payapi.io
-46706 [debug] api->curl {"ip":"79.159.164.234","countryCode":"ES","countryName":"Spain","regionName":"Andalusia","postalCode":"21410","timezone":"Europe/Madrid"}
-46708 [time] curl->proccess [get] timing 403ms.
-46710 [info] engine->run [localize] valid schema
-46714 [info] controller->cache [localize] cached
-46717 [api] api->render [200] rendering
-46718 [time] api->listening [run] timing 18ms.
-=== LISTENING ==>
-46725 [run] engine->localize ()
-46726 [info] engine->run [autoload] localize
-46727 [info] controller->_autoload [autoload] cache v0.0.1
-46729 [info] controller->_autoload [autoload] brand v0.0.1
-46732 [info] controller->cache [account] cached
-46737 [info] controller->cache [ssl] cached
-46740 [info] controller->cache [settings] cached
-46742 [info] controller->sdk [run] localize
-46743 [info] engine->run [check] 79.159.162.217
-46745 [info] controller->cache [localize] uncached
-46750 [info] api->curl [get] staging-input.payapi.io
-47223 [debug] api->curl {"ip":"79.159.162.217","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08911","timezone":"Europe/Madrid"}
-47224 [time] curl->proccess [get] timing 472ms.
-47225 [info] engine->run [localize] valid schema
-47229 [info] controller->cache [localize] cached
-47231 [api] api->render [200] rendering
-47232 [time] api->listening [run] timing 18ms.
-=== LISTENING ==>
-47240 [run] engine->localize ()
-47242 [info] engine->run [autoload] localize
-47243 [info] controller->_autoload [autoload] cache v0.0.1
-47244 [info] controller->_autoload [autoload] brand v0.0.1
-47247 [info] controller->cache [account] cached
-47251 [info] controller->cache [ssl] cached
-47255 [info] controller->cache [settings] cached
-47258 [info] controller->sdk [run] localize
-47259 [info] engine->run [check] 79.159.207.238
-47260 [info] controller->cache [localize] uncached
-47261 [info] api->curl [get] staging-input.payapi.io
-47717 [debug] api->curl {"ip":"79.159.207.238","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28015","timezone":"Europe/Madrid"}
-47718 [time] curl->proccess [get] timing 456ms.
-47720 [info] engine->run [localize] valid schema
-47724 [info] controller->cache [localize] cached
-47727 [api] api->render [200] rendering
-47728 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-47736 [run] engine->localize ()
-47736 [info] engine->run [autoload] localize
-47738 [info] controller->_autoload [autoload] cache v0.0.1
-47739 [info] controller->_autoload [autoload] brand v0.0.1
-47742 [info] controller->cache [account] cached
-47745 [info] controller->cache [ssl] cached
-47751 [info] controller->cache [settings] cached
-47754 [info] controller->sdk [run] localize
-47755 [info] engine->run [check] 79.159.164.203
-47756 [info] controller->cache [localize] uncached
-47757 [info] api->curl [get] staging-input.payapi.io
-48271 [debug] api->curl {"ip":"79.159.164.203","countryCode":"ES","countryName":"Spain","regionName":"Andalusia","postalCode":"21410","timezone":"Europe/Madrid"}
-48272 [time] curl->proccess [get] timing 514ms.
-48274 [info] engine->run [localize] valid schema
-48278 [info] controller->cache [localize] cached
-48280 [api] api->render [200] rendering
-48281 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-48288 [run] engine->localize ()
-48289 [info] engine->run [autoload] localize
-48290 [info] controller->_autoload [autoload] cache v0.0.1
-48291 [info] controller->_autoload [autoload] brand v0.0.1
-48294 [info] controller->cache [account] cached
-48297 [info] controller->cache [ssl] cached
-48300 [info] controller->cache [settings] cached
-48302 [info] controller->sdk [run] localize
-48303 [info] engine->run [check] 79.159.185.146
-48304 [info] controller->cache [localize] uncached
-48305 [info] api->curl [get] staging-input.payapi.io
-48701 [debug] api->curl {"ip":"79.159.185.146","countryCode":"ES","countryName":"Spain","regionName":"Canary Islands","postalCode":"38670","timezone":"Atlantic/Canary"}
-48703 [time] curl->proccess [get] timing 397ms.
-48704 [info] engine->run [localize] valid schema
-48708 [info] controller->cache [localize] cached
-48711 [api] api->render [200] rendering
-48712 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-48719 [run] engine->localize ()
-48719 [info] engine->run [autoload] localize
-48721 [info] controller->_autoload [autoload] cache v0.0.1
-48723 [info] controller->_autoload [autoload] brand v0.0.1
-48726 [info] controller->cache [account] cached
-48729 [info] controller->cache [ssl] cached
-48734 [info] controller->cache [settings] cached
-48737 [info] controller->sdk [run] localize
-48738 [info] engine->run [check] 79.159.160.213
-48739 [info] controller->cache [localize] uncached
-48740 [info] api->curl [get] staging-input.payapi.io
-49320 [debug] api->curl {"ip":"79.159.160.213","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08911","timezone":"Europe/Madrid"}
-49322 [time] curl->proccess [get] timing 580ms.
-49323 [info] engine->run [localize] valid schema
-49328 [info] controller->cache [localize] cached
-49330 [api] api->render [200] rendering
-49331 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-49338 [run] engine->localize ()
-49340 [info] engine->run [autoload] localize
-49341 [info] controller->_autoload [autoload] cache v0.0.1
-49342 [info] controller->_autoload [autoload] brand v0.0.1
-49345 [info] controller->cache [account] cached
-49348 [info] controller->cache [ssl] cached
-49350 [info] controller->cache [settings] cached
-49353 [info] controller->sdk [run] localize
-49354 [info] engine->run [check] 79.159.192.203
-49355 [info] controller->cache [localize] uncached
-49356 [info] api->curl [get] staging-input.payapi.io
-49789 [debug] api->curl {"ip":"79.159.192.203","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28230","timezone":"Europe/Madrid"}
-49791 [time] curl->proccess [get] timing 434ms.
-49792 [info] engine->run [localize] valid schema
-49796 [info] controller->cache [localize] cached
-49798 [api] api->render [200] rendering
-49799 [time] api->listening [run] timing 11ms.
-=== LISTENING ==>
-49806 [run] engine->localize ()
-49807 [info] engine->run [autoload] localize
-49808 [info] controller->_autoload [autoload] cache v0.0.1
-49810 [info] controller->_autoload [autoload] brand v0.0.1
-49813 [info] controller->cache [account] cached
-49816 [info] controller->cache [ssl] cached
-49818 [info] controller->cache [settings] cached
-49822 [info] controller->sdk [run] localize
-49824 [info] engine->run [check] 79.159.162.161
-49825 [info] controller->cache [localize] uncached
-49826 [info] api->curl [get] staging-input.payapi.io
-50370 [debug] api->curl {"ip":"79.159.162.161","countryCode":"ES","countryName":"Spain","regionName":"Catalonia","postalCode":"08911","timezone":"Europe/Madrid"}
-50371 [time] curl->proccess [get] timing 544ms.
-50372 [info] engine->run [localize] valid schema
-50376 [info] controller->cache [localize] cached
-50379 [api] api->render [200] rendering
-50380 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-50387 [run] engine->localize ()
-50388 [info] engine->run [autoload] localize
-50390 [info] controller->_autoload [autoload] cache v0.0.1
-50391 [info] controller->_autoload [autoload] brand v0.0.1
-50394 [info] controller->cache [account] cached
-50397 [info] controller->cache [ssl] cached
-50400 [info] controller->cache [settings] cached
-50404 [info] controller->sdk [run] localize
-50405 [info] engine->run [check] 79.159.164.172
-50407 [info] controller->cache [localize] uncached
-50408 [info] api->curl [get] staging-input.payapi.io
-50851 [debug] api->curl {"ip":"79.159.164.172","countryCode":"ES","countryName":"Spain","regionName":"Andalusia","postalCode":"21410","timezone":"Europe/Madrid"}
-50852 [time] curl->proccess [get] timing 443ms.
-50853 [info] engine->run [localize] valid schema
-50858 [info] controller->cache [localize] cached
-50861 [api] api->render [200] rendering
-50862 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-50870 [run] engine->localize ()
-50871 [info] engine->run [autoload] localize
-50872 [info] controller->_autoload [autoload] cache v0.0.1
-50874 [info] controller->_autoload [autoload] brand v0.0.1
-50877 [info] controller->cache [account] cached
-50880 [info] controller->cache [ssl] cached
-50885 [info] controller->cache [settings] cached
-50888 [info] controller->sdk [run] localize
-50889 [info] engine->run [check] 79.159.218.162
-50891 [info] controller->cache [localize] uncached
-50892 [info] api->curl [get] staging-input.payapi.io
-51463 [debug] api->curl {"ip":"79.159.218.162","countryCode":"ES","countryName":"Spain","regionName":"Principality of Asturias","postalCode":"33202","timezone":"Europe/Madrid"}
-51464 [time] curl->proccess [get] timing 572ms.
-51466 [info] engine->run [localize] valid schema
-51470 [info] controller->cache [localize] cached
-51474 [api] api->render [200] rendering
-51475 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-51484 [run] engine->localize ()
-51485 [info] engine->run [autoload] localize
-51486 [info] controller->_autoload [autoload] cache v0.0.1
-51487 [info] controller->_autoload [autoload] brand v0.0.1
-51490 [info] controller->cache [account] cached
-51493 [info] controller->cache [ssl] cached
-51496 [info] controller->cache [settings] cached
-51504 [info] controller->sdk [run] localize
-51506 [info] engine->run [check] 79.159.210.184
-51508 [info] controller->cache [localize] uncached
-51509 [info] api->curl [get] staging-input.payapi.io
-51918 [debug] api->curl {"ip":"79.159.210.184","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28039","timezone":"Europe/Madrid"}
-51919 [time] curl->proccess [get] timing 408ms.
-51921 [info] engine->run [localize] valid schema
-51925 [info] controller->cache [localize] cached
-51927 [api] api->render [200] rendering
-51928 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-51937 [run] engine->localize ()
-51938 [info] engine->run [autoload] localize
-51939 [info] controller->_autoload [autoload] cache v0.0.1
-51940 [info] controller->_autoload [autoload] brand v0.0.1
-51943 [info] controller->cache [account] cached
-51946 [info] controller->cache [ssl] cached
-51949 [info] controller->cache [settings] cached
-51953 [info] controller->sdk [run] localize
-51953 [info] engine->run [check] 79.159.141.142
-51955 [info] controller->cache [localize] uncached
-51956 [info] api->curl [get] staging-input.payapi.io
-52467 [debug] api->curl {"ip":"79.159.141.142","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28804","timezone":"Europe/Madrid"}
-52468 [time] curl->proccess [get] timing 511ms.
-52470 [info] engine->run [localize] valid schema
-52474 [info] controller->cache [localize] cached
-52477 [api] api->render [200] rendering
-52478 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-52486 [run] engine->localize ()
-52487 [info] engine->run [autoload] localize
-52488 [info] controller->_autoload [autoload] cache v0.0.1
-52489 [info] controller->_autoload [autoload] brand v0.0.1
-52493 [info] controller->cache [account] cached
-52495 [info] controller->cache [ssl] cached
-52500 [info] controller->cache [settings] cached
-52504 [info] controller->sdk [run] localize
-52505 [info] engine->run [check] 79.159.164.203
-52506 [info] controller->cache [localize] cached
-52509 [info] api->curl [get] staging-input.payapi.io
-52688 [debug] api->curl {"ip":"79.159.164.203","countryCode":"ES","countryName":"Spain","regionName":"Andalusia","postalCode":"21410","timezone":"Europe/Madrid"}
-52690 [time] curl->proccess [get] timing 180ms.
-52691 [info] engine->run [localize] valid schema
-52696 [api] api->render [200] rendering
-52697 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-52704 [run] engine->localize ()
-52705 [info] engine->run [autoload] localize
-52706 [info] controller->_autoload [autoload] cache v0.0.1
-52707 [info] controller->_autoload [autoload] brand v0.0.1
-52711 [info] controller->cache [account] cached
-52714 [info] controller->cache [ssl] cached
-52716 [info] controller->cache [settings] cached
-52719 [info] controller->sdk [run] localize
-52720 [info] engine->run [check] 79.159.178.155
-52723 [info] controller->cache [localize] cached
-52726 [info] api->curl [get] staging-input.payapi.io
-52973 [debug] api->curl {"ip":"79.159.178.155","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28001","timezone":"Europe/Madrid"}
-52974 [time] curl->proccess [get] timing 248ms.
-52976 [info] engine->run [localize] valid schema
-52980 [api] api->render [200] rendering
-52981 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-52989 [run] engine->localize ()
-52990 [info] engine->run [autoload] localize
-52991 [info] controller->_autoload [autoload] cache v0.0.1
-52992 [info] controller->_autoload [autoload] brand v0.0.1
-52995 [info] controller->cache [account] cached
-52997 [info] controller->cache [ssl] cached
-53000 [info] controller->cache [settings] cached
-53003 [info] controller->sdk [run] localize
-53003 [info] engine->run [check] 79.159.202.212
-53005 [info] controller->cache [localize] uncached
-53006 [info] api->curl [get] staging-input.payapi.io
-53514 [debug] api->curl {"ip":"79.159.202.212","countryCode":"ES","countryName":"Spain","regionName":"Madrid","postalCode":"28001","timezone":"Europe/Madrid"}
-53515 [time] curl->proccess [get] timing 508ms.
-53516 [info] engine->run [localize] valid schema
-53520 [info] controller->cache [localize] cached
-53523 [api] api->render [200] rendering
-53525 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-53531 [time] debug->destruct [app] timing 4044ms.
-=== 53534ms. === 2017-07-17 14:28:46 UTC ===
+=== DEBUG === 2017-07-18 04:57:24 UTC ==>
+0005 [info] engine->single PayApi SDK v0.0.1
+0007 [info] engine->load [autoload] api v0.0.1
+0008 [time] engine->load [load] timing 8ms.
+=== LISTENING ==>
+0017 [run] engine->localize ()
+0018 [info] engine->run [autoload] localize
+0019 [info] controller->_autoload [autoload] cache v0.0.1
+0020 [info] controller->_autoload [autoload] brand v0.0.1
+0025 [info] controller->cache [account] cached
+0029 [info] controller->cache [ssl] cached
+0033 [info] controller->cache [settings] cached
+0036 [info] controller->sdk [run] localize
+0037 [info] engine->run [check] 79.159.209.233
+0039 [info] controller->cache [localize] uncached
+0041 [info] api->curl [get] staging-input.payapi.io
+2046 [debug] api->curl 
+2048 [time] curl->proccess [get] timing 2006ms.
+2049 [error] helper->warning [warning] [curl] timeout
+2052 [info] curl->proccess [retry] staging-input.payapi.io
+4056 [debug] curl->proccess 
+4057 [time] curl->proccess [get] timing 2004ms.
+4058 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.209.233
+4061 [api] api->render [504] rendering
+4062 [time] api->listening [run] timing 15ms.
+=== LISTENING ==>
+4068 [run] engine->localize ()
+4068 [info] engine->run [autoload] localize
+4069 [info] controller->_autoload [autoload] cache v0.0.1
+4070 [info] controller->_autoload [autoload] brand v0.0.1
+4072 [info] controller->cache [account] cached
+4075 [info] controller->cache [ssl] cached
+4078 [info] controller->cache [settings] cached
+4080 [info] controller->sdk [run] localize
+4081 [info] engine->run [check] 79.159.157.195
+4082 [info] controller->cache [localize] uncached
+4083 [info] api->curl [get] staging-input.payapi.io
+6087 [debug] api->curl 
+6090 [time] curl->proccess [get] timing 2006ms.
+6091 [error] helper->warning [warning] [curl] timeout
+6093 [info] curl->proccess [retry] staging-input.payapi.io
+8098 [debug] curl->proccess 
+8100 [time] curl->proccess [get] timing 2006ms.
+8101 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.157.195
+8104 [api] api->render [504] rendering
+8105 [time] api->listening [run] timing 12ms.
+=== LISTENING ==>
+8110 [run] engine->localize ()
+8111 [info] engine->run [autoload] localize
+8112 [info] controller->_autoload [autoload] cache v0.0.1
+8113 [info] controller->_autoload [autoload] brand v0.0.1
+8115 [info] controller->cache [account] cached
+8118 [info] controller->cache [ssl] cached
+8121 [info] controller->cache [settings] cached
+8124 [info] controller->sdk [run] localize
+8125 [info] engine->run [check] 79.159.225.149
+8126 [info] controller->cache [localize] uncached
+8127 [info] api->curl [get] staging-input.payapi.io
+10130 [debug] api->curl 
+10132 [time] curl->proccess [get] timing 2004ms.
+10133 [error] helper->warning [warning] [curl] timeout
+10136 [info] curl->proccess [retry] staging-input.payapi.io
+12139 [debug] curl->proccess 
+12141 [time] curl->proccess [get] timing 2004ms.
+12142 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.225.149
+12144 [api] api->render [504] rendering
+12145 [time] api->listening [run] timing 13ms.
+=== LISTENING ==>
+12151 [run] engine->localize ()
+12152 [info] engine->run [autoload] localize
+12153 [info] controller->_autoload [autoload] cache v0.0.1
+12153 [info] controller->_autoload [autoload] brand v0.0.1
+12156 [info] controller->cache [account] cached
+12158 [info] controller->cache [ssl] cached
+12161 [info] controller->cache [settings] cached
+12163 [info] controller->sdk [run] localize
+12164 [info] engine->run [check] 79.159.233.194
+12165 [info] controller->cache [localize] uncached
+12166 [info] api->curl [get] staging-input.payapi.io
+14169 [debug] api->curl 
+14171 [time] curl->proccess [get] timing 2004ms.
+14172 [error] helper->warning [warning] [curl] timeout
+14174 [info] curl->proccess [retry] staging-input.payapi.io
+16177 [debug] curl->proccess 
+16179 [time] curl->proccess [get] timing 2003ms.
+16180 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.233.194
+16182 [api] api->render [504] rendering
+16183 [time] api->listening [run] timing 12ms.
+=== LISTENING ==>
+16191 [run] engine->localize ()
+16192 [info] engine->run [autoload] localize
+16193 [info] controller->_autoload [autoload] cache v0.0.1
+16194 [info] controller->_autoload [autoload] brand v0.0.1
+16197 [info] controller->cache [account] cached
+16202 [info] controller->cache [ssl] cached
+16210 [info] controller->cache [settings] cached
+16213 [info] controller->sdk [run] localize
+16213 [info] engine->run [check] 79.159.206.178
+16215 [info] controller->cache [localize] uncached
+16216 [info] api->curl [get] staging-input.payapi.io
+18217 [debug] api->curl 
+18219 [time] curl->proccess [get] timing 2003ms.
+18220 [error] helper->warning [warning] [curl] timeout
+18223 [info] curl->proccess [retry] staging-input.payapi.io
+20226 [debug] curl->proccess 
+20228 [time] curl->proccess [get] timing 2004ms.
+20230 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.206.178
+20232 [api] api->render [504] rendering
+20233 [time] api->listening [run] timing 13ms.
+=== LISTENING ==>
+20239 [run] engine->localize ()
+20240 [info] engine->run [autoload] localize
+20241 [info] controller->_autoload [autoload] cache v0.0.1
+20243 [info] controller->_autoload [autoload] brand v0.0.1
+20246 [info] controller->cache [account] cached
+20251 [info] controller->cache [ssl] cached
+20255 [info] controller->cache [settings] cached
+20258 [info] controller->sdk [run] localize
+20259 [info] engine->run [check] 79.159.226.202
+20260 [info] controller->cache [localize] uncached
+20261 [info] api->curl [get] staging-input.payapi.io
+22264 [debug] api->curl 
+22266 [time] curl->proccess [get] timing 2003ms.
+22267 [error] helper->warning [warning] [curl] timeout
+22269 [info] curl->proccess [retry] staging-input.payapi.io
+24272 [debug] curl->proccess 
+24273 [time] curl->proccess [get] timing 2003ms.
+24275 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.226.202
+24277 [api] api->render [504] rendering
+24279 [time] api->listening [run] timing 14ms.
+=== LISTENING ==>
+24285 [run] engine->localize ()
+24287 [info] engine->run [autoload] localize
+24288 [info] controller->_autoload [autoload] cache v0.0.1
+24290 [info] controller->_autoload [autoload] brand v0.0.1
+24294 [info] controller->cache [account] cached
+24299 [info] controller->cache [ssl] cached
+24303 [info] controller->cache [settings] cached
+24305 [info] controller->sdk [run] localize
+24306 [info] engine->run [check] 79.159.171.213
+24308 [info] controller->cache [localize] uncached
+24309 [info] api->curl [get] staging-input.payapi.io
+26313 [debug] api->curl 
+26314 [time] curl->proccess [get] timing 2005ms.
+26316 [error] helper->warning [warning] [curl] timeout
+26318 [info] curl->proccess [retry] staging-input.payapi.io
+28321 [debug] curl->proccess 
+28322 [time] curl->proccess [get] timing 2004ms.
+28323 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.171.213
+28326 [api] api->render [504] rendering
+28327 [time] api->listening [run] timing 13ms.
+=== LISTENING ==>
+28331 [run] engine->localize ()
+28332 [info] engine->run [autoload] localize
+28333 [info] controller->_autoload [autoload] cache v0.0.1
+28334 [info] controller->_autoload [autoload] brand v0.0.1
+28337 [info] controller->cache [account] cached
+28341 [info] controller->cache [ssl] cached
+28344 [info] controller->cache [settings] cached
+28348 [info] controller->sdk [run] localize
+28349 [info] engine->run [check] 79.159.231.168
+28351 [info] controller->cache [localize] uncached
+28351 [info] api->curl [get] staging-input.payapi.io
+30356 [debug] api->curl 
+30358 [time] curl->proccess [get] timing 2006ms.
+30360 [error] helper->warning [warning] [curl] timeout
+30362 [info] curl->proccess [retry] staging-input.payapi.io
+32366 [debug] curl->proccess 
+32367 [time] curl->proccess [get] timing 2004ms.
+32368 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.231.168
+32370 [api] api->render [504] rendering
+32371 [time] api->listening [run] timing 12ms.
+=== LISTENING ==>
+32378 [run] engine->localize ()
+32379 [info] engine->run [autoload] localize
+32380 [info] controller->_autoload [autoload] cache v0.0.1
+32381 [info] controller->_autoload [autoload] brand v0.0.1
+32384 [info] controller->cache [account] cached
+32387 [info] controller->cache [ssl] cached
+32390 [info] controller->cache [settings] cached
+32393 [info] controller->sdk [run] localize
+32394 [info] engine->run [check] 79.159.146.150
+32395 [info] controller->cache [localize] uncached
+32398 [info] api->curl [get] staging-input.payapi.io
+32602 [debug] api->curl {"ip":"79.159.146.150","countryCode":"ES","countryName":"Spain","regionName":"Galicia","regionCode":"GA","postalCode":"33760","timezone":"Europe/Madrid"}
+32604 [time] curl->proccess [get] timing 205ms.
+32608 [info] engine->run [localize] valid schema
+32613 [info] controller->cache [localize] cached
+32615 [api] api->render [200] rendering
+32616 [time] api->listening [run] timing 17ms.
+=== LISTENING ==>
+32623 [run] engine->localize ()
+32624 [info] engine->run [autoload] localize
+32625 [info] controller->_autoload [autoload] cache v0.0.1
+32627 [info] controller->_autoload [autoload] brand v0.0.1
+32632 [info] controller->cache [account] cached
+32637 [info] controller->cache [ssl] cached
+32641 [info] controller->cache [settings] cached
+32646 [info] controller->sdk [run] localize
+32647 [info] engine->run [check] 79.159.172.182
+32649 [info] controller->cache [localize] uncached
+32650 [info] api->curl [get] staging-input.payapi.io
+34655 [debug] api->curl 
+34657 [time] curl->proccess [get] timing 2006ms.
+34658 [error] helper->warning [warning] [curl] timeout
+34661 [info] curl->proccess [retry] staging-input.payapi.io
+36665 [debug] curl->proccess 
+36666 [time] curl->proccess [get] timing 2005ms.
+36668 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.172.182
+36670 [api] api->render [504] rendering
+36671 [time] api->listening [run] timing 13ms.
+=== LISTENING ==>
+36677 [time] debug->destruct [app] timing 392ms.
+=== 36678ms. === 2017-07-18 04:58:01 UTC ===
 

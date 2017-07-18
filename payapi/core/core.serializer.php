@@ -32,6 +32,10 @@ class serializer {
     return $api ;
   }
 
+  public function endPointQr ( $url ) {
+    return $this - https () . $this -> staging () . $this -> webshop () . 'qr' . '/' . $this -> paymentUrlEncode ( $url ) ;
+  }
+
   private function webshop () {
     return 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'webshop' . '/' ;
   }
@@ -49,11 +53,11 @@ class serializer {
     return $route ;
   }
 
-  public function instantPaymentUrlEncode ( $url ) {
+  public function paymentUrlEncode ( $url ) {
     return urlencode ( html_entity_decode ( $url ) ) ;
   }
 
-  private function microstamp () {
+  public function microstamp () {
     return  microtime ( true ) ;
   }
 

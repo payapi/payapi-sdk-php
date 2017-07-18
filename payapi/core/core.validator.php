@@ -31,7 +31,7 @@ final class validator extends helper {
                 $this -> warning ( '[' . $key . '] no valid value' , 'schema' ) ;
               } else {
                 if ( $value [ '___type' ] === 'url' ) {
-                  $data [ $key ] = $this -> serialize -> instantPaymentUrlEncode ( $data [ $key ] ) ;
+                  $data [ $key ] = $this -> serialize -> paymentUrlEncode ( $data [ $key ] ) ;
                 }
               }
             } else if ( $value [ '___mandatory' ] !== false ) {
