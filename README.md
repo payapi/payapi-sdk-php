@@ -21,7 +21,6 @@ PayApi Payments PHP SDK
               $sdk -> settings ( false , false , true ) ;            //-> refresh & gets instance merchantSettings
               $sdk -> settings () ;                                  //-> gets instance cached merchantSettings
               $sdk -> partialPayment ( $totalInCents , $currency ) ; //-> calculate partialPayment from merchantSettings
-                                                                          @TODO review using cached/plugin
               $sdk -> response ( <standard_response_code_int> ) ;    //-> get response info
               $sdk -> info () ;                                      //-> gets sdk debug info
 
