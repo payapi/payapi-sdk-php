@@ -38,3 +38,13 @@ PayApi Payments PHP SDK
                 "code"  =>    ( int )    <errorCode> ,
                 "error" => ( string )    <errorData>
               ) ;
+
+
+
+  @NOTE to debug, in payapi folder:
+  
+        $ tail -f -n300 debug/debug.payapi.log | perl colored.pl
+
+
+  @NOTE check 'test' folder out
+  
