@@ -11,6 +11,9 @@ PayApi Payments PHP SDK
                 payapi/cache/<instanceKey>/settings
 
         - 2. commands :
+              $sdk -> instantPayment ( $data ) ;                     //-> validate/sanitize/cache product/payment data
+                                                                          returns array ( "metadata" , "endPointPayment" , "endPointProductPayment" ) ;
+              $sdk -> brand () ;                                     //-> gets brand/partner info
               $sdk -> callback () ;                                  //-> gets/cache callback decoded transaction
               $sdk -> localize () ;                                  //-> gets/cache ip decoded localization (plugin adds adapt country and zone ids)
               $sdk -> localize ( true ) ;                            //-> gets & refresh ip decoded localization cache (plugin adds adapt country and zone ids)
