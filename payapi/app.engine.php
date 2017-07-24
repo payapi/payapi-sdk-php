@@ -10,12 +10,12 @@ final class engine {
   private
     $version                   =     '0.0.1' ,
     $plugin                    =    'native' ,
-    //$plugin                    = 'opencart2' ,
     $adapt                     =       false ,
     $debug                     =       false ,
     $config                    =       false ,
+    $localize                  =       false ,
     $entity                    =       false ,
-    $router                    =       false ,
+    $route                     =       false ,
     $validate                  =       false ,
     $load                      =       false ,
     $api                       =       false ,
@@ -27,16 +27,27 @@ final class engine {
       "settings"               =>       true
     ) ;
 
-  private function __construct ( $adapt ) {
-    $this -> adapt = $adapt ;
+  private function __construct ( $adapt , $plugin ) {
+    foreach ( glob ( __DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . '*' . '.' . 'php' ) as $core ) {
+      require_once $core ;
+    }
+    $this -> route = router :: single () ;
+    if ( is_string ( $plugin ) === true && $this -> route -> plugin ( $plugin ) !== false ) {
+      $this -> plugin = $plugin ;
+      $this -> adapt = $adapt ;
+    } else {
+      //-> back to native, do not pass object
+      if ( is_array ( $adapt ) !== false ) {
+        $this -> adapt = $adapt ;
+      } else {
+        $this -> adapt = false ;
+      }
+    }
     $this -> load () ;
     //->
   }
 
   private function load () {
-    foreach ( glob ( __DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . '*' . '.' . 'php' ) as $core ) {
-      require_once $core ;
-    }
     $this -> entity = entity :: single () ;
     $this -> adaptor = adaptor :: single ( $this -> adapt , $this -> plugin ) ;
     $this -> config = config :: single () ;
@@ -44,6 +55,7 @@ final class engine {
     $this -> error = error :: single () ;
     $this -> entity -> set ( '___info' , ( string ) $this ) ;
     $this -> debug -> add ( $this -> entity -> get ( '___info' ) ) ;
+    $this -> debug -> add ( '[plugin] ' . $this -> plugin ) ;
     $this -> entity -> addInfo ( 'sdk_payapi_v' , $this -> version ) ;
     $this -> validate = new validator () ;
     $this -> load = new loader () ;
@@ -78,10 +90,14 @@ final class engine {
     $command = new $controller ( $this -> adapt ) ;
     if ( method_exists ( $command , 'run' ) === true ) {
       if ( $this -> validate -> publicId ( $command -> publicId () ) === true || in_array ( $this -> command , $this -> public ) === true ) {
-        $this -> debug -> run ( true ) ;
-        return $command -> run () ;
+        if ( $command -> locate () === true ) {
+          $this -> debug -> run ( true ) ;
+          return $command -> run () ;
+        } else {
+          return $command -> returnResponse ( $this -> error -> notLocalizableAccess () ) ;
+        }
       } else {
-        return $this -> api -> returnResponse ( $this -> error -> forbidden () ) ;
+        return $command -> returnResponse ( $this -> error -> forbidden () ) ;
       }
     }
   }
@@ -90,9 +106,9 @@ final class engine {
     return 'PayApi SDK v' . $this -> version ;
   }
 
-  public static function single ( $adapt = false ) {
+  public static function single ( $adapt = false , $plugin = false ) {
     if ( self :: $single === false ) {
-      self :: $single = new self ( $adapt ) ;
+      self :: $single = new self ( $adapt , $plugin ) ;
     }
     return self :: $single ;
   }
