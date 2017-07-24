@@ -50,6 +50,25 @@ final class sanitizer {
     return filter_var ( $int , FILTER_SANITIZE_NUMBER_INT ) ;
   }
 
+  public function render ( $render ) {
+    if ( is_array ( $render ) !== false ) {
+      $sanitize = array ( '___tk' ) ;
+      foreach ( $render as $key => $value ) {
+        if ( in_array ( $key , $sanitize ) === true ) {
+          unset ( $render [ $key ] ) ;
+        }
+        if ( is_array ( $value ) ) {
+          foreach ( $value as $key2 => $value2 ) {
+            if ( in_array ( $key2 , $sanitize ) === true ) {
+              unset ( $render [ $key ] [ $key2 ] ) ;
+            }
+          }
+        }
+      }
+    }
+    return $render ;
+  }
+
   public function __toString () {
     return $this -> version ;
   }
