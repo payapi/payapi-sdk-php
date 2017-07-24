@@ -1,216 +1,24 @@
 
-=== DEBUG === 2017-07-18 04:57:24 UTC ==>
+=== DEBUG === 2017-07-24 07:28:06 UTC ==>
 0005 [info] engine->single PayApi SDK v0.0.1
+0006 [info] engine->single [plugin] native
 0007 [info] engine->load [autoload] api v0.0.1
-0008 [time] engine->load [load] timing 8ms.
+0009 [time] engine->load [load] timing 9ms.
 === LISTENING ==>
-0017 [run] engine->localize ()
-0018 [info] engine->run [autoload] localize
-0019 [info] controller->_autoload [autoload] cache v0.0.1
-0020 [info] controller->_autoload [autoload] brand v0.0.1
-0025 [info] controller->cache [account] cached
-0029 [info] controller->cache [ssl] cached
-0033 [info] controller->cache [settings] cached
-0036 [info] controller->sdk [run] localize
-0037 [info] engine->run [check] 79.159.209.233
-0039 [info] controller->cache [localize] uncached
-0041 [info] api->curl [get] staging-input.payapi.io
-2046 [debug] api->curl 
-2048 [time] curl->proccess [get] timing 2006ms.
-2049 [error] helper->warning [warning] [curl] timeout
-2052 [info] curl->proccess [retry] staging-input.payapi.io
-4056 [debug] curl->proccess 
-4057 [time] curl->proccess [get] timing 2004ms.
-4058 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.209.233
-4061 [api] api->render [504] rendering
-4062 [time] api->listening [run] timing 15ms.
+0020 [run] engine->payment ()
+0022 [info] engine->run [autoload] payment
+0024 [info] controller->_autoload [autoload] cache v0.0.1
+0027 [info] controller->cache [account] cached
+0034 [info] controller->cache [ssl] cached
+0039 [info] controller->cache [settings] cached
+0047 [info] controller->cache [reseller] cached
+0055 [info] controller->sdk [run] payment
+0057 [info] controller->cache [localize] cached
+0065 [info] controller->cache [payment] uncached
+0087 [info] engine->run [schema] valid
+0093 [api] api->render [200] rendering
+0096 [time] api->listening [run] timing 32ms.
 === LISTENING ==>
-4068 [run] engine->localize ()
-4068 [info] engine->run [autoload] localize
-4069 [info] controller->_autoload [autoload] cache v0.0.1
-4070 [info] controller->_autoload [autoload] brand v0.0.1
-4072 [info] controller->cache [account] cached
-4075 [info] controller->cache [ssl] cached
-4078 [info] controller->cache [settings] cached
-4080 [info] controller->sdk [run] localize
-4081 [info] engine->run [check] 79.159.157.195
-4082 [info] controller->cache [localize] uncached
-4083 [info] api->curl [get] staging-input.payapi.io
-6087 [debug] api->curl 
-6090 [time] curl->proccess [get] timing 2006ms.
-6091 [error] helper->warning [warning] [curl] timeout
-6093 [info] curl->proccess [retry] staging-input.payapi.io
-8098 [debug] curl->proccess 
-8100 [time] curl->proccess [get] timing 2006ms.
-8101 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.157.195
-8104 [api] api->render [504] rendering
-8105 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-8110 [run] engine->localize ()
-8111 [info] engine->run [autoload] localize
-8112 [info] controller->_autoload [autoload] cache v0.0.1
-8113 [info] controller->_autoload [autoload] brand v0.0.1
-8115 [info] controller->cache [account] cached
-8118 [info] controller->cache [ssl] cached
-8121 [info] controller->cache [settings] cached
-8124 [info] controller->sdk [run] localize
-8125 [info] engine->run [check] 79.159.225.149
-8126 [info] controller->cache [localize] uncached
-8127 [info] api->curl [get] staging-input.payapi.io
-10130 [debug] api->curl 
-10132 [time] curl->proccess [get] timing 2004ms.
-10133 [error] helper->warning [warning] [curl] timeout
-10136 [info] curl->proccess [retry] staging-input.payapi.io
-12139 [debug] curl->proccess 
-12141 [time] curl->proccess [get] timing 2004ms.
-12142 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.225.149
-12144 [api] api->render [504] rendering
-12145 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-12151 [run] engine->localize ()
-12152 [info] engine->run [autoload] localize
-12153 [info] controller->_autoload [autoload] cache v0.0.1
-12153 [info] controller->_autoload [autoload] brand v0.0.1
-12156 [info] controller->cache [account] cached
-12158 [info] controller->cache [ssl] cached
-12161 [info] controller->cache [settings] cached
-12163 [info] controller->sdk [run] localize
-12164 [info] engine->run [check] 79.159.233.194
-12165 [info] controller->cache [localize] uncached
-12166 [info] api->curl [get] staging-input.payapi.io
-14169 [debug] api->curl 
-14171 [time] curl->proccess [get] timing 2004ms.
-14172 [error] helper->warning [warning] [curl] timeout
-14174 [info] curl->proccess [retry] staging-input.payapi.io
-16177 [debug] curl->proccess 
-16179 [time] curl->proccess [get] timing 2003ms.
-16180 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.233.194
-16182 [api] api->render [504] rendering
-16183 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-16191 [run] engine->localize ()
-16192 [info] engine->run [autoload] localize
-16193 [info] controller->_autoload [autoload] cache v0.0.1
-16194 [info] controller->_autoload [autoload] brand v0.0.1
-16197 [info] controller->cache [account] cached
-16202 [info] controller->cache [ssl] cached
-16210 [info] controller->cache [settings] cached
-16213 [info] controller->sdk [run] localize
-16213 [info] engine->run [check] 79.159.206.178
-16215 [info] controller->cache [localize] uncached
-16216 [info] api->curl [get] staging-input.payapi.io
-18217 [debug] api->curl 
-18219 [time] curl->proccess [get] timing 2003ms.
-18220 [error] helper->warning [warning] [curl] timeout
-18223 [info] curl->proccess [retry] staging-input.payapi.io
-20226 [debug] curl->proccess 
-20228 [time] curl->proccess [get] timing 2004ms.
-20230 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.206.178
-20232 [api] api->render [504] rendering
-20233 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-20239 [run] engine->localize ()
-20240 [info] engine->run [autoload] localize
-20241 [info] controller->_autoload [autoload] cache v0.0.1
-20243 [info] controller->_autoload [autoload] brand v0.0.1
-20246 [info] controller->cache [account] cached
-20251 [info] controller->cache [ssl] cached
-20255 [info] controller->cache [settings] cached
-20258 [info] controller->sdk [run] localize
-20259 [info] engine->run [check] 79.159.226.202
-20260 [info] controller->cache [localize] uncached
-20261 [info] api->curl [get] staging-input.payapi.io
-22264 [debug] api->curl 
-22266 [time] curl->proccess [get] timing 2003ms.
-22267 [error] helper->warning [warning] [curl] timeout
-22269 [info] curl->proccess [retry] staging-input.payapi.io
-24272 [debug] curl->proccess 
-24273 [time] curl->proccess [get] timing 2003ms.
-24275 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.226.202
-24277 [api] api->render [504] rendering
-24279 [time] api->listening [run] timing 14ms.
-=== LISTENING ==>
-24285 [run] engine->localize ()
-24287 [info] engine->run [autoload] localize
-24288 [info] controller->_autoload [autoload] cache v0.0.1
-24290 [info] controller->_autoload [autoload] brand v0.0.1
-24294 [info] controller->cache [account] cached
-24299 [info] controller->cache [ssl] cached
-24303 [info] controller->cache [settings] cached
-24305 [info] controller->sdk [run] localize
-24306 [info] engine->run [check] 79.159.171.213
-24308 [info] controller->cache [localize] uncached
-24309 [info] api->curl [get] staging-input.payapi.io
-26313 [debug] api->curl 
-26314 [time] curl->proccess [get] timing 2005ms.
-26316 [error] helper->warning [warning] [curl] timeout
-26318 [info] curl->proccess [retry] staging-input.payapi.io
-28321 [debug] curl->proccess 
-28322 [time] curl->proccess [get] timing 2004ms.
-28323 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.171.213
-28326 [api] api->render [504] rendering
-28327 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-28331 [run] engine->localize ()
-28332 [info] engine->run [autoload] localize
-28333 [info] controller->_autoload [autoload] cache v0.0.1
-28334 [info] controller->_autoload [autoload] brand v0.0.1
-28337 [info] controller->cache [account] cached
-28341 [info] controller->cache [ssl] cached
-28344 [info] controller->cache [settings] cached
-28348 [info] controller->sdk [run] localize
-28349 [info] engine->run [check] 79.159.231.168
-28351 [info] controller->cache [localize] uncached
-28351 [info] api->curl [get] staging-input.payapi.io
-30356 [debug] api->curl 
-30358 [time] curl->proccess [get] timing 2006ms.
-30360 [error] helper->warning [warning] [curl] timeout
-30362 [info] curl->proccess [retry] staging-input.payapi.io
-32366 [debug] curl->proccess 
-32367 [time] curl->proccess [get] timing 2004ms.
-32368 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.231.168
-32370 [api] api->render [504] rendering
-32371 [time] api->listening [run] timing 12ms.
-=== LISTENING ==>
-32378 [run] engine->localize ()
-32379 [info] engine->run [autoload] localize
-32380 [info] controller->_autoload [autoload] cache v0.0.1
-32381 [info] controller->_autoload [autoload] brand v0.0.1
-32384 [info] controller->cache [account] cached
-32387 [info] controller->cache [ssl] cached
-32390 [info] controller->cache [settings] cached
-32393 [info] controller->sdk [run] localize
-32394 [info] engine->run [check] 79.159.146.150
-32395 [info] controller->cache [localize] uncached
-32398 [info] api->curl [get] staging-input.payapi.io
-32602 [debug] api->curl {"ip":"79.159.146.150","countryCode":"ES","countryName":"Spain","regionName":"Galicia","regionCode":"GA","postalCode":"33760","timezone":"Europe/Madrid"}
-32604 [time] curl->proccess [get] timing 205ms.
-32608 [info] engine->run [localize] valid schema
-32613 [info] controller->cache [localize] cached
-32615 [api] api->render [200] rendering
-32616 [time] api->listening [run] timing 17ms.
-=== LISTENING ==>
-32623 [run] engine->localize ()
-32624 [info] engine->run [autoload] localize
-32625 [info] controller->_autoload [autoload] cache v0.0.1
-32627 [info] controller->_autoload [autoload] brand v0.0.1
-32632 [info] controller->cache [account] cached
-32637 [info] controller->cache [ssl] cached
-32641 [info] controller->cache [settings] cached
-32646 [info] controller->sdk [run] localize
-32647 [info] engine->run [check] 79.159.172.182
-32649 [info] controller->cache [localize] uncached
-32650 [info] api->curl [get] staging-input.payapi.io
-34655 [debug] api->curl 
-34657 [time] curl->proccess [get] timing 2006ms.
-34658 [error] helper->warning [warning] [curl] timeout
-34661 [info] curl->proccess [retry] staging-input.payapi.io
-36665 [debug] curl->proccess 
-36666 [time] curl->proccess [get] timing 2005ms.
-36668 [error] curl->proccess [timeout] https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.172.182
-36670 [api] api->render [504] rendering
-36671 [time] api->listening [run] timing 13ms.
-=== LISTENING ==>
-36677 [time] debug->destruct [app] timing 392ms.
-=== 36678ms. === 2017-07-18 04:58:01 UTC ===
+0103 [time] debug->destruct [app] timing 103ms.
+=== 105ms. === 2017-07-24 07:28:06 UTC ===
 

@@ -1,6 +1,6 @@
 <?php
 //-> testing PA ip endPoint performance
-$many = 10 ;
+$many = 50 ;
 $fetched = 0 ;
 $error = 0 ;
 for ( $cont = 0 ; $cont < $many ; $cont ++ ) {

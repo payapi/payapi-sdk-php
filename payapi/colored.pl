@@ -10,7 +10,7 @@ while ( <STDIN> ) {
         s/.*\[fatal.*/\e[0;31m$&\e[0m/gi;
         s/\[info.*|\[time].*/\e[1;30m$&\e[0m/gi;
         s/\[error.*/\e[0;31m$&\e[0m/gi;
-        s/\[auto.*\]|\[render.*\]|success.*/\e[0;32m$&\e[0m/gi;
+        s/\[auto.*\]|\[render.*\]|rendering|success.*/\e[0;32m$&\e[0m/gi;
         s/.timing.*/\e[0;33m$&\e[0m/gi;
         s/\[warning.*/\e[0;33m$&\e[0m/gi;
     }

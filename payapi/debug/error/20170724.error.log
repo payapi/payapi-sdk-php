@@ -1,0 +1,30 @@
+2017-07-24 06:17:41 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:18:28 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:19:03 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:20:14 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-24 06:20:17 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-24 06:20:27 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-24 06:20:31 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-24 06:20:37 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-24 06:20:39 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.217.222
+2017-07-24 06:20:46 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-24 06:20:55 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-24 06:20:59 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-24 06:21:01 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.231.160
+2017-07-24 06:21:03 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-24 06:21:05 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://staging-input.payapi.io/v1/api/fraud/ipdata/79.159.170.178
+2017-07-24 06:23:47 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:23:57 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:24:51 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [notice] helper->error_handler Undefined property: Registry::$payapi in /var/www/public/system/framework.php on line 119
+2017-07-24 06:25:29 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:25:30 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:25:36 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:25:36 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:26:08 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:26:26 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:27:07 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 06:39:00 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-24 06:39:03 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://staging-input.payapi.io/v1/api/fraud/ipdata/84.79.234.58
+2017-07-24 06:39:28 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
+2017-07-24 07:24:54 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [notice] helper->error_handler Undefined variable: ip in /var/www/public/system/library/payapi/core/core.controller.php on line 74
+2017-07-24 07:24:54 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [notice] helper->error_handler Undefined variable: ip in /var/www/public/system/library/payapi/core/core.controller.php on line 75

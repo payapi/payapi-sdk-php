@@ -19,6 +19,10 @@ $config = array (
 
 //-> @NOTE check 'test' folder out
 test ( 'info' , $config ) ;
-
+/*
+$sdk = new payapiSdk ( $config ) ;
+$test = $sdk -> migrate () ;
+var_dump ( $test ) ;
+//->*/
 //->
 exit () ;

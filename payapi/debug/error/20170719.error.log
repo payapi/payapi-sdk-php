@@ -1,0 +1,167 @@
+2017-07-19 05:16:26 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler PDOStatement::execute() expects parameter 1 to be array, boolean given in /var/www/public/system/library/payapi/core/core.spdo.php on line 29
+2017-07-19 05:16:26 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: result in /var/www/public/system/library/payapi/core/core.spdo.php on line 44
+2017-07-19 05:16:26 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 155
+2017-07-19 05:16:26 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler PDOStatement::execute() expects parameter 1 to be array, boolean given in /var/www/public/system/library/payapi/core/core.spdo.php on line 29
+2017-07-19 05:16:26 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: result in /var/www/public/system/library/payapi/core/core.spdo.php on line 44
+2017-07-19 05:16:26 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler PDOStatement::execute() expects parameter 1 to be array, boolean given in /var/www/public/system/library/payapi/core/core.spdo.php on line 29
+2017-07-19 05:16:26 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: result in /var/www/public/system/library/payapi/core/core.spdo.php on line 44
+2017-07-19 06:12:01 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: result in /var/www/public/system/library/payapi/core/core.spdo.php on line 45
+2017-07-19 06:12:01 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 155
+2017-07-19 06:12:01 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: result in /var/www/public/system/library/payapi/core/core.spdo.php on line 45
+2017-07-19 06:12:01 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: result in /var/www/public/system/library/payapi/core/core.spdo.php on line 45
+2017-07-19 06:13:57 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 155
+2017-07-19 06:14:50 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 155
+2017-07-19 06:15:48 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [undefined] helper->error_handler Object of class PDOStatement could not be converted to string in /var/www/public/system/library/payapi/core/core.debug.php on line 107
+2017-07-19 06:15:48 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 155
+2017-07-19 06:15:48 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [undefined] helper->error_handler Object of class PDOStatement could not be converted to string in /var/www/public/system/library/payapi/core/core.debug.php on line 107
+2017-07-19 06:15:48 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [undefined] helper->error_handler Object of class PDOStatement could not be converted to string in /var/www/public/system/library/payapi/core/core.debug.php on line 107
+2017-07-19 06:16:09 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 155
+2017-07-19 06:18:11 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: response in /var/www/public/system/library/payapi/core/core.spdo.php on line 35
+2017-07-19 06:18:11 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 155
+2017-07-19 06:18:11 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: response in /var/www/public/system/library/payapi/core/core.spdo.php on line 35
+2017-07-19 06:18:11 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: response in /var/www/public/system/library/payapi/core/core.spdo.php on line 35
+2017-07-19 06:18:39 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 155
+2017-07-19 06:19:15 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 155
+2017-07-19 06:20:41 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 155
+2017-07-19 06:20:43 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 155
+2017-07-19 06:37:49 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 154
+2017-07-19 06:38:13 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Invalid argument supplied for foreach() in /var/www/public/system/library/payapi/command/command.migrate.php on line 154
+2017-07-19 07:22:06 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: stmt in /var/www/public/system/library/payapi/core/core.spdo.php on line 30
+2017-07-19 07:43:37 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined property: payapi\spdo::$connection in /var/www/public/system/library/payapi/core/core.spdo.php on line 26
+2017-07-19 07:44:11 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 07:44:11 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined property: PDOException::$getCode in /var/www/public/system/library/payapi/core/core.spdo.php on line 40
+2017-07-19 07:44:11 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined property: PDOException::$getCode in /var/www/public/system/library/payapi/core/core.spdo.php on line 40
+2017-07-19 07:44:11 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined property: PDOException::$getCode in /var/www/public/system/library/payapi/core/core.spdo.php on line 40
+2017-07-19 07:44:11 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined property: PDOException::$getCode in /var/www/public/system/library/payapi/core/core.spdo.php on line 40
+2017-07-19 07:45:18 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 07:45:18 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined property: PDOException::$getCode in /var/www/public/system/library/payapi/core/core.spdo.php on line 40
+2017-07-19 07:45:18 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined property: PDOException::$getCode in /var/www/public/system/library/payapi/core/core.spdo.php on line 40
+2017-07-19 07:45:18 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined property: PDOException::$getCode in /var/www/public/system/library/payapi/core/core.spdo.php on line 40
+2017-07-19 07:45:18 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined property: PDOException::$getCode in /var/www/public/system/library/payapi/core/core.spdo.php on line 40
+2017-07-19 07:45:52 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 07:49:28 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 07:50:18 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 07:53:33 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 07:57:13 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Trying to get property of non-object in /var/www/public/system/library/payapi/command/command.migrate.php on line 157
+2017-07-19 07:57:13 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Trying to get property of non-object in /var/www/public/system/library/payapi/command/command.migrate.php on line 157
+2017-07-19 07:57:13 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Trying to get property of non-object in /var/www/public/system/library/payapi/command/command.migrate.php on line 157
+2017-07-19 08:15:02 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler is_array() expects exactly 1 parameter, 0 given in /var/www/public/system/library/payapi/command/command.settings.php on line 30
+2017-07-19 08:15:02 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [partnerContactPhone] no valid value
+2017-07-19 08:15:02 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler is_array() expects exactly 1 parameter, 0 given in /var/www/public/system/library/payapi/command/command.settings.php on line 30
+2017-07-19 08:15:02 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] commandSettings->run no valid settings
+2017-07-19 08:15:28 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [partnerContactPhone] no valid value
+2017-07-19 08:15:28 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] commandSettings->run no valid settings
+2017-07-19 08:15:51 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [partnerContactPhone] no valid value
+2017-07-19 08:15:51 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] commandSettings->run no valid settings
+2017-07-19 08:17:36 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [partnerContactPhone] no valid value
+2017-07-19 08:17:36 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] commandSettings->run no valid settings
+2017-07-19 08:23:59 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [error] cache->validate [cache] key no valid
+2017-07-19 08:53:38 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Missing argument 3 for payapi\controller::cache(), called in /var/www/public/system/library/payapi/core/core.controller.php on line 58 and defined in /var/www/public/system/library/payapi/core/core.controller.php on line 178
+2017-07-19 08:53:38 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: token in /var/www/public/system/library/payapi/core/core.controller.php on line 179
+2017-07-19 08:53:38 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Illegal offset type in /var/www/public/system/library/payapi/core/core.cache.php on line 36
+2017-07-19 08:53:38 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Illegal offset type in isset or empty in /var/www/public/system/library/payapi/core/core.cache.php on line 85
+2017-07-19 08:53:38 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [error] cache->validate [cache] key no valid
+2017-07-19 08:53:38 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Array to string conversion in /var/www/public/system/library/payapi/core/core.cache.php on line 55
+2017-07-19 08:54:31 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Missing argument 3 for payapi\controller::cache(), called in /var/www/public/system/library/payapi/core/core.controller.php on line 58 and defined in /var/www/public/system/library/payapi/core/core.controller.php on line 178
+2017-07-19 08:54:31 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: token in /var/www/public/system/library/payapi/core/core.controller.php on line 179
+2017-07-19 08:54:31 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Illegal offset type in /var/www/public/system/library/payapi/core/core.cache.php on line 36
+2017-07-19 08:54:31 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Illegal offset type in isset or empty in /var/www/public/system/library/payapi/core/core.cache.php on line 85
+2017-07-19 08:54:31 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [error] cache->validate [cache] key no valid
+2017-07-19 08:54:31 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Array to string conversion in /var/www/public/system/library/payapi/core/core.cache.php on line 55
+2017-07-19 10:27:33 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined variable: his in /var/www/public/system/library/payapi/core/core.api.php on line 97
+2017-07-19 10:27:33 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Trying to get property of non-object in /var/www/public/system/library/payapi/core/core.api.php on line 97
+2017-07-19 10:56:36 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [processing] no valid value
+2017-07-19 10:56:36 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value
+2017-07-19 10:56:36 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value
+2017-07-19 10:56:36 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [chargeback] no valid value
+2017-07-19 10:56:36 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value
+2017-07-19 10:56:36 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value
+2017-07-19 10:56:36 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [cancel] no valid value
+2017-07-19 10:58:42 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [processing] no valid value
+2017-07-19 10:58:42 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value
+2017-07-19 10:58:42 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value
+2017-07-19 10:58:42 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [chargeback] no valid value
+2017-07-19 10:58:42 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value
+2017-07-19 10:58:42 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value
+2017-07-19 10:58:42 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [cancel] no valid value
+2017-07-19 10:59:30 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [processing] no valid value
+2017-07-19 10:59:30 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value
+2017-07-19 10:59:30 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value
+2017-07-19 10:59:30 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [chargeback] no valid value
+2017-07-19 10:59:30 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value
+2017-07-19 10:59:30 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value
+2017-07-19 10:59:30 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [cancel] no valid value
+2017-07-19 11:00:43 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [processing] no valid value
+2017-07-19 11:00:43 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value
+2017-07-19 11:00:43 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value
+2017-07-19 11:00:43 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [chargeback] no valid value
+2017-07-19 11:00:43 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value
+2017-07-19 11:00:43 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value
+2017-07-19 11:00:43 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [cancel] no valid value
+2017-07-19 11:02:24 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [processing] no valid value processing
+2017-07-19 11:02:24 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value success
+2017-07-19 11:02:24 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value failed
+2017-07-19 11:02:24 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [chargeback] no valid value chargeback
+2017-07-19 11:02:24 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value success
+2017-07-19 11:02:24 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value failed
+2017-07-19 11:02:24 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [cancel] no valid value cancel
+2017-07-19 11:03:03 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [processing] no valid value https://api.example.com/callback-processing
+2017-07-19 11:03:03 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value https://api.example.com/callback-success
+2017-07-19 11:03:03 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value https://api.example.com/callback-failed
+2017-07-19 11:03:03 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [chargeback] no valid value https://api.example.com/callback-chargeback
+2017-07-19 11:03:03 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value https://store.example.com/payment-success
+2017-07-19 11:03:03 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value https://store.example.com/payment-failed
+2017-07-19 11:03:03 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [cancel] no valid value https://store.example.com/payment-cancel
+2017-07-19 11:05:27 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [processing] no valid value 
+2017-07-19 11:05:27 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value 
+2017-07-19 11:05:27 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value 
+2017-07-19 11:05:27 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [chargeback] no valid value 
+2017-07-19 11:05:27 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value 
+2017-07-19 11:05:27 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value 
+2017-07-19 11:05:27 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [cancel] no valid value 
+2017-07-19 11:05:54 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [processing] no valid value urlencode
+2017-07-19 11:05:54 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value urlencode
+2017-07-19 11:05:54 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value urlencode
+2017-07-19 11:05:54 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [chargeback] no valid value urlencode
+2017-07-19 11:05:54 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [success] no valid value urlencode
+2017-07-19 11:05:54 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [failed] no valid value urlencode
+2017-07-19 11:05:54 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [cancel] no valid value urlencode
+2017-07-19 11:09:07 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning type not defined : urlencode
+2017-07-19 11:09:07 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [processing] no valid value
+2017-07-19 11:09:34 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [check] not defined : urlencode
+2017-07-19 11:09:34 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [schema] [processing] no valid value
+2017-07-19 14:16:21 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-19 14:16:22 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://input.payapi.io/v1/api/fraud/ipdata/79.159.142.225
+2017-07-19 14:16:23 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-19 14:16:24 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://input.payapi.io/v1/api/fraud/ipdata/79.159.201.231
+2017-07-19 14:16:25 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-19 14:16:26 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://input.payapi.io/v1/api/fraud/ipdata/79.159.162.168
+2017-07-19 14:16:27 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-19 14:16:28 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://input.payapi.io/v1/api/fraud/ipdata/79.159.164.147
+2017-07-19 14:16:29 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-19 14:16:30 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://input.payapi.io/v1/api/fraud/ipdata/79.159.236.195
+2017-07-19 14:16:31 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-19 14:16:32 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://input.payapi.io/v1/api/fraud/ipdata/79.159.213.141
+2017-07-19 14:16:33 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-19 14:16:34 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://input.payapi.io/v1/api/fraud/ipdata/79.159.149.161
+2017-07-19 14:16:35 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-19 14:16:36 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://input.payapi.io/v1/api/fraud/ipdata/79.159.227.177
+2017-07-19 14:16:37 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-19 14:16:38 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://input.payapi.io/v1/api/fraud/ipdata/79.159.176.145
+2017-07-19 14:16:39 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->warning [curl] timeout
+2017-07-19 14:16:40 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [timeout] curl->proccess https://input.payapi.io/v1/api/fraud/ipdata/79.159.144.220
+2017-07-19 15:04:22 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Trying to get property of non-object in /var/www/public/system/library/payapi/command/command.migrate.php on line 157
+2017-07-19 15:04:22 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Trying to get property of non-object in /var/www/public/system/library/payapi/command/command.migrate.php on line 157
+2017-07-19 15:04:22 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Trying to get property of non-object in /var/www/public/system/library/payapi/command/command.migrate.php on line 157
+2017-07-19 15:05:37 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Trying to get property of non-object in /var/www/public/system/library/payapi/command/command.migrate.php on line 157
+2017-07-19 15:05:37 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Trying to get property of non-object in /var/www/public/system/library/payapi/command/command.migrate.php on line 157
+2017-07-19 15:05:37 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Trying to get property of non-object in /var/www/public/system/library/payapi/command/command.migrate.php on line 157
+2017-07-19 15:05:48 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 157
+2017-07-19 15:07:40 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 157
+2017-07-19 15:08:06 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 15:09:28 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Illegal string offset 'Tables_in_oc_multimerchantshop' in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 15:09:28 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Illegal string offset 'Tables_in_oc_multimerchantshop' in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 15:09:28 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [warning] helper->error_handler Illegal string offset 'Tables_in_oc_multimerchantshop' in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 15:09:38 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 15:10:08 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 156
+2017-07-19 15:10:47 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined index: Tables_in_oc_multimerchantshop in /var/www/public/system/library/payapi/command/command.migrate.php on line 157

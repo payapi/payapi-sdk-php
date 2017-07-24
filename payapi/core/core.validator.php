@@ -29,10 +29,9 @@ final class validator extends helper {
               if ( $this -> check ( $data [ $key ] , $value [ '___type' ] , $min , $max ) !== true ) {
                 $error ++ ;
                 $this -> warning ( '[' . $key . '] no valid value' , 'schema' ) ;
-              } else {
-                if ( $value [ '___type' ] === 'url' ) {
-                  $data [ $key ] = $this -> serialize -> paymentUrlEncode ( $data [ $key ] ) ;
-                }
+              }
+              if ( $value [ '___type' ] === 'urlencoded' ) {
+                $data [ $key ] = $this -> serialize -> paymentUrlEncode ( $data [ $key ] ) ;
               }
             } else if ( $value [ '___mandatory' ] !== false ) {
               $error ++ ;
@@ -214,6 +213,7 @@ final class validator extends helper {
       case 'returnStatus':
         return $this -> isReturnStatus ( $data ) ;
       break;
+      case 'urlencoded':
       case 'url':
         return $this -> isUrl ( $data ) ;
       break;
@@ -227,6 +227,7 @@ final class validator extends helper {
         return $this -> isArray ( $data , $min , $max ) ;
       break;
       default:
+        $this -> warning ( '[type] not defined : ' . $type ) ;
         return false ;
       break;
     }
@@ -237,7 +238,7 @@ final class validator extends helper {
     $verifyPeer = ( $selfsigned === true ) ? false : true ;
     $domain = ( is_string ( $checkDomain ) === true ) ? $this -> sanitize -> parseDomain ( $checkDomain ) : $this -> domain ;
     //-> @NOTE @CARE @TODELETE
-    if ( $domain == false || $domain == 'store.multimerchantshop.dev' ) { $domain = 'store.multimerchantshop.xyz' ; }
+    if ( $domain == false || $domain == 'www.sdk.dev' ) { $domain = 'store.multimerchantshop.xyz' ; }
     $socket = stream_context_create ( [ 'http' => [ 'method' => 'GET' ] , 'ssl' => [
       'capture_peer_cert'       => true ,
       'capture_peer_cert_chain' => true ,

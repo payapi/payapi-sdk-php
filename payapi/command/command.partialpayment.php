@@ -28,7 +28,7 @@ final class commandPartialPayment extends controller {
         $calculate = array () ;
         $partial = array () ;
         $minimumAmountPerMonthInCents = ( $partialPaymentSettings [ 'minimumAmountAllowedInCents' ] / $partialPaymentSettings [ 'numberOfInstallments' ] ) ;
-        $minimumAmountPerMonth = ( $minimumAmountPerMonthInCents / 100 );
+        $minimumAmountPerMonth = ( $minimumAmountPerMonthInCents / 100 ) ;
         if ( round ( ( $paymentPriceInCents / $minimumAmountPerMonthInCents ) , 0 ) >= $partialPaymentSettings [ 'numberOfInstallments' ] ) {
           $partial [ 'paymentMonths'] = $partialPaymentSettings [ 'numberOfInstallments' ] ;
         } else {
