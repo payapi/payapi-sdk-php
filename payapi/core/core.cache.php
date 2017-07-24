@@ -13,10 +13,14 @@ final class cache extends helper {
     $caches                =   false ,
     $cache                 =   array (
       //             expiration days
-      "transaction"        =>     90 ,
       "localize"           =>     30 ,
       "ssl"                =>      1 ,
       "product"            =>      1 ,
+      "payment"            =>      1 ,
+      "transaction"        =>  false ,
+      "update"             =>  false ,
+      "reseller"           =>  false ,
+      "instance"           =>  false ,
       "account"            =>  false ,
       "settings"           =>  false
     ) ;
@@ -35,7 +39,7 @@ final class cache extends helper {
     }
     $file = $this -> validate ( $key , $token ) ;
     if ( is_string ( $file ) === true ) {
-      if ( is_file ( $file ) ) {
+      if ( is_file ( $file ) === true ) {
         $this -> debug ( '[' . $key . '] cached' ) ;
         $cacheInfo = date ( '' ,filemtime ( $file ) ) ;
         if ( $this -> cache [ $key ] === false || filemtime ( $file ) > strtotime ( "-" . $this -> cache [ $key ] . " days" ) ) {
