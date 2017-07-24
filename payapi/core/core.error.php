@@ -127,6 +127,10 @@ final class error {
     return 505 ;
   }
 
+  public function notLocalizableAccess () {
+    return 416 ;
+  }
+
   public function booBoo () {
     return 600 ;
   }
