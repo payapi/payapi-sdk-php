@@ -14,6 +14,7 @@ abstract class controller extends helper {
     $validate              =     false ,
     $sanitizer             =     false ,
     $load                  =     false ,
+    $localized             =     false ,
     $adaptor               =     false ,
     $db                    =     false ;
 
@@ -30,7 +31,6 @@ abstract class controller extends helper {
     $this -> entity = entity :: single () ;
     $this -> crypter = new crypter () ;
     $this -> cache = new cache () ;
-    $this -> brand = new brand ( 'payapi' ) ;
     $this -> validate = $this -> entity -> get ( 'validate' ) ;
     $this -> api = $this -> entity -> get ( 'api' ) ;
     $this -> account = $this -> cache ( 'read' , 'account' , $this -> instance () ) ;
@@ -46,6 +46,43 @@ abstract class controller extends helper {
     $this -> sdk () ;
   }
 
+  public function locate () {
+    //-> @TODO adapt/validate : adaptor -> ()
+    //->       just for customer not general
+    $this -> localized = $this -> localization () ;
+    //var_dump ( '___d' , $this -> ip () , $this -> localized , $this -> publicId () ) ; exit () ;
+    if ( isset ( $this -> localized [ 'ip' ] ) === true && isset ( $this -> localized [ 'countryCode' ] ) === true ) {
+      return true ;
+    }
+    $this -> error (  'not localized' , 'warning' ) ;
+    return false ;
+  }
+
+  private function localization () {
+    $ip = $this -> ip () ;
+    $cached = $this -> cache ( 'read' , 'localize' , $ip ) ;
+    if ( $cached !== false ) {
+      return $cached ;
+    }
+    $endPoint = $this -> serialize -> endPointLocalization ( $ip ) ;
+    $request = $this -> curl ( $endPoint , false , false ) ;
+    if ( $request !== false && isset ( $request [ 'code' ] ) === true ) {
+      if ( $request [ 'code' ] === 200) {
+        $validated = $this -> validate -> schema ( $request [ 'data' ] , $this -> load -> schema ( 'localize' ) ) ;
+        if ( is_array ( $validated ) !== false ) {
+          $this -> debug ( '[localize] valid schema' ) ;
+          $adaptedData = $this -> adaptor -> localized ( $validated ) ;
+          $this -> cache ( 'writte' , 'localize' , $ip , $adaptedData ) ;
+          return $this -> cache ( 'read' , 'localize' , $ip ) ;
+        } else {
+          //-> not valid schema from PA
+          $this -> error ( 'no valid localization' , 'warning' ) ;
+        }
+      }
+    }
+    return false ;
+  }
+
   private function sdk () {
     $this -> arguments = $this -> entity -> get ( 'arguments' ) ;
     $this -> entity -> remove ( 'validate' ) ;
@@ -55,6 +92,8 @@ abstract class controller extends helper {
     $this -> publicId = $this -> publicId () ;
     if ( $this -> validate -> publicId ( $this -> publicId ) === true ) {
       $this -> settings = $this -> cache ( 'read' , 'settings' , $this -> instance () ) ;
+      //-> read merchant settings reseller partnerKey
+      $this -> brand = $this -> cache ( 'read' , 'reseller' , $this -> settings ( 'reseller' ) ) ;
       $this -> token = $this -> crypter -> instanceToken ( $this -> publicId () ) ;
       $this -> entity -> addInfo ( 'public' , $this -> publicId () ) ;
       $this -> entity -> addInfo ( 'tk' , $this -> token () ) ;
@@ -73,9 +112,11 @@ abstract class controller extends helper {
   }
 
   private function info () {
-    $this -> entity -> addInfo ( 'by' , $this -> brand -> partnerName () . ', ' . $this -> brand -> partnerSlogan () ) ;
+    if ( $this -> brand !== false ) {
+      $this -> entity -> addInfo ( 'brand' , $this -> brand ( 'partnerName' ) . ', ' . $this -> brand ( 'partnerSlogan' ) ) ;
+    }
     $this -> debug ( '[run] ' . strtolower ( $this -> entity -> get ( 'command' ) ) ) ;
-    $this -> entity -> addInfo ( 'adaptor_' . $this -> entity -> get ( 'plugin' ) . '_v' , $this -> adaptor -> version () ) ;
+    $this -> entity -> addInfo ( 'adaptor_' . $this -> entity -> get ( 'plugin' ) . '_v' , ( string ) $this -> adaptor ) ;
     $this -> entity -> addInfo ( 'api_v' , ( string ) $this -> api ) ;
     $this -> entity -> addInfo ( 'crypter_v' , ( string ) $this -> crypter ) ;
     $this -> entity -> addInfo ( 'validator_v' , ( string ) $this -> validate ) ;
@@ -141,18 +182,32 @@ abstract class controller extends helper {
     return false ;
   }
 
+  protected function brand ( $key = false ) {
+    if ( $key === false ) {
+      return $this -> brand ;
+    }
+    if ( isset ( $this -> brand [ $key ] ) === true ) {
+      return $this -> brand [ $key ] ;
+    }
+    return false ;
+  }
+
   protected function render ( $data ) {
     $render = $this -> api -> render ( $data , 200 ) ;
     $return = ( ( $this -> config -> debug () === true ) ? $this -> entity -> addExtradata ( $render ) : $render ) ;
-    return $return ;
+    $sanitized =  $this -> sanitize -> render ( $return ) ;
+    return $sanitized ;
   }
 
   protected function response ( $code ) {
     return $this -> api -> response ( $code ) ;
   }
 
-  protected function returnResponse ( $code ) {
-    return $this -> api -> returnResponse ( $code ) ;
+  public function returnResponse ( $code ) {
+    $render =$this -> api -> returnResponse ( $code ) ;
+    $return = ( ( $this -> config -> debug () === true ) ? $this -> entity -> addExtradata ( $render ) : $render ) ;
+    $sanitized =  $this -> sanitize -> render ( $return ) ;
+    return $sanitized ;
   }
 
   public function decode ( $encoded , $hash = false , $crypted = false ) {
