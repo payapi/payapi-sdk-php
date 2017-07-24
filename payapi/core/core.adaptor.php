@@ -41,9 +41,8 @@ final class adaptor {
       $this -> adapt = plugin :: single ( $adapt ) ;
       $this -> config = config :: single ( $this -> config () ) ;
       $this -> debug = debug :: single ( $this -> debug () ) ;
-      $this -> debug ( '[plugin] ' . $this -> plugin ) ;
     } else {
-      $this -> error ( 'cannot load plugin' , 'fatal' ) ;
+      $this -> debug -> add ( '[plugin] 404' , 'error' ) ;
     }
   }
 
@@ -53,6 +52,14 @@ final class adaptor {
 
   public function product ( $product ) {
     return $this -> adapt -> product ( $product ) ;
+  }
+
+  public function payment ( $payment ) {
+    return $this -> adapt -> payment ( $payment ) ;
+  }
+
+  public function instantPayment ( $payment ) {
+    return $this -> adapt -> instantPayment ( $payment ) ;
   }
 
   public function log ( $info ) {
@@ -103,7 +110,7 @@ final class adaptor {
   }
 
   public function __toString () {
-    return $this -> plugin ;
+    return ( string ) $this -> adapt ;
   }
 
 
