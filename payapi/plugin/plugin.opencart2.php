@@ -28,8 +28,29 @@ final class plugin {
   }
 
   public function product ( $product ) {
+    if ( isset ( $product [ 'product_id' ] ) ) {
+      $priceExcVat = ( isset ( $product [ 'special' ] ) ) ? $product [ 'special' ] : $product [ 'price' ] ;
+      if ( isset ( $product [ 'tax_id' ] ) ) {
+        //-> @TODO
+        $tax = null ;
+      } else {
+        $tax = 0 ;
+      }
+      //-> disccount
+      return $product ;
+    }
     //->
-    return $product ;
+    return false ;
+  }
+
+  public function payment ( $payment ) {
+    //->
+    return $payment ;
+  }
+
+  public function instantPayment ( $payment ) {
+    //->
+    return $payment ;
   }
 
   public function loadLog () {

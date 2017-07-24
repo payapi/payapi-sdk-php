@@ -29,6 +29,16 @@ final class plugin {
     return $product ;
   }
 
+  public function payment ( $payment ) {
+    //->
+    return $payment ;
+  }
+
+  public function instantPayment ( $payment ) {
+    //->
+    return $payment ;
+  }
+
   public function loadLog () {
     //->
     return false ;
