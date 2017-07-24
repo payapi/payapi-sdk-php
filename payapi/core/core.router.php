@@ -19,11 +19,11 @@ final class router {
     $this -> instance = instance :: this () ;
   }
 
-  private function parentDir ( $dir ) {
+  public function parentDir ( $dir ) {
     return str_replace ( DIRECTORY_SEPARATOR . basename ( $dir ) , null , $dir ) ;
   }
 
-  private function root ( $key = false ) {
+  public function root ( $key = false ) {
     if ( is_string ( $key ) === true ) {
       return $this -> root . $key . DIRECTORY_SEPARATOR ;
     }
@@ -47,6 +47,18 @@ final class router {
 
   private function routeCache () {
     return $this -> root ( 'cache' ) ;
+  }
+
+  private function routeData () {
+    return $this -> root ( 'data' ) ;
+  }
+
+  private function routeTranslator ( $key ) {
+    $translator = $this -> root ( 'data' ) . 'translator' . DIRECTORY_SEPARATOR . 'translator' . '.' . $key . '.' . 'json' ;
+    if ( is_file ( $translator ) === true ) {
+      return $translator ;
+    }
+    return false ;
   }
 
   private function routeSchema () {
@@ -90,8 +102,8 @@ final class router {
   }
 
   public function cache ( $type , $key ) {
-    $common = array ( 'localize' , 'ssl' ) ;
-    $isolated = ( in_array ( $type , $common ) === true ) ? null : $this -> instance . DIRECTORY_SEPARATOR ;
+    $common = array ( 'localize' , 'ssl' , 'instance' , 'reseller' , 'update' ) ;
+    $isolated = ( in_array ( $type , $common ) === true ) ? null : 'data' . DIRECTORY_SEPARATOR . $this -> instance . DIRECTORY_SEPARATOR ;
     $cacheFile = $this -> routeCache () . $isolated . $type . DIRECTORY_SEPARATOR . 'cache' . '.' . $key . '.' . 'data' ;
     return $cacheFile ;
   }
