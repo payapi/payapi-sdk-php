@@ -24,23 +24,28 @@ final class commandSettings extends controller {
             $decodedData = json_decode ( $this -> decode ( $request [ 'data' ] , $apiKey ) , true ) ;
             $validated = $this -> validate -> schema ( $decodedData , $this -> load -> schema ( 'settings' ) ) ;
             if ( is_array ( $validated ) !== false ) {
-              $this -> debug ( '[settings] valid schema' ) ;
-              if ( $decodedData [ 'partialPayments' ] !== false ) {
-                $partialValidated = $this -> validate -> schema ( $decodedData [ 'partialPayments' ] , $this -> load -> schema ( 'partialPayments' ) ) ;
-                if ( is_array ( $partialValidated ) !== false ) {
-                  $this -> debug ( '[partialPayments] valid schema' ) ;
-                  $validated [ 'partialPayments' ] = $partialValidated ;
-                } else {
-                  $validated [ 'partialPayments' ] = false ;
-                  $this -> error ( '[partialPayments] no valid schema' , 'warning' ) ;
+              $error = 0 ;
+              foreach ( $validated as $key => $value ) {
+                $settings [ $key ] = $this -> validate -> schema ( $value , $this -> load -> schema ( 'settings' . '.' . $key ) ) ;
+                if ( is_array ( $settings [ $key ] ) === false ) {
+                  $error ++ ;
                 }
               }
-              $this -> cache ( 'writte' , 'account' , $this -> instance () , array (
-                "publicId" => $publicId ,
-                "apiKey"   => $this -> encode ( $apiKey , false , true )
-              ) ) ;
-              $this -> cache ( 'writte' , 'settings' , $this -> instance () , $validated ) ;
-              return $this -> render ( $this -> cache ( 'read' , 'settings' , $this -> instance () ) ) ;
+              if ( $error === 0 ) {
+                $this -> cache ( 'writte' , 'account' , $this -> instance () , array (
+                  "publicId" => $publicId ,
+                  "apiKey"   => $this -> encode ( $apiKey , false , true )
+                ) ) ;
+                $resellerData = $settings [ 'reseller' ] ;
+                $resellerId = $resellerData [ 'partnerId' ] ;
+                $settings [ 'reseller' ] = $resellerId ;
+                $this -> cache ( 'writte' , 'reseller' , $resellerId , $resellerData ) ;
+                $this -> cache ( 'writte' , 'settings' , $this -> instance () , $settings ) ;
+                return $this -> render ( $this -> cache ( 'read' , 'settings' , $this -> instance () ) ) ;
+              } else {
+                $this -> error ( 'no valid settings' , 'warning' ) ;
+                return $this -> returnResponse ( $this -> error -> notValidSchema () ) ;
+              }
             } else {
               //-> not valid schema from PA
               $this -> error ( 'no valid settings' , 'warning' ) ;
