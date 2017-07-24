@@ -1,11 +1,15 @@
 {
   "___info": {
-    "___version": "0.0.1",
-    "___date": "20170710"
+    "___version": "0.0.2",
+    "___date": "20170719"
   },
   "___schema": {
     "partialPayments": {
-      "___mandatory": true,
+      "___mandatory": false,
+      "___type": "setting"
+    },
+    "reseller": {
+      "___mandatory": false,
       "___type": "setting"
     }
   }
