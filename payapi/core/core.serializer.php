@@ -32,16 +32,29 @@ class serializer {
     return $api ;
   }
 
+  public function endPointPayment ( $publicId ) {
+    $api = $this -> https () . $this -> staging () . $this -> payment () . $publicId . '/' ;
+    return $api ;
+  }
+
   public function endPointQr ( $url ) {
     return $this - https () . $this -> staging () . $this -> webshop () . 'qr' . '/' . $this -> paymentUrlEncode ( $url ) ;
   }
 
   private function webshop () {
-    return 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'webshop' . '/' ;
+    return $this -> endPoint () . 'webshop' . '/' ;
+  }
+
+  private function payment () {
+    return $this -> endPoint () . 'secureform' . '/' ;
   }
 
   private function api () {
-    return 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'api' . '/' ;
+    return $this -> endPoint () . 'api' . '/' ;
+  }
+
+  private function endPoint () {
+    return 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' ;
   }
 
   private function https () {
@@ -82,7 +95,7 @@ class serializer {
   }
 
   public function percentage ( $total , $part ) {
-    return round ( ( ( $part * 100 ) / ( $total - $part ) ) , 0 ) ;
+    return ( int ) round ( ( ( $part * 100 ) / ( $total - $part ) ) , 0 ) ;
   }
 
   public function arrayToJson ( $array ) {
