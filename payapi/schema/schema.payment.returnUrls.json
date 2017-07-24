@@ -1,13 +1,9 @@
 {
   "___info": {
     "___version": "0.0.2",
-    "___date": "20170719"
+    "___date": "20170720"
   },
   "___schema" : {
-    "processing": {
-      "___mandatory": false,
-      "___type": "urlencoded"
-    },
     "success": {
       "___mandatory": false,
       "___type": "urlencoded"
@@ -16,7 +12,7 @@
       "___mandatory": false,
       "___type": "urlencoded"
     },
-    "chargeback": {
+    "cancel": {
       "___mandatory": false,
       "___type": "urlencoded"
     }
