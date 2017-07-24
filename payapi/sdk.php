@@ -59,6 +59,7 @@
 *
 *  @TODO       ever!
 *              sdk default noplugin settings
+*              @CARE schema.settings.reseller -> phoneNUmber (updated to string type, to revert to phone)
 *
 *
 **/
@@ -68,15 +69,15 @@ use \Firebase\JWT\JWT;
 
 use \payapi\engine as engine ;
 
-class payapi {
+class payapiSdk {
 
   private
     $app                       =   false ;
 
-  public function __construct ( $adapt ) {
+  public function __construct ( $adapt = false , $plugin = false ) {
     $this -> hack  () ;
     require_once ( 'app' . '.' . 'engine' . '.' . 'php' ) ;
-    $this -> app = engine :: single ( $adapt ) ;
+    $this -> app = engine :: single ( $adapt , $plugin ) ;
     return $this -> app ;
   }
 
@@ -98,8 +99,8 @@ class payapi {
 }
 
 //-> @NOTE TO DELETE AFTER DEV
-function test ( $key , $settings ) {
-  $sdk = new payapi ( $settings ) ;
+function test ( $key , $config ) {
+  $sdk = new payapiSdk ( $config , 'native' ) ;
   $command = __DIR__ . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'test' . '.' . $key . '.' . 'php' ;
   if ( is_file ( $command ) === true ) {
     require ( $command ) ;
