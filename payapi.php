@@ -63,18 +63,18 @@
 *
 **/
 
-//-> $         curl --insecure https://store.multimerchantshop.dev > /dev/null
+//-> $         curl --insecure https://www.sdk.dev > /dev/null
 
 use \payapi\engine as app ;
 
-class payapi {
+class payapiSdk {
 
   private
     $app                       =   false ;
 
-  public function __construct ( $adapt ) {
+  public function __construct ( $adapt = false , $plugin = false ) {
     require ( __DIR__ . DIRECTORY_SEPARATOR . 'payapi' . DIRECTORY_SEPARATOR . 'app' . '.' . 'engine' . '.' . 'php' ) ;
-    $this -> app = app :: single ( $adapt ) ;
+    $this -> app = app :: single ( $adapt , $plugin ) ;
     return $this -> app ;
   }
 
