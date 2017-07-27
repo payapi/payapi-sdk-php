@@ -37,7 +37,7 @@ final class curl extends helper {
       if ( $this -> isCleanCodeInt ( $code ) === true ) {
         if ( $code === 200 ) {
           if ( $secured !== false ) {
-            if ( isset ( $dataExpected [ 'data' ] ) === true && is_string ( $dataExpected [ 'data' ] ) === true && substr_count ( $dataExpected [ 'data' ] , '.' ) === 2 ) { // review dynamic signaures
+            if ( isset ( $dataExpected [ 'data' ] ) === true && is_string ( $dataExpected [ 'data' ] ) === true && substr_count ( $dataExpected [ 'data' ] , '.' ) === 2 ) { // review dynamic signatures
               $serialized = array (
                 "code" => ( int ) ( ( isset ( $dataExpected [ 'code' ] ) === true && $this -> isCleanCodeInt ( $dataExpected [ 'code' ] ) === true ) ? $dataExpected [ 'code' ] : $code ) ,
                 "data" => $dataExpected [ 'data' ]
@@ -48,7 +48,7 @@ final class curl extends helper {
               $this -> error ( 'unexpected data' , 'curl' ) ;
             }
           } else {
-            //-> filter objects
+            //-> @TODO filter objects
             if ( is_array ( $dataExpected ) !== false ) {
               $serialized = array (
                 "code" => ( int ) ( ( isset ( $dataExpected [ 'code' ] ) === true && $this -> isCleanCodeInt ( $dataExpected [ 'code' ] ) === true ) ? $dataExpected [ 'code' ] : $code ) ,

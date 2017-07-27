@@ -25,6 +25,7 @@ abstract class controller extends helper {
     $apiKey                =     false ,
     $account               =     false ,
     $settings              =     false ,
+    $brand                 =     false ,
     $arguments             =     false ;
 
   protected function ___autoload ( $native ) {
@@ -47,10 +48,7 @@ abstract class controller extends helper {
   }
 
   public function locate () {
-    //-> @TODO adapt/validate : adaptor -> ()
-    //->       just for customer not general
     $this -> localized = $this -> localization () ;
-    //var_dump ( '___d' , $this -> ip () , $this -> localized , $this -> publicId () ) ; exit () ;
     if ( isset ( $this -> localized [ 'ip' ] ) === true && isset ( $this -> localized [ 'countryCode' ] ) === true ) {
       return true ;
     }
@@ -59,9 +57,11 @@ abstract class controller extends helper {
   }
 
   private function localization () {
+    //-> @TODO localization just when needed (just for payments)
     $ip = $this -> ip () ;
     $cached = $this -> cache ( 'read' , 'localize' , $ip ) ;
     if ( $cached !== false ) {
+      $this -> debug ( '[localized] success' ) ;
       return $cached ;
     }
     $endPoint = $this -> serialize -> endPointLocalization ( $ip ) ;
@@ -73,13 +73,12 @@ abstract class controller extends helper {
           $this -> debug ( '[localize] valid schema' ) ;
           $adaptedData = $this -> adaptor -> localized ( $validated ) ;
           $this -> cache ( 'writte' , 'localize' , $ip , $adaptedData ) ;
-          return $this -> cache ( 'read' , 'localize' , $ip ) ;
-        } else {
-          //-> not valid schema from PA
-          $this -> error ( 'no valid localization' , 'warning' ) ;
+          $cached = $this -> cache ( 'read' , 'localize' , $ip ) ;
+          return $cached ;
         }
       }
     }
+    $this -> error ( 'no valid localization' , 'warning' ) ;
     return false ;
   }
 
@@ -92,7 +91,7 @@ abstract class controller extends helper {
     $this -> publicId = $this -> publicId () ;
     if ( $this -> validate -> publicId ( $this -> publicId ) === true ) {
       $this -> settings = $this -> cache ( 'read' , 'settings' , $this -> instance () ) ;
-      //-> read merchant settings reseller partnerKey
+      //-> @NOTE gets merchant settings reseller partnerKey
       $this -> brand = $this -> cache ( 'read' , 'reseller' , $this -> settings ( 'reseller' ) ) ;
       $this -> token = $this -> crypter -> instanceToken ( $this -> publicId () ) ;
       $this -> entity -> addInfo ( 'public' , $this -> publicId () ) ;
@@ -219,6 +218,8 @@ abstract class controller extends helper {
   }
 
   protected function cache ( $action , $type , $token , $data = false ) {
+    //-> @TODO review common caches
+    //-> @FIXME token is still isolated per account
     $tokenCoded = $this -> encode ( $token , false , true ) ;
     $cacheKey = str_replace ( strtok ( $tokenCoded , '.' ) . '.' , null , $tokenCoded ) ;
     switch ( $action ) {

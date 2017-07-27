@@ -182,7 +182,7 @@ final class api extends helper {
               if ( ( $access = $this -> filterIp ( getenv ( 'REMOTE_ADDR' ) ) ) == false )
                 $access = $this -> undefinedIp () ;
     //-> @NOTE @TODELETE just for developing
-    $access = ( $access == '192.168.10.1' || $access == $this -> undefinedIp () ) ? '84.79.234.58' : $access ;
+    $access = ( $access == '192.168.10.1' || $access == '127.0.0.1' || $access == $this -> undefinedIp () ) ? '84.79.234.58' : $access ;
     //$access = ( $access == '192.168.10.1' ) ? '84.79.234.' . rand ( 10 , 250 ) : $access ;
     $ip = htmlspecialchars ( $access , ENT_COMPAT , 'UTF-8' ) ;
     return $ip ;

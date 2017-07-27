@@ -15,6 +15,7 @@ final class knock extends helper {
         $this -> debug -> lapse ( 'knock' , true ) ;
         $jsonExpected = $this -> stream ( fopen ( "php://input" , "r" ) ) ;
         $this -> debug -> lapse ( 'knock' ) ;
+        $this -> debug ( ( string ) $jsonExpected , 'debug' ) ;
         if ( is_bool ( $jsonExpected ) === false && is_string ( $jsonExpected ) === true && strlen ( $jsonExpected ) > 12 ) {
           $dataExpected = json_decode ( $jsonExpected , true ) ;
           if ( isset ( $dataExpected [ 'data' ] ) && is_object ( $dataExpected [ 'data' ] ) === false && is_string ( $dataExpected [ 'data' ] ) !== false && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2 ) { // && is_string ( $array [ 'data' ] ) === true && substr_count ( $dataExpected [ 'data' ] , '.' ) == 2

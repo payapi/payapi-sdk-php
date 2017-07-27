@@ -1,7 +1,54 @@
 <?php
-
 namespace payapi ;
-
+/*
+* @COMMAND
+*           $sdk -> localize ()
+*           $sdk -> localize ( true ) //-> refresh localization
+*           $sdk -> localize ( true/false , $ip ) //-> localizates ip
+*
+* @TYPE     public
+*
+* @PARAMS
+*           $ip = valid ip
+*
+* @RETURNS
+*           localization array OR $this -> error -> notFound ()
+*
+* @SAMPLE
+*           ["code"]=>
+*           int(200)
+*           ["data"]=>
+*           array(8) {
+*             ["ip"]=>
+*             string(12) "84.79.234.58"
+*             ["countryCode"]=>
+*             string(2) "ES"
+*             ["countryName"]=>
+*             string(5) "Spain"
+*             ["regionName"]=>
+*             string(6) "Madrid"
+*             ["regionCode"]=>
+*             string(2) "MD"
+*             ["postalCode"]=>
+*             string(5) "28529"
+*             ["timezone"]=>
+*             string(13) "Europe/Madrid"
+*             ["timestamp"]=>
+*             float(1500884755.4039)
+*           }
+*
+* @NOTE
+*          localization info is cached
+*          data is adapted through plugin
+*
+* @VALID
+*          schema.localize
+*
+* @TODO
+*          localize just when needed -> transaction
+*          common ip cahe is still isolated at encoding
+*
+*/
 final class commandLocalize extends controller {
 
   public function run () {

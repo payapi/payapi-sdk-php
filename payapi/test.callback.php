@@ -50,7 +50,7 @@ class testing {
   }
 
   public function run () {
-    $endPoint = 'https://store.multimerchantshop.dev/index.php' ;
+    $endPoint = 'https://www.sdk.dev/index.php?route=payapi/callback' ;
     $payload = json_encode ( $this -> payload () , true ) ;
     $signed = $this -> encode ( $payload , $this -> payapi_api_key ) ;
     $request = '{"data":"' . $signed . '"}' ;
@@ -150,7 +150,7 @@ class testing {
       $curlPost = $post ;
       curl_setopt ( $buffer , CURLOPT_POSTFIELDS , $curlPost ) ;
     }
-    //var_dump ( '___test' , curl_exec ( $buffer ) ) ; exit () ;
+    //var_dump ( '___curl' , curl_exec ( $buffer ) ) ; exit () ;
     //$responsed = json_decode ( curl_exec ( $buffer ) , true ) ;
     $responsed = curl_exec ( $buffer ) ;
     $code = ( int ) addslashes ( curl_getinfo ( $buffer , CURLINFO_HTTP_CODE ) ) ;
@@ -234,6 +234,7 @@ class testing {
   }
 
   protected function debug ( $debug ) {
+    //var_dump ( '___debug' , $debug ) ;
     return true ;
   }
 
@@ -263,9 +264,9 @@ class testing {
 }
 
 function test () {//->
-  exit () ;
+  //exit () ;
   $testing = new testing () ;
-  for ( $cont = 0 ; $cont < 100 ; $cont ++ ) {
+  for ( $cont = 0 ; $cont < 1 ; $cont ++ ) {
     var_dump ( '___test' , $testing -> test () ) ;//->
     exit () ;
   }

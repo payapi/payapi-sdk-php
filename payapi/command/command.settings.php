@@ -1,7 +1,70 @@
 <?php
-
 namespace payapi ;
-
+/*
+* @COMMAND
+*           $sdk -> settings ( $payapi_public_id , $payapi_api_enc_key )
+*           $sdk -> settings ()
+*           $sdk -> settings ( false , false , true ) //-> refresh settings
+*
+* @TYPE     public
+*
+* @PARAMS
+*           $payapi_public_id = string/false
+*           $payapi_api_enc_key = string/false
+*
+* @RETURNS
+*           settings array OR $this -> error -> badRequest ()
+*
+* @SAMPLE
+*           ["code"]=>
+*           int(200)
+*           ["data"]=>
+*           array(3) {
+*             ["partialPayments"]=>
+*             array(9) {
+*               ["preselectedPartialPayment"]=>
+*               string(12) "pay_in_parts"
+*               ["numberOfInstallments"]=>
+*               int(36)
+*               ["minimumAmountAllowedInCents"]=>
+*               int(10000)
+*               ["minimumAmountAllowedCurrency"]=>
+*               string(3) "EUR"
+*               ["invoiceFeeInCents"]=>
+*               int(435)
+*               ["invoiceFeeCurrency"]=>
+*               string(3) "EUR"
+*               ["nominalAnnualInterestRateInCents"]=>
+*               int(1300)
+*               ["paymentTermInDays"]=>
+*               int(30)
+*               ["whitelistedCountries"]=>
+*               array(1) {
+*                 [0]=>
+*                 string(2) "FI"
+*               }
+*             }
+*             ["reseller"]=>
+*             string(6) "payapi"
+*             ["timestamp"]=>
+*             float(1500903420.0991)
+*           }
+* @CARE
+*          most SDK commands are not available till settings is successful
+*          public commands: info, localize, settings
+*
+*
+* @NOTE
+*          seetings info is cached
+*          reseller info is also cached
+*
+* @VALID
+*          schema.settings*
+*
+* @TODO
+*          include any other PA plugin conf
+*
+*/
 final class commandSettings extends controller {
 
   public function run () {

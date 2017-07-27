@@ -1,7 +1,8 @@
 <?php
-
 namespace payapi ;
-
+/*
+* @TODO
+*/
 final class commandValidate extends controller {
 
   public function run () {

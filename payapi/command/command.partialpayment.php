@@ -1,15 +1,59 @@
 <?php
-
 namespace payapi ;
-
+/*
+* @COMMAND
+*           $sdk -> partialPayment ( $paymentPriceInCents , $paymentCurrency )
+*
+* @PARAMS
+*           $paymentPriceInCents = numeric
+*           $paymentCurrency = string
+*
+* @RETURNS
+*           partialPayment array OR $this -> error -> notImplemented ()
+*
+* @SAMPLE
+*           ["code"]=>
+*           int(200)
+*           ["data"]=>
+*           array(11) {
+*             ["paymentMonths"]=>
+*             int(36)
+*             ["interestRate"]=>
+*             float(39)
+*             ["interestRatePerMonth"]=>
+*             float(1.08)
+*             ["interestPriceInCents"]=>
+*             float(39000)
+*             ["priceInCents"]=>
+*             float(139000)
+*             ["pricePerMonthInCents"]=>
+*             float(3861)
+*             ["invoiceFeeInCents"]=>
+*             int(435)
+*             ["paymentMethod"]=>
+*             string(12) "pay_in_parts"
+*             ["invoiceFeeDays"]=>
+*             int(30)
+*             ["currency"]=>
+*             string(3) "EUR"
+*             ["country"]=>
+*             string(2) "FI"
+*           }
+*
+* @NOTE
+*          if 'whitelistedCountries' setting is empty all countries are allowed
+*
+* @TODO
+*          handle currency
+*
+*/
 final class commandPartialPayment extends controller {
 
   public function run () {
     //->
     if ( $this -> partialPayments () === true ) {
-      if ( is_numeric ( $this -> arguments ( 0 ) ) === true && is_string ( $this -> arguments ( 1 ) ) === true && is_string ( $this -> arguments ( 2 ) ) === true ) {
-        //$partialPayment = $this -> calculatePartialPayment ( ( int ) $this -> arguments ( 0 ) ,  $this -> arguments ( 1 ) , $this -> arguments ( 2 ) ) ;
-        $partialPayment = $this -> calculatePartialPayment ( ( int ) $this -> arguments ( 0 ) ,  $this -> arguments ( 1 ) , 'FI' ) ;
+      if ( is_numeric ( $this -> arguments ( 0 ) ) === true && is_string ( $this -> arguments ( 1 ) ) === true ) {
+        $partialPayment = $this -> calculatePartialPayment ( ( int ) $this -> arguments ( 0 ) ,  $this -> arguments ( 1 ) ) ;
         if ( is_array ( $partialPayment ) !== false ) {
           return $this -> render ( $partialPayment ) ;
         }
@@ -20,10 +64,14 @@ final class commandPartialPayment extends controller {
     return $this -> returnResponse ( $this -> error -> notImplemented () ) ;
   }
 
-  private function calculatePartialPayment ( $paymentPriceInCents , $paymentCurrency , $country = false ) {
+  private function calculatePartialPayment ( $paymentPriceInCents , $paymentCurrency ) {
     //-> settings
     $partialPaymentSettings = $this -> settings ( 'partialPayments' ) ;
-    if ( in_array ( $country , $partialPaymentSettings [ 'whitelistedCountries' ] ) === true ) {
+    //-> checks localization country
+    //-> @NOTE: when PA fetch metadata should localize provided ip
+    // @TODO @TODELETE after DEV/TEST
+    $this -> localized [ 'countryCode' ] = 'FI' ;
+    if ( isset ( $partialPaymentSettings [ 'whitelistedCountries' ] ) !== true || $partialPaymentSettings [ 'whitelistedCountries' ] === false || in_array ( $this -> localized [ 'countryCode' ] , $partialPaymentSettings [ 'whitelistedCountries' ] ) === true ) {
       if ( is_int ( $paymentPriceInCents ) === true && $paymentPriceInCents >= $partialPaymentSettings [ 'minimumAmountAllowedInCents' ] && is_string ( $paymentCurrency ) === true ) {
         $calculate = array () ;
         $partial = array () ;
@@ -43,6 +91,7 @@ final class commandPartialPayment extends controller {
         $partial [ 'paymentMethod' ] = $partialPaymentSettings [ 'preselectedPartialPayment' ] ;
         $partial [ 'invoiceFeeDays' ] = $partialPaymentSettings [ 'paymentTermInDays' ] ;
         $partial [ 'currency' ] = $paymentCurrency ;
+        $partial [ 'country' ] = $this -> localized [ 'countryCode' ] ;
         return $partial ;
       }
     }

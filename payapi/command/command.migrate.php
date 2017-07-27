@@ -1,7 +1,9 @@
 <?php
-
 namespace payapi ;
-
+/*
+* @NOTE   DO NOT USE
+*         just for OC migration
+*/
 class commandMigrate extends controller {
 
   private

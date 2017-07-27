@@ -28,3 +28,20 @@
 2017-07-24 06:39:28 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [warning] controller->locate not localized
 2017-07-24 07:24:54 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [notice] helper->error_handler Undefined variable: ip in /var/www/public/system/library/payapi/core/core.controller.php on line 74
 2017-07-24 07:24:54 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [notice] helper->error_handler Undefined variable: ip in /var/www/public/system/library/payapi/core/core.controller.php on line 75
+2017-07-24 09:31:15 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [curl] curl->proccess unexpected response
+2017-07-24 09:31:15 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [timeout] curl->proccess https://staging-input.payapi.io/v1/api/merchantSettings/multimerchantshop
+2017-07-24 09:31:26 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [curl] curl->proccess unexpected response
+2017-07-24 09:31:26 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [timeout] curl->proccess https://staging-input.payapi.io/v1/api/merchantSettings/multimerchantshop
+2017-07-24 09:31:46 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [curl] curl->proccess unexpected response
+2017-07-24 09:31:46 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [timeout] curl->proccess https://staging-input.payapi.io/v1/api/merchantSettings/multimerchantshop
+2017-07-24 09:32:15 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [curl] curl->proccess unexpected response
+2017-07-24 09:32:15 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [timeout] curl->proccess https://staging-input.payapi.io/v1/api/merchantSettings/multimerchantshop
+2017-07-24 09:32:41 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [curl] curl->proccess unexpected response
+2017-07-24 09:32:41 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [timeout] curl->proccess https://staging-input.payapi.io/v1/api/merchantSettings/multimerchantshop
+2017-07-24 09:33:28 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [curl] curl->proccess unexpected response
+2017-07-24 09:33:28 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [timeout] curl->proccess https://staging-input.payapi.io/v1/api/merchantSettings/multimerchantshop
+2017-07-24 09:51:49 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [notice] helper->error_handler Undefined index: timestamp in /var/www/public/vqmod/vqcache/vq2-admin_controller_payment_payapi_payments.php on line 28
+2017-07-24 10:07:12 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [notice] helper->error_handler Undefined property: payapi\commandSettings::$brand in /var/www/public/system/library/payapi/core/core.controller.php on line 113
+2017-07-24 10:15:41 UTC [www.sdk.dev] [f91bc43b84a728076a8c992e50bb1891] [notice] helper->error_handler Array to string conversion in /var/www/public/admin/view/template/payment/payapi_payments.tpl on line 86
+2017-07-24 13:44:09 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined property: payapi\commandPartialPayment::$located in /var/www/public/system/library/payapi/command/command.partialPayment.php on line 26
+2017-07-24 13:44:14 UTC [store.multimerchantshop.xyz] [983ab1519a8b553ec58125a13bf09471] [notice] helper->error_handler Undefined property: payapi\commandPartialPayment::$locate in /var/www/public/system/library/payapi/command/command.partialPayment.php on line 26
