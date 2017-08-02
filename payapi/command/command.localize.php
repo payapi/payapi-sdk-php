@@ -1,10 +1,12 @@
 <?php
-namespace payapi ;
+
+namespace payapi;
+
 /*
 * @COMMAND
-*           $sdk -> localize ()
-*           $sdk -> localize ( true ) //-> refresh localization
-*           $sdk -> localize ( true/false , $ip ) //-> localizates ip
+*           $sdk->localize()
+*           $sdk->localize(true) //-> refresh localization
+*           $sdk->localize(true/false, $ip) //-> localizates ip
 *
 * @TYPE     public
 *
@@ -12,28 +14,28 @@ namespace payapi ;
 *           $ip = valid ip
 *
 * @RETURNS
-*           localization array OR $this -> error -> notFound ()
+*           localization array OR $this->error->notFound()
 *
 * @SAMPLE
-*           ["code"]=>
+*          ["code"]=>
 *           int(200)
-*           ["data"]=>
+*          ["data"]=>
 *           array(8) {
-*             ["ip"]=>
+*            ["ip"]=>
 *             string(12) "84.79.234.58"
-*             ["countryCode"]=>
+*            ["countryCode"]=>
 *             string(2) "ES"
-*             ["countryName"]=>
+*            ["countryName"]=>
 *             string(5) "Spain"
-*             ["regionName"]=>
+*            ["regionName"]=>
 *             string(6) "Madrid"
-*             ["regionCode"]=>
+*            ["regionCode"]=>
 *             string(2) "MD"
-*             ["postalCode"]=>
+*            ["postalCode"]=>
 *             string(5) "28529"
-*             ["timezone"]=>
+*            ["timezone"]=>
 *             string(13) "Europe/Madrid"
-*             ["timestamp"]=>
+*            ["timestamp"]=>
 *             float(1500884755.4039)
 *           }
 *
@@ -45,44 +47,46 @@ namespace payapi ;
 *          schema.localize
 *
 * @TODO
-*          localize just when needed -> transaction
+*          localize just when needed->transaction
 *          common ip cahe is still isolated at encoding
 *
 */
-final class commandLocalize extends controller {
+final class commandLocalize extends controller
+{
 
-  public function run () {
-    if ( $this -> validate -> ip ( $this -> arguments ( 1 ) ) === true ) {
-      $ip = $this -> arguments ( 1 ) ;
+  public function run()
+  {
+    if ($this->validate->ip($this->arguments(1)) === true) {
+      $ip = $this->arguments(1);
     } else {
-      $ip = $this -> ip () ;
+      $ip = $this->ip();
     }
-    $this -> debug ( '[check] ' . $ip ) ;
-    $cached = $this -> cache ( 'read' , 'localize' , $ip ) ;
-    if ( $this -> arguments ( 0 ) !== true && $cached !== false ) {
-      return $this -> render ( $cached ) ;
+    $this->debug('[check] ' . $ip);
+    $cached = $this->cache('read', 'localize', $ip);
+    if ($this->arguments(0) !== true && $cached !== false) {
+      return $this->render($cached);
     } else {
-      $endPoint = $this -> serialize -> endPointLocalization ( $ip ) ;
-      $request = $this -> curl ( $endPoint , false , false ) ;
-      if ( $request !== false && isset ( $request [ 'code' ] ) === true ) {
-        if ( $request [ 'code' ] === 200) {
-          $validated = $this -> validate -> schema ( $request [ 'data' ] , $this -> load -> schema ( 'localize' ) ) ;
-          if ( is_array ( $validated ) !== false ) {
-            $this -> debug ( '[localize] valid schema' ) ;
-            $adaptedData = $this -> adaptor -> localized ( $validated ) ;
-            $this -> cache ( 'writte' , 'localize' , $ip , $adaptedData ) ;
-            return $this -> render ( $this -> cache ( 'read' , 'localize' , $ip ) ) ;
+      $endPoint = $this->serialize->endPointLocalization($ip);
+      $request = $this->curl($endPoint, false, false);
+      if ($request !== false && isset($request['code']) === true) {
+        if ($request['code'] === 200) {
+          $validated = $this->validate->schema($request['data'], $this->load->schema('localize'));
+          if (is_array($validated) !== false) {
+            $this->debug('[localize] valid schema');
+            $adaptedData = $this->adaptor->localized($validated);
+            $this->cache('writte', 'localize', $ip, $adaptedData);
+            return $this->render($this->cache('read', 'localize', $ip));
           } else {
             //-> not valid schema from PA
-            $this -> error ( 'no valid localization' , 'warning' ) ;
-            return $this -> returnResponse ( $this -> error -> notValidLocalizationSchema () ) ;
+            $this->error('no valid localization', 'warning');
+            return $this->returnResponse($this->error->notValidLocalizationSchema());
           }
         } else {
-          return $this -> returnResponse ( $request [ 'code' ] ) ;
+          return $this->returnResponse($request['code']);
         }
       }
     }
-    return $this -> returnResponse ( $this -> error -> timeout () ) ;
+    return $this->returnResponse($this->error->timeout());
   }
 
 

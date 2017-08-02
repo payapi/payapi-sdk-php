@@ -1,8 +1,10 @@
 <?php
-namespace payapi ;
+
+namespace payapi;
+
 /*
 * @COMMAND
-*           $sdk -> info ()
+*           $sdk->info()
 *
 * @TYPE     public
 *
@@ -10,19 +12,21 @@ namespace payapi ;
 *           SDK info AND version string
 *
 * @SAMPLE
-*           ["code"]=>
+*          ["code"]=>
 *           int(200)
-*           ["data"]=>
+*          ["data"]=>
 *           string(17) "PayApi SDK v0.0.1"
 *
 * @TODO
-*           include debug info ( same than extradata )
+*           include debug info(same than extradata)
 *
 */
-final class commandInfo extends controller {
+final class commandInfo extends controller
+{
 
-  public function run () {
-    return $this -> render ( $this -> entity -> get ( '___info' ) ) ;
+  public function run()
+  {
+    return $this->render($this->entity->get('___info'));
   }
 
 

@@ -1,13 +1,17 @@
 <?php
-namespace payapi ;
+
+namespace payapi;
+
 /*
 * @TODO
 */
-final class commandValidate extends controller {
+final class commandValidate extends controller
+{
 
-  public function run () {
+  public function run()
+  {
     //->
-    return $this -> returnResponse ( $this -> error -> notImplemented () ) ;
+    return $this->returnResponse($this->error->notImplemented());
   }
 
 

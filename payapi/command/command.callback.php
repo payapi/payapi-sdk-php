@@ -1,8 +1,10 @@
 <?php
-namespace payapi ;
+
+namespace payapi;
+
 /*
 * @COMMAND
-*           $sdk -> callback ()
+*           $sdk->callback()
 *
 * @TYPE     private
 *
@@ -13,130 +15,130 @@ namespace payapi ;
 *           callback order payload
 *
 * @SAMPLE
-*           ["code"]=>
+*          ["code"]=>
 *           int(200)
-*           ["data"]=>
+*          ["data"]=>
 *           array(6) {
-*             ["payment"]=>
+*            ["payment"]=>
 *             array(1) {
-*               ["status"]=>
+*              ["status"]=>
 *               string(10) "processing"
 *             }
-*             ["order"]=>
+*            ["order"]=>
 *             array(5) {
-*               ["sumInCentsIncVat"]=>
+*              ["sumInCentsIncVat"]=>
 *               int(322)
-*               ["sumInCentsExcVat"]=>
+*              ["sumInCentsExcVat"]=>
 *               int(300)
-*               ["vatInCents"]=>
+*              ["vatInCents"]=>
 *               int(22)
-*               ["currency"]=>
+*              ["currency"]=>
 *               string(3) "EUR"
-*               ["referenceId"]=>
+*              ["referenceId"]=>
 *               string(6) "ref123"
 *             }
-*             ["products"]=>
+*            ["products"]=>
 *             array(2) {
-*               [0]=>
+*              [0]=>
 *               array(13) {
-*                 ["id"]=>
+*                ["id"]=>
 *                 string(9) "bbc123456"
-*                 ["quantity"]=>
+*                ["quantity"]=>
 *                 int(1)
-*                 ["title"]=>
+*                ["title"]=>
 *                 string(15) "Black bling cap"
-*                 ["description"]=>
+*                ["description"]=>
 *                 string(15) "Flashy fine cap"
-*                 ["imageUrl"]=>
+*                ["imageUrl"]=>
 *                 string(39) "https://example.com/black_bling_cap.png"
-*                 ["category"]=>
+*                ["category"]=>
 *                 string(13) "Caps and hats"
-*                 ["options"]=>
+*                ["options"]=>
 *                 array(1) {
-*                   [0]=>
+*                  [0]=>
 *                   string(6) "size=1"
 *                 }
-*                 ["model"]=>
+*                ["model"]=>
 *                 string(11) "BLINGCAP123"
-*                 ["priceInCentsIncVat"]=>
+*                ["priceInCentsIncVat"]=>
 *                 int(122)
-*                 ["priceInCentsExcVat"]=>
+*                ["priceInCentsExcVat"]=>
 *                 int(100)
-*                 ["vatInCents"]=>
+*                ["vatInCents"]=>
 *                 int(22)
-*                 ["vatPercentage"]=>
+*                ["vatPercentage"]=>
 *                 int(22)
-*                 ["extraData"]=>
+*                ["extraData"]=>
 *                 string(37) "manufacturer=Bling Bling&origin=China"
 *               }
-*               [1]=>
+*              [1]=>
 *               array(13) {
-*                 ["id"]=>
+*                ["id"]=>
 *                 string(9) "pbc123456"
-*                 ["quantity"]=>
+*                ["quantity"]=>
 *                 int(1)
-*                 ["title"]=>
+*                ["title"]=>
 *                 string(14) "Pink bling cap"
-*                 ["description"]=>
+*                ["description"]=>
 *                 string(15) "Flashy fine cap"
-*                 ["imageUrl"]=>
+*                ["imageUrl"]=>
 *                 string(38) "https://example.com/pink_bling_cap.png"
-*                 ["category"]=>
+*                ["category"]=>
 *                 string(13) "Caps and hats"
-*                 ["options"]=>
+*                ["options"]=>
 *                 array(1) {
-*                   [0]=>
+*                  [0]=>
 *                   string(6) "size=2"
 *                 }
-*                 ["model"]=>
+*                ["model"]=>
 *                 string(11) "BLINGCAP123"
-*                 ["priceInCentsIncVat"]=>
+*                ["priceInCentsIncVat"]=>
 *                 int(222)
-*                 ["priceInCentsExcVat"]=>
+*                ["priceInCentsExcVat"]=>
 *                 int(200)
-*                 ["vatInCents"]=>
+*                ["vatInCents"]=>
 *                 int(22)
-*                 ["vatPercentage"]=>
+*                ["vatPercentage"]=>
 *                 int(22)
-*                 ["extraData"]=>
+*                ["extraData"]=>
 *                 string(37) "manufacturer=Bling Bling&origin=China"
 *               }
 *             }
-*             ["shippingAddress"]=>
+*            ["shippingAddress"]=>
 *             array(8) {
-*               ["recipientName"]=>
+*              ["recipientName"]=>
 *               string(10) "John Smith"
-*               ["co"]=>
+*              ["co"]=>
 *               string(8) "Jane Doe"
-*               ["streetAddress"]=>
+*              ["streetAddress"]=>
 *               string(19) "Delivery street 123"
-*               ["streetAddress2"]=>
+*              ["streetAddress2"]=>
 *               string(9) "Apt. 1202"
-*               ["postalCode"]=>
+*              ["postalCode"]=>
 *               string(5) "90210"
-*               ["city"]=>
+*              ["city"]=>
 *               string(8) "New York"
-*               ["stateOrProvince"]=>
+*              ["stateOrProvince"]=>
 *               string(2) "NY"
-*               ["countryCode"]=>
+*              ["countryCode"]=>
 *               string(2) "US"
 *             }
-*             ["consumer"]=>
+*            ["consumer"]=>
 *             array(4) {
-*               ["consumerId"]=>
+*              ["consumerId"]=>
 *               string(9) "happyjohn"
-*               ["email"]=>
+*              ["email"]=>
 *               string(25) "happyconsumer@example.com"
-*               ["locale"]=>
+*              ["locale"]=>
 *               string(5) "en-US"
-*               ["mobilePhoneNumber"]=>
+*              ["mobilePhoneNumber"]=>
 *               string(11) "34123456789"
 *             }
-*             ["extraInputData"]=>
+*            ["extraInputData"]=>
 *             array(2) {
-*               ["message"]=>
+*              ["message"]=>
 *               string(19) "message to merchant"
-*               ["tableNumber"]=>
+*              ["tableNumber"]=>
 *               int(12)
 *             }
 *           }
@@ -152,64 +154,65 @@ namespace payapi ;
 *          handle order through adaptor/plugin
 *
 */
-final class commandCallback extends controller {
+final class commandCallback extends controller
+{
 
-  public function run () {
+  public function run()
+  {
     //-> returnResponse should display a json response and send headers
     //-> enable api headers?
-    //-> http_response_code ( $code ) ;
-
-    $knock = $this -> knock () ;
-    $sanitized = array () ;
-    if ( is_string ( $knock ) === true ) {
-      $knockDecoded = $this -> decode ( $knock , $this -> apiKey () ) ;
-      if ( is_string ( $knockDecoded ) === true ) {
-        $knockData = json_decode ( $knockDecoded , true ) ;
-        if ( is_array ( $knockData ) !== false ) {
-          $knockValidated = $this -> validate -> schema ( $knockData , $this -> load -> schema ( 'callback' ) ) ;
-          if ( is_array ( $knockValidated ) !== false ) {
-            $error = 0 ;
-            foreach ( $knockValidated as $schema => $data ) {
-              if ( $schema === 'products' ) {
-                foreach ( $data as $key => $product ) {
-                  $productValidated = $this -> validate -> schema ( $product , $this -> load -> schema ( 'callback' . '.' . 'products' ) ) ;
-                  if ( is_array ( $productValidated ) !== false ) {
-                    $sanitized [ 'products' ] [] = $productValidated ;
+    //-> http_response_code($code);
+    $knock = $this->knock();
+    $sanitized = array();
+    if (is_string($knock) === true) {
+      $knockDecoded = $this->decode($knock, $this->apiKey());
+      if (is_string($knockDecoded) === true) {
+        $knockData = json_decode($knockDecoded, true);
+        if (is_array($knockData) !== false) {
+          $knockValidated = $this->validate->schema($knockData, $this->load->schema('callback'));
+          if (is_array($knockValidated) !== false) {
+            $error = 0;
+            foreach($knockValidated as $schema => $data) {
+              if ($schema === 'products') {
+                foreach($data as $key => $product) {
+                  $productValidated = $this->validate->schema($product, $this->load->schema('callback' . '.' . 'products'));
+                  if (is_array($productValidated) !== false) {
+                    $sanitized['products'][] = $productValidated;
                   } else {
-                    $error ++ ;
+                    $error ++;
                   }
                 }
               } else
-              if ( $data !== false ) {
-                $dataValidated = $this -> validate -> schema ( $data , $this -> load -> schema ( 'callback' . '.' . $schema ) ) ;
-                if ( is_array ( $dataValidated ) !== false ) {
-                  $sanitized [ $schema ] = $dataValidated ;
+              if ($data !== false) {
+                $dataValidated = $this->validate->schema($data, $this->load->schema('callback' . '.' . $schema));
+                if (is_array($dataValidated) !== false) {
+                  $sanitized[$schema] = $dataValidated;
                 } else {
-                  $this -> warning ( $schema , 'schema' ) ;
-                  $error ++ ;
+                  $this->warning($schema, 'schema');
+                  $error ++;
                 }
               }
             }
           } else {
-            $error ++ ;
+            $error ++;
           }
-          if ( $error === 0 ) {
-            if ( $this -> cache ( 'read' , 'transaction' , $knockData [ 'payment' ] [ 'status' ] . $knockData [ 'order' ] [ 'referenceId' ] ) === false ){
-              $this -> cache ( 'writte' , 'transaction' , $knockData [ 'payment' ] [ 'status' ] . $knockData [ 'order' ] [ 'referenceId' ] , $sanitized ) ;
-              return $this -> render ( $sanitized ) ;
+          if ($error === 0) {
+            if ($this->cache('read', 'transaction', $knockData['payment']['status'] . $knockData['order']['referenceId']) === false) {
+              $this->cache('writte', 'transaction', $knockData['payment']['status'] . $knockData['order']['referenceId'], $sanitized);
+              return $this->render($sanitized);
             } else {
-              return $this -> returnResponse ( $this -> error -> transactionDuplicated () ) ;
+              return $this->returnResponse($this->error->transactionDuplicated());
             }
           } else {
-            return $this -> returnResponse ( $this -> error -> notValidSchema () ) ;
+            return $this->returnResponse($this->error->notValidSchema());
           }
         } else {
-          return $this -> returnResponse ( $this -> error -> notValidSchema () ) ;
+          return $this->returnResponse($this->error->notValidSchema());
         }
       }
-      return $this -> returnResponse ( $this -> error -> knockUnexpectedSignature () ) ;
+      return $this->returnResponse($this->error->knockUnexpectedSignature());
     }
-    return $this -> returnResponse ( $this -> error -> knockNotValid () ) ;
+    return $this->returnResponse($this->error->knockNotValid());
   }
 
 
