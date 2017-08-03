@@ -235,4 +235,9 @@ final class plugin
     {
         return $this->version;
     }
+
+    public function demo()
+    {
+        return false;
+    }
 }
