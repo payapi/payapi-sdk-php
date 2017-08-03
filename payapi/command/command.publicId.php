@@ -1,31 +1,35 @@
 <?php
-namespace payapi ;
+
+namespace payapi;
+
 /*
 * @COMMAND
-*           $sdk -> publicId ()
+*           $sdk->publicId()
 *
 * @TYPE     private
 *
 * @RETURNS
-*           publicId string OR $this -> error -> notFound ()
+*           publicId string OR $this->error->notFound()
 *
 * @SAMPLE
-*           ["code"]=>
+*          ["code"]=>
 *           int(200)
-*           ["data"]=>
+*          ["data"]=>
 *           string(17) "multimerchantshop"
 *
 * @NOTE
 *          only available after settings/install
 *
 */
-final class commandPublicId extends controller {
+final class commandPublicId extends controller
+{
 
-  public function run () {
-    if ( is_string ( $this -> publicId () ) === true ) {
-      return $this -> render ( $this -> publicId () ) ;
+  public function run()
+  {
+    if (is_string($this->publicId()) === true) {
+      return $this->render($this->publicId());
     }
-    return $this -> returnResponse ( $this -> error -> notFound () ) ;
+    return $this->returnResponse($this->error->notFound());
   }
 
 

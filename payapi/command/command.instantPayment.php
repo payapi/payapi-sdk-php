@@ -1,8 +1,10 @@
 <?php
-namespace payapi ;
+
+namespace payapi;
+
 /*
 * @COMMAND
-*           $sdk -> instantPayment ( $product )
+*           $sdk->instantPayment($product)
 *
 * @TYPE     private
 *
@@ -10,13 +12,13 @@ namespace payapi ;
 *           instantPayment metadata/endpoints
 *
 * @SAMPLE
-*           ["code"]=>
+*          ["code"]=>
 *           int(200)
-*           ["data"]=>
+*          ["data"]=>
 *           array(4) {
-*             ["payload"]=>
+*            ["payload"]=>
 *             string(1569) "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IntcImlvXCI6e1wicGF5YXBpLndlYnNob3BcIjpcIm11bHRpbWVyY2hhbnRzaG9wXCJ9LFwicHJvZHVjdFwiOntcImlkXCI6XCJyZWY4NzU2N1wiLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL3N0b3JlLm11bHRpbWVyY2hhbnRzaG9wLnh5elxcXC9pbmRleC5waHA_cm91dGU9cHJvZHVjdFxcXC9wcm9kdWN0JnByb2R1Y3RfaWQ9NDNcIixcInRpdGxlXCI6XCJQcm9kdWN0IDFcIixcImltYWdlVXJsXCI6XCJodHRwczpcXFwvXFxcL3N0b3JlLnBheWFwaS5pb1xcXC9tZWRpYVxcXC80MzMwN2FjN2YzNTZkNTFlNmRkNjViOGNhOWZlM2Q5M1xcXC9pbWFnZVxcXC9jYWNoZVxcXC9jYXRhbG9nXFxcL1VzZXJzXFxcL1VzZXI0XFxcL3BheWFwaV9wcmVtaXVtX3N1cHBvcnQtMjI4eDIyOC5qcGdcIixcImNhdGVnb3J5XCI6XCJjYXRlZ29yeSAxXCIsXCJwcmljZUluQ2VudHNFeGNWYXRcIjoyMDAwMCxcInByaWNlSW5DZW50c0luY1ZhdFwiOjI0MDAwLFwib3B0aW9uc1wiOntcImNvbG9yXCI6XCJibHVlXCIsXCJzaXplXCI6XCJYWExcIn0sXCJxdWFudGl0eVwiOjEsXCJ2YXRJbkNlbnRzXCI6NDAwMCxcInZhdFBlcmNlbnRhZ2VcIjoyMH0sXCJvcmRlclwiOntcImN1cnJlbmN5XCI6XCJFVVJcIn0sXCJjYWxsYmFja3NcIjp7XCJwcm9jZXNzaW5nXCI6XCJodHRwcyUzQSUyRiUyRmFwaS5leGFtcGxlLmNvbSUyRmNhbGxiYWNrLXByb2Nlc3NpbmdcIixcInN1Y2Nlc3NcIjpcImh0dHBzJTNBJTJGJTJGYXBpLmV4YW1wbGUuY29tJTJGY2FsbGJhY2stc3VjY2Vzc1wiLFwiZmFpbGVkXCI6XCJodHRwcyUzQSUyRiUyRmFwaS5leGFtcGxlLmNvbSUyRmNhbGxiYWNrLWZhaWxlZFwiLFwiY2hhcmdlYmFja1wiOlwiaHR0cHMlM0ElMkYlMkZhcGkuZXhhbXBsZS5jb20lMkZjYWxsYmFjay1jaGFyZ2ViYWNrXCJ9LFwicmV0dXJuVXJsc1wiOntcInN1Y2Nlc3NcIjpcImh0dHBzJTNBJTJGJTJGc3RvcmUuZXhhbXBsZS5jb20lMkZwYXltZW50LXN1Y2Nlc3NcIixcImNhbmNlbFwiOlwiaHR0cHMlM0ElMkYlMkZzdG9yZS5leGFtcGxlLmNvbSUyRnBheW1lbnQtY2FuY2VsXCIsXCJmYWlsZWRcIjpcImh0dHBzJTNBJTJGJTJGc3RvcmUuZXhhbXBsZS5jb20lMkZwYXltZW50LWZhaWxlZFwifX0i.iK_4xO5lr3-MtNRQmgEccsM0uC70-TnpACzkNFmVlu8"
-*             ["metadata"]=>
+*            ["metadata"]=>
 *             string(1519) "<meta name="io.payapi.webshop" content="multimerchantshop">
 *           <meta name="product.id" content="ref87567">
 *           <meta name="product.url" content="https://store.multimerchantshop.xyz/index.php?route=product/product&product_id=43">
@@ -37,9 +39,9 @@ namespace payapi ;
 *           <meta name="returnUrls.success" content="https%3A%2F%2Fstore.example.com%2Fpayment-success">
 *           <meta name="returnUrls.cancel" content="https%3A%2F%2Fstore.example.com%2Fpayment-cancel">
 *           <meta name="returnUrls.failed" content="https%3A%2F%2Fstore.example.com%2Fpayment-failed">"
-*             ["endPointInstantBuy"]=>
+*            ["endPointInstantBuy"]=>
 *             string(61) "https://staging-input.payapi.io/v1/webshop/multimerchantshop/"
-*             ["endPointProductInstantBuy"]=>
+*            ["endPointProductInstantBuy"]=>
 *             string(160) "https://staging-input.payapi.io/v1/webshop/multimerchantshop/https%3A%2F%2Fstore.multimerchantshop.xyz%2Findex.php%3Froute%3Dproduct%2Fproduct%26product_id%3D43"
 *
 * @NOTE
@@ -53,103 +55,109 @@ namespace payapi ;
 *           handle stockage ?
 *
 */
-final class commandInstantPayment extends controller {
+final class commandInstantPayment extends controller
+{
 
   protected
-    $payment               =   false ;
+    $payment               =   false;
 
-  public function run () {
-    $data = $this -> arguments ( 0 ) ;
-    $data [ 'product' ] = $this -> adaptor -> product ( $data [ 'product' ] ) ;
-    $error = 0 ;
-    $md5 = md5 ( json_encode ( $data , true ) ) ;
-    $cache = $this -> cache  ( 'read' , 'product' , $md5 ) ;
-    if ( $cache !== false ) {
-      return $cache ;
+  public function run()
+  {
+    $data = $this->arguments(0);
+    $data['product'] = $this->adaptor->product($data['product']);
+    $error = 0;
+    $md5 = md5(json_encode($data, true));
+    $cache = $this->cache ('read', 'product', $md5);
+    if ($cache !== false) {
+      return $cache;
     } else {
-      if ( is_array ( $this -> validate -> schema ( $data , $this -> load -> schema ( 'instantPayment' ) ) ) === true ) {
-        $sanitized = array () ;
-        foreach ( $data as $key => $value ) {
-          $sanitization = $this -> validate -> schema ( $value , $this -> load -> schema ( 'instantPayment.' . $key ) ) ;
-          if ( is_array ( $sanitization ) === true ) {
-            $sanitized [ $key ] = $sanitization ;
+      if (is_array($this->validate->schema($data, $this->load->schema('instantPayment'))) === true) {
+        $sanitized = array();
+        foreach($data as $key => $value) {
+          $sanitization = $this->validate->schema($value, $this->load->schema('instantPayment.' . $key));
+          if (is_array($sanitization) === true) {
+            $sanitized[$key] = $sanitization;
           } else {
-            $error ++ ;
+            $error ++;
           }
         }
       } else {
-        $error = 1 ;
+        $error = 1;
       }
-      if ( $error === 0 ) {
-        $this -> debug ( '[schema] valid' ) ;
-        $this -> payment = array_merge (
-          array ( "io" => array ( "payapi.webshop" => $this -> publicId () ) ) ,
-          $this -> product ( $sanitized )
-        ) ;
-        $metaData = $this -> metadata ( $this -> payment ) ;
-        $productUrl = $this -> payment [ 'product' ] [ 'url' ] . '&' . 'extraData' . '=' . $this -> extraData ( $data [ 'product' ] ) ;
+      if ($error === 0) {
+        $this->debug('[schema] valid');
+        $this->payment = array_merge(
+          array("io" => array("payapi.webshop" => $this->publicId())),
+          $this->product($sanitized)
+        );
+        $metaData = $this->metadata($this->payment);
+        $productUrl = $this->payment['product']['url'] . '&' . 'extraData' . '=' . $this->extraData($data['product']);
         //-> @TODO options/extraData
-        $product = array (
-          //"product"            => $this -> payment ,
-          //"payload"            => $this -> encode ( $payloadJson , $this -> publicId () ) ,
-          "metadata"           => $metaData ,
-          "productUrl"         => $productUrl ,
-          "endPointInstantBuy" => $this -> serialize -> endPointInstantBuy ( $this -> publicId () ) ,
-          "endPointProductInstantBuy" => $this -> serialize -> endPointInstantBuy ( $this -> publicId () ) . $this -> serialize -> paymentUrlEncode ( $productUrl )
-        ) ;
-        $this -> cache ( 'writte' , 'product' , $md5 ) ;
-        return $this -> render ( $product ) ;
+        $product = array(
+          //"product"            => $this->payment,
+          //"payload"            => $this->encode($payloadJson, $this->publicId()),
+          "metadata"           => $metaData,
+          "productUrl"         => $productUrl,
+          "endPointInstantBuy" => $this->serialize->endPointInstantBuy($this->publicId()),
+          "endPointProductInstantBuy" => $this->serialize->endPointInstantBuy($this->publicId()) . $this->serialize->paymentUrlEncode($productUrl)
+        );
+        $this->cache('writte', 'product', $md5);
+        return $this->render($product);
       } else {
-        $this -> debug ( 'not valid' , 'schema' ) ;
-        return $this -> returnResponse ( $this -> error -> badRequest () ) ;
+        $this->debug('not valid', 'schema');
+        return $this->returnResponse($this->error->badRequest());
       }
     }
-    return returnResponse ( $this -> error -> notImplemented () ) ;
+    return returnResponse($this->error->notImplemented());
   }
 
-  private function extraData ( $product ) {
-    $options = array () ;
-    foreach ( $product [ 'options' ] as $key => $value ) {
-      $options [ $key ] = $value ;
+  private function extraData($product)
+  {
+    $options = array();
+    foreach($product['options'] as $key => $value) {
+      $options[$key] = $value;
     }
-    $data = array (
-      'options' => $options ,
-      'ip' => $this -> ip () ,
-      'currency' => null ,
+    $data = array(
+      'options' => $options,
+      'ip' => $this->ip(),
+      'currency' => null,
       'locale' => null
-    ) ;
-    $flag = $this -> encode ( json_encode ( $data , true ) , false , true ) ;
-    return $flag ;
+    );
+    $flag = $this->encode(json_encode($data, true), false, true);
+    return $flag;
   }
 
-  private function metadata () {
+  private function metadata()
+  {
     //-> @TODO
-    $data = $this -> payment ;
-    $metaData = null ;
-    foreach ( $data as $key => $value ) {
-      if ( is_array ( $value ) !== false ) {
-        foreach ( $value as $meta => $content ) {
-          if ( $meta === 'options' && is_array ( $data [ $key ] [ $meta ] ) !== false ) {
-            $contentParsed = $this -> serialize -> options ( $data [ $key ] [ $meta ] ) ;
+    $data = $this->payment;
+    $metaData = null;
+    foreach($data as $key => $value) {
+      if (is_array($value) !== false) {
+        foreach($value as $meta => $content) {
+          if ($meta === 'options' && is_array($data[$key][$meta]) !== false) {
+            $contentParsed = $this->serialize->options($data[$key][$meta]);
           } else {
-            $contentParsed = $data [ $key ] [ $meta ] ;
+            $contentParsed = $data[$key][$meta];
           }
-          $metaData .= '<meta name="' . $key . '.' . $meta . '" content="' . $contentParsed . '">' . "\r\n" ;
+          $metaData .= '<meta name="' . $key . '.' . $meta . '" content="' . $contentParsed . '">' . "\r\n";
         }
       }
     }
-    return $metaData ;
+    return $metaData;
   }
 
-  private function product ( $data ) {
-    $data [ 'product' ] [ 'vatInCents' ] = $data [ 'product' ] [ 'priceInCentsIncVat' ] - $data [ 'product' ] [ 'priceInCentsExcVat' ] ;
-    $data [ 'product' ] [ 'vatPercentage' ] = $this -> serialize -> percentage ( $data [ 'product' ] [ 'priceInCentsIncVat' ] , $data [ 'product' ] [ 'vatInCents' ] ) ;
-    return $data ;
+  private function product($data)
+  {
+    $data['product']['vatInCents'] = $data['product']['priceInCentsIncVat'] - $data['product']['priceInCentsExcVat'];
+    $data['product']['vatPercentage'] = $this->serialize->percentage($data['product']['priceInCentsIncVat'], $data['product']['vatInCents']);
+    return $data;
   }
 
-  private function cacheKey ( $md5 ) {
-    $cacheKey = date ( 'YmdHis' , time () ) .'-' . $md5 ;
-    return $cacheKey ;
+  private function cacheKey($md5)
+  {
+    $cacheKey = date('YmdHis', time()) .'-' . $md5;
+    return $cacheKey;
   }
 
 

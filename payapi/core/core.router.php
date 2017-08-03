@@ -1,126 +1,147 @@
 <?php
 
-namespace payapi ;
+namespace payapi;
 
-final class router {
+final class router
+{
 
   public static
-    $single                     =   false ;
+    $single                     =   false;
 
   protected
-    $version                    = '0.0.1' ;
+    $version                    = '0.0.1';
 
   private
-    $root                       =   false ,
-    $instance                   =   false ;
+    $root                       =   false,
+    $instance                   =   false;
 
-  private function __construct () {
-    $this -> root = $this -> parentDir ( __DIR__ ) . DIRECTORY_SEPARATOR ;
-    $this -> instance = instance :: this () ;
+  private function __construct()
+  {
+    $this->root = $this->parentDir(__DIR__) . DIRECTORY_SEPARATOR;
+    $this->instance = instance::this();
   }
 
-  public function parentDir ( $dir ) {
-    return str_replace ( DIRECTORY_SEPARATOR . basename ( $dir ) , null , $dir ) ;
+  public function parentDir($dir)
+  {
+    return str_replace(DIRECTORY_SEPARATOR . basename($dir), null, $dir);
   }
 
-  public function root ( $key = false ) {
-    if ( is_string ( $key ) === true ) {
-      return $this -> root . $key . DIRECTORY_SEPARATOR ;
+  public function root($key = false)
+  {
+    if (is_string($key) === true) {
+      return $this->root . $key . DIRECTORY_SEPARATOR;
     }
-    return $this -> root ;
+    return $this->root;
   }
 
-  private function routeCheck ( $dir ) {
-    if ( is_dir ( $dir ) !== true ) {
-      return mkdir ( $dir , '0755' ) ;
+  private function routeCheck($dir)
+  {
+    if (is_dir($dir) !== true) {
+      return mkdir($dir, '0755');
     }
-    return true ;
+    return true;
   }
 
-  private function routeCore () {
-    return $this -> root ( 'core' ) ;
+  private function routeCore()
+  {
+    return $this->root('core');
   }
 
-  private function routeCommand () {
-    return $this -> root ( 'command' ) ;
+  private function routeCommand()
+  {
+    return $this->root('command');
   }
 
-  private function routeCache () {
-    return $this -> root ( 'cache' ) ;
+  private function routeCache()
+  {
+    return $this->root('cache');
   }
 
-  private function routeData () {
-    return $this -> root ( 'data' ) ;
+  private function routeData()
+  {
+    return $this->root('data');
   }
 
-  private function routeTranslator ( $key ) {
-    $translator = $this -> root ( 'data' ) . 'translator' . DIRECTORY_SEPARATOR . 'translator' . '.' . $key . '.' . 'json' ;
-    if ( is_file ( $translator ) === true ) {
-      return $translator ;
+  private function routeTranslator($key)
+  {
+    $translator = $this->root('data') . 'translator' . DIRECTORY_SEPARATOR . 'translator' . '.' . $key . '.' . 'json';
+    if (is_file($translator) === true) {
+      return $translator;
     }
-    return false ;
+    return false;
   }
 
-  private function routeSchema () {
-    return $this -> root ( 'schema' ) ;
+  private function routeSchema()
+  {
+    return $this->root('schema');
   }
 
-  public static function routeError () {
-    return str_replace ( DIRECTORY_SEPARATOR . basename ( __DIR__ ) , null , __DIR__ ) . DIRECTORY_SEPARATOR . 'debug' . DIRECTORY_SEPARATOR . 'error' . DIRECTORY_SEPARATOR ;
+  public static function routeError()
+  {
+    return str_replace(DIRECTORY_SEPARATOR . basename(__DIR__), null, __DIR__) . DIRECTORY_SEPARATOR . 'debug' . DIRECTORY_SEPARATOR . 'error' . DIRECTORY_SEPARATOR;
   }
 
-  public function routeDebug () {
-    return $this -> root ( 'debug' ) ;
+  public function routeDebug()
+  {
+    return $this->root('debug');
   }
 
-  private function routePlugin () {
-    return $this -> root ( 'plugin' ) ;
+  private function routePlugin()
+  {
+    return $this->root('plugin');
   }
 
-  public function plugin ( $key ) {
-    $plugin = $this -> routePlugin () . 'plugin' . '.' . $key . '.' . 'php' ;
-    if ( is_file ( $plugin ) === true ) {
-      return $plugin ;
+  public function plugin($key)
+  {
+    $plugin = $this->routePlugin() . 'plugin' . '.' . $key . '.' . 'php';
+    if (is_file($plugin) === true) {
+      return $plugin;
     }
-    return false ;
+    return false;
   }
 
-  public function command ( $key ) {
-    $controller = $this -> routeCommand () . 'command' . '.' . $key . '.' . 'php' ;
-    if ( is_file ( $controller ) === true ) {
-      return $controller ;
+  public function command($key)
+  {
+    $controller = $this->routeCommand() . 'command' . '.' . $key . '.' . 'php';
+    if (is_file($controller) === true) {
+      return $controller;
     }
-    return false ;
+    return false;
   }
 
-  public function schema ( $key ) {
-    $schema = $this -> routeSchema () . 'schema' . '.' . $key . '.' . 'json' ;
-    if ( is_file ( $schema ) === true ) {
-      return $schema ;
+  public function schema($key)
+  {
+    $schema = $this->routeSchema() . 'schema' . '.' . $key . '.' . 'json';
+    if (is_file($schema) === true) {
+      return $schema;
     }
-    return false ;
+    return false;
   }
 
-  public function cache ( $type , $key ) {
-    $common = array ( 'localize' , 'ssl' , 'instance' , 'reseller' , 'update' ) ;
-    $isolated = ( in_array ( $type , $common ) === true ) ? null : 'data' . DIRECTORY_SEPARATOR . $this -> instance . DIRECTORY_SEPARATOR ;
-    $cacheFile = $this -> routeCache () . $isolated . $type . DIRECTORY_SEPARATOR . 'cache' . '.' . $key . '.' . 'data' ;
-    return $cacheFile ;
+  public function cache($type, $key)
+  {
+    $common = array('localize', 'ssl', 'instance', 'reseller', 'update');
+    $isolated =(in_array($type, $common) === true) ? null : 'data' . DIRECTORY_SEPARATOR . $this->instance . DIRECTORY_SEPARATOR;
+    $cacheFile = $this->routeCache() . $isolated . $type . DIRECTORY_SEPARATOR . 'cache' . '.' . $key . '.' . 'data';
+    return $cacheFile;
   }
 
-  public function brand ( $key ) {
-    return $this -> routeCache () . 'brand' . DIRECTORY_SEPARATOR . 'brand' . '.' . $key . '.' . 'json' ;
+  public function brand($key)
+  {
+    return $this->routeCache() . 'brand' . DIRECTORY_SEPARATOR . 'brand' . '.' . $key . '.' . 'json';
   }
 
-  public static function single () {
-    if ( self :: $single === false ) {
-      self :: $single = new self () ;
+  public static function single()
+  {
+    if (self::$single === false) {
+      self::$single = new self();
     }
-    return self :: $single ;
+    return self::$single;
   }
 
-  public function __toString () {
-    return $this -> version ;
+  public function __toString()
+  {
+    return $this->version;
   }
 
 

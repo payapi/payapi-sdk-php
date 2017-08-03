@@ -1,213 +1,233 @@
 <?php
 
-namespace payapi ;
+namespace payapi;
 
-final class api extends helper {
+final class api extends helper
+{
 
   public
-    $version                       =   '0.0.1' ;
+    $version                       =   '0.0.1';
 
   private
-    $curl                          =     false ,
-    $knock                         =     false ,
-    $code                          =     false ,
-    $mode                          =     'sdk' ,
-    $entity                        =     false ,
-    $headers                       =     false ,
-    $timeout                       =         1 ,
-    $id                            =     false ,
-    $responses =    array (
+    $curl                          =     false,
+    $knock                         =     false,
+    $code                          =     false,
+    $mode                          =     'sdk',
+    $entity                        =     false,
+    $headers                       =     false,
+    $timeout                       =         1,
+    $id                            =     false,
+    $responses =    array(
       // @NOTE PHP ZEND INTERNAL STATUS HEADERS
 
       // Informational 1xx
-      100 =>                        'continue' ,
-      101 =>             'switching Protocols' ,
+      100 =>                        'continue',
+      101 =>             'switching Protocols',
 
       // Success 2xx
-      200 =>                         'success' ,
-      201 =>                         'created' ,
-      202 =>                        'accepted' ,
-      203 =>   'non-Authoritative Information' ,
-      204 =>                      'no Content' ,
-      205 =>                   'reset Content' ,
-      206 =>                 'partial Content' ,
+      200 =>                         'success',
+      201 =>                         'created',
+      202 =>                        'accepted',
+      203 =>   'non-Authoritative Information',
+      204 =>                      'no Content',
+      205 =>                   'reset Content',
+      206 =>                 'partial Content',
 
       // Redirection 3xx
-      300 =>                'multiple choices' ,
-      301 =>               'moved permanently' ,
-      302 =>                           'found' ,  // 1.1
-      303 =>                       'see Other' ,
-      304 =>                    'not modified' ,
-      305 =>                       'use proxy' ,
+      300 =>                'multiple choices',
+      301 =>               'moved permanently',
+      302 =>                           'found',  // 1.1
+      303 =>                       'see Other',
+      304 =>                    'not modified',
+      305 =>                       'use proxy',
       // 306 is deprecated but reserved
-      307 =>              'temporary redirect' ,
+      307 =>              'temporary redirect',
 
       // Client Error 4xx
-      400 =>                     'bad request' ,
-      401 =>                    'unauthorized' ,
-      402 =>                'payment required' ,
-      403 =>                       'forbidden' ,
-      404 =>                       'not found' ,
-      405 =>              'method not allowed' ,
-      406 =>                  'not acceptable' ,
-      407 =>   'proxy authentication required' ,
-      408 =>                 'request timeout' ,
-      409 =>                        'conflict' ,
-      410 =>                            'gone' ,
-      411 =>                 'length required' ,
-      412 =>             'precondition failed' ,
-      413 =>        'request entity too large' ,
-      414 =>            'request-uri too long' ,
-      415 =>          'unsupported media type' ,
-      416 => 'requested range not satisfiable' ,
-      417 =>              'expectation failed' ,
+      400 =>                     'bad request',
+      401 =>                    'unauthorized',
+      402 =>                'payment required',
+      403 =>                       'forbidden',
+      404 =>                       'not found',
+      405 =>              'method not allowed',
+      406 =>                  'not acceptable',
+      407 =>   'proxy authentication required',
+      408 =>                 'request timeout',
+      409 =>                        'conflict',
+      410 =>                            'gone',
+      411 =>                 'length required',
+      412 =>             'precondition failed',
+      413 =>        'request entity too large',
+      414 =>            'request-uri too long',
+      415 =>          'unsupported media type',
+      416 => 'requested range not satisfiable',
+      417 =>              'expectation failed',
 
       // Server Error 5xx
-      500 =>           'internal server error' ,
-      501 =>                 'not implemented' ,
-      502 =>                     'bad gateway' ,
-      503 =>             'service unavailable' ,
-      504 =>                 'gateway timeout' ,
-      505 =>      'http version not supported' ,
-      509 =>        'bandwidth limit exceeded' ,
+      500 =>           'internal server error',
+      501 =>                 'not implemented',
+      502 =>                     'bad gateway',
+      503 =>             'service unavailable',
+      504 =>                 'gateway timeout',
+      505 =>      'http version not supported',
+      509 =>        'bandwidth limit exceeded',
 
       // @NOTE Extra One(s) 6xx  :)
       600 =>                         'boo boo'
-    ) ;
+     );
 
-  protected function ___autoload () {
-    $this -> ip = $this -> getIp () ;
+  protected function ___autoload()
+  {
+    $this->ip = $this->getIp();
   }
 
-  public function ip () {
-    return $this -> ip ;
+  public function ip()
+  {
+    return $this->ip;
   }
 
-  public function render ( $data , $code ) {
+  public function render($data, $code)
+  {
     //->
-    $label = ( ( $code === 200 ) ? 'data' : 'error' ) ;
-    $this -> buffer = array (
-      "code" => $code ,
+    $label =(($code === 200) ? 'data' : 'error');
+    $this->buffer = array(
+      "code" => $code,
       $label => $data
-    ) ;
-    $this -> code = ( $this -> checkCode ( $code ) === true ) ? $code : 600 ;
-    $this -> headers ( $code ) ;
-    $this -> listening () ;
-    $this -> debug -> blank ( '=== LISTENING ==>' ) ;
-    return $this -> buffer ;
+    );
+    $this->code =($this->checkCode($code) === true) ? $code : 600;
+    $this->headers($code);
+    $this->listening();
+    $this->debug->blank('=== LISTENING ==>');
+    return $this->buffer;
   }
 
-  private function listening () {
-    $this -> debug ( '[' . $this -> code . '] rendering' , 'api' ) ;
-    $this -> debug -> run () ;
+  private function listening()
+  {
+    $this->debug('[' . $this->code . '] rendering', 'api');
+    $this->debug->run();
   }
 
-  public function response ( $code = false ) {
-    return $this -> getApiResponse ( $code ) ;
+  public function response($code = false)
+  {
+    return $this->getApiResponse($code);
   }
 
-  public function returnResponse ( $code ) {
-    $code = ( $this -> checkCode ( $code ) === true ) ? $code : 600 ;
-    return $this -> render ( $this -> responses [ $code ] , $code ) ;
+  public function returnResponse($code)
+  {
+    $code =($this->checkCode($code) === true) ? $code : 600;
+    return $this->render($this->responses[$code], $code);
   }
 
-  public function curl ( $url , $secured = true , $post = false , $timeout = 1 , $return = 1 , $header = 0 , $ssl = 1 , $fresh = 1 , $noreuse = 1 ) {
-    if ( $this -> curl === false ) {
-      $this -> curl = new curl () ;
+  public function curl($url, $secured = true, $post = false, $timeout = 1, $return = 1, $header = 0, $ssl = 1, $fresh = 1, $noreuse = 1)
+  {
+    if ($this->curl === false) {
+      $this->curl = new curl();
     }
-    $checkTimeout = ( $this -> config -> staging () === true ) ? 2 : $timeout ;
-    $response = $this -> curl -> proccess ( $url , $secured , $post , $checkTimeout , $return , $header , $ssl , $fresh , $noreuse ) ;
+    $checkTimeout =($this->config->staging() === true) ? 2 : $timeout;
+    $response = $this->curl->proccess($url, $secured, $post, $checkTimeout, $return, $header, $ssl, $fresh, $noreuse);
     //->
-    return $response ;
+    return $response;
   }
 
-  public function knock () {
-    if ( $this -> knock === false ) {
-      $this -> knock = new knock () ;
+  public function knock()
+  {
+    if ($this->knock === false) {
+      $this->knock = new knock();
     }
-    $knock = $this -> knock -> listen () ;
+    $knock = $this->knock->listen();
     //->
-    return $knock ;
+    return $knock;
   }
 
-  public function defaultCode () {
-    end ( $this -> responses ) ;
-    return key ( $this -> responses ) ;
+  public function defaultCode()
+  {
+    end($this->responses);
+    return key($this->responses);
   }
 
-  private function undefinedIp () {
-    return 'undefined' ;
+  private function undefinedIp()
+  {
+    return 'undefined';
   }
 
-  public function code ( $responseCode ) {
-    if ( $this -> isCleanCodeInt ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) ) {
-      return $responseCode ;
+  public function code($responseCode)
+  {
+    if ($this->isCleanCodeInt($responseCode) === true && isset($this->responses[$responseCode])) {
+      return $responseCode;
     }
-    return $this -> error -> notAcceptable () ;
+    return $this->error->notAcceptable();
   }
 
-  public function checkCode ( $responseCode ) {
-    if ( $this -> isCleanCodeInt ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) === true ) {
-      return true ;
+  public function checkCode($responseCode)
+  {
+    if ($this->isCleanCodeInt($responseCode) === true && isset($this->responses[$responseCode]) === true) {
+      return true;
     }
-    return false ;
+    return false;
   }
 
-  private function headers () {
-    if ( $this -> headers !== true ) {
-      return true ;
+  private function headers()
+  {
+    if ($this->headers !== true) {
+      return true;
     }
-    $this -> debug ( '[headers] ' . $this -> mode ) ;
-    //header ( 'Content-type: ' . $this -> modes [ $this -> mode ] ) ;
-    header ( "X-Robots-Tag: noindex,nofollow" ) ;
-    return http_response_code ( $this -> code ) ;
+    $this->debug('[headers] ' . $this->mode);
+    //header('Content-type: ' . $this->modes[$this->mode]);
+    header("X-Robots-Tag: noindex,nofollow");
+    return http_response_code($this->code);
   }
 
-  private function getApiResponse ( $responseCode ) {
-    if ( $this -> isCleanCodeInt ( $responseCode ) === true && isset ( $this -> responses [ $responseCode ] ) === true ) {
-      $code = $responseCode ;
+  private function getApiResponse($responseCode)
+  {
+    if ($this->isCleanCodeInt($responseCode) === true && isset($this->responses[$responseCode]) === true) {
+      $code = $responseCode;
     } else {
-      $this -> debug ( 'response code no valid' , 'api' ) ;
-      $code = $this -> error -> notAcceptable () ;
+      $this->debug('response code no valid', 'api');
+      $code = $this->error->notAcceptable();
     }
-    return $this -> responses [ $code ] ;
+    return $this->responses[$code];
   }
 
-  private function getIp () {
-    if ( ( $access = $this -> filterIp ( getenv ( 'HTTP_CLIENT_IP' ) ) ) == false )
-      if ( ( $access = $this -> filterIp ( getenv ( 'HTTP_X_FORWARDED_FOR' ) ) ) == false )
-        if ( ( $access = $this -> filterIp ( getenv ( 'HTTP_X_FORWARDED' ) ) ) == false )
-          if ( ( $access = $this -> filterIp ( getenv ( 'HTTP_FORWARDED_FOR' ) ) ) == false )
-            if ( ( $access = $this -> filterIp ( getenv ( 'HTTP_FORWARDED' ) ) ) == false )
-              if ( ( $access = $this -> filterIp ( getenv ( 'REMOTE_ADDR' ) ) ) == false )
-                $access = $this -> undefinedIp () ;
+  private function getIp()
+  {
+    if (($access = $this->filterIp(getenv('HTTP_CLIENT_IP'))) == false)
+      if (($access = $this->filterIp(getenv('HTTP_X_FORWARDED_FOR'))) == false)
+        if (($access = $this->filterIp(getenv('HTTP_X_FORWARDED'))) == false)
+          if (($access = $this->filterIp(getenv('HTTP_FORWARDED_FOR'))) == false)
+            if (($access = $this->filterIp(getenv('HTTP_FORWARDED'))) == false)
+              if (($access = $this->filterIp(getenv('REMOTE_ADDR'))) == false)
+                $access = $this->undefinedIp();
     //-> @NOTE @TODELETE just for developing
-    $access = ( $access == '192.168.10.1' || $access == '127.0.0.1' || $access == $this -> undefinedIp () ) ? '84.79.234.58' : $access ;
-    //$access = ( $access == '192.168.10.1' ) ? '84.79.234.' . rand ( 10 , 250 ) : $access ;
-    $ip = htmlspecialchars ( $access , ENT_COMPAT , 'UTF-8' ) ;
-    return $ip ;
+    $access =($access == '192.168.10.1' || $access == '127.0.0.1' || $access == $this->undefinedIp()) ? '84.79.234.58' : $access;
+    //$access =($access == '192.168.10.1') ? '84.79.234.' . rand(10, 250) : $access;
+    $ip = htmlspecialchars($access, ENT_COMPAT, 'UTF-8');
+    return $ip;
   }
 
-  public function filterIp ( $ip ) {
-    if ( md5 ( filter_var ( $ip , FILTER_VALIDATE_IP ) ) === md5 ( $ip ) && ip2long ( $ip ) !== false ) {
-      return preg_replace ( "/[^0-0.\d ]/i" , '' , $ip ) ;
+  public function filterIp($ip)
+  {
+    if (md5(filter_var($ip, FILTER_VALIDATE_IP)) === md5($ip) && ip2long($ip) !== false) {
+      return preg_replace("/[^0-0.\d]/i", '', $ip);
     }
-    return false ;
+    return false;
   }
 
-  private function isCleanCodeInt ( $int ) {
-    if ( is_int ( $int ) === true && $int >= 200 && $int <= 600 ) {
-      return true ;
+  private function isCleanCodeInt($int)
+  {
+    if (is_int($int) === true && $int >= 200 && $int <= 600) {
+      return true;
     }
-    return false ;
+    return false;
   }
 
-  public function checkIncomingHasValidSsl ( $url ) {
-    return $this -> checkSsl ( $url ) ;
+  public function checkIncomingHasValidSsl($url)
+  {
+    return $this->checkSsl($url);
   }
 
-  public function __toString () {
-    return $this -> version ;
+  public function __toString()
+  {
+    return $this->version;
   }
 
 

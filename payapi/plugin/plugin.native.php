@@ -1,104 +1,131 @@
 <?php
 
-namespace payapi ;
+namespace payapi;
 
-final class plugin {
+final class plugin
+{
 
   public static
-    $single                    =     false ;
+    $single                    =     false;
 
   public
-    $version                   =        '0.0.0' ;
+    $version                   =        '0.0.0';
 
   private
-    $native                    =          false ,
-    $config                    =          false ,
-    $db                        =          false ;
+    $native                    =          false,
+    $config                    =          false,
+    $db                        =          false;
 
-  public function __construct ( $config ) {
-    $this -> config = $config ;
+  public function __construct($config)
+  {
+    $this->config = $config;
   }
 
-  public function validated () {
+  public function validated()
+  {
     //->
-    return true ;
+    return true;
   }
 
-  public function product ( $product ) {
+  public function product($product)
+  {
     //->
-    return $product ;
+    return $product;
   }
 
-  public function payment ( $payment ) {
+  public function payment($payment)
+  {
     //->
-    return $payment ;
+    return $payment;
   }
 
-  public function instantPayment ( $payment ) {
+  public function instantPayment($payment)
+  {
     //->
-    return $payment ;
+    return $payment;
   }
 
-  public function loadLog () {
+  public function loadLog()
+  {
     //->
-    return false ;
+    return false;
   }
 
-  public function log ( $info ) {
-    return true ;
+  public function log($info)
+  {
+    return true;
   }
 
-  public function config () {
-    return $this -> config ;
+  public function config()
+  {
+    return $this->config;
   }
 
-  public function session () {
-    return false ;
+  public function session()
+  {
+    return false;
   }
 
-  public function db () {
-    return false ;
+  public function db()
+  {
+    return false;
   }
 
-  public function customer () {
-    return false ;
+  public function customer()
+  {
+    return false;
   }
 
-  public function debug () {
-    if ( isset ( $this -> config [ 'debug' ] ) === true && $this -> config [ 'debug' ] === true ) {
-      return true ;
+  public function debug()
+  {
+    if (isset($this->config['debug']) === true && $this->config['debug'] === true) {
+      return true;
     }
-    return false ;
+    return false;
   }
 
-  public function nativeVersion () {
-    return $this -> version ;
-  }
-
-  public function version () {
-    return $this -> version ;
-  }
-
-  public function staging () {
-    if ( isset ( $this -> config [ 'staging' ] ) === true && $this -> config [ 'staging' ] === true ) {
-      return true ;
+  public function demo()
+  {
+    if (isset($this->config['demo']) === true && $this->config['demo'] === true) {
+      return true;
     }
-    return false ;
+    return false;
   }
 
-  public function localized ( $localized ) {
-    return $localized ;
+  public function nativeVersion()
+  {
+    return $this->version;
   }
 
-  public static function single ( $adapt ) {
-    if ( self :: $single === false ) {
-      self :: $single = new self ( $adapt ) ;
+  public function version()
+  {
+    return $this->version;
+  }
+
+  public function staging()
+  {
+    if (isset($this->config['staging']) === true && $this->config['staging'] === true) {
+      return true;
     }
-    return self :: $single ;
+    return false;
   }
 
-  public function __toString () {
-    return $this -> version ;
+  public function localized($localized)
+  {
+    return $localized;
+  }
+
+  public static function single($adapt)
+  {
+    if (self::$single === false) {
+      self::$single = new self($adapt);
+    }
+    return self::$single;
+  }
+
+  public function __toString()
+  {
+    return $this->version;
   }
 
 

@@ -1,50 +1,57 @@
 <?php
 
-namespace payapi ;
+namespace payapi;
+
 //-> SDK config
-final class config {
+final class config
+{
 
   public static
-    $single                     =      false ;
+    $single                     =      false;
 
   private
-    $settings                   =      false ,
-    $instance                   =      false ,
-    $schema                     =      array (
-      "debug"                   =>     false ,
-      "staging"                 =>     false
-    )                                        ;
+    $settings                   =      false,
+    $instance                   =      false,
+    $schema                     =      array(
+      "debug"                   =>     false,
+      "staging"                 =>     false,
+      "demo"                    =>     false
+    )                                       ;
 
-  private function __construct ( $config ) {
-    $this -> instance = instance :: this () ;
-    foreach ( $this -> schema as $key => $value ) {
-      if ( isset ( $config [ $key ] ) === true ) {
-        if ( $config [ $key ] === true ) {
-          $this -> settings [ $key ] = true ;
+  private function __construct($config)
+  {
+    $this->instance = instance::this();
+    foreach($this->schema as $key => $value) {
+      if (isset($config[$key]) === true) {
+        if ($config[$key] === true) {
+          $this->settings[$key] = true;
         } else {
-          $this -> settings [ $key ] = $value ;
+          $this->settings[$key] = $value;
         }
       }
     }
   }
 
-  public function __call ( $key , $arguments = array () ) {
-    if ( $arguments === array () && is_string ( $key ) === true && isset ( $this -> settings [ $key ] ) === true ) {
-      return $this -> settings [ $key ] ;
+  public function __call($key, $arguments = array())
+  {
+    if ($arguments === array() && is_string($key) === true && isset($this->settings[$key]) === true) {
+      return $this->settings[$key];
     }
     //->  @NOTE
-    return null ;
+    return null;
   }
 
-  public static function single ( $config = array () ) {
-    if ( self :: $single === false ) {
-      self :: $single = new self ( $config ) ;
+  public static function single($config = array())
+  {
+    if (self::$single === false) {
+      self::$single = new self($config);
     }
-    return self :: $single ;
+    return self::$single;
   }
 
-  public function __toString () {
-    return $this -> data ;
+  public function __toString()
+  {
+    return $this->data;
   }
 
 
