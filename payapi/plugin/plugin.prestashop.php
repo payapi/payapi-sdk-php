@@ -6,21 +6,17 @@ namespace payapi;
  * Class PluginPrestashop
  * @author efim@payapi.in
  */
-final class PluginPrestashop
+final class plugin
 {
     public static $single = false;
 
     public $version       = '0.0.1';
 
-    private $native       = false;
     private $config       = false;
-    private $db           = false;
 
-    private function __construct($native)
+    private function __construct($config)
     {
-        $this->native = $native;
-        $this->db = $this->native->get('db');
-        $this->config = $this->native->get('config');
+        $this->config = $config;
         $this->loadLog();
     }
 
@@ -105,11 +101,11 @@ final class PluginPrestashop
         array_push($products_array, $shippingObject);
 
         // Get shipping address info.
-        $address = new Address((int)$cart->id_address_delivery);
+        $address = new \Address((int)$cart->id_address_delivery);
 
-        $customer = new Customer((int)$address->id_customer);
+        $customer = new \Customer((int)$address->id_customer);
 
-        $country = new Country((int)$address->id_country);
+        $country = new \Country((int)$address->id_country);
 
         $shipping_address = array(
             'recipientName' => $customer->firstname." ".$customer->lastname,
@@ -121,7 +117,7 @@ final class PluginPrestashop
             'countryCode' => $country->iso_code,
         );
 
-        $shop_url = Tools::getHttpHost(true).__PS_BASE_URI__;
+        $shop_url = \Tools::getHttpHost(true).__PS_BASE_URI__;
 
         $returnUrls = array(
             'success' => $shop_url.'index.php?payapireturn=success',
@@ -184,7 +180,7 @@ final class PluginPrestashop
 
     public function debug()
     {
-        return $this->native->debug();
+        return $this->config['debug'];
     }
 
     public function nativeVersion()
@@ -199,11 +195,31 @@ final class PluginPrestashop
 
     public function staging()
     {
-        return $this->native->debug();
+        return $this->config['staging'];
     }
 
     public function localized($localized)
     {
+        /*
+        $sql = 'SELECT `id_country`
+            FROM `'._DB_PREFIX_.'country`
+            WHERE `iso_code` = \''.$localized['countryCode'].'\'';
+        $resultCountry = Db::getInstance()->getRow($sql);
+         */
+        $country_id = \Country::getByIso($localized['countryCode']);
+        if ($country_id != false) {
+            $zone_id = \Country::getIdZone($country_id);
+            if ($zone_id != false) {
+                return array_merge(
+                    $localized,
+                    array(
+                        'country_id' => $resultCountry['id_country'],
+                        'zone_id'    => $zone_id,
+                    )
+                );
+            }
+        }
+
         return $localized;
     }
 
