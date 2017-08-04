@@ -39,10 +39,10 @@ final class plugin
      */
     public function payment($cart)
     {
-        $currency = new Currency($cart->id_currency);
+        $currency = new \Currency($cart->id_currency);
 
-        $sumInCentsIncVat = (float)$cart->getOrderTotal(true, Cart::BOTH) * 100;
-        $sumInCentsExcVat = (float)$cart->getOrderTotal(false, Cart::BOTH) * 100;
+        $sumInCentsIncVat = (float)$cart->getOrderTotal(true, \Cart::BOTH) * 100;
+        $sumInCentsExcVat = (float)$cart->getOrderTotal(false, \Cart::BOTH) * 100;
 
         $vatInCents = $sumInCentsIncVat - $sumInCentsExcVat;
 
@@ -84,8 +84,8 @@ final class plugin
             array_push($products_array, $productObject);
         }
 
-        $shipping_cost = (float)$cart->getOrderTotal(true, Cart::ONLY_SHIPPING) * 100;
-        $shipping_cost_no_tax = (float)$cart->getOrderTotal(false, Cart::ONLY_SHIPPING) * 100;
+        $shipping_cost = (float)$cart->getOrderTotal(true, \Cart::ONLY_SHIPPING) * 100;
+        $shipping_cost_no_tax = (float)$cart->getOrderTotal(false, \Cart::ONLY_SHIPPING) * 100;
         // Add shipping cost as a last product
         $shippingObject = array(
             'id' => $cart->id_carrier,
@@ -200,12 +200,6 @@ final class plugin
 
     public function localized($localized)
     {
-        /*
-        $sql = 'SELECT `id_country`
-            FROM `'._DB_PREFIX_.'country`
-            WHERE `iso_code` = \''.$localized['countryCode'].'\'';
-        $resultCountry = Db::getInstance()->getRow($sql);
-         */
         $country_id = \Country::getByIso($localized['countryCode']);
         if ($country_id != false) {
             $zone_id = \Country::getIdZone($country_id);
@@ -213,7 +207,7 @@ final class plugin
                 return array_merge(
                     $localized,
                     array(
-                        'country_id' => $resultCountry['id_country'],
+                        'country_id' => $country_id,
                         'zone_id'    => $zone_id,
                     )
                 );
