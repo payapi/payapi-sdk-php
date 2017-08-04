@@ -64,8 +64,8 @@
 *
 **/
 
-require ( "/opt/php-jwt/vendor/autoload.php" ) ;
-//require __DIR__."/../vendor/autoload.php";
+//require ( "/opt/php-jwt/vendor/autoload.php" ) ;
+require __DIR__."/../vendor/autoload.php";
 
 use \Firebase\JWT\JWT;
 

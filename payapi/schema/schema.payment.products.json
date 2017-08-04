@@ -15,7 +15,7 @@
       "___min": 1
     },
     "url": {
-      "___mandatory": true,
+      "___mandatory": false,
       "___type": "urlencoded"
     },
     "title": {
@@ -26,7 +26,7 @@
     "description": {
       "___mandatory": false,
       "___type": "string",
-      "___min": 1
+      "___min": 0
     },
     "imageUrl": {
       "___mandatory": false,
@@ -34,7 +34,7 @@
       "___min": 1
     },
     "category": {
-      "___mandatory": true,
+      "___mandatory": false,
       "___type": "string",
       "___min": 1
     },
@@ -53,6 +53,16 @@
       "___min": 1
     },
     "priceInCentsExcVat": {
+      "___mandatory": true,
+      "___type": "number",
+      "___min": 1
+    },
+    "vatInCents": {
+      "___mandatory": true,
+      "___type": "number",
+      "___min": 1
+    },
+    "vatPercentage": {
       "___mandatory": true,
       "___type": "number",
       "___min": 1

@@ -50,7 +50,7 @@ final class loader extends helper
       $this->schema[$key] = $schema;
       return $schema;
     }
-    $this->warning('not available', 'schema');
+    $this->warning('[' . $key . '] not available', 'schema');
     return false;
   }
 
