@@ -146,7 +146,7 @@ class commandPayment extends controller
           'order' => array()
         );
         foreach($data as $key => $value) {
-          if ($key !== 'product') {
+          if ($key !== 'products') {
             $sanitization = $this->validate->schema($value, $this->load->schema('payment.' . $key));
             if (is_array($sanitization) !== true) {
               $error ++;
@@ -155,7 +155,7 @@ class commandPayment extends controller
             }
           } else {
             foreach($value as $key => $product) {
-              $sanitization = $this->validate->schema($product, $this->load->schema('payment' . '.' . 'product'));
+              $sanitization = $this->validate->schema($product, $this->load->schema('payment' . '.' . 'products'));
               if (is_array($sanitization) !== true) {
                 $error ++;
               } else {

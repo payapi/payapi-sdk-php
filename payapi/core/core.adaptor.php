@@ -85,9 +85,9 @@ final class adaptor
         return $this->adapt->db();
     }
 
-    public function customer()
+    public function customer($email)
     {
-        return $this->adapt->customer();
+        return $this->adapt->customer($email);
     }
 
     public function debug()

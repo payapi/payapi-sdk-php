@@ -87,9 +87,14 @@ final class plugin
     return $this->native->get('db');
   }
 
-  public function customer()
+  public function customer($email)
   {
-    return $this->native->get('customer');
+    //-> checks customer data
+    $query = $this->db->query( "SELECT `customer_id` FROM `oc_customer` WHERE ´email´= '" . $email . "' LIMIT 1");
+    if ( isset($query->row) === true && is_array($query->row) === true) {
+      return $query->row;
+    }
+    return false;
   }
 
   public function debug()

@@ -12,7 +12,7 @@
       "___mandatory": false,
       "___type": "array"
     },
-    "product": {
+    "products": {
       "___mandatory": true,
       "___type": "array"
     },

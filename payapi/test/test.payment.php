@@ -2,7 +2,7 @@
 
 
 $product = array (
-  "product"                => array (
+  "products"                => array (
     array (
       "id"                   => 'ref87567' . rand ( 1000 , 9999 )   ,
       "url"                  => 'https://store.multimerchantshop.xyz/index.php?route=product/product&product_id=41' ,

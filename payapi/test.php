@@ -18,7 +18,7 @@ $config = array(
 );
 
 //-> @NOTE check 'test' folder out
-test('info', $config);
+test('payment', $config);
 /*
 $sdk = new payapiSdk($config);
 $test = $sdk->migrate();

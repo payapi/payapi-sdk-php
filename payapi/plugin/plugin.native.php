@@ -71,7 +71,7 @@ final class plugin
     return false;
   }
 
-  public function customer()
+  public function customer($email)
   {
     return false;
   }
