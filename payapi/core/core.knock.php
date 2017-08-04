@@ -12,6 +12,7 @@ final class knock extends helper
     //$server = json_encode(stream_get_wrappers(), true);
     //$this->debug('[server] ___stream : ' . $server);
     if (getenv('REQUEST_METHOD') == 'POST') {
+      //->
       $this->debug('access from : ' . 'TODO');
       if ($this->sslEnabled() !== false) { // TODO check incomming domain $this->checkIncomingHasValidSsl
         $this->debug('[ACK] success');
@@ -46,6 +47,7 @@ final class knock extends helper
     $stream = null;
     while(($line = fread($foo, 64)) && $blocked === false) {
       if (isset($stream) === null && $blocked === false && md5(substr($line, 0, 9)) != md5('{"data":"')) {
+        //-> @TODO review on error (gets unexpected curl)
         $this->warning('stream blocked', 'filter');
         $blocked = true;
       }
