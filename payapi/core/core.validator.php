@@ -53,7 +53,7 @@ final class validator extends helper
         $this->warning('object blocked', 'schema');
       }
     } else {
-      $this->warning('no valid schema', 'schema');
+      $this->warning('[' . json_encode($schema) . '] no valid schema', 'schema');
     }
     return false;
   }
