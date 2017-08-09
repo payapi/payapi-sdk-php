@@ -6,15 +6,15 @@
   "___schema" : {
     "success": {
       "___mandatory": false,
-      "___type": "urlencoded"
+      "___type": "url"
     },
     "failed": {
       "___mandatory": false,
-      "___type": "urlencoded"
+      "___type": "url"
     },
     "cancel": {
       "___mandatory": false,
-      "___type": "urlencoded"
+      "___type": "url"
     }
   }
 }

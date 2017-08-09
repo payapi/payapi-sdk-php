@@ -18,7 +18,19 @@
     },
     "tosUrl": {
       "___mandatory": false,
-      "___type": "urlencoded"
+      "___type": "url"
+    },
+    "sumInCentsIncVat": {
+      "___mandatory": true,
+      "___type": "number"
+    },
+    "sumInCentsExcVat": {
+      "___mandatory": true,
+      "___type": "number"
+    },
+    "vatInCents": {
+      "___mandatory": true,
+      "___type": "number"
     },
     "shippingHandlingFeeInCentsIncVat": {
       "___mandatory": false,

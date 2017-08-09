@@ -6,19 +6,19 @@
   "___schema" : {
     "processing": {
       "___mandatory": false,
-      "___type": "urlencoded"
+      "___type": "url"
     },
     "success": {
       "___mandatory": false,
-      "___type": "urlencoded"
+      "___type": "url"
     },
     "failed": {
       "___mandatory": false,
-      "___type": "urlencoded"
+      "___type": "url"
     },
     "chargeback": {
       "___mandatory": false,
-      "___type": "urlencoded"
+      "___type": "url"
     }
   }
 }
