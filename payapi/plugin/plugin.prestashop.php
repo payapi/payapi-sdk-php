@@ -63,7 +63,7 @@ final class plugin
         foreach ($cart->getProducts() as $product) {
             // Price calculations
             $prodPriceInCentsExcVat = round($product['price'] * 100);
-            $prodPriceInCentsIncVat = round($product['price_without_reduction'] * 100);
+            $prodPriceInCentsIncVat = round($product['price_with_reduction'] * 100);
             $prodVatInCents = $prodPriceInCentsIncVat - $prodPriceInCentsExcVat;
             $prodVatPercentage = round($prodVatInCents / $prodPriceInCentsExcVat * 100);
 
