@@ -135,7 +135,7 @@ class commandPayment extends controller
         $data = $this->arguments(0);
         $data = $this->adaptor->payment($data);
         $error = 0;
-        $md5 = md5(json_encode($data, true));
+        $md5 = md5(json_encode($data, JSON_HEX_TAG));
         $cache = $this->cache ('read', 'payment', $md5);
         if ($cache !== false && 1 === 2) {
             return $cache;

@@ -15,7 +15,7 @@
       "___min": 1
     },
     "url": {
-      "___mandatory": true,
+      "___mandatory": false,
       "___type": "url"
     },
     "title": {
