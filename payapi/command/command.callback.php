@@ -157,63 +157,78 @@ namespace payapi;
 final class commandCallback extends controller
 {
 
-  public function run()
-  {
-    //-> returnResponse should display a json response and send headers
-    //-> enable api headers?
-    //-> http_response_code($code);
-    $knock = $this->knock();
-    $sanitized = array();
-    if (is_string($knock) === true) {
-      $knockDecoded = $this->decode($knock, $this->apiKey());
-      if (is_string($knockDecoded) === true) {
-        $knockData = json_decode($knockDecoded, true);
-        if (is_array($knockData) !== false) {
-          $knockValidated = $this->validate->schema($knockData, $this->load->schema('callback'));
-          if (is_array($knockValidated) !== false) {
-            $error = 0;
-            foreach($knockValidated as $schema => $data) {
-              if ($schema === 'products') {
-                foreach($data as $key => $product) {
-                  $productValidated = $this->validate->schema($product, $this->load->schema('callback' . '.' . 'products'));
-                  if (is_array($productValidated) !== false) {
-                    $sanitized['products'][] = $productValidated;
-                  } else {
-                    $error ++;
-                  }
-                }
-              } else
-              if ($data !== false) {
-                $dataValidated = $this->validate->schema($data, $this->load->schema('callback' . '.' . $schema));
-                if (is_array($dataValidated) !== false) {
-                  $sanitized[$schema] = $dataValidated;
-                } else {
-                  $this->warning($schema, 'schema');
-                  $error ++;
-                }
-              }
-            }
-          } else {
-            $error ++;
-          }
-          if ($error === 0) {
-            if ($this->cache('read', 'transaction', $knockData['payment']['status'] . $knockData['order']['referenceId']) === false) {
-              $this->cache('writte', 'transaction', $knockData['payment']['status'] . $knockData['order']['referenceId'], $sanitized);
-              return $this->render($sanitized);
-            } else {
-              return $this->returnResponse($this->error->transactionDuplicated());
-            }
-          } else {
-            return $this->returnResponse($this->error->notValidSchema());
-          }
-        } else {
-          return $this->returnResponse($this->error->notValidSchema());
+    public function run()
+    {
+        //-> returnResponse should display a json response and send headers
+        //-> enable api headers?
+        //-> http_response_code($code);
+        $knock = $this->knock();
+        $sanitized = array();
+
+        if (is_string($knock) !== true) {
+            return $this->returnResponse($this->error->knockNotValid());
         }
-      }
-      return $this->returnResponse($this->error->knockUnexpectedSignature());
+        $knockDecoded = $this->decode($knock, $this->apiKey());
+        if (is_string($knockDecoded) !== true) {
+            return $this->returnResponse($this->error->knockUnexpectedSignature());
+        }
+        $knockData = json_decode($knockDecoded, true);
+        if (is_array($knockData) === false) {
+            return $this->returnResponse($this->error->notValidSchema());
+        }
+        $knockValidated = $this->validate->schema($knockData, $this->load->schema('callback'));
+        if (is_array($knockValidated) !== false) {
+            $error = 0;
+            foreach ($knockValidated as $schema => $data) {
+                if ($schema === 'products') {
+                    foreach ($data as $key => $product) {
+                        $productValidated = $this->validate->schema(
+                            $product,
+                            $this->load->schema('callback' . '.' . 'products')
+                        );
+                        if (is_array($productValidated) !== false) {
+                            $sanitized['products'][] = $productValidated;
+                        } else {
+                            $error++;
+                        }
+                    }
+                } else {
+                    if ($data !== false) {
+                        $dataValidated = $this->validate->schema(
+                            $data,
+                            $this->load->schema('callback' . '.' . $schema)
+                        );
+                        if (is_array($dataValidated) !== false) {
+                            $sanitized[$schema] = $dataValidated;
+                        } else {
+                            $this->warning($schema, 'schema');
+                            $error++;
+                        }
+                    }
+                }
+            }
+        } else {
+            $error++;
+        }
+
+        if ($error === 0) {
+            $duplicated = $this->cache(
+                'read',
+                'transaction',
+                $knockData['payment']['status'] . $knockData['order']['referenceId']
+            );
+            if ($duplicated !== false) {
+                return $this->returnResponse($this->error->transactionDuplicated());
+            }
+            $this->cache(
+                'writte',
+                'transaction',
+                $knockData['payment']['status'] . $knockData['order']['referenceId'],
+                $sanitized
+            );
+            return $this->render($sanitized);
+        } else {
+            return $this->returnResponse($this->error->notValidSchema());
+        }
     }
-    return $this->returnResponse($this->error->knockNotValid());
-  }
-
-
 }

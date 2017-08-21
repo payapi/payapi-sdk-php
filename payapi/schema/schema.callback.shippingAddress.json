@@ -12,7 +12,7 @@
     "co": {
       "___mandatory": false,
       "___type": "string",
-      "___min": 1
+      "___min": 0
     },
     "streetAddress": {
       "___mandatory": true,
@@ -22,7 +22,7 @@
     "streetAddress2": {
       "___mandatory": false,
       "___type": "string",
-      "___min": 1
+      "___min": 0
     },
     "postalCode": {
       "___mandatory": true,
@@ -37,7 +37,7 @@
     "stateOrProvince": {
       "___mandatory": false,
       "___type": "string",
-      "___min": 2,
+      "___min": 0,
       "___max": 2
     },
     "countryCode": {

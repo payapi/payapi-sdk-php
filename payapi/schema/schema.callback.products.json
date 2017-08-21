@@ -22,7 +22,7 @@
     "description": {
       "___mandatory": false,
       "___type": "string",
-      "___min": 1
+      "___min": 0
     },
     "imageUrl": {
       "___mandatory": false,
