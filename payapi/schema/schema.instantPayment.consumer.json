@@ -7,7 +7,7 @@
     "consumerId": {
       "___mandatory": false,
       "___type": "string",
-      "___min": 1
+      "___min": 0
     },
     "email": {
       "___mandatory": false,
