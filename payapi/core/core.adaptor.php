@@ -60,9 +60,9 @@ final class adaptor
         return $this->adapt->product($product);
     }
 
-    public function payment($payment)
+    public function payment($payment, $partialPaymentMethod = null)
     {
-        return $this->adapt->payment($payment);
+        return $this->adapt->payment($payment, $partialPaymentMethod);
     }
 
     public function instantPayment($payment)

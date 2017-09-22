@@ -20,6 +20,12 @@
       "___mandatory": false,
       "___type": "url"
     },
+    "preselectedPartialPayment": {
+      "___mandatory": false,
+      "___type": "string",
+      "____min": 1,
+      "____max": 250
+    },
     "sumInCentsIncVat": {
       "___mandatory": true,
       "___type": "number"

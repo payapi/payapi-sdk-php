@@ -133,7 +133,9 @@ class commandPayment extends controller
     public function run()
     {
         $data = $this->arguments(0);
-        $data = $this->adaptor->payment($data);
+        $partialPaymentMethod = $this->arguments(1);
+        //error_log(' SDK partialPaymentMethod: '.$partialPaymentMethod, 0);
+        $data = $this->adaptor->payment($data, $partialPaymentMethod);
         $error = 0;
         $md5 = md5(json_encode($data, JSON_HEX_TAG));
         $cache = $this->cache ('read', 'payment', $md5);

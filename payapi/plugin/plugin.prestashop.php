@@ -37,7 +37,7 @@ final class plugin
      *
      * @return secure form object
      */
-    public function payment($cart)
+    public function payment($cart, $partialPaymentMethod = null)
     {
         $currency = new \Currency($cart->id_currency);
 
@@ -51,6 +51,7 @@ final class plugin
         // Terms of Services
         $tosUrl = "https://payapi.io/terms";
 
+        // Assume the schema will take care of empty/null payment method
         $order = array( 'sumInCentsIncVat' => $sumInCentsIncVat,
             'sumInCentsExcVat' => $sumInCentsExcVat,
             'vatInCents' => $vatInCents,
@@ -58,6 +59,9 @@ final class plugin
             'referenceId' => $referenceId,
             'tosUrl' => $tosUrl,
         );
+        if ($partialPaymentMethod) {
+            $order = array_merge($order, array('preselectedPartialPayment' => $partialPaymentMethod));
+        }
 
         $products_array = array();
         foreach ($cart->getProducts() as $product) {

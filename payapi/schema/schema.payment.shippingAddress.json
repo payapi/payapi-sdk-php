@@ -37,8 +37,8 @@
     "stateOrProvince": {
       "___mandatory": false,
       "___type": "string",
-      "___min": 2,
-      "___max": 2
+      "___min": 0,
+      "___max": 250
     },
     "countryCode": {
       "___mandatory": true,
