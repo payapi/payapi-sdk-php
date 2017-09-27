@@ -65,6 +65,7 @@
 
 //-> $         curl --insecure https://www.sdk.dev > /dev/null
 
+namespace Payapi\PaymentsSdk;
 use \payapi\engine as app;
 
 class payapiSdk
