@@ -2,7 +2,7 @@
   "name": "payapi/php-sdk-php",
   "description": "PayApi SDK for PHP",
   "version": "1.0.0",
-  "license": ["OSL-3.0"],
+  "license": ["Apache-2.0"],
   "require": {
     "php": ">=5.5.0",
     "firebase/php-jwt": "^4.0"
