@@ -76,7 +76,7 @@ class payapiSdk
 
   public function __construct($adapt = false, $plugin = false)
   {
-    require(__DIR__ . DIRECTORY_SEPARATOR . 'payapi' . DIRECTORY_SEPARATOR . 'app' . '.' . 'engine' . '.' . 'php');
+    require_once(__DIR__ . DIRECTORY_SEPARATOR . 'payapi' . DIRECTORY_SEPARATOR . 'app' . '.' . 'engine' . '.' . 'php');
     $this->app = app :: single($adapt, $plugin);
     return $this->app;
   }
