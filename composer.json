@@ -1,5 +1,5 @@
 {
-  "name": "payapi/php-sdk-php",
+  "name": "payapi/payapi-sdk-php",
   "description": "PayApi SDK for PHP",
   "version": "1.0.0",
   "license": ["Apache-2.0"],
