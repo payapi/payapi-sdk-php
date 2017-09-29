@@ -87,7 +87,7 @@ final class debug
   }
 
   private function milisecons($microseconds) {
-    $miliseconds =(round($microseconds, 3) * 1000);
+    $miliseconds = (round($microseconds, 3) * 1000);
     return $miliseconds;
   }
 
