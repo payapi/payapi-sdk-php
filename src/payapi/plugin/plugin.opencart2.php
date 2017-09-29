@@ -89,7 +89,7 @@ final class plugin
 
   public function customer($email)
   {
-    //-> checks customer data
+    //-> checks customer data by email
     $query = $this->db->query( "SELECT `customer_id` FROM `oc_customer` WHERE ´email´= '" . $email . "' LIMIT 1");
     if ( isset($query->row) === true && is_array($query->row) === true) {
       return $query->row;
@@ -99,7 +99,7 @@ final class plugin
 
   public function debug()
   {
-    if (DEBUGGING === 1) {
+    if($this->config->has('payapi_debug') && $this->config->get('payapi_debug') != 0) {
       return true;
     }
     return false;
@@ -120,7 +120,7 @@ final class plugin
 
   public function staging()
   {
-    if (STAGING === 1) {
+    if($this->config->has('payapi_test') && $this->config->get('payapi_test') != 0) {
       return true;
     }
     return false;
