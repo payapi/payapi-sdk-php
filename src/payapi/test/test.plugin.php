@@ -1,3 +1,3 @@
 <?php
 
-$test = $sdk -> plugin ( 'nets' ) ;
+$test = $sdk -> plugin ( 'somepay' ) ;

@@ -82,20 +82,26 @@ final class commandPlugin extends controller
   private function pluginBrand()
   {
     if (is_string($this->arguments(0)) === true) {
-      $pluginBrand = $this->load->pluginBrand($this->arguments(0));
-      if (is_array($pluginBrand) === true) {
-        return $pluginBrand;
+      $this->debug('brand key: ' . $this->arguments(0));
+      if (is_string($this->arguments(0)) === true) {
+        $pluginBrand = $this->load->pluginBrand($this->arguments(0));
+        if (is_array($pluginBrand) === true) {
+          return $pluginBrand;
+        } else {
+          $this->warning('invalid plugin branding');
+        }
       } else {
-        $this->warning('invalid plugin branding');
+        $this->warning('invalid value');
       }
     } else {
-      $this->warning('invalid value');
+      $this->debug('[brand] default');
     }
+    return false;
   }
 
   private function defaultPluginBrand()
   {
-    return json_decode($this->load->pluginBrand($this->defaultPluginBrand), true);
+    return $this->load->pluginBrand($this->defaultPluginBrand);
   }
 
 
