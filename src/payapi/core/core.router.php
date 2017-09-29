@@ -100,6 +100,15 @@ final class router
     return false;
   }
 
+  public function routePluginBrand($key)
+  {
+    $pluginBrand = $this->routePlugin() . 'brand' . DIRECTORY_SEPARATOR . 'brand' . '.' . $key . '.' . 'json';
+    if (is_file($pluginBrand) === true) {
+      return $pluginBrand;
+    }
+    return false;
+  }
+
   public function command($key)
   {
     $controller = $this->routeCommand() . 'command' . '.' . $key . '.' . 'php';

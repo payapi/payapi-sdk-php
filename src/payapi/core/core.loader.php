@@ -54,5 +54,21 @@ final class loader extends helper
     return false;
   }
 
+  public function pluginBrand($key)
+  {
+    $route = $this->route->routePluginBrand($key);
+    if (is_string($route) === true) {
+      $dataPlugin = json_decode(file_get_contents($route), true);
+      if (is_array($dataPlugin) === true) {
+        return $dataPlugin;
+      } else {
+        $this->warning('[' . $key . '] malformed', 'pluginBrand');
+      }
+    } else {
+      $this->warning('[' . $key . '] not available', 'pluginBrand');
+    }
+    return false;
+  }
+
 
 }

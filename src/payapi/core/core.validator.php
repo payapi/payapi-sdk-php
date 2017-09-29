@@ -258,7 +258,7 @@ final class validator extends helper
     $verifyPeer =($selfsigned === true) ? false : true;
     $domain =(is_string($checkDomain) === true) ? $this->sanitize->parseDomain($checkDomain) : $this->domain;
     //-> @NOTE @CARE @TODELETE
-    if ($domain == false || $domain == 'www.sdk.dev') { $domain = 'store.multimerchantshop.xyz'; }
+    //if ($domain == false || $domain == 'www.sdk.dev') { $domain = 'store.multimerchantshop.xyz'; }
     $socket = stream_context_create(['http' =>['method' => 'GET'], 'ssl' =>[
       'capture_peer_cert'       => true,
       'capture_peer_cert_chain' => true,
