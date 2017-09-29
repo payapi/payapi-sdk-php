@@ -17,10 +17,6 @@ final class instance
 
   public static function domain()
   {
-    //-> @NOTE @CARE @TODELETE
-    if (is_string(getenv('SERVER_NAME')) !== true || getenv('SERVER_NAME') == 'www.sdk.dev') {
-      putenv('SERVER_NAME=store.multimerchantshop.xyz');
-    }
     return getenv('SERVER_NAME');
   }
 
