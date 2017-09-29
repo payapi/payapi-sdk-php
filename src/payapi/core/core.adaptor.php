@@ -15,7 +15,10 @@ final class adaptor
     private $adaptors     = array(
         "native",
         "opencart2",
-        "prestashop",
+        "opencart22",
+        "opencart23",
+        "opencart3",
+        "prestashop"
     );
 
     protected $log        = false;
