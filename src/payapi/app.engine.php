@@ -24,6 +24,7 @@ final class engine
     $arguments                 =       false,
     $public                    =      array(
       "info"                   =>       true,
+      "plugin"                 =>       true,
       "localize"               =>       true,
       "settings"               =>       true
    );
