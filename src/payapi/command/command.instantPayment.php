@@ -19,7 +19,7 @@ namespace payapi;
 *            ["payload"]=>
 *             string(1569) "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IntcImlvXCI6e1wicGF5YXBpLndlYnNob3BcIjpcIm11bHRpbWVyY2hhbnRzaG9wXCJ9LFwicHJvZHVjdFwiOntcImlkXCI6XCJyZWY4NzU2N1wiLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL3N0b3JlLm11bHRpbWVyY2hhbnRzaG9wLnh5elxcXC9pbmRleC5waHA_cm91dGU9cHJvZHVjdFxcXC9wcm9kdWN0JnByb2R1Y3RfaWQ9NDNcIixcInRpdGxlXCI6XCJQcm9kdWN0IDFcIixcImltYWdlVXJsXCI6XCJodHRwczpcXFwvXFxcL3N0b3JlLnBheWFwaS5pb1xcXC9tZWRpYVxcXC80MzMwN2FjN2YzNTZkNTFlNmRkNjViOGNhOWZlM2Q5M1xcXC9pbWFnZVxcXC9jYWNoZVxcXC9jYXRhbG9nXFxcL1VzZXJzXFxcL1VzZXI0XFxcL3BheWFwaV9wcmVtaXVtX3N1cHBvcnQtMjI4eDIyOC5qcGdcIixcImNhdGVnb3J5XCI6XCJjYXRlZ29yeSAxXCIsXCJwcmljZUluQ2VudHNFeGNWYXRcIjoyMDAwMCxcInByaWNlSW5DZW50c0luY1ZhdFwiOjI0MDAwLFwib3B0aW9uc1wiOntcImNvbG9yXCI6XCJibHVlXCIsXCJzaXplXCI6XCJYWExcIn0sXCJxdWFudGl0eVwiOjEsXCJ2YXRJbkNlbnRzXCI6NDAwMCxcInZhdFBlcmNlbnRhZ2VcIjoyMH0sXCJvcmRlclwiOntcImN1cnJlbmN5XCI6XCJFVVJcIn0sXCJjYWxsYmFja3NcIjp7XCJwcm9jZXNzaW5nXCI6XCJodHRwcyUzQSUyRiUyRmFwaS5leGFtcGxlLmNvbSUyRmNhbGxiYWNrLXByb2Nlc3NpbmdcIixcInN1Y2Nlc3NcIjpcImh0dHBzJTNBJTJGJTJGYXBpLmV4YW1wbGUuY29tJTJGY2FsbGJhY2stc3VjY2Vzc1wiLFwiZmFpbGVkXCI6XCJodHRwcyUzQSUyRiUyRmFwaS5leGFtcGxlLmNvbSUyRmNhbGxiYWNrLWZhaWxlZFwiLFwiY2hhcmdlYmFja1wiOlwiaHR0cHMlM0ElMkYlMkZhcGkuZXhhbXBsZS5jb20lMkZjYWxsYmFjay1jaGFyZ2ViYWNrXCJ9LFwicmV0dXJuVXJsc1wiOntcInN1Y2Nlc3NcIjpcImh0dHBzJTNBJTJGJTJGc3RvcmUuZXhhbXBsZS5jb20lMkZwYXltZW50LXN1Y2Nlc3NcIixcImNhbmNlbFwiOlwiaHR0cHMlM0ElMkYlMkZzdG9yZS5leGFtcGxlLmNvbSUyRnBheW1lbnQtY2FuY2VsXCIsXCJmYWlsZWRcIjpcImh0dHBzJTNBJTJGJTJGc3RvcmUuZXhhbXBsZS5jb20lMkZwYXltZW50LWZhaWxlZFwifX0i.iK_4xO5lr3-MtNRQmgEccsM0uC70-TnpACzkNFmVlu8"
 *            ["metadata"]=>
-*             string(1519) "<meta name="io.payapi.webshop" content="multimerchantshop">
+*             string(1519) "<meta name="io.payapi.webshop" content="your_public_id">
 *           <meta name="product.id" content="ref87567">
 *           <meta name="product.url" content="https://store.multimerchantshop.xyz/index.php?route=product/product&product_id=43">
 *           <meta name="product.title" content="Product 1">
@@ -40,9 +40,9 @@ namespace payapi;
 *           <meta name="returnUrls.cancel" content="https%3A%2F%2Fstore.example.com%2Fpayment-cancel">
 *           <meta name="returnUrls.failed" content="https%3A%2F%2Fstore.example.com%2Fpayment-failed">"
 *            ["endPointInstantBuy"]=>
-*             string(61) "https://staging-input.payapi.io/v1/webshop/multimerchantshop/"
+*             string(61) "https://staging-input.payapi.io/v1/webshop/your_public_id/"
 *            ["endPointProductInstantBuy"]=>
-*             string(160) "https://staging-input.payapi.io/v1/webshop/multimerchantshop/https%3A%2F%2Fstore.multimerchantshop.xyz%2Findex.php%3Froute%3Dproduct%2Fproduct%26product_id%3D43"
+*             string(160) "https://staging-input.payapi.io/v1/webshop/your_public_id/https%3A%2F%2Fstore.multimerchantshop.xyz%2Findex.php%3Froute%3Dproduct%2Fproduct%26product_id%3D43"
 *
 * @NOTE
 *           product data is adapted through plugin

@@ -15,7 +15,7 @@ namespace payapi;
 *          ["code"]=>
 *           int(200)
 *          ["data"]=>
-*           string(17) "multimerchantshop"
+*           string(17) "your_public_id"
 *
 * @NOTE
 *          only available after settings/install
