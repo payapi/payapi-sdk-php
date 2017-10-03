@@ -74,8 +74,6 @@ final class commandPartialPayment extends controller
     $partialPaymentSettings = $this->settings('partialPayments');
     //-> checks localization country
     //-> @NOTE: when PA fetch metadata should localize provided ip
-    // @TODO @TODELETE after DEV/TEST
-    $this->localized['countryCode'] = 'FI';
     if (isset($partialPaymentSettings['whitelistedCountries']) !== true || $partialPaymentSettings['whitelistedCountries'] === false || in_array($this->localized['countryCode'], $partialPaymentSettings['whitelistedCountries']) === true) {
       if (is_int($paymentPriceInCents) === true && $paymentPriceInCents >= $partialPaymentSettings['minimumAmountAllowedInCents'] && is_string($paymentCurrency) === true) {
         $calculate = array();
