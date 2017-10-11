@@ -26,6 +26,15 @@
       "___min": 3,
       "___max": 3
     },
+    "monthlyFeeThresholdInCents": {
+      "___mandatory": true,
+      "___type": "integer",
+      "___min": 1
+    },
+    "openingFeeInCents": {
+      "___mandatory": true,
+      "___type": "integer"
+    },
     "invoiceFeeInCents": {
       "___mandatory": true,
       "___type": "integer"
