@@ -60,6 +60,8 @@ final class commandPartialPayment extends controller
         $partialPayment = $this->calculatePartialPayment((int) $this->arguments(0),  $this->arguments(1));
         if (is_array($partialPayment) !== false) {
           return $this->render($partialPayment);
+        } else {
+          return $this->returnResponse($this->error->notSatisfied());
         }
       } else {
         return $this->returnResponse($this->error->badRequest());
