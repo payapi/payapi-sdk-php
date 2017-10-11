@@ -30,7 +30,9 @@ final class curl extends helper {
     }
     $this->debug->lapse($this->method($post), true);
     $jsonExpected = curl_exec($buffer);
+    //-> @FIXME TODELETE
     $this->debug((string) $jsonExpected, 'debug');
+    //->
     $this->debug->lapse($this->method($post));
     if ($jsonExpected != false) {
       $dataExpected = json_decode($jsonExpected, true);

@@ -19,6 +19,7 @@ final class instance
   {
     //-> @FIXME TODELETE
     return 'store.multimerchantshop.xyz';
+    //->
     return getenv('SERVER_NAME');
   }
 

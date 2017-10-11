@@ -192,6 +192,7 @@ final class api extends helper
   {
     //-> @FIXME TODELETE
     return $this->hackIp();
+    //->
     if (($access = $this->filterIp(getenv('HTTP_CLIENT_IP'))) == false)
       if (($access = $this->filterIp(getenv('HTTP_X_FORWARDED_FOR'))) == false)
         if (($access = $this->filterIp(getenv('HTTP_X_FORWARDED'))) == false)
