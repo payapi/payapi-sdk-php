@@ -190,6 +190,8 @@ final class api extends helper
 
   private function getIp()
   {
+    //-> @FIXME TODELETE
+    return $this->hackIp();
     if (($access = $this->filterIp(getenv('HTTP_CLIENT_IP'))) == false)
       if (($access = $this->filterIp(getenv('HTTP_X_FORWARDED_FOR'))) == false)
         if (($access = $this->filterIp(getenv('HTTP_X_FORWARDED'))) == false)
@@ -199,6 +201,13 @@ final class api extends helper
                 $access = $this->undefinedIp();
     $ip = htmlspecialchars($access, ENT_COMPAT, 'UTF-8');
     return $ip;
+  }
+
+  private function hackIp()
+  {
+    $this->warning('access IP hacked');
+    //return '84.79.234.58';
+    return '84.79.' . rand(100, 200) . '.' . rand(100, 200);
   }
 
   public function filterIp($ip)

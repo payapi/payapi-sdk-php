@@ -17,6 +17,8 @@ final class instance
 
   public static function domain()
   {
+    //-> @FIXME TODELETE
+    return 'store.multimerchantshop.xyz';
     return getenv('SERVER_NAME');
   }
 
