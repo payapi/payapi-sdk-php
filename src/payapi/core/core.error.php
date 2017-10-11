@@ -166,6 +166,11 @@ final class error
     return 409;
   }
 
+  public function notSatisfied()
+  {
+    return 412;
+  }
+
   public function booBoo()
   {
     return 600;
