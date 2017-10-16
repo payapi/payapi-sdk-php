@@ -63,6 +63,7 @@ final class commandInstantPayment extends controller
     public function run()
     {
         $data = $this->arguments(0);
+        //-> @FIXME ???
         $data['product'] = $this->adaptor->product($data['product']);
         $error = 0;
         $md5 = md5(json_encode($data, JSON_HEX_TAG));

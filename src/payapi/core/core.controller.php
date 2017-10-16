@@ -51,6 +51,7 @@ abstract class controller extends helper
 
   public function locate()
   {
+    //-> note if PA access this should be PA query ip
     $this->localized = $this->localization();
     if (isset($this->localized['ip']) === true && isset($this->localized['countryCode']) === true) {
       return true;
@@ -59,13 +60,19 @@ abstract class controller extends helper
     return false;
   }
 
-  private function localization()
+  protected function localization($requestedIp = false)
   {
     //-> @TODO localization just when needed(just for payments)
-    $ip = $this->ip();
+    //         validate $requestedIp and handle error(s)
+    if(is_string($requestedIp) === true) {
+        $ip = $requestedIp;
+    } else {
+        $ip = $this->ip();
+    }
     $cached = $this->cache('read', 'localize', $ip);
     if ($cached !== false) {
       $this->debug('[localized] success');
+      $this->debug(json_encode($cached, JSON_HEX_TAG));
       return $cached;
     }
     $endPoint = $this->serialize->endPointLocalization($ip);
@@ -78,6 +85,7 @@ abstract class controller extends helper
           $adaptedData = $this->adaptor->localized($validated);
           $this->cache('writte', 'localize', $ip, $adaptedData);
           $cached = $this->cache('read', 'localize', $ip);
+          $this->debug(json_encode($cached, JSON_HEX_TAG));
           return $cached;
         }
       }
