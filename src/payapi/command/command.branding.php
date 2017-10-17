@@ -70,7 +70,7 @@ final class commandBranding extends controller
       return $this->render($pluginBrand);
     }
     $this->warning('plugin brand defaulted');
-    return $this->defaultPluginBrand();
+    return $this->render($this->defaultPluginBrand());
   }
 
   private function pluginBrand()
