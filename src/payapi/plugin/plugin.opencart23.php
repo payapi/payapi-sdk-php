@@ -98,7 +98,7 @@ final class plugin
     public function loadLog()
     {
         if ($this->debug() === true) {
-            return new \Log(strtolower(__NAMESPACE__) . '.' . date('YmdHis', time()) . '.' . __NAMESPACE__ . '.' . 'log');
+            return new \Log(date('Ymd', time()) . '.' . strtolower(__NAMESPACE__) . '.' . 'log');
         }
         return false;
     }
