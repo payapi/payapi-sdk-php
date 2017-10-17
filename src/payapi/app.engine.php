@@ -25,11 +25,12 @@ final class engine
     $public                    =      array(
       "info"                   =>       true,
       "plugin"                 =>       true,
+      "branding"               =>       true,
       "localize"               =>       true,
       "settings"               =>       true
    );
 
-  private function __construct($adapt, $plugin)
+  private function __construct($adapt, $plugin, $branding)
   {
     foreach(glob(__DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . '*' . '.' . 'php') as $core) {
       require_once $core;
@@ -97,6 +98,7 @@ final class engine
     $command = new $controller($this->adapt);
     if (method_exists($command, 'run') === true) {
       if ($this->validate->publicId($command->publicId()) === true || in_array($this->command, $this->public) === true) {
+        //-> this should be called in engine load
         if ($command->locate() === true) {
           $this->debug->run(true);
           return $command->run();
@@ -114,10 +116,10 @@ final class engine
     return 'PayApi SDK v' . $this->version;
   }
 
-  public static function single($adapt = false, $plugin = false)
+  public static function single($adapt = false, $plugin = false, $branding = false)
   {
     if (self::$single === false) {
-      self::$single = new self($adapt, $plugin);
+      self::$single = new self($adapt, $plugin, $branding);
     }
     return self::$single;
   }

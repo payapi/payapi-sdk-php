@@ -12,12 +12,19 @@ final class api extends helper
     $curl                          =     false,
     $knock                         =     false,
     $code                          =     false,
-    $mode                          =     'sdk',
     $entity                        =     false,
     $headers                       =     false,
     $timeout                       =         1,
-    $id                            =     false,
-    $responses =    array(
+    //$id                            =     false,
+    $index                         =     'no',
+    $follow                        =     'no',
+    $mode                          =     'sdk',
+    $modes                         =    array(
+      'json' => 'application/json',
+      'html' => 'text/html',
+      'sdk'  => false
+    ),
+    $responses                     =    array(
       // @NOTE PHP ZEND INTERNAL STATUS HEADERS
 
       // Informational 1xx
@@ -95,7 +102,7 @@ final class api extends helper
       $label => $data
     );
     $this->code =($this->checkCode($code) === true) ? $code : 600;
-    $this->headers($code);
+    $this->headers();
     $this->listening();
     $this->debug->blank('=== LISTENING ==>');
     return $this->buffer;
@@ -169,12 +176,40 @@ final class api extends helper
   private function headers()
   {
     if ($this->headers !== true) {
+      $this->debug('[headers] disabled');
       return true;
     }
     $this->debug('[headers] ' . $this->mode);
-    //header('Content-type: ' . $this->modes[$this->mode]);
-    header("X-Robots-Tag: noindex,nofollow");
+    if(isset($this->modes[$this->mode]) === true && is_string($this->modes[$this->mode]) === true) {
+      header('Content-type: ' . $this->modes[$this->mode]);
+    }
+    header("X-Robots-Tag: " . $this->index . "index," . $this->follow . "follow");
     return http_response_code($this->code);
+  }
+
+  public function mode($mode)
+  {
+    if(is_string($mode) === true && isset($this->modes[$mode]) === true) {
+      return $this->mode = $mode;
+    }
+    $this->warning('no valid api mode');
+    return false;
+  }
+
+  public function index($status = false)
+  {
+    if ($status === true) {
+      return $this->index = null;
+    }
+    return $this->index = 'no';
+  }
+
+  public function follow($status = false)
+  {
+    if ($status === true) {
+      return $this->follow = null;
+    }
+    return $this->follow = 'no';
   }
 
   private function getApiResponse($responseCode)
@@ -191,7 +226,7 @@ final class api extends helper
   private function getIp()
   {
     //-> @FIXME TODELETE
-    return $this->hackIp();
+    return $this->hackAccess();
     //->
     if (($access = $this->filterIp(getenv('HTTP_CLIENT_IP'))) == false)
       if (($access = $this->filterIp(getenv('HTTP_X_FORWARDED_FOR'))) == false)
@@ -204,10 +239,12 @@ final class api extends helper
     return $ip;
   }
 
-  private function hackIp()
+  private function hackAccess()
   {
     $this->warning('access IP hacked');
-    //return '84.79.234.58';
+    //-> check core.instance.php
+    $this->warning('SERVER NAME hacked');
+    return '84.79.234.58';
     return '84.79.' . rand(100, 200) . '.' . rand(100, 200);
   }
 

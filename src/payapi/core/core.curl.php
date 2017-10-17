@@ -30,17 +30,15 @@ final class curl extends helper {
     }
     $this->debug->lapse($this->method($post), true);
     $jsonExpected = curl_exec($buffer);
-    //-> @FIXME TODELETE
-    $this->debug((string) $jsonExpected, 'debug');
-    //->
     $this->debug->lapse($this->method($post));
     if ($jsonExpected != false) {
       $dataExpected = json_decode($jsonExpected, true);
       $code = curl_getinfo($buffer, CURLINFO_HTTP_CODE);
       if ($this->isCleanCodeInt($code) === true) {
+        $this->debug('[' . $code . '] success');
         if ($code === 200) {
           if ($secured !== false) {
-            if (isset($dataExpected['data']) === true && is_string($dataExpected['data']) === true && substr_count($dataExpected['data'], '.') === 2) { // review dynamic signatures
+            if (isset($dataExpected['data']) === true && is_string($dataExpected['data']) === true && substr_count($dataExpected['data'], '.') === 2) {
               $serialized = array(
                 "code" =>(int)((isset($dataExpected['code']) === true && $this->isCleanCodeInt($dataExpected['code']) === true) ? $dataExpected['code'] : $code),
                 "data" => $dataExpected['data']

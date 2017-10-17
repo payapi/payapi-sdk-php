@@ -88,6 +88,7 @@ final class commandSettings extends controller
         $request = $this->curl($endPoint, $this->payload($apiKey), true);
         if ($request !== false && isset($request['code']) === true) {
           if ($request['code'] === 200) {
+            //->$this->debug($request['data'] . ' -> ' . $apiKey, 'debug');
             $decodedData = json_decode($this->decode($request['data'], $apiKey), true);
             $validated = $this->validate->schema($decodedData, $this->load->schema('settings'));
             if (is_array($validated) !== false) {

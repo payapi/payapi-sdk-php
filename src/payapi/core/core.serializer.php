@@ -19,6 +19,11 @@ class serializer
     $this->config = config::single();
   }
 
+  public function publicQueryFlag()
+  {
+    return md5($this->domain . md5($this->instance));
+  }
+
   public function endPointLocalization($ip)
   {
     $api = $this->https() . $this->staging() . 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'api' . '/' . 'fraud' . '/' . 'ipdata' . '/' . $ip;

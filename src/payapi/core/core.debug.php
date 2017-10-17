@@ -113,7 +113,7 @@ final class debug
   {
     $trace = $this->trace(debug_backtrace());
     $miliseconds = str_pad(round((microtime(true) - $this->microtime) * 1000, 0), 4, '0', STR_PAD_LEFT);
-    $entry =($miliseconds . '[' . $this->label($label) . '] ' . $trace . ' ' .((is_string($info)) ? $info :((is_array($info) ? json_encode($info) :((is_bool($info) || is_object($info)) ?(string) $info : 'undefined')))));
+    $entry =($miliseconds . ' [' . $this->label($label) . '] ' . $trace . ' ' .((is_string($info)) ? $info :((is_array($info) ? json_encode($info) :((is_bool($info) || is_object($info)) ?(string) $info : 'undefined')))));
     $this->history[] = $entry;
     return $this->set($entry);
   }
