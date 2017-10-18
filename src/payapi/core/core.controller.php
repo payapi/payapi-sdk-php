@@ -72,7 +72,7 @@ abstract class controller extends helper
     $cached = $this->cache('read', 'localize', $ip);
     if ($cached !== false) {
       $this->debug('[localized] success');
-      $this->debug(json_encode($cached, JSON_HEX_TAG));
+      //$this->debug(json_encode($cached, JSON_HEX_TAG));
       return $cached;
     }
     $endPoint = $this->serialize->endPointLocalization($ip);
@@ -85,7 +85,7 @@ abstract class controller extends helper
           $adaptedData = $this->adaptor->localized($validated);
           $this->cache('writte', 'localize', $ip, $adaptedData);
           $cached = $this->cache('read', 'localize', $ip);
-          $this->debug(json_encode($cached, JSON_HEX_TAG));
+          //$this->debug(json_encode($cached, JSON_HEX_TAG));
           return $cached;
         }
       }
