@@ -9,7 +9,7 @@
       "___type": "setting"
     },
     "reseller": {
-      "___mandatory": false,
+      "___mandatory": true,
       "___type": "setting"
     }
   }
