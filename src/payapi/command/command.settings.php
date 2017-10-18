@@ -4,9 +4,9 @@ namespace payapi;
 
 /*
 * @COMMAND
-*           $sdk->settings($payapi_public_id, $payapi_api_enc_key)
+*           $sdk->settings($staging, $payapi_public_id, $payapi_api_enc_key)
 *           $sdk->settings()
-*           $sdk->settings(false, false, true) //-> refresh settings
+*           $sdk->settings(false, false, false, true) //-> refresh settings
 *
 * @TYPE     public
 *
@@ -64,7 +64,8 @@ namespace payapi;
 *          schema.settings*
 *
 * @TODO
-*          include any other PA plugin conf
+*          add stag/prod flag to command
+*.         update brand data on settings refresh
 *
 */
 final class commandSettings extends controller
@@ -72,31 +73,38 @@ final class commandSettings extends controller
 
   public function run()
   {
-    if ($this->validate->publicId($this->arguments(0)) === true && $this->validate->apiKey($this->arguments(1)) === true) {
-      $publicId = $this->arguments(0);
-      $apiKey = $this->arguments(1);
+    if ($this->validate->publicId($this->arguments(1)) === true && $this->validate->apiKey($this->arguments(2)) === true) {
+      $publicId = $this->arguments(1);
+      $apiKey = $this->arguments(2);
     } else {
       $publicId = $this->publicId();
       $apiKey = $this->apiKey();
     }
+    //-> @TODO review config mode handling
+    $this->config->mode($this->arguments(0));
+    $this->serialize->mode($this->arguments(0));
     if ($this->validate->publicId($publicId) === true && $this->validate->apiKey($apiKey) === true) {
       $cached = $this->cache('read', 'settings', $this->instance());
-      if ($this->arguments(2) !== true && $cached !== false) {
+      if ($this->arguments(1) === false && $cached !== false) {
         return $this->render($cached);
       } else {
         $endPoint = $this->serialize->endPointSettings($publicId);
         $request = $this->curl($endPoint, $this->payload($apiKey), true);
         if ($request !== false && isset($request['code']) === true) {
           if ($request['code'] === 200) {
-            //->$this->debug($request['data'] . ' -> ' . $apiKey, 'debug');
             $decodedData = json_decode($this->decode($request['data'], $apiKey), true);
+            //->$this->debug('settings: ' . json_encode($decodedData, true), 'debug');
             $validated = $this->validate->schema($decodedData, $this->load->schema('settings'));
             if (is_array($validated) !== false) {
               $error = 0;
               foreach($validated as $key => $value) {
-                $settings[$key] = $this->validate->schema($value, $this->load->schema('settings' . '.' . $key));
-                if (is_array($settings[$key]) === false) {
-                  $error ++;
+                if($value !== false) {
+                  $settings[$key] = $this->validate->schema($value, $this->load->schema('settings' . '.' . $key));
+                  if (is_array($settings[$key]) === false) {
+                    $error ++;
+                  }
+                } else {
+                  $settings[$key] = false;
                 }
               }
               if ($error === 0) {
@@ -130,6 +138,11 @@ final class commandSettings extends controller
       return $this->returnResponse($this->error->badRequest());
     }
     return $this->returnResponse($this->error->timeout());
+  }
+
+  private function updateBrand()
+  {
+    //->
   }
 
   private function payload($apiKey)

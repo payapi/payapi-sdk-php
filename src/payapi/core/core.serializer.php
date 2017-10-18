@@ -12,16 +12,29 @@ class serializer
     $instance                   =   false,
     $version                    = '0.0.1';
 
+  private $staging = false;
+
   protected function __construct()
   {
     $this->instance = instance::this();
     $this->domain = instance::domain();
     $this->config = config::single();
+    $this->staging = $this->config->get('staging');
+
   }
 
   public function publicQueryFlag()
   {
     return md5($this->domain . md5($this->instance));
+  }
+
+  public function mode($staging = false)
+  {
+    if($staging === true || $staging === 1) {
+      $this->staging = true;
+    } else {
+      $this->staging = false;
+    }
   }
 
   public function endPointLocalization($ip)
@@ -30,7 +43,7 @@ class serializer
     return $api;
   }
 
-  public function endPointSettings($publicId)
+  public function endPointSettings($publicId, $staging = false)
   {
     $api = $this->https() . $this->staging() . $this->api() . 'merchantSettings' . '/' . $publicId;
     return $api;
@@ -80,7 +93,7 @@ class serializer
 
   private function staging()
   {
-    $route =(($this->config->staging() === true) ? 'staging' . '-' : null);
+    $route =(($this->staging === true) ? 'staging' . '-' : null);
     return $route;
   }
 
