@@ -71,6 +71,8 @@ namespace payapi;
 final class commandSettings extends controller
 {
 
+  private $staging = false;
+
   public function run()
   {
     if ($this->validate->publicId($this->arguments(1)) === true && $this->validate->apiKey($this->arguments(2)) === true) {
@@ -82,7 +84,7 @@ final class commandSettings extends controller
     }
     //-> @TODO review config mode handling
     $this->config->mode($this->arguments(0));
-    $this->serialize->mode($this->arguments(0));
+    $this->staging = $this->serialize->mode($this->arguments(0));
     if ($this->validate->publicId($publicId) === true && $this->validate->apiKey($apiKey) === true) {
       $cached = $this->cache('read', 'settings', $this->instance());
       if ($this->arguments(1) === false && $cached !== false) {
@@ -110,7 +112,8 @@ final class commandSettings extends controller
               if ($error === 0) {
                 $this->cache('writte', 'account', $this->instance(), array(
                   "publicId" => $publicId,
-                  "apiKey"   => $this->encode($apiKey, false, true)
+                  "apiKey"   => $this->encode($apiKey, false, true),
+                  "staging"  => $this->staging
                 ));
                 $resellerData = $settings['reseller'];
                 $resellerId = $resellerData['partnerId'];

@@ -35,6 +35,7 @@ class serializer
     } else {
       $this->staging = false;
     }
+    return $this->staging;
   }
 
   public function endPointLocalization($ip)
