@@ -4,13 +4,14 @@ namespace payapi;
 
 /*
 * @COMMAND
-*           $sdk->settings($staging, $payapi_public_id, $payapi_api_enc_key)
-*           $sdk->settings()
-*           $sdk->settings(false, false, false, true) //-> refresh settings
+*           $sdk->settings($staging, $payapi_public_id, $payapi_api_enc_key) //-> refresh settings
+*
+*           $sdk->settings() //-> get cached settings
 *
 * @TYPE     public
 *
 * @PARAMS
+*.          $staging = boolean
 *           $payapi_public_id = string/false
 *           $payapi_api_enc_key = string/false
 *
@@ -95,7 +96,6 @@ final class commandSettings extends controller
         if ($request !== false && isset($request['code']) === true) {
           if ($request['code'] === 200) {
             $decodedData = json_decode($this->decode($request['data'], $apiKey), true);
-            //->$this->debug('settings: ' . json_encode($decodedData, true), 'debug');
             $validated = $this->validate->schema($decodedData, $this->load->schema('settings'));
             if (is_array($validated) !== false) {
               $error = 0;
@@ -154,7 +154,6 @@ final class commandSettings extends controller
       //=>
       "storeDomain" => getenv('SERVER_NAME')
     );
-    //var_dump($payload, $this->apiKey(), $this->encode($payload, $this->apiKey())); exit;
     return $this->encode($payload, $apiKey);
   }
 
