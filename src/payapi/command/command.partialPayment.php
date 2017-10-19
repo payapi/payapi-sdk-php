@@ -100,7 +100,7 @@ final class commandPartialPayment extends controller
                     $partial['interestRatePerMonth'] = round(($partial['interestRate'] / $partial['paymentMonths']), 2);
                     $partial['interestPriceInCents'] = round((($paymentPriceInCents / 100) * $partial['interestRate']), 0);
                     $partial['openingFeeInCents'] = $this->partialPaymentSettings['openingFeeInCents'];
-                    $partial['priceInCents'] = $paymentPriceInCents + $partial['interestPriceInCents'] + $partial['openingFeeInCents'];
+                    $partial['priceInCents'] = $paymentPriceInCents + $partial['interestPriceInCents'];
                     $partial['pricePerMonthInCents'] = round($partial['priceInCents'] / $partial['paymentMonths'], 0);
                     $partial['invoiceFeeInCents'] = $this->partialPaymentSettings['invoiceFeeInCents'];
                     $partial['paymentMethod'] = $this->partialPaymentSettings['preselectedPartialPayment'];
