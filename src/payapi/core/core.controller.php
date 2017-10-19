@@ -115,6 +115,14 @@ abstract class controller extends helper
     $this->info();
   }
 
+  public function staging()
+  {
+    if(isset($this->account['staging']) === true && $this->account['staging'] === true) {
+      return true;
+    }
+    return false;
+  }
+
   public function instance()
   {
     return $this->instance;
