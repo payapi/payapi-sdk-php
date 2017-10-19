@@ -14,7 +14,6 @@ final class config
     $instance                   =      false,
     $schema                     =      array(
       "debug"                   =>     false,
-      "staging"                 =>     false,
       "demo"                    =>     false
     )                                       ;
 
@@ -34,25 +33,11 @@ final class config
 
   public function __call($key, $arguments = array())
   {
-    //var_dump($key, $arguments);
-    if($key === 'mode') {
-      return $this->mode($arguments);
-    }
     if ($arguments === array() && is_string($key) === true && isset($this->settings[$key]) === true) {
       return $this->settings[$key];
     }
     //->  @NOTE
     return null;
-  }
-
-  public function mode($data = false)
-  {
-    if(isset($data[0]) === true && $data[0] === true) {
-      $this->settings['staging'] = true;
-    } else {
-      $this->settings['staging'] = false;
-    }
-    return $this->settings['staging'];
   }
 
   public static function single($config = array())

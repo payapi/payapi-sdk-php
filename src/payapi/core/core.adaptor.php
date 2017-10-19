@@ -46,8 +46,11 @@ final class adaptor
             $this->config = config::single($config);
             $this->debug = debug::single($this->debug());
             foreach ($config as $key => $setting) {
-                $enabled =($setting != false) ? 'true' : 'false';
-                $this->debug->add('[' . $key . '] ' . $enabled);
+                //-> @FIXME TODELETE after update
+                if($key != 'staging') {
+                    $enabled =($setting != false) ? 'true' : 'false';
+                    $this->debug->add('[' . $key . '] ' . $enabled);
+                }
             }
         } else {
             $this->debug->add('[plugin] 404', 'error');

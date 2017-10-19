@@ -45,6 +45,14 @@ abstract class controller extends helper
         return $this->api->returnResponse($this->error->noValidSsl());
       }
     }
+    if(is_array($this->account) === true) {
+      if ($this->staging() === true) {
+        $mode = 'PROD';
+      } else {
+        $mode = 'STAG';
+      }
+      $this->debug('[mode] ' . $mode);
+    }
     $this->adaptor = $this->entity->get('adaptor');
     $this->sdk();
   }
@@ -117,10 +125,10 @@ abstract class controller extends helper
 
   public function staging()
   {
-    if(isset($this->account['staging']) === true && $this->account['staging'] === true) {
-      return true;
+    if(isset($this->account['staging']) === true && $this->account['staging'] !== true) {
+      return false;
     }
-    return false;
+    return true;
   }
 
   public function instance()
