@@ -282,6 +282,9 @@ abstract class controller extends helper
           return $this->decode($cached, false, true);
         }
       break;
+      case 'delete' :
+        return$this->cache->delete($type, $cacheKey);
+      break;
       default :
         return false;
       break;

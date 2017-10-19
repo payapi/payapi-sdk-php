@@ -66,9 +66,10 @@ final class cache extends helper
   {
     if (is_string($file = $this->validate($key, $token)) === true) {
       if (is_file($file)) {
+        $this->debug('deleting cache: ' . $key, 'debug');
         return unlink($file);
       } else {
-        $this->error('to delete cache file not found');
+        $this->warning('to delete cache file not found');
       }
     }
     return false;
