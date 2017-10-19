@@ -74,10 +74,10 @@ class payapiSdk
   private
     $app                       =   false;
 
-  public function __construct($adapt = false, $plugin = false)
+  public function __construct($adapt = false, $plugin = false, $branding = false)
   {
     require_once(__DIR__ . DIRECTORY_SEPARATOR . 'payapi' . DIRECTORY_SEPARATOR . 'app' . '.' . 'engine' . '.' . 'php');
-    $this->app = app :: single($adapt, $plugin);
+    $this->app = app :: single($adapt, $plugin, $branding);
     return $this->app;
   }
 
