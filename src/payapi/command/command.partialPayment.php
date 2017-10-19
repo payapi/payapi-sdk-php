@@ -121,11 +121,8 @@ final class commandPartialPayment extends controller
             $countryCode = $this->localization($this->arguments(2));
         } else {
             $countryCode = $this->localized['countryCode'];
-        }        
-        //-> @FIXME TODELETE
-        $this->warning('countryCode hacked');
-        $countryCode = 'FI';
-        //->
+        }    
+
         if (is_string($countryCode) === true) {
           $this->partialPaymentCountryCode = $countryCode;
           return $countryCode;
