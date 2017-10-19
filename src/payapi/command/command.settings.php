@@ -76,7 +76,9 @@ final class commandSettings extends controller
 
   public function run()
   {
-    $this->cache('delete', 'settings', $this->instance());
+    if ($this->arguments(1) != false) {
+      $this->cache('delete', 'settings', $this->instance());
+    }
     if ($this->validate->publicId($this->arguments(1)) === true && $this->validate->apiKey($this->arguments(2)) === true) {
       $publicId = $this->arguments(1);
       $apiKey = $this->arguments(2);
