@@ -279,10 +279,10 @@ final class validator extends helper
         $this->debug(('[VALID] ' . $streamMetas['stream_type']));
         return $streamParams["options"]["ssl"]["peer_certificate"];
       }
-    } else {
+    } else if ($checked === false) {
       sleep(100); //-> avoiding timeout
       $this->debug('[SSL] retry');
-      return $this->ssl($checkDomain, $selfsigned, $timeout, true);
+      return $this->ssl($domain, $selfsigned, $timeout, true);
     }
     $this->warning('ssl certificate', 'NOVALID');
     return false;
