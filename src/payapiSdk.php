@@ -8,7 +8,8 @@
 *              JWT
 *
 *  @category   Payments, Social Sharing
-*  @version    v0.0.0.0(20170711)
+*  @version    v1.0.0.0(20170711)
+*  @version    v2.0.0.0(20171019)
 *
 *  @param     (object) adapt =(main sdk config || adapt model for adaptor plugin)
 *
@@ -21,22 +22,30 @@
 *                payapi/cache/<instanceKey>/settings
 *
 *        - 2. commands :
-*              $sdk->instantPayment($data);                     //-> validate/sanitize/cache product/payment data
+*              $sdk->instantPayment($data);                       //-> validate/sanitize/cache product/payment data
 *                                                                          returns array("metadata", "endPointPayment", "endPointProductPayment");
-*              $sdk->brand();                                     //-> gets brand/partner info
+*              $sdk->branding();                                  //-> gets branding/partner info
+*
 *              $sdk->callback();                                  //-> gets/cache callback decoded transaction
+*
 *              $sdk->localize();                                  //-> gets/cache ip decoded localization(plugin adds adapt country and zone ids)
-*              $sdk->localize(true);                            //-> gets & refresh ip decoded localization cache(plugin adds adapt country and zone ids)
-*              $sdk->settings('public_id', 'api_key', true);  //-> verify account & gets/cache instance merchantSettings, also refresh account data
-*              $sdk->settings(false, false, true);            //-> refresh & gets instance merchantSettings
+*              $sdk->localize(true);                              //-> gets & refresh ip decoded localization cache(plugin adds adapt country and zone ids)
+*
+*              $sdk->settings('public_id', 'api_key', true);      //-> verify account & gets/cache instance merchantSettings, also refresh account data
+*              $sdk->settings(false, false, true);                //-> refresh & gets instance merchantSettings
 *              $sdk->settings();                                  //-> gets instance cached merchantSettings
-*              $sdk->partialPayment($totalInCents, $currency); //-> calculate partialPayment from merchantSettings
-*              $sdk->response(<standard_response_code_int>);    //-> get response info
+*
+*              $sdk->partialPayment($totalInCents, $currency);    //-> calculate partialPayment from merchantSettings
+*
+*              $sdk->response(<standard_response_code_int>);      //-> get response info
+*
 *              $sdk->info();                                      //-> gets sdk debug info
 *
 *       (*) plugin is defined in /payapi/app.engine.php
 *              - native
-*              - opencart2
+*              - opencart23
+*              - magento
+*              - prestashop
 *
 *  @return
 *        - success :
