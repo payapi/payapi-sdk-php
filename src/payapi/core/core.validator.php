@@ -282,7 +282,7 @@ final class validator extends helper
     } else {
       sleep(100); //-> avoiding timeout
       $this->debug('[SSL] retry');
-      return $this->CheckSsl($checkDomain, $selfsigned, $timeout, true);
+      return $this->ssl($checkDomain, $selfsigned, $timeout, true);
     }
     $this->warning('ssl certificate', 'NOVALID');
     return false;
