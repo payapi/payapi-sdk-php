@@ -82,10 +82,9 @@ final class commandPartialPayment extends controller
         //-> settings
         $this->partialPaymentSettings = $this->settings('partialPayments');
         //-> checks localization country
-        //-> @NOTE: when PA fetch metadata should localize provided ip
         $countryCode = $this->countryCode();
         if(is_string($countryCode) === true) {
-            if (isset($this->partialPaymentSettings['whitelistedCountries']) !== true || $this->partialPaymentSettings['whitelistedCountries'] === false || in_array($this->partialPaymentCountryCode, $this->partialPaymentSettings['whitelistedCountries']) === true) {
+            if (isset($this->partialPaymentSettings['whitelistedCountries']) !== true || $this->partialPaymentSettings['whitelistedCountries'] === false || in_array($countryCode, $this->partialPaymentSettings['whitelistedCountries']) === true) {
                 if (is_int($paymentPriceInCents) === true && $paymentPriceInCents >= $this->partialPaymentSettings['minimumAmountAllowedInCents'] && is_string($paymentCurrency) === true) {
                     $calculate = array();
                     $partial = array();
@@ -106,7 +105,7 @@ final class commandPartialPayment extends controller
                     $partial['paymentMethod'] = $this->partialPaymentSettings['preselectedPartialPayment'];
                     $partial['invoiceFeeDays'] = $this->partialPaymentSettings['paymentTermInDays'];
                     $partial['currency'] = $paymentCurrency;
-                    $partial['country'] = $this->localized['countryCode'];
+                    $partial['country'] = $countryCode;
                     return $partial;
                 }
             }
@@ -116,12 +115,16 @@ final class commandPartialPayment extends controller
 
     private function countryCode()
     {
-        //->
-        if (is_string($this->arguments(2)) === true) {
-            $countryCode = $this->localization($this->arguments(2));
-        } else {
+        if ($this->arguments(2) !== false && $this->validate->ip($this->arguments(2)) === true) {
+            $localization = $this->localization($this->arguments(2));
+            if (is_string($localization['countryCode']) === true) {
+                $countryCode = $localization['countryCode'];
+            } else {
+                $countryCode = false;
+            }
+        } else if (isset($this->localized['countryCode']) === true) {
             $countryCode = $this->localized['countryCode'];
-        }    
+        }        
 
         if (is_string($countryCode) === true) {
           $this->partialPaymentCountryCode = $countryCode;
