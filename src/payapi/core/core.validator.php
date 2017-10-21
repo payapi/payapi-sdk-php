@@ -8,7 +8,7 @@ final class validator extends helper
 {
 
   public
-    $version                    = '0.0.1';
+    $version                    = '1.0.0';
 
   public function command($command)
   {

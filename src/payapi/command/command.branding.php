@@ -70,7 +70,6 @@ final class commandBranding extends controller
       $this->debug('[branded] ' . $pluginBrand['partnerId']);
       return $this->render($pluginBrand);
     }
-    $this->warning('plugin brand defaulted');
     return $this->render($this->defaultPluginBrand());
   }
 
@@ -80,9 +79,8 @@ final class commandBranding extends controller
       $this->debug('checking brand: ' . $this->arguments(0));
       return $this->getPluginBrandFromCode($this->arguments(0));
     } else {
-      if (method_exists('Payapi\Branding\Branding','getBrandingCode')) {
-          use Payapi\Branding\Branding;
-          $brandFromComposer = new Branding();
+      if (method_exists('\Payapi\Branding\Branding','getBrandingCode')) {
+          $brandFromComposer = new \Payapi\Branding\Branding();
           $brandCode = $brandFromComposer->getBrandingCode();
           $this->debug('checking brand from library: ' . $brandCode);
           return $this->getPluginBrandFromCode($brandCode);          
@@ -96,6 +94,7 @@ final class commandBranding extends controller
 
   private function defaultPluginBrand()
   {
+    $this->warning('plugin brand defaulted');
     return $this->load->pluginBrand($this->defaultPluginBrand);
   }
 
