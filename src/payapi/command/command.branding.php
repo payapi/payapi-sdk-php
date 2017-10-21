@@ -69,7 +69,6 @@ final class commandBranding extends controller
       $this->debug('[branded] ' . $pluginBrand['partnerId']);
       return $this->render($pluginBrand);
     }
-    $this->warning('plugin brand defaulted');
     return $this->render($this->defaultPluginBrand());
   }
 
@@ -95,6 +94,7 @@ final class commandBranding extends controller
 
   private function defaultPluginBrand()
   {
+    $this->warning('plugin brand defaulted');
     return $this->load->pluginBrand($this->defaultPluginBrand);
   }
 
