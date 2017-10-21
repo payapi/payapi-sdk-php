@@ -5,6 +5,7 @@ namespace payapi;
 /*
 * @COMMAND
 *           $sdk->branding('payapi')
+*           $sdk->branding() //-> get branding from external branding library OR default branding
 *
 * @TYPE     public
 *
@@ -73,22 +74,22 @@ final class commandBranding extends controller
   }
 
   private function pluginBrand()
-  {
+  {    
     if (is_string($this->arguments(0)) === true) {
       $this->debug('checking brand: ' . $this->arguments(0));
-      if (is_string($this->arguments(0)) === true) {
-        $pluginBrand = $this->load->pluginBrand($this->arguments(0));
-        if (is_array($pluginBrand) === true) {
-          return $pluginBrand;
-        } else {
-          $this->warning('invalid plugin branding');
-        }
-      } else {
-        $this->warning('invalid value');
-      }
+      return $this->getPluginBrandFromCode($this->arguments(0));
     } else {
-      $this->debug('[brand] default');
+      if (method_exists('Payapi\Branding\Branding','getBrandingCode')) {
+          use Payapi\Branding\Branding;
+          $brandFromComposer = new Branding();
+          $brandCode = $brandFromComposer->getBrandingCode();
+          $this->debug('checking brand from library: ' . $brandCode);
+          return $this->getPluginBrandFromCode($brandCode);          
+      } else {
+        $this->debug('[brand] default');
+      }
     }
+
     return false;
   }
 
@@ -98,5 +99,19 @@ final class commandBranding extends controller
     return $this->load->pluginBrand($this->defaultPluginBrand);
   }
 
+  private function getPluginBrandFromCode($code)
+  {
+    if (is_string($code) === true) {
+        $pluginBrand = $this->load->pluginBrand($code);
+        if (is_array($pluginBrand) === true) {
+          return $pluginBrand;
+        } else {
+          $this->warning('invalid plugin branding');          
+        }
+      } else {
+        $this->warning('invalid value');
+      }
+      return false;
+  }
 
 }
