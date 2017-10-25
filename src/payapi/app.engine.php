@@ -9,7 +9,7 @@ final class engine
     $single                    =    false;
 
   private
-    $version                   =     '1.0.1',
+    $version                   =     '2.0.3',
     $plugin                    =    'native',
     $adapt                     =       false,
     $debug                     =       false,
