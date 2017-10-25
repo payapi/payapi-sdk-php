@@ -5,4 +5,3 @@ src/payapi/cache/*
 src/payapi/debug/*
 *.log
 *.data
-*.kk
