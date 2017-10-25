@@ -34,6 +34,7 @@ abstract class controller extends helper
     $this->entity = entity::single();
     $this->crypter = new crypter();
     $this->cache = new cache();
+    $this->load = $this->entity->get('load');
     $this->validate = $this->entity->get('validate');
     $this->api = $this->entity->get('api');
     $this->account = $this->cache('read', 'account', $this->instance());
@@ -106,7 +107,6 @@ abstract class controller extends helper
   {
     $this->arguments = $this->entity->get('arguments');
     $this->entity->remove('validate');
-    $this->load = $this->entity->get('load');
     $this->entity->remove('load');
     $this->entity->remove('api');
     $this->publicId = $this->publicId();

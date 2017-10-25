@@ -99,9 +99,9 @@ final class commandPartialPayment extends controller
                     $partial['interestRatePerMonth'] = round(($partial['interestRate'] / $partial['paymentMonths']), 2);
                     $partial['interestPriceInCents'] = round((($paymentPriceInCents / 100) * $partial['interestRate']), 0);
                     $partial['openingFeeInCents'] = $this->partialPaymentSettings['openingFeeInCents'];
-                    $partial['priceInCents'] = $paymentPriceInCents + $partial['interestPriceInCents'];
-                    $partial['pricePerMonthInCents'] = round($partial['priceInCents'] / $partial['paymentMonths'], 0);
                     $partial['invoiceFeeInCents'] = $this->partialPaymentSettings['invoiceFeeInCents'];
+                    $partial['priceInCents'] = $paymentPriceInCents + $partial['interestPriceInCents'] + ($partial['invoiceFeeInCents'] * $partial['paymentMonths']);
+                    $partial['pricePerMonthInCents'] = round($partial['priceInCents'] / $partial['paymentMonths'], 0);
                     $partial['paymentMethod'] = $this->partialPaymentSettings['preselectedPartialPayment'];
                     $partial['invoiceFeeDays'] = $this->partialPaymentSettings['paymentTermInDays'];
                     $partial['currency'] = $paymentCurrency;
@@ -115,6 +115,10 @@ final class commandPartialPayment extends controller
 
     private function countryCode()
     {
+        //-> @FIXME TODELETE 
+        $this->warning('hacked', 'countryCode');
+        return 'FI';
+        //->
         if ($this->arguments(2) !== false && $this->validate->ip($this->arguments(2)) === true) {
             $localization = $this->localization($this->arguments(2));
             if (is_string($localization['countryCode']) === true) {
