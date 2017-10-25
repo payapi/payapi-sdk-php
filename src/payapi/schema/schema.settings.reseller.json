@@ -48,6 +48,10 @@
       "___min": 1,
       "___max": 150
     },
+    "partnerBackoffice": {
+      "___mandatory": false,
+      "___type": "url"
+    },
     "partnerWebUrl": {
       "___mandatory": true,
       "___type": "url"
