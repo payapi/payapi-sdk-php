@@ -114,11 +114,7 @@ final class commandPartialPayment extends controller
     }
 
     private function countryCode()
-    {
-        //-> @FIXME TODELETE 
-        $this->warning('hacked', 'countryCode');
-        return 'FI';
-        //->
+    {        
         if ($this->arguments(2) !== false && $this->validate->ip($this->arguments(2)) === true) {
             $localization = $this->localization($this->arguments(2));
             if (is_string($localization['countryCode']) === true) {
