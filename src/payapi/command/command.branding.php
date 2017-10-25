@@ -47,6 +47,13 @@ namespace payapi;
 *              string(1) "1"
 *              ["enable"]=>
 *              string(1) "1"
+               ["partnerBackoffice"]=>
+                  array(2) {
+                    ["production"]=>
+                    string(15) "input.payapi.io"
+                    ["staging"]=>
+                    string(23) "staging-input.payapi.io"
+                  }
 *           }
 *
 * @NOTE
