@@ -68,6 +68,7 @@ final class commandBranding extends controller
     $pluginBrand = $this->pluginBrand();
     if (is_array($pluginBrand) !== false) {
       $this->debug('[branded] ' . $pluginBrand['partnerId']);
+      $pluginBrand['partnerBackoffice'] = $this->backOffice();
       return $this->render($pluginBrand);
     }
     return $this->render($this->defaultPluginBrand());
@@ -92,6 +93,15 @@ final class commandBranding extends controller
     return false;
   }
 
+  private function backOffice()
+  {
+      $backoffice = array(
+          "production" => 'input.payapi.io',
+          "staging" => 'staging-input.payapi.io'
+      );
+      return $backoffice;
+  }
+
   private function defaultPluginBrand()
   {
     $this->warning('plugin brand defaulted');
@@ -103,6 +113,7 @@ final class commandBranding extends controller
     if (is_string($code) === true) {
         $pluginBrand = $this->load->pluginBrand($code);
         if (is_array($pluginBrand) === true) {
+          $pluginBrand['partnerBackoffice'] = $this->backOffice();
           return $pluginBrand;
         } else {
           $this->warning('invalid plugin branding');          
