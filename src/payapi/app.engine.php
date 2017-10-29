@@ -32,6 +32,7 @@ final class engine
 
   private function __construct($adapt, $plugin, $branding)
   {
+    date_default_timezone_set('UTC');
     foreach(glob(__DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . '*' . '.' . 'php') as $core) {
       require_once $core;
     }
