@@ -1,0 +1,1 @@
+NOTE: releasing has been freezed till version 3.0 is finished!
