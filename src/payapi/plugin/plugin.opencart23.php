@@ -11,6 +11,7 @@ final class plugin
 
     private $native                 =     false;
     private $config                 =     false;
+    private $session                =     false;
     private $db                     =     false;
     private $schemaProduct          =    array(
         "product_id"      => true,
@@ -32,9 +33,20 @@ final class plugin
     private function __construct($native)
     {
       $this->native = $native;
-      $this->db = $this->native->get('db');
-      $this->config = $this->native->get('config');
+      $this->session = $this->session();
+      $this->db = $this->db();
+      $this->config = $this->config();
       $this->loadLog();
+    }
+
+    public function language()
+    {
+        return $this->session->data['language'];
+    }
+
+    public function currency()
+    {
+        return $this->session->data['currency'];
     }
 
     public function validated()
@@ -108,11 +120,6 @@ final class plugin
         return $this->log($info);
     }
 
-    public function config()
-    {
-        return $this->native->get('config');
-    }
-
     public function session()
     {
         return $this->native->get('session');
@@ -121,6 +128,11 @@ final class plugin
     public function db()
     {
         return $this->native->get('db');
+    }
+
+    public function config()
+    {
+        return $this->native->get('config');
     }
 
     public function customer($email)

@@ -1,14 +1,14 @@
 <?=$header?>
     <br>
-    <h1 align="center"><?=$text_loading_title?></h1>
+    <h1 align="center"><?=$text_wait?></h1>
     <div class="row">
       <div class="loading">
         <p><ul class="fa-ul loading-steps" id="loadingSteps">
-        <li><i class="fa-li fa fa-spinner fa-spin fa-2x fa-pull-left"></i><?=$text_loading_step1?></li>
-        <li><i class="fa-li fa fa-spinner fa-spin fa-2x fa-pull-left"></i><?=$text_loading_step2?></li>
-        <li><i class="fa-li fa fa-spinner fa-spin fa-2x fa-pull-left"></i><?=$text_loading_step3?></li>
-        <li><i class="fa-li fa fa-spinner fa-spin fa-2x fa-pull-left"></i><?=$text_loading_step4?></li>
-        <li><i class="fa-li fa fa-spinner fa-spin fa-2x fa-pull-left"></i><?=$text_loading_step5?></li>
+        <li><i class="fa-li fa fa-spinner fa-spin fa-2x fa-pull-left"></i><?=$loading_1?></li>
+        <li><i class="fa-li fa fa-spinner fa-spin fa-2x fa-pull-left"></i><?=$loading_2?></li>
+        <li><i class="fa-li fa fa-spinner fa-spin fa-2x fa-pull-left"></i><?=$loading_3?></li>
+        <li><i class="fa-li fa fa-spinner fa-spin fa-2x fa-pull-left"></i><?=$loading_4?></li>
+        <li><i class="fa-li fa fa-spinner fa-spin fa-2x fa-pull-left"></i><?=$loading_5?></li>
         </ul></p>
       </div>
     </div><br><br><br><br>
@@ -31,7 +31,7 @@
           flatten(val, _path, result);
         } else {
           result[_path.join(\'.\')] = val;
-        }
+                  }
       }
       return result;
     }
@@ -61,8 +61,8 @@
 
     var messages = {};
     var locales = [\'en-US\', \'es-ES\', \'fi-FI\'];
-    var locale =\'' . $settingLocale . '\'; // get session locale;
-    var publicId = \'' . $settingPublicId . '\';
+    var locale =\'' . $language . '\'; // get session locale;
+    var publicId = \'' . $payapi_public_id . '\';
     $.getJSON(\'/private/locales/\'+ (locales.indexOf(locale) < 0 ? \'en-US\' : locale), function(json) {
       messages.invalid = json;
       messages = flatten(messages);

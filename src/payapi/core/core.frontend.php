@@ -8,15 +8,15 @@ final class frontend {
 	protected $script = array();
 	protected $meta = array();
 
-	private $compressed = true;
-	private $config = false;
-	private $route = false;
-	private $key = false;
-	private $template = false;
-	private $view = null;
-	private $response = array();
-	private $debug = false;
-	private $wording = false;
+	private $compressed         =   true;
+	private $config             =   false;
+	private $route              =   false;
+	private $key                =   false;
+	private $template           =   false;
+	private $view               =  'load';
+	private $response           = array();
+	private $debug              =   false;
+	private $wording            =   false;
 
 	public function __construct($template = false)
 	{
@@ -24,12 +24,7 @@ final class frontend {
         $this->route = router::single();
         $this->debug = debug::single();
         $this->wording = wording::single();
-		if (isset($template) === true && is_string($template) === true && is_string($this->route->template($template)) == true) {
-			$this->key = $template;
-		} else {
-			$this->key = __NAMESPACE__;
-		}
-		$this->template = $this->route->template($this->key);
+        $this->template = $this->route->ui() . 'demo' . DIRECTORY_SEPARATOR;
 	}
 
 	public function encodeHtml($unencoded)
@@ -46,112 +41,38 @@ final class frontend {
 		return $this->debug->add($info, $label);
 	}
 
-	public function render($view, $response)
+	public function render($view)
 	{
-		if (isset($response['code']) === true) {
-			if ($response['code'] === 200) {
-				$this->wording($response['data']);
-				
-			} else {
-				$this->response = $response;
-			}
-		} else {
-			$this->response = array(
-				"code" => '404',
-				"data" => '[frontend] undefined error'
-			);
-		}
-		$this->response['metadata'] = $this->view($this->template . 'common' . DIRECTORY_SEPARATOR . 'metadata' . '.' . 'tpl');
-		$this->response['header'] = $this->view($this->template . 'common' . DIRECTORY_SEPARATOR . 'header' . '.' . 'tpl');
-		$this->response['navigation'] = $this->view($this->template . 'common' . DIRECTORY_SEPARATOR . 'navigation' . '.' . 'tpl');
-		$this->response['footer'] = $this->view($this->template . 'common' . DIRECTORY_SEPARATOR . 'footer' . '.' . 'tpl');
-		if (isset($this->response['code']) === true) {
-			$this->view = 'error';
-		} else {
-			$this->view = $view;
-		}
 		$this->debug('rendering frontend');
-		$this->debug('template: ' . $this->key);
 		$this->debug('view: ' . $this->view);
-		$this->response['content'] = $this->view($this->template . 'view' . DIRECTORY_SEPARATOR . $this->view . '.' . 'tpl');
-		$frontend = $this->view($this->template . 'frontend' . '.' . 'tpl');
+		$this->response = $this->view($this->view);
+		$frontend = $this->view($view);
 		if ($this->compressed === true) {
 			return $this->compress($frontend);
 		}
 		return $frontend;
 	}
 
-	private function wording()
-	{
-		$branding = $this->wording->get('branding');
-		$this->response['brand'] = $branding['name'];
-		$this->response['slogan'] = $branding['slogan'];
-		$this->response['title'] = $this->response['brand'] . ', ' . $branding['slogan'];
-		$this->response['locale'] = substr($branding['locale'], 0, 2);
-		$this->response['logo'] = $branding['logoUrl'];
-		$this->response['website'] = $branding['webUrl'];
-		$this->response['favicon'] = $branding['iconUrl'];
-		$this->response['country'] = $branding['country'];
-		$this->response['email'] = $this->encodeHtml($branding['contactEmail']);
-		$this->response['hrefEmail'] = $this->encodeHtml('mailto:' . $branding['contactEmail']);
-		$this->response['phone'] = $this->encodeHtml($branding['contactPhone']);
-		$this->response['hrefPhone'] = $this->encodeHtml('tel:+' . str_replace(' ', null, $branding['contactPhone']));
-		$this->response['mobile'] = $this->encodeHtml($branding['contactMobile']);
-		$this->response['hrefMobile'] = $this->encodeHtml('tel:+' . str_replace(' ', null, $branding['contactMobile']));
-		$this->response['address'] = $this->encodeHtml($branding['address']);
-		$this->response['country'] = $this->encodeHtml($branding['country']);
-		$this->response['PC'] = $this->encodeHtml($branding['PC']);
-		$this->response['city'] = $this->encodeHtml($branding['city']);
-		$this->response['region'] = $this->encodeHtml($branding['region']);
-		$this->response['support'] = $this->encodeHtml($branding['supportInfoL1']);
-		$this->response['copy'] = date('Y', time()) . ' ' . $this->response['title'];
-		if (isset($branding['from']) === true && $branding['from'] < date('Y', time())) {
-			$this->response['copy'] = $branding['from'] . '-' . date('Y', time());
-		} else {
-			$this->response['copy'] = date('Y', time());
-		}
-		$this->response['copyright'] = $this->response['copy'] . ' ' . $this->response['brand'] . ', ' . $branding['slogan'];
-		$this->response['minimized'] = '.min';
-		$this->response['colorMain'] = $branding['template']['colorMain'];
-		$this->response['colorSecond'] = $branding['template']['colorSecond'];
-		$this->response['colorThird'] = $branding['template']['colorThird'];
-		$this->response['background'] = $branding['template']['background'];
-		// FIXME
-		//$this->response['minimized'] = '';
-		if(isset($branding['template']['colorTitle']) === true) {
-			$this->response['colorTitle'] = $branding['template']['colorTitle'];
-		} else {
-			$this->response['colorTitle'] = $branding['template']['colorMain'];
-		}
-		if(isset($branding['delegations']) === true) {
-			$this->response['delegations'] = $branding['delegations'];
-		} else {
-			$this->response['delegations'] = array();
-		}
-		if(isset($branding['template']['fade']) === true) {
-			$this->response['fade'] = $branding['template']['fade'];
-		} else {
-			$this->response['fade'] = '.2';
-		}
-		if(isset($branding['template']['radius']) === true) {
-			$this->response['radius'] = $branding['template']['radius'];
-		} else {
-			$this->response['radius'] = '22px';
-		}
-		if(isset($branding['template']['logoAlign']) === true) {
-			$this->response['logoAlign'] = $branding['template']['logoAlign'];
-		} else {
-			$this->response['logoAlign'] = 'left';
-		}
-	}
-
 	private function view($view)
 	{
-		extract($this->response);
-		ob_start();
-		require($view);
-		$clean = ob_get_clean();
-		return $clean;
+		$template = $this->route->demo($view);
+		if(is_file($template) === true) {
+			$wording = $this->wording->get();
+			$media = 'https://input.payapi.io/';
+			extract($wording);
+			ob_start();
+			require($this->template . 'common' . DIRECTORY_SEPARATOR . 'header' . '.' . 'tpl');
+			$header = ob_get_clean();
+			ob_start();
+			require($this->template . 'common' . DIRECTORY_SEPARATOR . 'footer' . '.' . 'tpl');
+			$footer = ob_get_clean();
+			ob_start();
+			require($template);
+			$clean = ob_get_clean();
+			return $clean;			
+		}
+		$this->debug('[debug][frontend] cannot get template: ' . $view);
+		return null;
 	}
 
 	public function compress($buffer)
@@ -181,6 +102,8 @@ final class frontend {
 				'/; </',
 				'/; } </',
 				'/; -/',
+				'/; /',
+				'/{ /',
 				'/: #/',
 				'/> :root { -/'
 			),
@@ -195,6 +118,8 @@ final class frontend {
 				';<',
 				';}<',
 				';-',
+				';',
+				'{',
 				':#',
 				'>:root{-'
 			),

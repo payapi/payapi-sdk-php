@@ -195,7 +195,8 @@ class commandPayment extends controller
                     "payload"            => $payloadJwt,
                     //"decoded"            => $this->decode($payloadJwt, $this->publicId()),
                     "endPointPayment"    => $this->serialize->endPointPayment($this->publicId()),
-                    "order_form_js_path" => "payapi/views/js/order_form.js",
+                    //"order_form_js_path" => "payapi/views/js/order_form.js",
+                    "order_form_js_path" => $this->route->view('form/order')
                 );
                 $this->cache('writte', 'payment', $md5);
                 return $this->render($payment);

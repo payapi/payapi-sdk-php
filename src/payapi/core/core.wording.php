@@ -2,11 +2,13 @@
 
 namespace payapi;
 
+//-> @TODO if wording file do not exist revert to en-gb
+
 class wording {
 
 	public static $single = false;
 
-	private $locale = 'en-en';
+	private $locale = 'en-gb';
 	private $data = array();
 	private $route = false;
 	private $loaded = array();
@@ -14,9 +16,10 @@ class wording {
 
 	private function __construct($locale)
 	{
+		//-> @TODO validate locale if passedy 
 		$this->data = array();
 		$this->route = router::single();
-		if(is_string($locale) === true && is_string($this->route->dictionary($locale . DIRECTORY_SEPARATOR)) === true) {
+		if(is_string($locale) === true && is_string($this->route->dictionary($locale)) === true) {
 			$this->locale = $locale;
 		}
 		$this->load($this->locale);
@@ -27,8 +30,11 @@ class wording {
 		$this->data[$key] = $value;
 	}
 
-	public function get($key)
+	public function get($key = false)
 	{
+		if($key === false) {
+			return $this->data;
+		} else
 		if($this->has($key) === true) {
 			return $this->data[$key];
 		}
@@ -45,14 +51,15 @@ class wording {
 
 	public function load($key)
 	{
+		//-> @TODO default to en-gb if false
 		if(in_array($key, $this->loaded)) {
 			return true;
 		}
-		$_ = array();
-		$dictionary = $this->route->dictionary($this->locale . DIRECTORY_SEPARATOR . $key);
+		$dictionary = $this->route->wording($key, $this->locale);
 		if (is_string($dictionary) === true) {
-			require $dictionary;
-			$this->data = array_merge($this->data, $_);
+			$___ = array();
+			require ($dictionary);
+			$this->data = array_merge($this->data, $___);
 			$this->loaded[] = $key;
 			return true;
 		}
@@ -69,7 +76,7 @@ class wording {
 
 	public function __toString()
 	{
-		return json_encode($this->data, true);
+		return json_encode($this->data, JSON_PRETTY_PRINT);
 	}
 
 

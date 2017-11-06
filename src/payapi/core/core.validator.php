@@ -256,7 +256,7 @@ final class validator extends helper
   public function ssl($checkDomain = false, $selfsigned = false, $timeout = 1, $checked = false)
   {
     $verifyPeer =($selfsigned === true) ? false : true;
-    $domain =(is_string($checkDomain) === true) ? $this->sanitize->parseDomain($checkDomain) : $this->domain;
+    $domain =(is_string($checkDomain) === true) ? $this->sanitize->domain($checkDomain) : $this->domain;
     $this->debug('domain: ' . $this->domain);
     $socket = stream_context_create(['http' =>['method' => 'GET'], 'ssl' =>[
       'capture_peer_cert'       => true,

@@ -68,67 +68,20 @@ namespace payapi;
 final class commandBranding extends controller
 {
 
-  private $defaultPluginBrand = 'payapi';
+    private $defaultPluginBrand = 'payapi';
 
-  public function run()
-  {
-    $pluginBrand = $this->pluginBrand();
-    if (is_array($pluginBrand) !== false) {
-      $this->debug('[branded] ' . $pluginBrand['partnerId']);
-      $pluginBrand['partnerBackoffice'] = $this->backOffice();
-      return $this->render($pluginBrand);
-    }
-    return $this->render($this->defaultPluginBrand());
-  }
-
-  private function pluginBrand()
-  {    
-    if (is_string($this->arguments(0)) === true) {
-      $this->debug('checking brand: ' . $this->arguments(0));
-      return $this->getPluginBrandFromCode($this->arguments(0));
-    } else {
-      if (method_exists('\Payapi\Branding\Branding','getBrandingCode')) {
-          $brandFromComposer = new \Payapi\Branding\Branding();
-          $brandCode = $brandFromComposer->getBrandingCode();
-          $this->debug('checking brand from library: ' . $brandCode);
-          return $this->getPluginBrandFromCode($brandCode);          
-      } else {
-        $this->debug('[brand] default');
-      }
-    }
-
-    return false;
-  }
-
-  private function backOffice()
-  {
-      $backoffice = array(
-          "production" => 'input.payapi.io',
-          "staging" => 'staging-input.payapi.io'
-      );
-      return $backoffice;
-  }
-
-  private function defaultPluginBrand()
-  {
-    $this->warning('plugin brand defaulted');
-    return $this->load->pluginBrand($this->defaultPluginBrand);
-  }
-
-  private function getPluginBrandFromCode($code)
-  {
-    if (is_string($code) === true) {
-        $pluginBrand = $this->load->pluginBrand($code);
-        if (is_array($pluginBrand) === true) {
-          $pluginBrand['partnerBackoffice'] = $this->backOffice();
-          return $pluginBrand;
-        } else {
-          $this->warning('invalid plugin branding');          
+    public function run()
+    {
+        if ($this->arguments(0) !== false) {
+            $pluginBrand = $this->pluginBranding($this->arguments(0));
+            if (is_array($pluginBrand) === true) {
+                $this->warning('brand: ' . $this->arguments(0));
+                return $this->render($pluginBrand);
+            }
         }
-      } else {
-        $this->warning('invalid value');
-      }
-      return false;
-  }
+        $this->warning('brand defaulted');
+        return $this->render($this->pluginBranding());
+    }
+
 
 }

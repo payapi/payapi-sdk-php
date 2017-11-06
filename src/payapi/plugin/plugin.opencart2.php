@@ -23,6 +23,16 @@ final class plugin
     $this->config = $this->native->get('config');
     $this->loadLog();
   }
+  
+  public function language()
+  {
+      return 'en-gb';
+  }
+
+  public function currency()
+  {
+      return 'EUR';
+  }
 
   public function validated()
   {

@@ -24,6 +24,16 @@ final class plugin
     $this->loadLog();
   }
 
+  public function language()
+  {
+      return 'en-gb';
+  }
+
+  public function currency()
+  {
+      return 'EUR';
+  }
+
   public function validated()
   {
     //->

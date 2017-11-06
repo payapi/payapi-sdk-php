@@ -57,6 +57,20 @@ final class adaptor
         }
     }
 
+    public function language()
+    {
+        //-> @FIXME TODELETE
+        ////-> this should be fetched from main controller, calling wording
+        return 'es-es';
+        //->
+        return $this->adapt->language();
+    }
+
+    public function currency()
+    {
+        return $this->adapt->currency();
+    }
+
     private function validated()
     {
         return $this->adapt->validated();

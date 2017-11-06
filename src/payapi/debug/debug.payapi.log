@@ -1,0 +1,41 @@
+
+=== DEBUG === 2017-11-06 07:55:49 UTC ==>
+0004 [info] engine->load [debug] true
+0004 [info] engine->load [demo] false
+0005 [info] engine->single PayApi SDK v3.0.0
+0006 [info] engine->single [plugin] native
+0007 [info] engine->load [autoload] api v0.0.1
+0007 [error] helper->warning [warning] access IP hacked
+0009 [error] helper->warning [warning] SERVER NAME hacked
+0011 [time] engine->load [load] timing 11ms.
+=== LISTENING ==>
+0015 [run] engine->demo ()
+0015 [info] engine->run [autoload] demo
+0016 [info] controller->_autoload [autoload] cache v0.0.1
+0017 [info] controller->cache [account] cached
+0021 [info] controller->cache [ssl] uncached
+0021 [info] controller->_autoload domain: store.multimerchantshop.xyz
+0022 [info] controller->_autoload [SSL] store.multimerchantshop.xyz
+1127 [info] controller->_autoload [VALID] tcp_socket/ssl
+1132 [info] helper->construct [mode] PROD
+1133 [info] controller->cache [settings] uncached
+1134 [info] controller->cache [reseller] uncached
+1137 [info] controller->sdk [brand] default
+1140 [info] controller->sdk [run] demo
+1141 [info] controller->cache [localize] uncached
+1142 [info] api->curl [get] input.payapi.io
+2145 [time] curl->proccess [get] timing 1002ms.
+2147 [error] helper->warning [warning] [curl] timeout
+2150 [info] curl->proccess [retry] input.payapi.io
+2887 [time] curl->proccess [get] timing 736ms.
+2890 [debug] curl->proccess {"ip":"84.79.161.122","countryCode":"ES","countryName":"Spain","regionName":"Andalusia","postalCode":"29400","timezone":"Europe/Madrid"}
+2891 [info] curl->proccess [200] success
+2894 [info] controller->locate [localize] valid schema
+2897 [info] controller->cache [localize] cached
+2901 [info] commandDemo->run [brand] default
+2903 [error] helper->warning [warning] [DEMO] shell access
+2904 [info] commandDemo->run rendering frontend
+2905 [info] commandDemo->run view: load
+2919 [time] debug->destruct [app] timing 1182ms.
+=== 2920ms. === 2017-11-06 07:55:52 UTC ===
+
