@@ -5,3 +5,4 @@ src/payapi/cache/*
 src/payapi/debug/*
 *.log
 *.data
+index.php
