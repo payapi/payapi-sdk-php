@@ -1,0 +1,121 @@
+{
+  "___info": {
+    "___version": "0.0.1",
+    "___date": "20170710"
+  },
+  "___schema": {
+    "io_payapi_webshop": {
+      "___mandatory": true,
+      "___type": "string"
+    },
+    "order_currency": {
+      "___mandatory": true,
+      "___type": "string"
+    },
+    "product_id": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "product_quantity": {
+      "___mandatory": true,
+      "___type": "number",
+      "___min": 1
+    },
+    "product_title": {
+      "___mandatory": true,
+      "___type": "string",
+      "___min": 1
+    },
+    "product_model": {
+      "___mandatory": false,
+      "___type": "string",
+      "___min": 1
+    },
+    "product_category": {
+      "___mandatory": false,
+      "___type": "string",
+      "___min": 1
+    },
+    "product_description": {
+      "___mandatory": false,
+      "___type": "string",
+      "___min": 1
+    },
+    "product_imageurl": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "product_options": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "product_priceincentsincvat": {
+      "___mandatory": true,
+      "___type": "number"
+    },
+    "product_priceincentsexcvat": {
+      "___mandatory": true,
+      "___type": "number"
+    },
+    "product_vatincents": {
+      "___mandatory": true,
+      "___type": "number"
+    },
+    "product_vatpercentage": {
+      "___mandatory": true,
+      "___type": "number"
+    },
+    "product_extradata": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "consumer_mobilephonenumber": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "consumer_locale": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "order_tosurl": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "consumer_consumerid": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "consumer_email": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "callbacks_processing": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "callbacks_success": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "callbacks_failed": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "callbacks_chargeback": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "returnurls_success": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "returnurls_cancel": {
+      "___mandatory": false,
+      "___type": "string"
+    },
+    "returnurls_failed": {
+      "___mandatory": false,
+      "___type": "string"
+    }
+  }
+}
