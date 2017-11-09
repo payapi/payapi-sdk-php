@@ -57,14 +57,11 @@ namespace payapi;
 final class commandPartialPayment extends controller
 {
 
-    private $partialPaymentCountryCode = false;
-    private $partialPaymentSettings = false;
-
     public function run()
     {
         if ($this->partialPayments() === true) {
             if (is_numeric($this->arguments(0)) === true && is_string($this->arguments(1)) === true) {
-                $partialPayment = $this->calculatePartialPayment((int) $this->arguments(0),  $this->arguments(1));
+                $partialPayment = $this->calculatePartialPayment((int) $this->arguments(0),  $this->arguments(1), $this->countryCode());
                 if (is_array($partialPayment) !== false) {
                     return $this->render($partialPayment);
                 } else {
@@ -75,42 +72,6 @@ final class commandPartialPayment extends controller
             }
         }
         return $this->returnResponse($this->error->notImplemented());
-    }
-
-    private function calculatePartialPayment($paymentPriceInCents, $paymentCurrency)
-    {
-        //-> settings
-        $this->partialPaymentSettings = $this->settings('partialPayments');
-        //-> checks localization country
-        $countryCode = $this->countryCode();
-        if(is_string($countryCode) === true) {
-            if (isset($this->partialPaymentSettings['whitelistedCountries']) !== true || $this->partialPaymentSettings['whitelistedCountries'] === false || in_array($countryCode, $this->partialPaymentSettings['whitelistedCountries']) === true) {
-                if (is_int($paymentPriceInCents) === true && $paymentPriceInCents >= $this->partialPaymentSettings['minimumAmountAllowedInCents'] && is_string($paymentCurrency) === true) {
-                    $calculate = array();
-                    $partial = array();
-                    $minimumAmountPerMonthInCents =($this->partialPaymentSettings['monthlyFeeThresholdInCents'] / $this->partialPaymentSettings['numberOfInstallments']);
-                    $minimumAmountPerMonth =($minimumAmountPerMonthInCents / 100);
-                    if (round(($paymentPriceInCents / $minimumAmountPerMonthInCents), 0) >= $this->partialPaymentSettings['numberOfInstallments']) {
-                        $partial['paymentMonths'] = $this->partialPaymentSettings['numberOfInstallments'];
-                    } else {
-                        $partial['paymentMonths'] = $maximumPricePartialMonths;
-                    }
-                    $partial['interestRate'] =(($this->partialPaymentSettings['nominalAnnualInterestRateInCents'] / 100) / 12) * $partial['paymentMonths'];
-                    $partial['interestRatePerMonth'] = round(($partial['interestRate'] / $partial['paymentMonths']), 2);
-                    $partial['interestPriceInCents'] = round((($paymentPriceInCents / 100) * $partial['interestRate']), 0);
-                    $partial['openingFeeInCents'] = $this->partialPaymentSettings['openingFeeInCents'];
-                    $partial['invoiceFeeInCents'] = $this->partialPaymentSettings['invoiceFeeInCents'];
-                    $partial['priceInCents'] = $paymentPriceInCents + $partial['interestPriceInCents'] + ($partial['invoiceFeeInCents'] * $partial['paymentMonths']);
-                    $partial['pricePerMonthInCents'] = round($partial['priceInCents'] / $partial['paymentMonths'], 0);
-                    $partial['paymentMethod'] = $this->partialPaymentSettings['preselectedPartialPayment'];
-                    $partial['invoiceFeeDays'] = $this->partialPaymentSettings['paymentTermInDays'];
-                    $partial['currency'] = $paymentCurrency;
-                    $partial['country'] = $countryCode;
-                    return $partial;
-                }
-            }
-        }
-        return false;
     }
 
     private function countryCode()

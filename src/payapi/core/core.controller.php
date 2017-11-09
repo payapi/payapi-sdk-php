@@ -5,29 +5,31 @@ namespace payapi;
 abstract class controller extends helper
 {
 
-    protected $customer              =     false;
-    protected $entity                =     false;
-    protected $session               =     false;
-    protected $data                  =     false;
-    protected $token                 =     false;
-    protected $cache                 =     false;
-    protected $validate              =     false;
-    protected $sanitizer             =     false;
-    protected $load                  =     false;
-    protected $api                   =     false;
-    protected $localized             =     false;
-    protected $language              =     false;
-    protected $currency              =     false;
-    protected $adaptor               =     false;
-    protected $db                    =     false;
+    protected $customer                  =     false;
+    protected $entity                    =     false;
+    protected $session                   =     false;
+    protected $data                      =     false;
+    protected $token                     =     false;
+    protected $cache                     =     false;
+    protected $validate                  =     false;
+    protected $sanitizer                 =     false;
+    protected $load                      =     false;
+    protected $api                       =     false;
+    protected $localized                 =     false;
+    protected $language                  =     false;
+    protected $currency                  =     false;
+    protected $adaptor                   =     false;
+    protected $db                        =     false;
+    protected $partialPaymentCountryCode =     false;
+    protected $partialPaymentSettings    =     false;
 
-    private   $crypter               =     false;
-    private   $publicId              =     false;
-    private   $apiKey                =     false;
-    private   $account               =     false;
-    private   $settings              =     false;
-    private   $brand                 =     false;
-    private   $arguments             =     false;
+    private   $crypter                   =     false;
+    private   $publicId                  =     false;
+    private   $apiKey                    =     false;
+    private   $account                   =     false;
+    private   $settings                  =     false;
+    private   $brand                     =     false;
+    private   $arguments                 =     false;
 
     protected function ___autoload($native)
     {
@@ -101,6 +103,7 @@ abstract class controller extends helper
     {
         //-> @FIXME TODELETE this has to be implemented in PA side
         //   @TODO better to add it in product url contruct in the meanwhile
+        //-> @TOUPDATE plz use request model!
         if (isset($_GET['payapiwebshop']) === true && isset($_GET['currency']) === true && isset($_GET['language']) === true && isset($_GET['quantity']) === true) {
             return true;
         }
@@ -231,7 +234,6 @@ abstract class controller extends helper
         } else {
             $this->entity->addInfo('public', 'anonymous');
         }
-        //$this->wording = wording::single('es-es');
         $this->wording = wording::single($this->language);
         $this->wording->set('branding', $this->pluginBranding());
 
@@ -333,6 +335,42 @@ abstract class controller extends helper
     {
         if (is_array($this->settings('partialPayments')) !== false) {
             return true;
+        }
+        return false;
+    }
+
+    protected function calculatePartialPayment($paymentPriceInCents, $paymentCurrency, $countryCode)
+    {
+        if ($this->partialPayments() === true) {
+            $this->partialPaymentSettings = $this->settings('partialPayments');
+            if(is_string($countryCode) === true) { //->  && is_array($this->partialPaymentSettings) === true
+                if (isset($this->partialPaymentSettings['whitelistedCountries']) !== true || $this->partialPaymentSettings['whitelistedCountries'] === false || in_array($countryCode, $this->partialPaymentSettings['whitelistedCountries']) === true) {
+                    if (is_int($paymentPriceInCents) === true && $paymentPriceInCents >= $this->partialPaymentSettings['minimumAmountAllowedInCents'] && is_string($paymentCurrency) === true) {
+                        $calculate = array();
+                        $partial = array();
+                        $minimumAmountPerMonthInCents =($this->partialPaymentSettings['monthlyFeeThresholdInCents'] / $this->partialPaymentSettings['numberOfInstallments']);
+                        $minimumAmountPerMonth =($minimumAmountPerMonthInCents / 100);
+                        if (round(($paymentPriceInCents / $minimumAmountPerMonthInCents), 0) >= $this->partialPaymentSettings['numberOfInstallments']) {
+                            $partial['paymentMonths'] = $this->partialPaymentSettings['numberOfInstallments'];
+                        } else {
+                            $partial['paymentMonths'] = $maximumPricePartialMonths;
+                        }
+                        $partial['interestRate'] =(($this->partialPaymentSettings['nominalAnnualInterestRateInCents'] / 100) / 12) * $partial['paymentMonths'];
+                        $partial['interestRatePerMonth'] = round(($partial['interestRate'] / $partial['paymentMonths']), 2);
+                        $partial['interestPriceInCents'] = round((($paymentPriceInCents / 100) * $partial['interestRate']), 0);
+                        $partial['openingFeeInCents'] = $this->partialPaymentSettings['openingFeeInCents'];
+                        $partial['invoiceFeeInCents'] = $this->partialPaymentSettings['invoiceFeeInCents'];
+                        $partial['priceInCents'] = $paymentPriceInCents + $partial['interestPriceInCents'] + ($partial['invoiceFeeInCents'] * $partial['paymentMonths']);
+                        $partial['pricePerMonthInCents'] = round($partial['priceInCents'] / $partial['paymentMonths'], 0);
+                        $partial['paymentMethod'] = $this->partialPaymentSettings['preselectedPartialPayment'];
+                        $partial['invoiceFeeDays'] = $this->partialPaymentSettings['paymentTermInDays'];
+                        $partial['currency'] = $paymentCurrency;
+                        $partial['country'] = $countryCode;
+                        return $partial;
+                    }
+                }
+            }
+
         }
         return false;
     }
