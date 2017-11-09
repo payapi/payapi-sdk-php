@@ -3,7 +3,7 @@
     <form class="form-horizontal" action="/index.php?route=api/demo&mode=success" method="post">
     <row>
       <div class="col-sm-12">
-      <?=$partialTopBlock?>
+      <?=$paymentInfo?>
         <fieldset><legend><?=$block_order?></legend>
         <div class="col-md-12 this-order-information" id="this-order-information">
           <dl class="dl-horizontal">
@@ -61,10 +61,10 @@
             <dl class="dl-horizontal">
 
               <dd class="shippingAddress">
-                <?=$consumer [ 'fullname' ]?><br>
-                <?=$consumer [ 'address' ]?><br>
-                <?=$consumer [ 'postal' ]?> <?=$consumer [ 'city' ]?>, <?=$consumer [ 'region' ]?><br>
-                <?=$consumer [ 'country' ]?><br>
+                <?=$consumer['fullname']?><br>
+                <?=$consumer['address']?><br>
+                <?=$consumer['postal']?> <?=$consumer['city']?>, <?=$consumer['region']?><br>
+                <?=$consumer['country']?><br>
               </dd>
             </dl>
           </div>
@@ -75,8 +75,7 @@
           <legend><?=$block_payment?></legend>
           <div class="col-md-12">
               <dl class="dl-horizontal">
-                <?=$normalPaymentInfo?>
-                <?=$partialPaymentInfo?>
+                <?=$paymentBLock?>
               </dl>
               <div class="form-group">
                 <label class="col-md-4 control-label" for="payment"></label>

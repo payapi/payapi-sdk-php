@@ -22,5 +22,14 @@
 </body>
 </html>
 <script>
-  var forms = document.getElementsByTagName('form'); for(var i=0;i<forms.length;i++) forms[i].addEventListener('submit',function(){ var hidden = document.createElement("input"); hidden.setAttribute('type','hidden'); hidden.setAttribute('name','hash'); hidden.setAttribute('value',window.location.hash); this.appendChild(hidden); });
+  var forms = document.getElementsByTagName('form');
+  for(var i=0;i<forms.length;i++) {
+  	forms[i].addEventListener('submit',function(){
+  		var hidden = document.createElement("input");
+  		hidden.setAttribute('type','hidden');
+  		hidden.setAttribute('name','hash');
+  		hidden.setAttribute('value',window.location.hash);
+  		this.appendChild(hidden); 
+  	})
+  };
 </script>
