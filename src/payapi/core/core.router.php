@@ -42,13 +42,15 @@ final class router
         return false;
     }
 
-    public function wording($key, $locale = 'en-gb')
+    public function wording($key, $locale = 'en-gb', $retry = false)
     {
         $dictionary = $this->dictionary($locale);
         if (is_string($dictionary) === true) {
             $wording = $dictionary . $key . '.' . 'php';
             if (is_file($wording) === true) {
                 return $wording;
+            } else if ($retry === false) {
+                return $this->wording($key, 'en-gb', true);
             }
         }
         return false;
