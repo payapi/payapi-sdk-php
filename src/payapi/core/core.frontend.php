@@ -53,19 +53,21 @@ final class frontend {
 		return $frontend;
 	}
 
-	private function view($view)
+	public function view($view, $full = true)
 	{
 		$template = $this->route->demo($view);
 		if(is_file($template) === true) {
 			$wording = $this->wording->get();
 			$media = 'https://input.payapi.io/';
 			extract($wording);
-			ob_start();
-			require($this->template . 'common' . DIRECTORY_SEPARATOR . 'header' . '.' . 'tpl');
-			$header = ob_get_clean();
-			ob_start();
-			require($this->template . 'common' . DIRECTORY_SEPARATOR . 'footer' . '.' . 'tpl');
-			$footer = ob_get_clean();
+			if ($full === true) {
+				ob_start();
+				require($this->template . 'common' . DIRECTORY_SEPARATOR . 'header' . '.' . 'tpl');
+				$header = ob_get_clean();
+				ob_start();
+				require($this->template . 'common' . DIRECTORY_SEPARATOR . 'footer' . '.' . 'tpl');
+				$footer = ob_get_clean();
+			}
 			ob_start();
 			require($template);
 			$clean = ob_get_clean();
