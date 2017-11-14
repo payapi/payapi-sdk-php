@@ -62,8 +62,8 @@
 
               <dd class="shippingAddress">
                 <?=$consumer['fullname']?><br>
-                <?=$consumer['address']?><br>
-                <?=$consumer['postal']?> <?=$consumer['city']?>, <?=$consumer['region']?><br>
+                <?=$consumer['address_1']?><br>
+                <?=$consumer['address_2']?><br>
                 <?=$consumer['country']?><br>
               </dd>
             </dl>

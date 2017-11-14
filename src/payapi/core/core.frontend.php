@@ -18,12 +18,12 @@ final class frontend {
 	private $debug              =   false;
 	private $wording            =   false;
 
-	public function __construct($template = false)
+	public function __construct($language )
 	{
 		$this->config = config::single();
         $this->route = router::single();
         $this->debug = debug::single();
-        $this->wording = wording::single();
+        $this->wording = wording::single($language);
         $this->template = $this->route->ui() . 'demo' . DIRECTORY_SEPARATOR;
 	}
 
@@ -47,7 +47,7 @@ final class frontend {
 		$this->debug('view: ' . $this->view);
 		$this->response = $this->view($this->view);
 		$frontend = $this->view($view);
-		if ($this->compressed === true) {
+		if ($this->compressed === true && 1 === 2) {
 			return $this->compress($frontend);
 		}
 		return $frontend;

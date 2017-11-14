@@ -2,10 +2,15 @@
 
 namespace payapi;
 
+//-> @TODO this should fetch metadata from product url (passed in query)
+//-> param ¢_GET['mode']
+//-> param ¢_GET['product']
+
 final class commandDemo extends controller
 {
 
     private   $returning       =     true;
+    private   $partial         =     false;
     private   $modes           =     array(
                   "confirm",
                   "success",
@@ -19,19 +24,27 @@ final class commandDemo extends controller
                   "unavailable"
               );
     private   $product         =     false;
+    private   $urlProduct      =     false;
+    private   $urlBase         =     false;
+    private   $metadata        =     false;
     private   $encodedMode     =   array();
     private   $mode            =    'load';
+    private   $monetary        =     false;
     private   $branding        =   array();
     private   $frontend        =      null;
 
     public function run()
     {
-        //var_dump($_SERVER); exit;
         //die($this->api->request->url()); // https://www.oc23.dev/index.php?route=payapi/test&mode=confirm
         $this->encodedMode();
+        //-> this should be fetched from metadata
+        $this->language = $this->adaptor->language();
+        $this->currency = $this->adaptor->currency();
+        //->
         $this->wording->load('demo');
+        $this->monetary = $this->wording->get('monetary');
+        $this->config->set('monetary', $this->monetary);
         //die($this->urlBase());
-        setLocale(LC_MONETARY, $this->wording->get('monetary') . '.UTF-8');
         //-> @TODO filter arguments
         if (is_string($this->arguments(0)) === true) {
             $this->branding = $this->pluginBranding($this->arguments(0));
@@ -41,6 +54,8 @@ final class commandDemo extends controller
         $title = $this->branding['partnerName'] . ', ' . $this->branding['partnerSlogan'];
         //-> @NOTE overwrittes default brand if a new one is requested
         $this->wording->set('branding', $this->branding);
+        //-> frontend
+        $this->frontend = new frontend($this->language);
         $this->request();
         if ($this->mode !== 'load') {
             $title = $this->wording->get('head_' . $this->mode . '_title') . '. ' . $title;
@@ -50,8 +65,6 @@ final class commandDemo extends controller
         $this->wording->set('head_title', $title);
         $this->wording->set('language', $this->language);
         $this->wording->set('currency', '<span class="currency">' . $this->currency . '</span>');
-        //-> frontend
-        $this->frontend = new frontend($this->adaptor->language());
         return $this->frontend->render($this->mode);
     }
 
@@ -60,15 +73,20 @@ final class commandDemo extends controller
         $requested = $this->api->request->url();
         if (is_string($requested) === true) {
             $parsed = $this->serialize->urlGet($requested);
-            parse_str($this->serialize->urlGet($requested, 'query'), $query);
-            if(isset($query['mode'])) {
-                $clean = str_replace(array('&mode=' . $query['mode'], '&amp;mode=' . $query['mode'], '?mode=' . $query['mode']), null, $requested);
+            parse_str($this->serialize->urlGet($requested, 'query'), $this->query);
+            if(isset($this->query['mode'])) {
+                $clean = str_replace(array('&mode=' . $this->query['mode'], '&amp;mode=' . $this->query['mode'], '?mode=' . $this->query['mode']), null, $requested);
                 return $clean;
             } else {
                 return $requested;
             }
         }
         return null;
+    }
+
+    private function monetize($price)
+    {
+        return $this->serialize->monetize($price, $this->currency, $this->monetary);
     }
 
     private function request()
@@ -86,6 +104,7 @@ final class commandDemo extends controller
                 $this->partialPayment();
                 if (md5($this->api->request->get('mode')) == md5('confirm')) {
                     $this->mode = 'confirm';
+                    //->
                 } else if (md5($this->api->request->get('mode')) == md5('success') || md5($this->api->request->get('mode')) == md5('cancel') || md5($this->api->request->get('mode')) == md5('failed') || md5($this->api->request->get('mode')) == md5('unavailable')) {
                     $this->mode = 'notice';
                     $this->wording->load('notice');
@@ -95,8 +114,8 @@ final class commandDemo extends controller
                     $this->wording->set('description', $this->wording->get('return_' . $this->api->request->get('mode') . '_info'));
                     $this->wording->set('class', $this->wording->get('return_' . $this->api->request->get('mode') . '_class'));
                 } else {
-                    //$rediredt = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'] . '?' . 'mode' . '=' . 'cponfirm';
-                    $redirect = 'https://www.oc23.dev/index.php?route=payapi/test' . '&' . 'mode' . '=' . 'confirm';
+                    //$rediredt = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'] . '?' . 'mode' . '=' . 'confirm';
+                    $redirect = 'https://www.oc23.dev/index.php?route=payapi/test' . '&' . 'mode' . '=' . 'confirm' . '&product=' . urlencode($this->product['url']);
                     $this->wording->set('redirectLocation', $redirect);
                 }
             }
@@ -114,39 +133,75 @@ final class commandDemo extends controller
 
     private function partialPayment()
     {
+        //-> @TOREVIEW
         if (md5($this->api->request->get('isPartial')) === md5('1')) {
-            $this->wording->set('isPartial', true);
+            $this->partial = true;
+            $payment = 'partial';
+            $this->wording->set('text_partial_notice_1', sprintf('1000', $this->wording->get('text_partial_notice_1')));
+            $this->wording->set('text_partial_notice_2', sprintf('1000', $this->wording->get('text_partial_notice_2')));
         } else {
-            $this->wording->set('isPartial', false);
+            $payment = 'default';
+        }
+        $this->wording->set('paymentBLock', $this->frontend->view('payment/' . $payment . '.payment', false));
+        $this->wording->set('paymentInfo', $this->frontend->view('payment/' . $payment . '.info', false));
+        return $this->partial;
+    }
+
+    private function metadata($url)
+    {
+        if (is_string($url) === true) {
+            //var_dump($url); exit;
+            $metadata = get_meta_tags($url);
+            $validated = $this->validate->schema($metadata, $this->load->schema('metadata'));
+            if (is_array($validated) === true) {
+                $this->metadata = $validated;
+                return $this->metadata;
+            }
+            return false;
         }
 
-        
+        return false;
     }
 
     private function product()
     {
-        $price = 200;
-        $shipping = 9;
-        $price_html = $this->serialize->monetize($price);
-        $shipping_html = $this->serialize->monetize($shipping);
-        return array(
-            "id"            => 21,
-            "name"          => "TEST PRODUCT",
-            "price"         => $price,
-            "price_html"    => $price_html,
-            "quantity"      => 1,
-            "image"         => 'https://store.multimerchantshop.xyz/media/983ab1519a8b553ec58125a13bf09471/image/cache/catalog/hp_1-228x228.jpg',
-            "shipping"      => $shipping,
-            "shipping_html" => $shipping_html,
-            "url"           => 'https://store.multimerchantshop.xyz/index.php?route=product/product&product_id=46'
-
-        );
+        //->
+        if (is_string($this->api->request->get('product')) === true) {
+            $this->urlProduct = $this->api->request->get('product');
+            if ($this->metadata($this->urlProduct) !== false) {
+                if (isset($this->metadata['order_shippinghandlingfeeincentsincvat']) === true) {
+                    $shipping = $this->metadata['order_shippinghandlingfeeincentsincvat']/100;
+                } else {
+                    $shipping = 0;
+                }
+                
+                $this->product = array(
+                    "id"            => $this->metadata['product_id'],
+                    "name"          => $this->metadata['product_title'],
+                    "price"         => $this->metadata['product_priceincentsincvat']/100,
+                    "price_html"    => $this->monetize($this->metadata['product_priceincentsincvat']/100),
+                    "quantity"      => $this->metadata['product_quantity'],
+                    "image"         => urldecode($this->metadata['product_imageurl']),
+                    "shipping"      => $shipping,
+                    "shipping_html" => $this->monetize($shipping),
+                    "url"           => $this->urlProduct
+                );
+                //-> partial
+                if (isset($this->metadata['order_preselectedPartialPayment']) && $this->metadata['order_preselectedPartialPayment'] != null) {
+                    //-> enable partial
+                    $totalPrice = ($this->product['price'] + $this->product['shipping']);
+                    $this->product['partial'] = $this->calculatePartialPayment($totalPrice, $this->currency, $this->localized['countryCode']);
+                }
+                return $this->product;
+            }
+        }
+        return false;
     }
 
     private function payment()
     {
         $total = $this->product['price'] + $this->product['shipping'];
-        $total_html = $this->serialize->monetize($total);
+        $total_html = $this->monetize($total);
         return array(
             "total"         => $total,
             "total_html"    => $total_html,
@@ -157,17 +212,17 @@ final class commandDemo extends controller
 
     private function consumer()
     {
+        $name = $this->wording->get('customer_name');
+        $part = explode(' ', $name);
         return array(
-            "name"     => 'Jonh',
-            "surname"  => 'Doe',
-            "fullname" => 'Jonh Doe',
-            "email"    => 'jonh@doe.com',
-            "address"  => 'My address 123',
-            "method"   => 'VISA',
-            "postal"   => 4321,
-            "city"     => 'London',
-            "region"   => 'City of London',
-            "country"  => 'United Kingdom'
+            "name"       => $part[0],
+            "surname"    => $part[1],
+            "fullname"   => $name,
+            "email"      => $this->wording->get('customer_email'),
+            "address_1"  => $this->wording->get('customer_address_1'),
+            "address_2"  => $this->wording->get('customer_address_2'),
+            "method"     => $this->wording->get('customer_method'),
+            "country"    => $this->wording->get('customer_country')
         );
     }
 

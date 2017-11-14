@@ -239,7 +239,7 @@ final class api extends helper
         $this->warning('access IP hacked');
         //-> check core.instance.php
         $this->warning('SERVER NAME hacked');
-        //return '84.79.234.58';
+        return '84.79.234.58';
         return '84.79.' . rand(100, 200) . '.' . rand(100, 200);
     }
 

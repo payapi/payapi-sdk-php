@@ -6,7 +6,7 @@ $___['head_success_title']                        = 'Procesando pago';
 $___['head_cancel_title']                         = 'Pago cancelado';
 $___['head_unavailable_title']                    = 'Servicio no disponible';
 
-$___['text_demo']                                 = 'demo';
+$___['text_demo']                                 = 'DEMO';
 $___['text_wait']                                 = 'Por favor, espere...';
 $___['text_total']                                = 'total';
 $___['text_net']                                  = 'Neto';
@@ -23,7 +23,7 @@ $___['text_click_here']                           = 'click aquí';
 $___['label_title']                               = 'Título';
 $___['label_quantity']                            = 'Unids';
 $___['label_unit_price']                          = 'P/Unid';
-$___['label_handling']                            = 'Envío y manipulación';
+$___['label_handling']                            = 'Envío y gestión';
 
 $___['title_loading']                             = 'Cargando detalles del pago';
 $___['title_confirm']                             = 'Confirmar información';
@@ -43,9 +43,10 @@ $___['block_payment']                             = 'Información del Pago';
 
 $___['button_confirm']                            = 'confirmar compra';
 
-$___['customer_name']                             = 'Jonh Doe';
-$___['customer_address_1']                        = 'Doe street 7';
-$___['customer_address_2']                        = '3F4S8K San Diego, California';
-$___['customer_country']                          = 'United States';
-$___['customer_email']                            = 'doe@email.com';
+$___['customer_name']                             = 'Juan Fernández';
+$___['customer_address_1']                        = 'Paseo de la Castellana 123';
+$___['customer_address_2']                        = '28046 Madrid, Comunidad de Madrid';
+$___['customer_country']                          = 'España';
+$___['customer_email']                            = 'juan.fdz@email.es';
+$___['customer_method']                           = 'VISA';
 $___['customer_card']                             = '001234567890';

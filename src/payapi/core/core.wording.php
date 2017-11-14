@@ -16,6 +16,8 @@ class wording {
 
 	private function __construct($locale)
 	{
+		//-> @FIXME gets es-es
+		//die($locale);
 		//-> @TODO validate locale if passedy 
 		$this->data = array();
 		$this->route = router::single();

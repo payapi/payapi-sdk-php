@@ -6,7 +6,7 @@ $___['head_success_title']                        = 'Payment processing';
 $___['head_cancel_title']                         = 'Payment canceled';
 $___['head_unavailable_title']                    = 'Service unavailable';
 
-$___['text_demo']                                 = 'demo';
+$___['text_demo']                                 = 'DEMO';
 $___['text_wait']                                 = 'Please Wait...';
 $___['text_total']                                = 'total';
 $___['text_net']                                  = 'Net';
@@ -48,4 +48,5 @@ $___['customer_address_1']                        = 'Doe street 7';
 $___['customer_address_2']                        = '3F4S8K San Diego, California';
 $___['customer_country']                          = 'United States';
 $___['customer_email']                            = 'doe@email.com';
+$___['customer_method']                           = 'VISA';
 $___['customer_card']                             = '001234567890';

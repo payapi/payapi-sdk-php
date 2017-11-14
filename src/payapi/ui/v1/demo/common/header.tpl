@@ -12,11 +12,10 @@
     <link href="<?=$branding['partnerIconUrl']?>" rel="apple-touch-icon">
     <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css" rel="stylesheet">
     <link href="//media.internetcreatives.com/css/payapi/v1/demo/secureform.min.css" rel="stylesheet">
-    <!--link href="/media/v1/css/secureform.css" rel="stylesheet"-->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
   </head>
   <body>
     <div class="demo-notice" class="pull-right">
-      DEMO
+      <?=$text_demo?>
     </div>
     <div class="container">

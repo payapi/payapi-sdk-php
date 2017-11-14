@@ -59,10 +59,12 @@ final class adaptor
 
     public function language()
     {
-        //-> @FIXME TODELETE
+        //*/-> @FIXME TODELETE
         ////-> this should be fetched from main controller, calling wording
         return 'es-es';
-        //->
+        //return 'es-es';
+        //*/
+
         return $this->adapt->language();
     }
 

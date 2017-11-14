@@ -12,6 +12,10 @@
       "___mandatory": true,
       "___type": "string"
     },
+    "order_preselectedPartialPayment": {
+      "___mandatory": false,
+      "___type": "string"
+    },
     "product_id": {
       "___mandatory": false,
       "___type": "string"

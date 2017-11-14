@@ -12,6 +12,7 @@ class serializer
     protected $version                    = '0.0.1';
 
     private   $staging                    =   false;
+    private   $monetized                  = 'en_GB';
 
     protected function __construct()
     {
@@ -26,14 +27,52 @@ class serializer
         return md5($this->domain . md5($this->instance));
     }
 
-    public function monetize($price)
+    public function monetize($price, $currency = false, $monetary = false, $decimals = 2, $left = false)
     {
-        //-> @FIXME monetizes from language code, it should use currency!!
-        $monetized = money_format('%.2n', $price);
-        if(strpos($monetized, '.') === false) {
+        if (is_string($monetary) === true && $this->monetized !== $monetary) {
+            //-> setlocale(LC_MONETARY, '0')
+            setLocale(LC_MONETARY, $monetary . '.UTF-8');
+            //putenv('LC_ALL=' . $monetary );
+            $this->monetized = $monetary;
+        }
+        if (is_string($currency) === true) {
+            $symbol = false;
+            if ($left === true) {
+                $currencyLeft = '<small>' . $currency . '</small> ';
+                $currencyRight = null;
+            } else {
+                $currencyRight = ' <small>' . $currency . '</small>';
+                $currencyLeft = null;
+            }
+        } else {
+            $symbol = true;
+            $currencyRight = null;
+            $currencyLeft = null;
+        }
+        if ($symbol === true) {
+            $displaySymbol = '.';
+        } else {
+            //-> does NOT displays symbol
+            $displaySymbol = '!';
+        }
+        $standarized = money_format('%' . $displaySymbol . $decimals . 'n', (int) $price);
+        if ($symbol === true && $left === false) {
+            $part = explode(' ', $standarized);
+            if (isset($part[1]) === true) {
+                $formatted = $part[1] . $part[0];
+            } else {
+                //-> formatting error
+                $formatted = $standarized;
+            }
+        } else {
+            $formatted = $standarized;
+        }
+        $monetized = $currencyLeft . $formatted . $currencyRight;
+        if(strpos($monetized, '.') === false && strpos($monetized, ',') === false) {
             return $monetized;
         }
-        return str_replace('.', '<small>.', $monetized) . '</small>';
+        $zero = str_repeat("0",$decimals);
+        return str_replace(array('.' . $zero, ',' . $zero), array('<small>.' . $zero, '<small>,' . $zero), $monetized) . '</small>';
     }
 
     public function mode($staging = false)
@@ -202,6 +241,15 @@ class serializer
             }
         }
         return false;
+    }
+
+    public function urlUpdateQuery($url, $key, $value)
+    {
+        $part = $this->urlGet($url);
+        if(isset($part['query']) === true) {
+            $part['query'] = str_replace($key .'=' . '?', $key . '=' . $value, $part['query']);
+            return $this->urlBuild($part['host'], true, $part['user'], $part['pass'], $part['port'], $part['path'], $part['query'], $part['fragment'], $part['anchorRight']);
+        }
     }
 
     public function urlInsertQuery($url, $addQuery)
