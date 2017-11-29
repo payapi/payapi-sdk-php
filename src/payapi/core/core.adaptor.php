@@ -19,7 +19,8 @@ final class adaptor
         "opencart23",
         "opencart3",
         "prestashop",
-        "magento"
+        "magento",
+        "oscommerce"
     );
 
     protected $log        = false;
