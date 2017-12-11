@@ -64,6 +64,10 @@
     "model": {
       "___mandatory": false,
       "___type": "string"
+    },
+    "extraData": {
+      "___mandatory": false,
+      "___type": "string"
     }
   }
 }
