@@ -66,16 +66,18 @@ final class plugin
                 $incVat  = $excVat + $taxes;
                 $qty     = intval($item['qty']);
                 $totalTaxes += $qty * $taxes;
-                
+
                 // Set attributes
                 $attributes = '';
-                foreach ($item['attributes'] as $attribute) {
-                    $attributes .= ' ' . $attribute['option'] . ': ' . $attribute['value'];
+                if (isset($item['attributes'])) {
+                    foreach ($item['attributes'] as $attribute) {
+                        $attributes .= ' ' . $attribute['option'] . ': ' . $attribute['value'];
+                    }
                 }
                 error_log('attributes: '.$attributes, 0);
                 
                 $products[] = [
-                    "id"                 => $item['id'],
+                    "id"                 => (string)$item['id'],
                     "quantity"           => $qty,
                     "title"              => $item['name'] . $attributes,
                     "model"              => $item['model'],
@@ -136,7 +138,7 @@ final class plugin
         //Return URLs
 
         $returnUrls = [
-            "success" => $this->getStoreUrl() . "checkout_success.php",
+            "success" => $this->getStoreUrl() . "ext/modules/payment/payapi/checkout_success.php",
             "cancel"  => $this->getStoreUrl()  ,
             "failed"  => $this->getStoreUrl()
         ];
@@ -157,6 +159,8 @@ final class plugin
             "returnUrls"      => $returnUrls,
             "callbacks"       => $jsonCallbacks
             ];
+
+        // error_log(' res in payment: '.json_encode($res), 0);
 
         return $res;
     }
