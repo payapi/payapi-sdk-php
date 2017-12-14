@@ -392,10 +392,17 @@ abstract class controller extends helper
     protected function render($data)
     {
         $render = $this->api->render($data, 200);
-        $render['data']['public_id'] = $this->publicId();
-        $return =(($this->config->debug() === true) ? $this->entity->addExtradata($render) : $render);
+        $render['public_id'] = $this->publicId();
+        $populate = $this->populate($render);
+        $return = (($this->config->debug() === true) ? $this->entity->addExtradata($populate) : $populate);
         $sanitized =  $this->sanitize->render($return);
         return $sanitized;
+    }
+
+    protected function populate ($data)
+    {
+        $data['public_id'] = $this->publicId();
+        return $data;
     }
 
     protected function response($code)
@@ -406,7 +413,8 @@ abstract class controller extends helper
     public function returnResponse($code)
     {
         $render =$this->api->returnResponse($code);
-        $return =(($this->config->debug() === true) ? $this->entity->addExtradata($render) : $render);
+        $populate = $this->populate($render);
+        $return =(($this->config->debug() === true) ? $this->entity->addExtradata($populate) : $populate);
         $sanitized =  $this->sanitize->render($return);
         return $sanitized;
     }
