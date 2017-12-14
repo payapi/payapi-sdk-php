@@ -232,10 +232,7 @@ abstract class controller extends helper
             //-> @NOTE gets merchant settings reseller partnerKey
             $this->brand = $this->cache('read', 'reseller', $this->settings('reseller'));
             $this->token = $this->crypter->instanceToken($this->publicId());
-            $this->entity->addInfo('public', $this->publicId());
             $this->entity->addInfo('tk', $this->token());
-        } else {
-            $this->entity->addInfo('public', 'anonymous');
         }
         $this->wording = wording::single($this->language);
         $this->wording->set('branding', $this->pluginBranding());
@@ -392,7 +389,6 @@ abstract class controller extends helper
     protected function render($data)
     {
         $render = $this->api->render($data, 200);
-        $render['public_id'] = $this->publicId();
         $populate = $this->populate($render);
         $return = (($this->config->debug() === true) ? $this->entity->addExtradata($populate) : $populate);
         $sanitized =  $this->sanitize->render($return);
@@ -401,7 +397,7 @@ abstract class controller extends helper
 
     protected function populate ($data)
     {
-        $data['public_id'] = $this->publicId();
+        $data['___public'] = $this->publicId();
         return $data;
     }
 
