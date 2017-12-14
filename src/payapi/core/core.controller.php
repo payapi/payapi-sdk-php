@@ -395,7 +395,7 @@ abstract class controller extends helper
         return $sanitized;
     }
 
-    protected function populate ($data)
+    protected function populate($data)
     {
         $data['___public'] = $this->publicId();
         return $data;
