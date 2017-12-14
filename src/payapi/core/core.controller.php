@@ -42,7 +42,11 @@ abstract class controller extends helper
         $this->account = $this->cache('read', 'account', $this->instance());
         if (isset($this->account['staging']) === true) {
             $this->config->mode($this->account['staging']);
+            $mode = 'STAG';
+        } else {
+            $mode = 'PROD';
         }
+        $this->debug('[mode] ' . $mode);
         if (is_string($this->cache('read', 'ssl', $this->api->ip())) !== true) {
             $validated = $this->validate->ssl();
             if (is_resource($validated) === true) {
@@ -50,14 +54,6 @@ abstract class controller extends helper
             } else {
                 return $this->api->returnResponse($this->error->noValidSsl());
             }
-        }
-        if(is_array($this->account) === true) {
-            if ($this->staging() === true) {
-                $mode = 'PROD';
-            } else {
-                $mode = 'STAG';
-            }
-            $this->debug('[mode] ' . $mode);
         }
         $this->adaptor = $this->entity->get('adaptor');
         $this->language = $this->adaptor->language();
@@ -76,7 +72,7 @@ abstract class controller extends helper
             "currency",
             "language",
             "quantity",
-            //-> @NOTE. @TODO to implement in PA side
+            //-> @NOTE. @TODO token to implement in PA side?
             "payapi",
             /*"mandatoryFields",*/
             "consumerIp"
@@ -239,13 +235,10 @@ abstract class controller extends helper
 
         $this->info();
     }
-
+    //-> @TODELETE
     public function staging()
     {
-        if(isset($this->account['staging']) === true && $this->account['staging'] !== true) {
-            return false;
-        }
-        return true;
+        return $this->config->staging();
     }
 
     public function instance()
