@@ -40,6 +40,9 @@ abstract class controller extends helper
         $this->validate = $this->entity->get('validate');
         $this->api = $this->entity->get('api');
         $this->account = $this->cache('read', 'account', $this->instance());
+        if (isset($this->account['staging']) === true) {
+            $this->config->mode($this->account['staging']);
+        }
         if (is_string($this->cache('read', 'ssl', $this->api->ip())) !== true) {
             $validated = $this->validate->ssl();
             if (is_resource($validated) === true) {
@@ -389,6 +392,7 @@ abstract class controller extends helper
     protected function render($data)
     {
         $render = $this->api->render($data, 200);
+        $render['data']['public_id'] = $this->publicId();
         $return =(($this->config->debug() === true) ? $this->entity->addExtradata($render) : $render);
         $sanitized =  $this->sanitize->render($return);
         return $sanitized;
