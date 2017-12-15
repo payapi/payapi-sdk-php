@@ -34,9 +34,10 @@ final class debug
         // $this->route
         if ($enabled !== true) {
             return false;
+        } else {
+            $this->enabled = true;
         }
         $this->microtime = microtime(true);
-        $this->enabled = $enabled;
         $this->lapse('execution', true);
         $this->lapse('app', true);
         $this->dir = str_replace('core', 'debug', __DIR__) . DIRECTORY_SEPARATOR;
@@ -158,7 +159,7 @@ final class debug
             return false;
         }
         $fileredEntry = filter_var($entry, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-      return error_log($fileredEntry . "\n", 3, $this->file);
+        return error_log($fileredEntry . "\n", 3, $this->file);
     }
 
     public static function single($enabled = false)

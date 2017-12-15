@@ -76,6 +76,7 @@ final class commandSettings extends controller
 
   public function run()
   {
+    //var_dump($this->arguments(0), $this->arguments(1), $this->arguments(2)); exit;
     if ($this->arguments(1) != false) {
       $this->cache('delete', 'settings', $this->instance());
     }
@@ -83,12 +84,14 @@ final class commandSettings extends controller
       $publicId = $this->arguments(1);
       $apiKey = $this->arguments(2);
     } else {
+      //-> @FIXME just when both are false! $this->arguments(2&&3)
       $publicId = $this->publicId();
       $apiKey = $this->apiKey();
     }
     //-> @TODO review config mode handling
     $this->config->mode($this->arguments(0));
-    $this->staging = $this->serialize->mode($this->arguments(0));
+    //var_dump($this->arguments(0)); exit;
+    $this->staging = $this->config->staging();
     if ($this->validate->publicId($publicId) === true && $this->validate->apiKey($apiKey) === true) {
       $cached = $this->cache('read', 'settings', $this->instance());
       if ($this->arguments(1) === false && $cached !== false) {
@@ -104,6 +107,7 @@ final class commandSettings extends controller
               $error = 0;
               foreach($validated as $key => $value) {
                 if($value !== false) {
+                  //var_dump('false', $validated); exit;
                   $settings[$key] = $this->validate->schema($value, $this->load->schema('settings' . '.' . $key));
                   if (is_array($settings[$key]) === false) {
                     $error ++;
@@ -112,6 +116,7 @@ final class commandSettings extends controller
                   $settings[$key] = false;
                 }
               }
+            //var_dump($settings); exit;
               if ($error === 0) {
                 $this->cache('writte', 'account', $this->instance(), array(
                   "publicId" => $publicId,
@@ -121,6 +126,7 @@ final class commandSettings extends controller
                 $resellerData = $settings['reseller'];
                 $resellerId = $resellerData['partnerId'];
                 $settings['reseller'] = $resellerId;
+                $settings['staging'] = $this->staging;
                 $this->cache('writte', 'reseller', $resellerId, $resellerData);
                 $this->cache('writte', 'settings', $this->instance(), $settings);
                 return $this->render($this->cache('read', 'settings', $this->instance()));

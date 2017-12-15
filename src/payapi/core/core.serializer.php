@@ -19,7 +19,6 @@ class serializer
         $this->instance = instance::this();
         $this->domain = instance::domain();
         $this->config = config::single();
-        $this->staging = $this->config->get('staging');
     }
 
     public function publicQueryFlag()
@@ -75,16 +74,6 @@ class serializer
         return str_replace(array('.' . $zero, ',' . $zero), array('<small>.' . $zero, '<small>,' . $zero), $monetized) . '</small>';
     }
 
-    public function mode($staging = false)
-    {
-        if($staging === true || $staging === 1) {
-            $this->staging = true;
-        } else {
-            $this->staging = false;
-        }
-        return $this->staging;
-    }
-
     public function endPointLocalization($ip)
     {
         $api = $this->https() . $this->staging() . 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'api' . '/' . 'fraud' . '/' . 'ipdata' . '/' . $ip;
@@ -99,13 +88,13 @@ class serializer
 
     public function endPointInstantBuy($publicId)
     {
-        $api = $this->https() . $this->staging() . $this->webshop() . $publicId . '/';
+        $api = $this->https() . $this->staging() . $this->webshop() . $publicId;
         return $api;
     }
 
     public function endPointPayment($publicId)
     {
-        $api = $this->https() . $this->staging() . $this->payment() . $publicId . '/';
+        $api = $this->https() . $this->staging() . $this->payment() . $publicId;
         return $api;
     }
 
@@ -141,7 +130,7 @@ class serializer
 
     private function staging()
     {
-        $route =(($this->staging === true) ? 'staging' . '-' : null);
+        $route = (($this->config->staging() !== true) ? null : 'staging' . '-');
         return $route;
     }
 
