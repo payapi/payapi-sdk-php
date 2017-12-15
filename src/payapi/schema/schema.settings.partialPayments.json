@@ -28,8 +28,7 @@
     },
     "monthlyFeeThresholdInCents": {
       "___mandatory": true,
-      "___type": "integer",
-      "___min": 1
+      "___type": "integer"
     },
     "openingFeeInCents": {
       "___mandatory": true,
