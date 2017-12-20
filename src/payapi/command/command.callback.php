@@ -145,7 +145,7 @@ namespace payapi;
 *
 * @NOTE
 *          transactions are cached per status
-*          duplicated status updates are not allowed
+*          duplicated status updates are not allowed (gets 406 error)
 *
 * @VALID
 *          schema.callback*
