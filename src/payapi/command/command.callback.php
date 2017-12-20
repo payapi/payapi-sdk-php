@@ -219,7 +219,8 @@ final class commandCallback extends controller
             );
             if ($duplicated !== false) {
                 //-> 401 error
-                return $this->returnResponse($this->error->transactionDuplicated());
+                return $this->render($duplicated);
+                //return $this->returnResponse($this->error->transactionDuplicated());
             }
             $this->cache(
                 'writte',
