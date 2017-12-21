@@ -56,7 +56,7 @@ final class plugin
 
         $vatInCents = $sumInCentsIncVat - $sumInCentsExcVat;
 
-        $referenceId = (string)$cart->id;
+        $referenceId = (string)$cart->id . "_" . \Tools::passwdGen();
 
         // Terms of Services
         $tosUrl = "https://payapi.io/terms";
@@ -115,21 +115,25 @@ final class plugin
         array_push($products_array, $shippingObject);
 
         // Get shipping address info.
-        $address = new \Address((int)$cart->id_address_delivery);
+        $shipping_address = null;
+        // In case when user is not registered we will not send shipping address
+        if ((int)$cart->id_address_delivery) {
+            $address = new \Address((int)$cart->id_address_delivery);
 
-        $customer = new \Customer((int)$address->id_customer);
+            $customer = new \Customer((int)$address->id_customer);
 
-        $country = new \Country((int)$address->id_country);
+            $country = new \Country((int)$address->id_country);
 
-        $shipping_address = array(
-            'recipientName' => $customer->firstname." ".$customer->lastname,
-            'co' => $address->company,
-            'streetAddress' => $address->address1,
-            'streetAddress2' => $address->address2,
-            'postalCode' => $address->postcode,
-            'city' => $address->city,
-            'countryCode' => $country->iso_code,
-        );
+            $shipping_address = array(
+                'recipientName' => $customer->firstname." ".$customer->lastname,
+                'co' => $address->company,
+                'streetAddress' => $address->address1,
+                'streetAddress2' => $address->address2,
+                'postalCode' => $address->postcode,
+                'city' => $address->city,
+                'countryCode' => $country->iso_code,
+            );
+        }
 
         $shop_url = \Tools::getHttpHost(true).__PS_BASE_URI__;
 
@@ -146,13 +150,23 @@ final class plugin
             'chargeback' => $shop_url.'index.php?fc=module&module=payapi&controller=callback',
         );
 
-        $secureformObject = array(
-            'order' => $order,
-            'products' => $products_array,
-            'shippingAddress' => $shipping_address,
-            'callbacks' => $callbacks,
-            'returnUrls' => $returnUrls
-        );
+        $secureformObject = array();
+        if ($shipping_address) {
+            $secureformObject = array(
+                'order' => $order,
+                'products' => $products_array,
+                'shippingAddress' => $shipping_address,
+                'callbacks' => $callbacks,
+                'returnUrls' => $returnUrls
+            );
+        } else {
+            $secureformObject = array(
+                'order' => $order,
+                'products' => $products_array,
+                'callbacks' => $callbacks,
+                'returnUrls' => $returnUrls
+            );
+        }
 
         return $secureformObject;
     }
