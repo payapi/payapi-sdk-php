@@ -17,10 +17,7 @@ final class instance
 
     public static function domain()
     {
-        //-> @FIXME TODELETE
-        return 'store.multimerchantshop.xyz';
-        //->
-        return getenv('SERVER_NAME');
+        return str_replace('*', 'store', getenv('HTTP_HOST'));
     }
 
     private static function encode($decoded)
