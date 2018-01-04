@@ -7,7 +7,8 @@ final class curl extends helper {
     private   $version               = '0.0.1';
     private   $code                  =   false;
 
-    public function proccess($url, $post = false, $secured = true, $timeout = 1, $return = 1, $header = 0, $ssl = 1, $fresh = 1, $noreuse = 1, $retried = false) {
+    public function proccess($url, $post = false, $secured = true, $timeout = 1, $return = 1, $header = 0, $ssl = 1, $fresh = 1, $noreuse = 1, $retried = false)
+    {
         $this->debug('[' .(($retried !== false) ?  'retry' : $this->method($post)) . '] ' . $this->parseDomain($url));
         $options = array(
             CURLOPT_URL              => $url,
@@ -32,9 +33,6 @@ final class curl extends helper {
         $this->debug->lapse($this->method($post));
         if ($jsonExpected != false) {
             $dataExpected = json_decode($jsonExpected, true);
-            //-> @FIXME TODELETE debugging PA response
-            $this->debug($jsonExpected, 'debug');
-            //->
             $code = curl_getinfo($buffer, CURLINFO_HTTP_CODE);
             if ($this->isCleanCodeInt($code) === true) {
                 $this->debug('[' . $code . '] success');
@@ -59,9 +57,6 @@ final class curl extends helper {
                             curl_close($buffer);
                             return $serialized;
                         } else {
-                            //-> @FIXME TODELETE: checks for PA IP response error
-                            $this->warning('[curl] ' . $jsonExpected);
-                            //->
                             $this->error('unexpected unsecured data', 'curl');
                         }
                     }
@@ -74,7 +69,7 @@ final class curl extends helper {
             curl_close($buffer);
             return  $this->proccess($url, $post, $secured, $timeout, $return, $header, $ssl, $fresh, $noreuse, true);
         }
-        $this->error($url, 'timeout');
+        $this->error($url, 'curl');
         curl_close($buffer);
         return false;
     }
