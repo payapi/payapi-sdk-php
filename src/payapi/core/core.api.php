@@ -220,22 +220,19 @@ final class api extends helper
 
     private function getIp()
     {
-        //-> @FIXME TODELETE
-        return $this->hackAccess();
-        //->
-        if (($access = $this->sanitize->ip(getenv('HTTP_CLIENT_IP'))) == false)
-            if (($access = $this->sanitize->ip(getenv('HTTP_X_FORWARDED_FOR'))) == false)
-                if (($access = $this->sanitize->ip(getenv('HTTP_X_FORWARDED'))) == false)
-                    if (($access = $this->sanitize->ip(getenv('HTTP_FORWARDED_FOR'))) == false)
-                        if (($access = $this->sanitize->ip(getenv('HTTP_FORWARDED'))) == false)
-                            if (($access = $this->sanitize->ip(getenv('REMOTE_ADDR'))) == false)
+        if (($access = $this->sanitize->ip(getenv('HTTP_CLIENT_IP', true))) == false)
+            if (($access = $this->sanitize->ip(getenv('HTTP_X_FORWARDED_FOR', true))) == false)
+                if (($access = $this->sanitize->ip(getenv('HTTP_X_FORWARDED', true))) == false)
+                    if (($access = $this->sanitize->ip(getenv('HTTP_FORWARDED_FOR', true))) == false)
+                        if (($access = $this->sanitize->ip(getenv('HTTP_FORWARDED', true))) == false)
+                            if (($access = $this->sanitize->ip(getenv('REMOTE_ADDR', true))) == false)
                                 $access = $this->serialize->undefined();
         $ip = htmlspecialchars($access, ENT_COMPAT, 'UTF-8');
         return $ip;
     }
 
     private function hackAccess()
-    {
+    { 
         $this->warning('access IP hacked');
         //-> check core.instance.php
         $this->warning('SERVER NAME hacked');
