@@ -1,0 +1,394 @@
+{
+  "name": "English",
+  "title": "Secure payment with PayApi",
+  "partnerTitle": "Secure payment with",
+  "paymentGatewayUnavailable": "Payment gateway unavailable. Please try again later.",
+  "validationErrors": "Validation error found. This error is final. Sending the same input will not change the result.",
+  "secureform": {
+    "error": "Errors found",
+    "warning": "Please note",
+    "unavailable": "The service is unavailable or it has been used with invalid parameters.<br>Please try again later!",
+    "invalidParameters": "The service has been used with invalid parameters.",
+    "error503": "The service is unavailable",
+    "error400": "Bad request",
+    "fraudThresholdExceed": "Unfortunately we cannot provide you a payment gateway at the moment. This is not a system error. Please try again tomorrow or contact your merchant.",
+    "paymentSessionExpired": "Sorry, your payment session has expired",
+    "title": "Secure Payment",
+    "order": {
+      "legend": "Order Summary",
+      "sumExcludingVat": "Net",
+      "sumIncludingVat": "Total",
+      "vat": "VAT",
+      "referenceId": "Reference ID"
+    },
+    "seller": {
+      "legend": "Seller Information",
+      "details": "Company Details",
+      "vatId": "VAT ID",
+      "name": "Company name",
+      "streetAddress": "Street address",
+      "streetAddress2": "Street address",
+      "postalCodeAndCity": "Postal code and city",
+      "country": "Country"
+    },
+    "products": {
+      "legend": "Products",
+      "title": "Title",
+      "quantity": "Qty",
+      "priceIncludingVat": "U/P",
+      "priceExcludingVat": "U/P (ex.VAT)",
+      "vat": "VAT",
+      "shippingHandling": "Shipping and Handling",
+      "shippingHandlingDescription": "Shipping and handling fees, added with instant buy",
+      "shippingHandlingCategory": "Shipping"
+    },
+    "creditCard": {
+      "legend": "Payment Information",
+      "email": "Consumer email",
+      "cardHolder": "Card holder",
+      "creditCard": "Credit card",
+      "emailInfo": "Email for payment status and delivery notices",
+      "name": "Card holder name",
+      "nameInfo": "Card holder name exactly as printed on the card",
+      "paymentMethod": "Payment method",
+      "ccnumber": "Credit card number",
+      "CCV": "CVV/CCV",
+      "CCVInfo": "3-4 numbers, usually located on the backside of the card",
+      "expiration": "Expires",
+      "monthExpiration": "Expires (month)",
+      "yearExpiration": "Expires (year)",
+      "s1button":"Submit",
+      "s2button": "Confirm Purchase",
+      "s2buttonmob": "Confirm",
+      "vbutton": "Verify",
+      "mbutton": "Modify",
+      "cbutton": "Cancel",
+      "medbutton": "Modify extra data",
+      "pbutton %s": "Pay in parts, from %s/month",
+      "pbuttonmob %s": "Pay %s/month"
+    },
+    "consumer": {
+      "legend": "Delivery Address",
+      "full": "Full Address",
+      "name": "Recipient name",
+      "co": "Care of",
+      "address": "Street address",
+      "address2": "Street address 2",
+      "zip": "Postal code",
+      "city": "City",
+      "province": "State/Province",
+      "country": "Country",
+      "phoneNumber": "Mobile phone number"
+    },
+    "tos": {
+      "legend": "Terms of Service",
+      "text": "By filling in the form above and clicking the Submit button, you accept the",
+      "checkbox": "I accept the",
+      "terms": "Terms and Conditions of",
+      "andTerms": "and",
+      "rememberMe": "Remember me, this is a private device"
+    },
+    "loading": {
+      "title": "Please wait...",
+      "step1": "Securing connection",
+      "step2": "Transmitting data",
+      "step3": "Evaluating consumer",
+      "step4": "Evaluating merchant",
+      "step5": "Secure payment enabled"
+    },
+    "cryptoPayments": {
+      "cryptoCurrencies": "Crypto-currencies:",
+      "supportedCryptoCurrencies": "Please note. Your purchase will be converted into BTC with the current exchange rate.",
+      "confirmNote": "Your purchase will be converted into BTC with the current exchange rate when you click Confirm."
+    }
+  },
+  "secureconfirm": {
+    "title": "Confirm details"
+  },
+  "securereturn": {
+    "titleCancelled": "Payment was cancelled",
+    "titleProcessed": "Payment in process",
+    "cancelInfo": "Your payment was cancelled.<br>You will be redirected to the merchant site shortly. If you are not automatically redirected, please",
+    "cancelInfoNoCancelUrl": "Your payment was cancelled.",
+    "processInfo": "Your payment is now in process.<br>You will be notified by email when the state of the payment changes.<br>You will be redirected to the merchant site shortly. If you are not automatically redirected, please",
+    "processInfoNoSuccessUrl": "Your payment is now in process.",
+    "clickhere": "click here"
+  },
+  "secureformverify": {
+    "legend": "Verify Payment Information",
+    "info": "For added security, we need to confirm following information from you and from your previous purchase"
+  },
+  "secureformextrainput": {
+    "title": "Please fill in the next fields required for the payment",
+    "legend": "Extra data",
+    "cbutton": "Cancel",
+    "sbutton": "Next"
+  },
+  "cryptoTransaction": {
+    "title": "Crypto Currency Payment",
+    "instructions": {
+      "legend": "Instructions",
+      "p1": "Please send the correct amount to the address as indicated below. Please make sure to send enough in order to cover any coin transaction fees! This will ensure that the system will mark your payment as successful. You can do the transfer using your mobile/online wallet application",
+      "p2": "Once the payment has been received successfully, you will receive an email notification. The arrival of the transfer confirmation may take some time, usually the notification is sent within few hours after your payment.<br><br>In case you need assistance, please contact your seller/merchant"
+    },
+    "details": {
+      "legend": "Transaction Details",
+      "amount": "Amount",
+      "currency": "Currency",
+      "transactionId": "Transaction ID",
+      "walletAddress": "Wallet address",
+      "confirmsNeeded": "Confirms needed",
+      "timeoutInSecs": "Timeout (in seconds)",
+      "status": "Status"
+    },
+    "note": "Please note! The transfer has to be made within 12 hours, so that it won't expire automatically. It may take some time before the payment status has been confirmed.",
+    "bclose": "Close"
+  },
+  "bankTransfer": {
+    "title": "Bank transfer",
+    "instructions": {
+      "legend": "Instructions",
+      "p1": "Please use the following information to pay for this purchase using bank transfer / wire transfer. Once the payment has been received and confirmed by the recipient, the transaction will be marked as *successful*",
+      "p2": "Please allow a minimum of 3 days for the payment to arrive into recipients bank account before contacting them.",
+      "p3": "The bank transfer details will be sent to you via email when clicking the ‘Close’ button."
+    },
+    "bankDetails": {
+      "legend": "Bank transfer details",
+      "bankAccountOwnerName": "Account owner",
+      "internationalBankAccountNumber": "IBAN",
+      "messageOrReference": "Message/Reference",
+      "swiftbic": "SWIFT/BIC"
+    },
+    "note": "The bank transfer payment has to be made within 2 days so that it won't expire automatically",
+    "bclose": "Close"
+  },
+  "poweredBy": {
+    "poweredBy": "Powered by",
+    "info1": "Secure online and mobile payments"
+  },
+  "invalid": {
+    "payment":{
+      "ip": {
+        "address": "Invalid client IP address"
+      },
+      "cardHolderEmail": "Invalid card holder email address",
+      "cardHolderName": "Invalid card holder name",
+      "paymentMethod": "Invalid payment method",
+      "creditCardNumber": "Invalid credit card number",
+      "ccv": "Invalid CVV/CCV code",
+      "expiresMonth": "Invalid credit card expiry month",
+      "expiresYear": "Invalid credit card expiry year",
+      "cardHasExpired": "Credit card has expired",
+      "termsAccepted": "Terms of service must be accepted"
+    },
+    "consumer": {
+      "name": "Invalid recipient name",
+      "co": "Invalid recipient c/o (care of)",
+      "streetAddress": "Invalid recipient street address",
+      "streetAddress2": "Invalid recipient street address 2",
+      "postalCode": "Invalid recipient postal code",
+      "city": "Invalid recipient city",
+      "stateOrProvince": "Invalid recipient state or province",
+      "countryCode": "Invalid recipient country",
+      "locale": "Invalid recipient locale (5-chars: RFC5646)",
+      "mobilePhoneNumber": "Invalid mobile phone number",
+      "email": "Invalid consumer email",
+      "consumerId": "Invalid consumer ID",
+      "ssn": "Invalid social security number"
+    },
+    "order": {
+      "sumInCentsIncVat": "Invalid order sum (including VAT)",
+      "sumInCentsExcVat": "Invalid order sum (excluding VAT)",
+      "vatInCents": "Invalid order VAT",
+      "referenceId": "Invalid order reference ID",
+      "currency": "Invalid order currency",
+      "tosUrl":"Invalid Terms of Service URL"
+    },
+    "product": {
+      "priceInCentsIncVat": "Invalid product sum(including VAT)",
+      "priceInCentsExcVat": "Invalid product sum(excluding VAT)",
+      "vatPercentage": "Invalid product VAT parcentage",
+      "quantity": "Invalid product quantity (must be a number)",
+      "imageUrl": "Invalid product image URL (only HTTPS allowed)",
+      "description": "Invalid product description",
+      "title": "Invalid product title",
+      "category": "Invalid product category",
+      "model": "Invalid product model",
+      "extraData": "Invalid product extraData",
+      "options": "Invalid product options"
+    },
+    "shippingAddress": {
+      "recipientName": "Invalid shipping recipient name",
+      "co": "Invalid shipping address c/o",
+      "streetAddress": "Invalid shipping street address",
+      "streetAddress2": "Invalid shipping street address 2",
+      "postalCode": "Invalid postal code",
+      "city": "Invalid shipping city",
+      "stateOrProvince": "Invalid state or province",
+      "countryCode": "Invalid country code. (2-char ISO 3166-1 alpha-2)"
+    },
+    "callbacks": {
+      "success": "Callback URL for successful payment is not valid (only HTTPS allowed)",
+      "failed": "Callback URL for failed payment is not valid (only HTTPS allowed)",
+      "chargeback": "Callback URL for a chargeback is not valid (only HTTPS allowed)",
+      "processing": "Callback URL for processing is not valid (only HTTPS allowed)"
+    },
+    "returnUrls": {
+      "success": "Return URL for successful payment is not valid (only HTTPS allowed)",
+      "cancel": "Return URL for cancelled payment is not valid (only HTTPS allowed)",
+      "failed": "Return URL for failed payment is not valid (only HTTPS allowed)"
+    },
+    "whitelistedDomain": "Webshop domain not whitelisted for API key",
+    "webshopUrl": "Webshop URL or HTTPS certificate are not valid",
+    "publicId": "Invalid public ID",
+    "json": "JSON object is not valid",
+    "amountBelowMinimumAllowed": "The total order amount is below the minimum allowed for selected payment method",
+    "noWhitelistedCountryCode": "The selected payment method is not available for your country",
+    "webBrowserNotSupported": "Unfortunately your browser is not compatible with our security features. In order to use our services, you are required to install a browser that supports our security features. Examples of such browsers are: <br><br>- Google Chrome v40 or greater <br>- Safari v10 or greater <br>- Mozilla Firefox v45 or greater",
+    "unavailablePreviousPaymentMethod": "Unfortunately your previously selected payment method is not available for this purchase. Please select new payment method",
+    "noPaymentPlansAvailable": "Unfortunately the selected payment method, Pay in parts, is not available for this purchase",
+    "orderCurrencyNotSupported": "The selected payment method is not available for this purchase. The order currency is not supported. Please, select a different payment method"
+  },
+  "partialPayment": {
+    "collector": {
+      "title": "Pay in parts Agreement",
+      "instructions":"Please note that partial payments are in Demo mode",
+      "legend": "Partial payment",
+      "ssn": "Social security number",
+      "paymentInformation %s": "When you select Invoice as payment method, you receive your goods before you pay. You can then choose to pay the whole amount at once or to break up the payments into smaller installments. The minimum amount to pay is <i id=\"lowestAmountToPay\"></i> %s. You must be at least 18 years of age when using this payment method. Visit <a href=\"http://www.collector.se\" target=\"_blank\">http://www.collector.se </a> for more information.",
+      "termsAndConditions %1$s %2$s": "I have read and accept Collector Bank's <a href=\"http://www.collector.se/upload/Partners/Agreements/%1$s/Credit_terms_All_%2$s.pdf\" target=\"_blank\">General Conditions For Invoice And Credit Accounts</a> and <a href=\"http://www.collector.se/upload/Partners/Agreements/%1$s/SECCI_%2$s.pdf\" target=\"_blank\">Standardised European Consumer Credit Information</a>",
+      "numberOfInstallments": "Number of installments",
+      "plan": "Partial Payment Plan",
+      "monthlyPayment": "Monthly payment",
+      "bcancel": "Cancel",
+      "bagree": "Agree & Submit",
+      "loading": {
+        "title": "Credit check ongoing"
+      },
+      "tosLegend": "Collector Invoice Solution",
+      "tosText1 %d %s": "You have selected Collector Invoice and Instalment payments as your payment method. Please notice that the invoice will expire in %d days and an invoice fee of %s is added",
+      "tosText2 %d %s": "When you receive the invoice you can choose to pay by installments, over up to %d months. If paying by installments, interest of %s per year is added",
+      "error": "Credit check failed, please click \"Modify\" to select new payment method",
+      "lowestAmountToPay": "The minimum amount to pay is"
+    },
+    "fastPay": {
+      "title": "Pay in parts Agreement",
+      "instructions":"Please note that partial payments are in Demo mode",
+      "legend": "Partial payment",
+      "ssn": "Social security number",
+      "paymentInformation %s": "When you select Pay in parts as payment method, you receive your goods before you pay. You can break up the payments over up <i id=\"maxNumberOfInstallments\"></i> installments. The minimum amount to pay is <i id=\"minimumMonthlyPayment\"></i> %s per month. You must be at least 18 years of age when using this payment method. Visit <a href=\"https://www.payapi.io\" target=\"_blank\">https://payapi.io </a> for more information.",
+      "termsAndConditions": "I have read and accept FastPay partial payment <a href=\"https://payapi.io/terms\" target=\"_blank\">General Conditions</a>",
+      "numberOfInstallments": "Number of installments",
+      "plan": "Partial Payment Plan",
+      "monthlyPayment": "Monthly payment",
+      "bcancel": "Cancel",
+      "bagree": "Agree & Submit",
+      "loading": {
+        "title": "Credit check ongoing"
+      },
+      "tosLegend": "Invoice Partial Payments",
+      "tosText1 %d %s": "You have selected Pay in parts and Installment payments as your payment method. Please notice that the invoice will expire in %d days and an invoice fee of %s is added",
+      "tosText2 %d %s %s": "You can choose to pay by installments, over up to %d months. Please, keep in mind that an interest of %s per year is added and the opening fee for the first invoice is %s",
+      "error": "Credit check failed",
+      "lowestAmountToPay": "The minimum amount to pay is",
+      "confirmForm %s %d": "To pay %s per month in %d installments",
+      "apr": "Annual Percentage Rate",
+      "currentCredit": "Current credit",
+      "interestTotal": "Total interest",
+      "paymentTotal": "Total payment",
+      "feesTotal": "Total fees"
+    }
+  },
+  "emails": {
+    "dear": "Dear",
+    "title %s": "Dear %s",
+    "footer": "Please note: This email has been sent by our Pam Bot. She doesn't like any responses, so if you have any queries, please contact your merchant directly",
+    "disclaimer": "DISCLAIMER: This information is for informative purposes only. Please verify the transaction details in the backoffice. Direct link: ",
+    "infoCallbacks": "Please do not deliver the product based on this email notification. If you are not using our webshop plugins, you should always verify the transaction details in the backoffice and confirm that they match to the product you are selling.",
+    "payment": {
+      "successful": {
+        "subject": "The payment request has been successfully processed",
+        "merchantTitle": "The payment request has been successfully processed. Order details are shown below",
+        "title": "The payment request has been successfully processed. The merchant has been notified. Order details are shown below"
+      },
+      "failed": {
+        "subject": "The payment request has failed",
+        "title": "The payment request has failed. For more information, please contact your merchant. Order details are shown below"
+      },
+      "received": {
+        "subject": "Your payment is in process",
+        "title": "Your payment is being processed. You will be notified once the payment has been accepted. Order details are shown below"
+      },
+      "date %s": "The payment request was made at %s",
+      "transaction %s": "The transaction ID is %s"
+    },
+    "signup": {
+      "merchant": {
+        "subject": "Welcome ",
+        "subject %s": "Welcome %s",
+        "title": "Welcome! Your new user account has been created",
+        "p1": "This user account provides you access to the payments service backoffice, an extension to the payment gateway with easy and secure payments routing solutions and extended anti-fraud operations",
+        "p2 %s %s %s": "You may access the payments backoffice at: %s. Please use the following credentials: <br> - Username: <b>%s</b>   <br> - Password: <b>%s</b> ",
+        "p3": "Please give a short moment to <b>login to your backoffice and change the password</b> for security reasons.<br><br> Your new online shop is currently being created and you will shortly receive another email containing instructions on how to access the dashboard",
+        "footer": "If you need any help or support, please do not hesitate to contact your sales representative"
+      },
+      "user": {
+        "subject %s": "Welcome %s!",
+        "title": "Welcome! Your new PayApi Backoffice user account has been created",
+        "p1 %s %s": "You may access your dashboard at: %s with the username <b>%s</b>",
+        "p2": "If you need any help or support, please contact us at support@payapi.io.",
+        "footer": "Kind regards, <br> PayApi"
+      },
+      "instructions": {
+        "subject": "Checkout - Quick Integration Guide",
+        "p1":"Congratulations! We have created and configured a default API key and added this to your account automatically for your convenience. You are now able to integrate our libraries, SDKs or the RESTful API",
+        "p2":"In order to start using the mobile checkout in your website, shop or application, a quick integration has to be completed. The integration guide is available for download here: <a href=\"https://storage.cloud.google.com/public0/docs/sdk/quick_integration_guide_latest.pdf\" target=\"_blank\">Quick Integration Guide</a>",
+        "p3": "The guide includes a description of the necessary steps to add the Checkout button into your application, easily and in just in few minutes. It also includes the list of supported platforms and download links for the different libraries and SDKs that will help you get going quickly. To accept payments, you need your API key information, which you will find below. For additional details, you may want to check our <a href=\"https://payapi.io/apidoc\" target=\"_blank\">API reference</a> from the website",
+        "p4 %s %s": "API Key information: <br>- Public ID: <b>%s</b><br>- Key: <b>%s</b> <br>",
+        "p5": "If you have any questions, please do not hesitate to contact your sales representative",
+        "footer": "Kind regards,<br> Integration Team"
+      },
+      "newGateway": {
+        "subject": "payment gateway has been configured",
+        "subject %s": "%s payment gateway has been configured",
+        "p1":"For your information, your payment processing settings have been automatically configured for your convenience. You can now start accepting payments and selling your products online.",
+        "p2 %s":"If you need to view or modify the configuration, you can access it here: %s",
+        "p3 %s": "If you have any questions, please do not hesitate to contact your local %s representative",
+        "footer": "Kind regards, <br> Customer Support"
+      }
+    },
+    "invoice": {
+      "generated": {
+        "subject %s %s": "Invoice #%s from %s",
+        "title %s": "Please find your invoice attached (#%s). You may view the invoice details or pay now using the buttons below",
+        "invoiceDetails": "Invoice Details",
+        "p1": "Invoice details are shown below for your convenience:",
+        "footer %s": "Kind regards, <br> %s"
+      },
+      "reminder": {
+        "subject %s %s": "Invoice #%s reminder from %s",
+        "title %s": "Please note that you have an unpaid invoice from %s. You may view the invoice details or pay now using the buttons below"
+      },
+      "cancelled": {
+        "subject %s %s": "Invoice #%s from %s has been cancelled",
+        "title %s %s": "Your invoice (#%s) from %s has been cancelled. No further action is required"
+      },
+      "overdue": {
+        "subject %s": "Payment for client invoice #%s is overdue by two months",
+        "title %s %s": "Please note that no further reminders for the invoice (#%s) will be sent to the client, %s. Please make contact with the client in this regard",
+        "p1": "Invoice details are shown below for your convenience:"
+      },
+      "viewDetails": "View Details",
+      "payNow": "Pay Now",
+      "payInParts %s": "Pay In Parts, from %s/ month"
+    },
+    "bankDetails": {
+      "subject": "Bank details for the payment - reference: ",
+      "subject %s": "Bank details for the payment - reference: %s"
+    },
+    "cryptoTransactionDetails": {
+      "subject": "Your crypto payment request - reference: ",
+      "subject %s": "Your crypto payment request - reference: %s"
+    }
+  }
+}

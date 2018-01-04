@@ -1,0 +1,390 @@
+{
+    "name": "Dansk",
+    "title": "Sikker betalingen med PayApi",
+    "partnerTitle": "Sikker betalingen med",
+    "paymentGatewayUnavailable": "Betalings gatewaystation er utilgængelig. Prøv igen senere.",
+    "validationErrors": "Valideringsfejl er fundet. Denne fejl er endelig. Hvis du sender det samme input, ændres ikke resultatet.",
+    "secureform": {
+      "error": "Nogle fejl er fundet",
+      "warning": "Please note",
+      "unavailable": "Tjenesten er ikke tilgængelig, eller den er blevet brugt med ugyldige parametre.<br>Prøv igen senere!",
+      "invalidParameters": "Tjenesten er blevet brugt med ugyldige parametre.",
+      "error503": "Tjenesten er ikke tilgængelig",
+      "error400": "Dårlig anmodning",
+      "fraudThresholdExceed": "Desværre kan vi ikke give dig en betalingsgateway for øjeblikket. Dette er ikke en systemfejl.  Prøv igen i morgen eller kontakt din forhandler.",
+      "paymentSessionExpired": "Beklager, din betalingssession er udløbet",
+      "title": "Sikker betaling",
+      "order": {
+        "legend": "Ordreoversigt",
+        "sumExcludingVat": "Net",
+        "sumIncludingVat": "I alt",
+        "vat": "Moms",
+        "referenceId": "Reference-ID-nummer  "
+      },
+      "seller": {
+        "legend": "Oplysninger om sælger",
+        "details": "Virksomhedsoplysninger",
+        "vatId": "Moms-ID-nummeret  ",
+        "name": "Firmanavn",
+        "streetAddress": "Vejnavn",
+        "streetAddress2": "Vejnavn",
+        "postalCodeAndCity": "Postnummer og by",
+        "country": "Land"
+      },
+      "products": {
+        "legend": "Produkter",
+        "title": "Titel",
+        "quantity": "Antal",
+        "priceIncludingVat": "U/P  ",
+        "priceExcludingVat": "U/P (ex.moms) ",
+        "vat": "Moms",
+        "shippingHandling": "Shipping and Handling",
+        "shippingHandlingDescription": "Shipping and handling fees, added with instant buy",
+        "shippingHandlingCategory": "Shipping"
+      },
+      "creditCard": {
+        "legend": "Betalingsinformation",
+        "email": "Forbrugernes e-mailadresse  ",
+        "cardHolder": "Kortindehaver",
+        "creditCard": "Kreditkort",
+        "emailInfo": "E-mail for betalingsstatus samt leveringsmeddelelser",
+        "name": "Kortholders navn",
+        "nameInfo": "Kortindehavers navn nøjagtigt som trykt på kortet",
+        "paymentMethod": "Betalingsmetode",
+        "ccnumber": "Kreditkortnummer",
+        "CCV": "CVV/CCV",
+        "CCVInfo": "3-4 numre, som normalt sidder på bagsiden af kortet",
+        "expiration": "Udløber",
+        "monthExpiration": "Udløber (måned)",
+        "yearExpiration": "Udløber (år)",
+        "s1button":"Indsend",
+        "s2button": "Bekræft købet",
+        "s2buttonmob": "Bekræfte",
+        "vbutton": "Tjek",
+        "mbutton": "Ændre/tilføje",
+        "cbutton": "Annulere",
+        "medbutton": "Tilføje ekstra data",
+        "pbutton %s": "Udbetale i dele, fra %s /måned",
+        "pbuttonmob %s": "Betal %s /måned"
+      },
+      "consumer": {
+        "legend": "Leveringsadresse",
+        "full": "Fuld adresse",
+        "name": "Navn på modtager",
+        "co": "c/o",
+        "address": "Vejnavn",
+        "address2": "Gadeadresse 2",
+        "zip": "Postnummer",
+        "city": "By",
+        "province": "Stat/provins",
+        "country": "Land",
+        "phoneNumber": "Mobiltelefonnummer  "
+      },
+      "tos": {
+        "legend": "Servicevilkår",
+        "text": "Ved at udfylde formularen ovenfor og klikke på Submit-knappen accepterer du",
+        "checkbox": "Jeg accepterer",
+        "terms": "Vilkårene og betingelser for",
+        "andTerms": "og",
+        "rememberMe": "Husk mig, dette er en privat enhed"
+      },
+      "loading": {
+        "title": "Vent venligst...",
+        "step1": "Sikre forbindelsen",
+        "step2": "Data overføres ",
+        "step3": "Evaluering af forbrugeren",
+        "step4": "Evaluering af forhandleren",
+        "step5": "Den sikker betaling er aktiveret"
+      },
+      "cryptoPayments": {
+        "cryptoCurrencies": "Krypto-valutaer:",
+        "supportedCryptoCurrencies": "Bemærk venligst. Dit køb konverteres til BTC med den nuværende valutakurs.",
+        "confirmNote": "Når du klikker på Bekræft  konverteres dit køb til BTC med den aktuelle valutakurs."
+      }
+    },
+    "secureconfirm": {
+      "title": "Bekræft detaljerne"
+    },
+    "securereturn": {
+      "titleCancelled": "Betalingen er blevet annulleret",
+      "titleProcessed": "Betalingen er i gang",
+      "cancelInfo": "Din betaling blev annulleret. <br> Du bliver omdirigeret til forhandlernes hjemmeside inden for kort tid.  Hvis du ikke omdirigeres automatisk, så venligst",
+      "cancelInfoNoCancelUrl": "Din betaling er blevet annulleret.",
+      "processInfo": "Din betaling er nu i gang. <br> Du vil blive underrettet via e-mail, når betalingsformen ændres. <br> Du bliver omdirigeret til forhandlernes hjemmeside inden for kort tid. Hvis du ikke omdirigeres automatisk, så venligst",
+      "processInfoNoSuccessUrl": "Din betaling er nu i gang.",
+      "clickhere": "Klik her  "
+    },
+    "secureformverify": {
+      "legend": "Bekræft betalingsoplysninger",
+      "info": "For ekstra sikkerhed skal vi bekræfte de følgende oplysninger fra dig og fra dit tidligere køb"
+    },
+    "secureformextrainput": {
+      "title": "Udfyld venligst de næste felter, der kræves til betalingen",
+      "legend": "Ekstra data",
+      "cbutton": "Annulere",
+      "sbutton": "Næste"
+    },
+    "cryptoTransaction": {
+      "title": "Krypto Valuta Betaling",
+      "instructions": {
+        "legend": "Instruktioner",
+        "p1": "Send venligst det korrekte beløb til adressen som angivet nedenfor. Sørg for at sende nok for at dække eventuelle gebyrer! Dette sikrer, at systemet markerer din betaling vellykket. Du kan gøre overførslen ved hjælp af din mobil/online elektronisk tegnebog app.",
+        "p2": "Når betalingen er blevet modtaget, modtager du en e-mail-besked. Ankomsten af overførselsbekræftelsen kan tage lidt tid, normalt sendes meddelelsen inden for få timer efter din betaling. <br> <br> Hvis du har brug for hjælp, bedes du kontakte din sælger/ forhandler"
+      },
+      "details": {
+        "legend": "Transaktionsdetaljer",
+        "amount": "Beløb",
+        "currency": "Valuta",
+        "transactionId": "Transaktions ID-nummer",
+        "walletAddress": "Tegnebogsadresse",
+        "confirmsNeeded": "Det er nødvendigt at bekræfte",
+        "timeoutInSecs": "Tidsudløb (i sekunder)",
+        "status": "Status"
+      },
+      "note": "Bemærk venligst! Overførslen skal foretages inden for 12 timer, så den ikke udløber automatisk. Det kan tage lidt tid, før betalingsstatus er bekræftet.",
+      "bclose": "Luk"
+    },
+    "bankTransfer": {
+      "title": "Bankoverførsel ",
+      "instructions": {
+        "legend": "Instruktioner",
+        "p1": "Brug venligst følgende oplysninger til at udbetale for dette køb ved hjælp af bankoverførsel/elektronisk overførsel. Når betalingen er modtaget og bekræftet af modtageren, vil transaktionen blive markeret som *vellykket *",
+        "p2": "Giv venligst mindst 3 dage til betalingen for at komme til modtagerens bankkonto inden du kontakter dem.",
+        "p3": "TNår du klikker på 'Luk' knappen vil overførselsoplysningerne blive sendt til dig via e-mail."
+      },
+      "bankDetails": {
+        "legend": "Oplysninger om bankoverførsel  ",
+        "bankAccountOwnerName": "Kontoejer",
+        "internationalBankAccountNumber": "IBAN",
+        "messageOrReference": "Message/reference",
+        "swiftbic": "SWIFT/BIC"
+      },
+      "note": "Betaling via bankoverførsel skal foretages inden for 2 dage, så den ikke udløber automatisk",
+      "bclose": "Luk"
+    },
+    "poweredBy": {
+      "poweredBy": "Drevet af ",
+      "info1": "Sikker online og mobil betalinger"
+    },
+    "invalid": {
+      "payment":{
+        "ip": {
+          "address": "Ugyldig klient-IP-adresse"
+        },
+        "cardHolderEmail": "Ugyldig emailadresse til kortindehaveren",
+        "cardHolderName": "Ugyldigt kortindehaverens navn",
+        "paymentMethod": "Ugyldig betalingsmetode",
+        "creditCardNumber": "Ugyldigt kreditkortnummer",
+        "ccv": "Ugyldig CVV/CCV kode ",
+        "expiresMonth": "Ugyldig udløbsdmåned på kreditkort ",
+        "expiresYear": "Ugyldigt udløbsår på kreditkort",
+        "cardHasExpired": "Kreditkortet er udløbet",
+        "termsAccepted": "Servicevilkårene skal accepteres"
+      },
+      "consumer": {
+        "name": "Ugyldigt modtagerensnavn",
+        "co": "Ugyldig modtager (att.)",
+        "streetAddress": "Ugyldigt modtages gadenavn",
+        "streetAddress2": "Ugyldig modtagers gadenavn 2",
+        "postalCode": "Ugyldigt modtagers postnummer",
+        "city": "Ugyldig modtagers by",
+        "stateOrProvince": "Ugyldig modtagers stat eller provins",
+        "countryCode": "Ugyldigt modtagers land ",
+        "locale": "Ugyldigt modtagers lokalilet (5-tegn: RFC5646)",
+        "mobilePhoneNumber": "Ugyldigt mobilnummer",
+        "email": "Ugyldig forbrugers e-mail adresse",
+        "consumerId": "Ugyldigt forbrugers identitet ",
+        "ssn": "Ugyldigt socialt sikkerhedsnummer"
+      },
+      "order": {
+        "sumInCentsIncVat": "Ugyldig ordresum (inklusive Moms)",
+        "sumInCentsExcVat": "Ugyldig ordresum (ekskl. Moms)",
+        "vatInCents": "Ugyldig ordre moms",
+        "referenceId": "Ugyldigt ordrenummer-ID",
+        "currency": "Ugyldig ordres valuta ",
+        "tosUrl":"Ugyldige servicevilkår"
+      },
+      "product": {
+        "priceInCentsIncVat": "Ugyldig produktsummen (inkl. moms)",
+        "priceInCentsExcVat": "Ugyldig produktsummen (ekskl. moms)  ",
+        "vatPercentage": "Ugyldig momsprocent for produkter",
+        "quantity": "Ugyldig produktmængde (skal være et tal)",
+        "imageUrl": "Ugyldig webadresse for produktbilledet (kun HTTPS er tilladt)",
+        "description": "Ugyldig produktbeskrivelse ",
+        "title": "Ugyldig produkttitel",
+        "category": "Ugyldig produktkategori",
+        "model": "Ugyldig produktmodel",
+        "extraData": "Ugyldig produkt extraData",
+        "options": "Ugyldige produktindstillinger"
+      },
+      "shippingAddress": {
+        "recipientName": "Ugyldig forsendelsesmodtager",
+        "co": "Ugyldig forsendelsesadresse c/o",
+        "streetAddress": "Ugyldig forsendelsesgade adresse",
+        "streetAddress2": "Ugyldig forsendelsesgade adresse 2",
+        "postalCode": "Ugyldigt postnummer",
+        "city": "Ugyldig fragtby",
+        "stateOrProvince": "Ugyldig stat eller provins",
+        "countryCode": "Ugyldig landskode. (2-tegn ISO 3166-1 alfa-2) "
+      },
+      "callbacks": {
+        "success": "Genkaldelsen af webadressen for en vellykket betaling er ikke gyldig (kun HTTPS er tilladt) ",
+        "failed": "Genkaldelsen af webadressen ved en mislykket betaling er ikke gyldig (kun HTTPS er tilladt)",
+        "chargeback": "Genkaldelsen af webadressen for debetoverførsel er ikke gyldig (kun HTTPS er tilladt)",
+        "processing": "Genkaldelsen af webadressen til behandling er ikke gyldig (kun HTTPS er tilladt)"
+      },
+      "returnUrls": {
+        "success": "Retur webadressen for en vellykket betaling er ikke gyldig (kun HTTPS tilladt)",
+        "cancel": "Retur webadressen for en annulleret betaling er ikke gyldig (kun HTTPS er tilladt)",
+        "failed": "Den retur webadresse for en mislykket betaling er ikke gyldig (kun HTTPS er tilladt)"
+      },
+      "whitelistedDomain": "Webshop-domænet er ikke hvidlistet til API-nøglen  ",
+      "webshopUrl": "Webshop URL eller HTTPS-certifikatet ikke er gyldigt",
+      "publicId": "Ugyldigt offentligt-ID-nummer",
+      "json": "JSON-objektet er ikke gyldigt",
+      "amountBelowMinimumAllowed": "Det samlede bestillingsbeløb er under det minimum, der er tilladt for den valgte betalingsmetode",
+      "noWhitelistedCountryCode": "Den valgte betalingsmetode er ikke tilgængelig i dit land",
+      "webBrowserNotSupported": "Desværre er din browser ikke kompatibel med vores sikkerhedsfunktioner.   For at kunne bruge vores tjenester skal du installere en browser, der understøtter vores sikkerhedsfunktioner. Eksempler på sådanne browsere er: <br><br> - Google Chrome v40 eller nyere <br> - Safari v10 eller nyere <br> - Mozilla Firefox v45 eller nyere",
+      "unavailablePreviousPaymentMethod": "Desværre er din tidligere valgte betalingsmetode ikke tilgængelig for dette køb. Vælg venligst en ny betalingsmetode",
+      "noPaymentPlansAvailable": "Desværre er den valgte betalingsmetode, Betal i dele, ikke tilgængelig for dette køb",
+      "orderCurrencyNotSupported": "Den valgte betalingsmetode er ikke tilgængelig for dette køb. Ordrekursen understøttes ikke. Vælg venligst en anden betalingsmetode"
+    },
+    "partialPayment": {
+      "collector": {
+        "title": "Betal i delaftale  ",
+        "instructions":"Bemærk venligst, at delbetalinger er i Demo-mode",
+        "legend": "Delvis betaling",
+        "ssn": "CPR-nummer",
+        "paymentInformation %s": "Når du vælger Faktura som betalingsmetode, modtager du dine varer, før du betaler for disse. Du kan derefter vælge at udbetale hele beløbet på én gang eller for at opdele betalingerne i mindre rater. Minimumsbeløbet at udbetale er <i id=\"lowestAmountToPay\"></i> %s.  Du skal være mindst 18 år når du bruger denne betalingsmetode. Besøg <a href=\"http://www.collector.se\" target=\"_blank\">http://www.collector.se</a> for mere information.",
+        "termsAndConditions %1$s %2$s": "Jeg har læst og accepteret Collector Banks <a href=\"http://www.collector.se/upload/Partners/Agreements/%1$s/Credit_terms_All_%2$s.pdf\" target=\"_blank\"> Almindelige betingelser for Fakturaer- og Kreditkonti </a> og <a href=\"http://www.collector.se/upload/Partners/Agreements/%1$s/SECCI_%2$s.pdf\" target=\"_blank\"> Standardiseret Europæiske forbrugerkreditoplysninger</a>",
+        "numberOfInstallments": "Antal af afdragsbetalinger",
+        "plan": "Delvis betalingsplan",
+        "monthlyPayment": "Månedlige betaling",
+        "bcancel": "Annulere",
+        "bagree": "Enig og indsend ",
+        "loading": {
+          "title": "Kredit check løbende"
+        },
+        "tosLegend": "Samlerfaktura løsning",
+        "tosText1 %d %s": "Du har valgt samlerfakturaen og afdragsbetalinger som din betalingsmetode. Bemærk venligst at fakturaen udløber i %d dage, og et faktura gebyr på %s er tilføjet",
+        "tosText2 %d %s": "Når du modtager fakturaen, kan du vælge at betale efter afdrag, over op til %d måneder. Ved betaling efter afdrag tilføjes renter på %s pr. År  ",
+        "error": "Hvis kreditchecken mislykkedes, venligst klik på \"Rediger\" for at vælge en ny betalingsmetode",
+        "lowestAmountToPay": "Minimumsbeløbet at udbetale er"
+      },
+      "fastPay": {
+        "title": "Betal i delaftale  ",
+        "instructions":"Bemærk venligst, at delbetalinger er i Demo-mode",
+        "legend": "Delvis betaling",
+        "ssn": "CPR-nummer",
+        "paymentInformation %s": "Når du vælger Betal i dele som betalingsmetode, modtager du dine varer, før du betaler.  Du kan opdele betalingerne over <i id=\"maxNumberOfInstallments\"></i> afdrag. Minimumsbeløbet at udbetale er <i id=\"minimumMonthlyPayment\"></i> %s pr. måned. Du skal være mindst 18 år når du bruger denne betalingsmetode. Besøg <a href=\"https://www.payapi.io\" target=\"_blank\"> https://payapi.io</a> for flere oplysninger.",
+        "termsAndConditions": "Jeg har læst og accepteret FastPay-delbetaling <a href=\"https://payapi.io/terms\" target=\"_blank\">Generelle vilkårene </a>",
+        "numberOfInstallments": "Antal af afdragsbetalinger",
+        "plan": "Delvis betalingsplan",
+        "monthlyPayment": "Månedlige betaling",
+        "bcancel": "Annulere",
+        "bagree": "Enig og indsend ",
+        "loading": {
+          "title": "Kredit check løbende"
+        },
+        "tosLegend": "Delbetalinger af fakturaen",
+        "tosText1 %d %s": "Du har valgt at dele betalingen og afdragsbetalinger som din betalingsmetode. Bemærk venligst at fakturaen udløber i %d dage, og et faktura gebyr på %s er tilføjet",
+        "tosText2 %d %s %s": "Du kan vælge at udbetale efter rater, over op til %d måneder. Vær venligst opmærksom på, at en interesse på %s pr. År tilføjes, og at åbningsgebyret for den første faktura er %s",
+        "error": "Kreditcheck mislykkedes",
+        "lowestAmountToPay": "Minimumsbeløbet at udbetale er",
+        "confirmForm %s %d": "At udbetale %s pr. måned i %d afdrag  ",
+        "apr": "Den aktuelle årlig rentesats",
+        "currentCredit": "Nuværende kredit",
+        "interestTotal": "Total interest",
+        "paymentTotal": "Total payment",
+        "feesTotal": "Total fees"
+      }
+    },
+    "emails": {
+      "dear": "Kære",
+      "title %s": "Kære %s",
+      "footer": "Hav en god dag",
+      "disclaimer": "ANSVARSFRASKRIVELSE:  Disse oplysninger er kun til orienterende formål. Kontroller venligst at transaktionsoplysningerne i backoffice er ok. Direkte link: ",
+      "infoCallbacks": "Vær venlig at ikke levere produktet ud fra denne email besked. Hvis du ikke bruger betalingsanmodninger, skal du altid kontrollere transaktionsoplysningerne i backoffice og bekræfte, at de svarer til det produkt du sælger",
+      "payment": {
+        "successful": {
+          "subject": "Betalingsanmodningen er blevet behandlet korrekt",
+          "merchantTitle": "Betalingsanmodningen er blevet behandlet korrekt. Bestillingsoplysninger er vist nedenfor",
+          "title": "Betalingsanmodningen er blevet behandlet korrekt. Forhandleren er blevet underrettet. Bestillingsoplysninger er vist nedenfor"
+        },
+        "failed": {
+          "subject": "Betalingsanmodningen er mislykket",
+          "title": "Betalingsanmodningen er mislykket. For mere information kontakt venligst din forhandler. Bestillingsoplysninger er vist nedenfor"
+        },
+        "received": {
+          "subject": "Din betalingsanmodning er modtaget",
+          "title": "Din betalingsanmodning er modtaget og behandles nu. Du vil blive underrettet, når betalingen er blevet accepteret. Bestillingsoplysninger er vist nedenfor"
+        },
+        "date %s": "Betalingsanmodningen blev foretaget på %s",
+        "transaction %s": "Transaktions-ID-nummeret er %s"
+      },
+      "signup": {
+        "merchant": {
+          "subject": "Velkommen ",
+          "title": "Velkommen! Din nye brugerkonto er blevet oprettet  ",
+          "p1": "Denne brugerkonto giver dig adgang til backoffice for betalingstjenester, en udvidelse til betalingsgatewayen med enkle og sikre betalinger, routingløsninger og udvidede anti-svindeloperationer",
+          "p2 %s %s %s": "Du kan få adgang til betalingsbackoffice på: %s :. Brug venligst følgende legitimationsoplysninger: <br> - <b> Brugernavn: %s </ b> <br> - <b> Adgangskode: %s </ b> ",
+          "p3": "Vent venligst et kort øjeblik til at <b> logge ind på din backoffice og ændre adgangskoden </b> af sikkerhedsmæssige årsager. <br><br> Inden for få minutter er din nye online-butik oprettet, og du vil modtage en ny e-mail med detaljer om butikken og hvordan du får adgang til butik-administrationssiden",
+          "footer": "Hvis du har brug for hjælp eller support, bedes du kontakte dit lokale salg eller support. <br><br> Nyd den mobile shopping løsning og sikre dine betalinger!"
+        },
+        "user": {
+          "subject %s": "Velkommen %s!",
+          "title": "Velkommen som ny bruger til din PayApi backoffice, den sikre betalingstjeneste med udvidede operationer for svigsbekæmpelse",
+          "p1 %s %s": "Du kan få adgang til din backoffice på: %s.  Brug venligst dit brugernavn %s med den adgangskode, der blev givet under registreringen",
+          "p2": "Hvis du har brug for hjælp eller support, bedes du kontakte os på support@payapi.io",
+          "footer": "Sikker betalinger, <br> PayApi Team "
+        },
+        "instructions": {
+          "subject": "Checkout integrations omviser",
+          "p1":" Tillykke! Vi har oprettet og konfigureret en standard API nøgle og tilføjet dette automatisk til din konto for din bekvemmelighed. Du kan nu integrere vores biblioteker, SDK'er eller RESTful API",
+          "p2":"For at kunne begynde at bruge den mobile checkout på din hjemmeside, butik eller applikation, skal en hurtig integration fuldføres. Den hurtig integrations omviser kan downloades her: <a href=\"https://storage.cloud.google.com/public0/docs/sdk/quick_integration_guide_latest.pdf\" target=\"_blank\"> Den hurtig integrations omviser</a>",
+          "p3": "Integrationsguiden indeholder en beskrivelse af de nødvendige trin for at nemt tilføje Checkout-knappen til din app og denne proces tager kun få minutter at gennemføre.  Guiden indeholder også listen over de understøttede platforme og downloadlinks til forskellige biblioteker og SDK'er, der hjælper dig med at komme hurtigt i gang. For at kunne acceptere betalingerne, har du brug for dine API-nøgleoplysninger, som er tilgængelige for dig nedenfor. For yderligere oplysninger kan du kontrollere vores <a href=\"https://payapi.io/apidoc\" target=\"_blank\"> API-reference </a> fra PayApi-dokumentationsstedet",
+          "p4 %s %s": "API Nøgleinformation: <br> - <b> Offentligt ID-nummer: </b> %s<br>- <b> Key: </b> %s <br>",
+          "p5": "Hvis du har spørgsmål, er du velkommen til at kontakte os ",
+          "footer": "Med venlig hilsen, <br> Support Team"
+        },
+        "newGateway": {
+          "subject": "betalings gateway er konfigureret til din PayApi-konto",
+          "p1":"Dine betalingsbehandlingsindstillinger er blevet konfigureret og tilføjet til din konto automatisk. Nu kan du sikre begynde at acceptere betalinger og sælge dine produkter online! ",
+          "p2 %s":"Hvis du har brug for at få adgang til eller ændre konfigurationen, kan du gøre det her: %s",
+          "p3 %s": "Hvis du har spørgsmål, er du velkommen til at kontakte din lokale %s-support",
+          "footer": "Med venlig hilsen, <br> PayApi team"
+        }
+      },
+      "invoice": {
+        "generated": {
+          "subject %s %s": "Faktura #%s fra %s",
+          "title %s": "Din faktura #%s er blevet genereret. <br> Tak for din forretning",
+          "invoiceDetails": "Fakturaens detaljer",
+          "p1": "Fakturaens detaljer er vist nedenfor:",
+          "footer %s": "Med venlig hilsen, <br>%s"
+        },
+        "reminder": {
+          "subject %s %s": "Faktura nr. %s påmindelse fra %s",
+          "title %s": "Dette er en påmindelse om en ikke ubetalt faktura fra %s. Venligst klik på den nedenstående link for at se og udbetale fakturaen"
+        },
+        "cancelled": {
+          "subject %s %s": "Faktura nr.%s fra %s er blevet annulleret",
+          "title %s %s": "Fakturaen %s fra %s er blevet annulleret"
+        },
+        "overdue": {
+          "subject %s": "Betalingen for faktura $%s er forsinket med to måneder",
+          "title %s %s": "Bemærk venligst, at påmindelserne for fakturaen #%s ikke bliver sendt yderligere til klienten: %s. Venligst annulér fakturaen eller kontakt kunden ",
+          "p1": "Fakturaens detaljer er vist nedenfor:"
+        },
+        "viewDetails": "View Details",
+        "payNow": "Udbetal nu",
+        "payInParts %s": "Pay In Parts, from %s/ month"
+      },
+      "bankDetails": {
+        "subject": "Bankoplysninger for betalingen - reference: "
+      },
+      "cryptoTransactionDetails": {
+        "subject": "Din krypto betalingsanmodning - reference: "
+      }
+    }
+  }

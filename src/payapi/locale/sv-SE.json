@@ -1,0 +1,391 @@
+{
+    "name": "Svenska",
+    "title": "Säker betalning med PayApi",
+    "partnerTitle": "Säker betalning med",
+    "paymentGatewayUnavailable": "Betalningsgatewayen är inte tillgänglig. Försök gärna igen senare.",
+    "validationErrors": "Ett verifieringsfel påträffades. Detta fel är slutgiltigt. Att skicka om samma indata kommer inte att förändra resultatet.",
+    "secureform": {
+      "error": "Fel påträffade",
+      "warning": "Please note",
+      "unavailable": "Tjänsten är inte tillgänglig eller så har ogiltiga parametrar använts till den.<br>Försök gärna igen senare!",
+      "invalidParameters": "Ogiltiga parametrar har använts till tjänsten.",
+      "error503": "Tjänsten är inte tillgänglig",
+      "error400": "Felaktig begäran",
+      "fraudThresholdExceed": "Tyvärr kan vi inte tillhandahålla dig med en betalningsgateway för tillfället. Detta är inte ett systemfel. Försök gärna igen imorgon eller kontakta e-handlaren.",
+      "paymentSessionExpired": "Beklagar, men din betalningssession har upphört att gälla",
+      "title": "Säker betalning",
+      "order": {
+        "legend": "Orderöversikt",
+        "sumExcludingVat": "Netto",
+        "sumIncludingVat": "Totalt",
+        "vat": "Moms",
+        "referenceId": "Referensnummer"
+      },
+      "seller": {
+        "legend": "Information om säljaren",
+        "details": "Företagsuppgifter",
+        "vatId": "Momsregistreringsnummer",
+        "name": "Företagsnamn",
+        "streetAddress": "Gatuadress",
+        "streetAddress2": "Gatuadress",
+        "postalCodeAndCity": "Postnummer och ort",
+        "country": "Land"
+      },
+      "products": {
+        "legend": "Produkter",
+        "title": "Titel",
+        "quantity": "Antal",
+        "priceIncludingVat": "Pris/styck",
+        "priceExcludingVat": "Pris/styck (exkl. moms)",
+        "vat": "Moms",
+        "shippingHandling": "Shipping and Handling",
+        "shippingHandlingDescription": "Shipping and handling fees, added with instant buy",
+        "shippingHandlingCategory": "Shipping"
+      },
+      "creditCard": {
+        "legend": "Betalningsuppgifter",
+        "email": "Köparens e-postadress",
+        "cardHolder": "Kortinnehavare",
+        "creditCard": "Kreditkort",
+        "emailInfo": "E-postadress för betalningsstatus och leveransaviseringar",
+        "name": "Kortinnehavarens namn",
+        "nameInfo": "Kortinnehavarens namn exakt så som det är tryckt på kortet",
+        "paymentMethod": "Betalningssätt",
+        "ccnumber": "Kreditkortsnummer",
+        "CCV": "CVV/CCV",
+        "CCVInfo": "3-4 siffror, vanligtvis tryckta på baksidan av kortet",
+        "expiration": "Upphör att gälla",
+        "monthExpiration": "Upphör att gälla (månad)",
+        "yearExpiration": "Upphör att gälla (år)",
+        "s1button":"Skicka",
+        "s2button": "Bekräfta köpet",
+        "s2buttonmob": "Bekräfta",
+        "vbutton": "Kontrollera",
+        "mbutton": "Ändra",
+        "cbutton": "Avbryt",
+        "medbutton": "Ändra tilläggsinformation",
+        "pbutton %s": "Delbetala, från %s/månad",
+        "pbuttonmob %s": "Betala %s/månad"
+      },
+      "consumer": {
+        "legend": "Leveransadress",
+        "full": "Fullständig adress",
+        "name": "Mottagarens namn",
+        "co": "C/o",
+        "address": "Gatuadress",
+        "address2": "Gatuadress 2",
+        "zip": "Postnummer",
+        "city": "Ort",
+        "province": "Delstat/Landskap",
+        "country": "Land",
+        "phoneNumber": "Mobilnummer"
+      },
+      "tos": {
+        "legend": "Användarvillkor",
+        "text": "Genom att fylla i ovanstående formulär och klicka på knappen ”Skicka”, godkänner du",
+        "checkbox": "Jag godkänner",
+        "terms": "Villkoren för",
+        "andTerms": "och",
+        "rememberMe": "Kom ihåg mig, det här är en privat enhet"
+      },
+      "loading": {
+        "title": "Vänligen vänta ...",
+        "step1": "Säkrar anslutning",
+        "step2": "Överför uppgifter",
+        "step3": "Utvärderar köpare",
+        "step4": "Utvärderar e-handlaren",
+        "step5": "Säker betalning aktiverad"
+      },
+      "cryptoPayments": {
+        "cryptoCurrencies": "Kryptovalutor:",
+        "supportedCryptoCurrencies": "Obs! Ditt köp kommer att omvandlas till BTC i enlighet med gällande växelkurs.",
+        "confirmNote": "Ditt köp kommer att omvandlas till BTC i enlighet med gällande växelkurs när du klickar på ”Bekräfta”."
+      }
+    },
+    "secureconfirm": {
+      "title": "Bekräfta uppgifterna"
+    },
+    "securereturn": {
+      "titleCancelled": "Betalningen avbröts",
+      "titleProcessed": "Betalningen behandlas",
+      "cancelInfo": "Din betalning avbröts.<br>Du kommer inom kort att omdirigeras till e-handlarens webbplats. Om du inte omdirigeras automatiskt, vänligen",
+      "cancelInfoNoCancelUrl": "Din betalning avbröts.",
+      "processInfo": "Din betalning behandlas nu.<br>Du kommer att få en avisering med e-post då betalningsstatusen ändras.<br>Du kommer inom kort att omdirigeras till e-handlarens webbplats. Om du inte omdirigeras automatiskt, vänligen",
+      "processInfoNoSuccessUrl": "Din betalning behandlas nu.",
+      "clickhere": "klicka här"
+    },
+    "secureformverify": {
+      "legend": "Verifiera betalningsuppgifterna",
+      "info": "För ökad säkerhet behöver vi få följande uppgifter från dig och från dina tidigare köp bekräftade"
+    },
+    "secureformextrainput": {
+      "title": "Fyll i följande obligatoriska fält för betalningen",
+      "legend": "Tilläggsinformation",
+      "cbutton": "Avbryt",
+      "sbutton": "Nästa"
+    },
+    "cryptoTransaction": {
+      "title": "Betalning i kryptovaluta",
+      "instructions": {
+        "legend": "Anvisningar",
+        "p1": "Skicka det korrekta beloppet till den nedan angivna adressen . Se till att skicka ett belopp stort nog att täcka eventuella växlingskostnader! Detta gör att systemet med säkerhet kommer att ange din betalning som slutförd. Du kan göra överföringen med hjälp av plånboksmjukvaran i din mobiltelefon eller med din e-plånbok.",
+        "p2": "När betalningen har tagits emot på korrekt sätt skickas en e-postavisering till dig. Det kan ta lite tid innan du får överföringsbekräftelsen, vanligtvis skickas aviseringen inom ett par timmar efter betalningen genomförts.<br><br>Om du skulle behöva hjälp får du gärna kontakta säljaren/e-handlaren"
+      },
+      "details": {
+        "legend": "Transaktionsspecifikationer",
+        "amount": "Belopp",
+        "currency": "Valuta",
+        "transactionId": "Transaktions-ID",
+        "walletAddress": "Plånboksadress",
+        "confirmsNeeded": "Bekräftelser nödvändiga",
+        "timeoutInSecs": "Tidsgräns (i sekunder)",
+        "status": "Status"
+      },
+      "note": "Obs! Överföringen måste genomföras inom 12 timmar för att den inte automatiskt ska upphöra att gälla. Det kan ta lite tid innan betalningsstatusen har blivit bekräftad.",
+      "bclose": "Stäng"
+    },
+    "bankTransfer": {
+      "title": "Banköverföring",
+      "instructions": {
+        "legend": "Anvisningar",
+        "p1": "Använd följande uppgifter för att betala köpet via banköverföring/elektronisk överföring. När betalningen har mottagits och bekräftats av mottagaren kommer transaktionen anges som *slutförd*",
+        "p2": "Kontakta inte banken innan minst 3 dagar har gått, för att betalningen ska hinna komma in på mottagarens bankkonto.",
+        "p3": "Specifikationerna för banköverföringen kommer att skickas till dig via e-post när du klickar på knappen ”Stäng”."
+      },
+      "bankDetails": {
+        "legend": "Specifikationer för banköverföringen",
+        "bankAccountOwnerName": "Kontoinnehavare",
+        "internationalBankAccountNumber": "IBAN",
+        "messageOrReference": "Meddelande/Referens",
+        "swiftbic": "SWIFT/BIC"
+      },
+      "note": "Betalning via banköverföring måste genomföras inom 2 timmar för att den inte automatiskt ska upphöra att gälla.",
+      "bclose": "Stäng"
+    },
+    "poweredBy": {
+      "poweredBy": "Använder",
+      "info1": "Säkra webb- och mobilbetalningar"
+    },
+    "invalid": {
+      "payment":{
+        "ip": {
+          "address": "Klientens IP-adress ogiltig"
+        },
+        "cardHolderEmail": "Kortinnehavarens e-postadress ogiltig",
+        "cardHolderName": "Kortinnehavarens namn ogiltigt",
+        "paymentMethod": "Betalningssätt ogiltigt",
+        "creditCardNumber": "Kreditkortsnummer ogiltigt",
+        "ccv": "CVV-/CCV-kod ogiltig",
+        "expiresMonth": "Kreditkortets utgångsmånad ogiltig",
+        "expiresYear": "Kreditkortets utgångsår ogiltigt",
+        "cardHasExpired": "Kreditkortet har upphört att gälla",
+        "termsAccepted": "Användarvillkoren måste godkännas"
+      },
+      "consumer": {
+        "name": "Mottagarens namn ogiltigt",
+        "co": "Mottagarens c/o ogiltigt",
+        "streetAddress": "Mottagarens gatuadress ogiltig",
+        "streetAddress2": "Mottagarens gatuadress 2 ogiltig",
+        "postalCode": "Mottagarens postnummer ogiltigt",
+        "city": "Mottagarens ort ogiltig",
+        "stateOrProvince": "Mottagarens delstat ogiltig/landskap ogiltigt",
+        "countryCode": "Mottagarens land ogiltigt",
+        "locale": "Mottagarens plats (5-tecken: RFC5646) ogiltig",
+        "mobilePhoneNumber": "Mobilnummer ogiltigt",
+        "email": "Köparens e-postadress ogiltig",
+        "consumerId": "Köparens ID ogiltigt",
+        "ssn": "Personnummer ogiltigt"
+      },
+      "order": {
+        "sumInCentsIncVat": "Ordersumma (inkl. moms) ogiltig",
+        "sumInCentsExcVat": "Ordersumma (exkl. moms) ogiltig",
+        "vatInCents": "Ordermoms ogiltig",
+        "referenceId": "Orderns referensnummer ogiltigt",
+        "currency": "Ordervaluta ogiltig",
+        "tosUrl":"Användarvillkorens webbadress ogiltig"
+      },
+      "product": {
+        "priceInCentsIncVat": "Produktsumma (inkl. moms) ogiltig",
+        "priceInCentsExcVat": "Produktsumma (exkl. moms) ogiltig",
+        "vatPercentage": "Produktens momsprocentssats ogiltig",
+        "quantity": "Produktantal (måste anges i siffror) ogiltigt",
+        "imageUrl": "Produktbildens webbadress (endast HTTPS tillåten) ogiltig",
+        "description": "Produktbeskrivning ogiltig",
+        "title": "Produkttitel ogiltig",
+        "category": "Produktkategori ogiltig",
+        "model": "Produktmodell ogiltig",
+        "extraData": "Produktens tilläggsinformation ogiltig",
+        "options": "Produktalternativ ogiltiga"
+      },
+      "shippingAddress": {
+        "recipientName": "Leveransmottagarens namn ogiltigt",
+        "co": "Leveransens c/o-adress ogiltig",
+        "streetAddress": "Leverensens gatuadress ogiltig",
+        "streetAddress2": "Leveransens gatuadress 2 ogiltig",
+        "postalCode": "Postnummer ogiltigt",
+        "city": "Leveransort ogiltig",
+        "stateOrProvince": "Delstat ogiltig/landskap ogiltigt",
+        "countryCode": "Landskod ogiltig (2 tecken enl. ISO 3166-1 alpha-2)"
+      },
+      "callbacks": {
+        "success": "Callback-URL:en för slutförd betalning är ogiltig (endast HTTPS tillåten)",
+        "failed": "Callback-URL:en för misslyckad betalning är ogiltig (endast HTTPS tillåten)",
+        "chargeback": "Callback-URL:en för chargeback är ogiltig (endast HTTPS tillåten)",
+        "processing": "Callback-URL:en för betalningsbehandling är ogiltig (endast HTTPS tillåten)"
+      },
+      "returnUrls": {
+        "success": "Retur-URL:en för slutförd betalning är ogiltig (endast HTTPS tillåten)",
+        "cancel": "Retur-URL:en för avbruten betalning är ogiltig (endast HTTPS tillåten)",
+        "failed": "Retur-URL:en för misslyckad betalning är ogiltig (endast HTTPS tillåten)"
+      },
+      "whitelistedDomain": "Webbutiksdomänen ej vitlistad för API-nyckeln",
+      "webshopUrl": "Webbutikens URL ogiltig eller HTTPS-certifikatet ogiltigt",
+      "publicId": "Publikt ID ogiltigt",
+      "json": "JSON-objektet ogiltigt",
+      "amountBelowMinimumAllowed": "Den totala ordersumman är mindre än lägsta tillåtna summa för det valda betalningssättet.",
+      "noWhitelistedCountryCode": "Det valda betalningssättet är inte tillgängligt för ditt land",
+      "webBrowserNotSupported": "Tyvärr är din webbläsare inte kompatibel med våra säkerhetsfunktioner. För att kunna använda våra tjänster måste du installera en webbläsare som stödjer våra säkerhetsfunktioner. Exempel på sådana webbläsare är: <br><br>- Google Chrome v40 eller senare <br>- Safari v10 eller senare <br>- Mozilla Firefox v45 eller senare",
+      "unavailablePreviousPaymentMethod": "Tyvärr är det betalningssätt som du har valt tidigare inte tillgängligt för det här köpet. Var vänlig och välj ett nytt betalningssätt",
+      "noPaymentPlansAvailable": "Tyvärr är det valda betalningssättet ”Delbetala” inte tillgängligt för det här köpet.",
+      "orderCurrencyNotSupported": "Det valda betalningssättet är inte tillgängligt för det här köpet. Ordervalutan stöds inte. Var vänlig och välj ett annat betalningssätt"
+    },
+    "partialPayment": {
+      "collector": {
+        "title": "Delbetalningsavtal",
+        "instructions":"Observera att delbetalningarna är i demoläge",
+        "legend": "Delbetalning",
+        "ssn": "Personnummer",
+        "paymentInformation %s": "När du väljer ”Faktura” som betalningssätt levereras varorna innan du betalar. Då kan du välja att betala in hela beloppet på en gång eller dela upp betalningen i mindre delbetalningar. Minsta belopp att betala är <i id=\"lowestAmountToPay\"></i> %s. Du måste vara minst 18 år för att få använda det här betalningssättet. Besök <a href=\"http://www.collector.se\" target=\"_blank\">http://www.collector.se </a> för mer information.",
+        "termsAndConditions %1$s %2$s": "Jag har läst igenom och godkänner Collector Banks <a href=\"http://www.collector.se/upload/Partners/Agreements/%1$s/Credit_terms_All_%2$s.pdf\" target=”_blank”>Allmänna villkor för faktura och kreditkonto</a> samt <a href=\"http://www.collector.se/upload/Partners/Agreements/%1$s/SECCI_%2$s.pdf\" target=”_blank”>Standardiserad europeisk konsumentkreditinformation</a>",
+        "numberOfInstallments": "Antal delbetalningar",
+        "plan": "Delbetalningsplan",
+        "monthlyPayment": "Månadsbetalning",
+        "bcancel": "Avbryt",
+        "bagree": "Godkänn & skicka in",
+        "loading": {
+          "title": "Kreditvärdigheten kontrolleras"
+        },
+        "tosLegend": "Collectors fakturalösning",
+        "tosText1 %d %s": "Du har valt Collector faktura och delbetalning som betalningssätt. Observera att fakturan förfaller om %d dagar och att en fakturaavgift på %s tillkommer",
+        "tosText2 %d %s": "När du får fakturan kan du välja att göra delbetalningar i upp till %d månader. Vid delbetalning tillkommer en årsränta på %s.",
+        "error": "Kreditvärdigheten godkändes inte. Klicka på ”Ändra” för att välja ett nytt betalningssätt.",
+        "lowestAmountToPay": "Minsta belopp att betala är"
+      },
+      "fastPay": {
+        "title": "Delbetalningsavtal",
+        "instructions":"Observera att delbetalningarna är i demoläge",
+        "legend": "Delbetalning",
+        "ssn": "Personnummer",
+        "paymentInformation %s": "När du väljer ”Delbetala” som betalningssätt levereras varorna innan du betalar. Du kan dela upp betalningarna i upp till <i id=\"maxNumberOfInstallments”></i> delbetalningar. Minsta belopp att betala är <i id=\"minimumMonthlyPayment\"></i> %s per månad. Du måste vara minst 18 år för att få använda det här betalningssättet. Besök <a href=\"https://www.payapi.io\" target=\"_blank\">https://payapi.io </a> för mer information.",
+        "termsAndConditions": "Jag har läst igenom och godkänner FastPays <a href=\"https://payapi.io/terms\" target=”_blank”>Allmänna villkor för delbetalning</a>",
+        "numberOfInstallments": "Antal delbetalningar",
+        "plan": "Delbetalningsplan",
+        "monthlyPayment": "Månadsbetalning",
+        "bcancel": "Avbryt",
+        "bagree": "Godkänn & skicka in",
+        "loading": {
+          "title": "Kreditvärdigheten kontrolleras"
+        },
+        "tosLegend": "Faktura med delbetalningar",
+        "tosText1 %d %s": "Du har valt ”Delbetalning” som betalningssätt. Observera att fakturan förfaller om %d dagar och att en fakturaavgift på %s tillkommer",
+        "tosText2 %d %s %s": "Du kan välja att göra delbetalningar i upp till %d månader. Tänk på att en årsränta på %s tillkommer och att uppläggningsavgiften på den första fakturan är %s.",
+        "error": "Kreditvärdigheten godkändes inte",
+        "lowestAmountToPay": "Minsta belopp att betala är",
+        "confirmForm %s %d": "Att betala %s i månaden genom %d delbetalningar",
+        "apr": "Effektiv årsränta",
+        "currentCredit": "Aktuell kredit",
+        "interestTotal": "Total interest",
+        "paymentTotal": "Total payment",
+        "feesTotal": "Total fees"
+      }
+    },
+    "emails": {
+      "dear": "Bästa",
+      "title %s": "Bästa %s",
+      "footer": "Ha en bra dag",
+      "disclaimer": "FRISKRIVNINGSKLAUSUL: Den här informationen ges endast i informativt syfte. Kontrollera transaktionsspecifikationerna i backoffice. Direktlänk ",
+      "infoCallbacks": "Leverera inte produkten baserat på den här e-postaviseringen. Om du inte använder en betalnings-callback bör du alltid kontrollera transaktionsspecifikationerna i backoffice för att säkerställa att de stämmer med den produkt du säljer",
+      "payment": {
+        "successful": {
+          "subject": "Betalningsbegäran har behandlats och slutförts",
+          "merchantTitle": "Betalningsbegäran har behandlats och slutförts. Orderspecifikationerna visas nedanför",
+          "title": "Betalningsbegäran har behandlats och slutförts. E-handlaren har meddelats. Orderspecifikationerna visas nedanför"
+        },
+        "failed": {
+          "subject": "Betalningsbegäran har inte godkänts",
+          "title": "Betalningsbegäran har inte godkänts. Kontakta din e-handlare för mer information. Orderspecifikationerna visas nedanför"
+        },
+        "received": {
+          "subject": "Din betalningsbegäran har tagits emot",
+          "title": "Din betalningsbegäran har tagits emot och håller på att behandlas. Du kommer att meddelas när betalningen har godkänts. Orderspecifikationerna visas nedanför"
+        },
+        "date %s": "Betalningsbegäran utfärdades %s",
+        "transaction %s": "Transaktions-ID är %s"
+      },
+      "signup": {
+        "merchant": {
+          "subject": "Välkommen ",
+          "title": "Välkommen! Ditt nya användarkonto har skapats",
+          "p1": "Det här användarkontot ger dig tillgång till betalningstjänsten i backoffice, ett tillägg till din betalningsgateway med enkla och säkra flödeslösningar för betalning och utökade funktioner mot bedrägerier.",
+          "p2 %s %s %s": "Du kan komma åt betalningstjänsten i backoffice på: %s:. Använd följande autentiseringsuppgifter: <br> - <b> Användarnamn: %s</b>   <br> - <b> Lösenord: %s </b> ",
+          "p3": "Av säkerhetsskäl bör du lägga en minut på att <b>logga in i backoffice och ändra lösenordet</b>.<br><br> Kort därefter kommer din nya webbutik att ha skapats och du kommer få ett nytt mejl med uppgifter om butiken och hur du kommer åt butikens administrationssida.",
+          "footer": "Om du behöver hjälp eller support får du gärna kontakta din lokala säljare eller support. <br><br> Mycket nöje med den mobila shoppinglösningen och de säkra betalningarna."
+        },
+        "user": {
+          "subject %s": "Välkommen %s!",
+          "title": "Välkommen som ny användare av PayApi backoffice, den säkra betalningstjänsten med utökade funktioner mot bedrägerier.",
+          "p1 %s %s": "Du kan komma åt ditt backoffice på: %s. Ange ditt användarnamn %s och det lösenord som du fick vid registreringen.",
+          "p2": "Om du behöver hjälp eller support får du gärna kontakta oss på: support@payapi.io",
+          "footer": "Säkra betalningar <br> PayApi-teamet"
+        },
+        "instructions": {
+          "subject": "Integreringsguide för kassa",
+          "p1":" Grattis! Vi har skapat och konfigurerat en API-nyckel med standardinställningar och automatiskt lagt till den till ditt konto för din bekvämlighets skull. Du kan nu integrera våra bibliotek, SDK:er och RESTful API:n.",
+          "p2":"Innan mobilkassan på/i din webbplats, webbutik eller applikation kan användas måste en snabbintegrering utföras. Snabbintegreringsguiden kan laddas ner här: <a href=\"https://storage.cloud.google.com/public0/docs/sdk/quick_integration_guide_latest.pdf\" target=”_blank”>Snabbintegreringsguide</a>",
+          "p3": "Integreringsguiden innehåller en beskrivning av de steg som måste utföras för att enkelt och på bara några få minuter kunna lägga till knappen ”Kassa” i din applikation. Guiden innehåller också en lista över de plattformar som stöds samt nedladdningslänkar till olika bibliotek och SDK:er som hjälper dig att snabbt komma igång. För att godkänna betalningar behöver du uppgifterna för din API-nyckel, vilka finns tillgängliga nedanför. För att få mer information kan du ta en titt på vår <a href=\"https://payapi.io/apidoc\" target=”_blank”>API-referens</a> från PayApi:s dokumentationswebbplats.",
+          "p4 %s %s": "Uppgifter för API-nyckeln: <br>- <b> Publikt ID: </b> %s<br>- <b> Nyckel: </b> %s <br>",
+          "p5": "Tveka inte att kontakta oss om du skulle ha några frågor.",
+          "footer": "Med vänliga hälsningar<br> Supportteamet"
+        },
+        "newGateway": {
+          "subject": "betalningsgatewayen har konfigurerats med ditt PayApi-konto",
+          "p1":"För kännedom och för din bekvämlighets skull har dina betalningsbehandlingsinställningar konfigurerats och automatiskt tillförts till ditt konto. Nu kan du börja godkänna betalningar och tryggt sälja dina produkter online.",
+          "p2 %s":"Om du skulle behöva komma åt eller ändra konfigurationen, kan du göra det här: %s",
+          "p3 %s": "Tveka inte att kontakta din lokala %s-support om du skulle ha några frågor.",
+          "footer": "Med vänliga hälsningar <br> PayApi-teamet"
+        }
+      },
+      "invoice": {
+        "generated": {
+          "subject %s %s": "Faktura #%s från %s",
+          "title %s": "Din faktura #%s har skapats. <br> Tack för ditt köp!",
+          "payNow": "Betala nu",
+          "invoiceDetails": "Fakturauppgifter",
+          "p1": "Fakturauppgifterna visas nedanför:",
+          "footer %s": "Med vänliga hälsningar <br> %s"
+        },
+        "reminder": {
+          "subject %s %s": "Betalningspåminnelse för faktura #%s från %s",
+          "title %s": "Detta är en betalningspåminnelse för en obetald faktura från %s. Klicka på länken nedanför för att visa och betala fakturan."
+        },
+        "cancelled": {
+          "subject %s %s": "Faktura #%s från %s har annullerats.",
+          "title %s %s": "Faktura #%s från %s har annullerats."
+        },
+        "overdue": {
+          "subject %s": "Faktura #%s är förfallen till betalning för två månader sedan.",
+          "title %s %s": "Observera att inga fler betalningspåminnelser för faktura #%s kommer att skickas ut till kunden, %s: Annullera fakturan eller kontakta kunden.",
+          "p1": "Fakturauppgifterna visas nedanför:"
+        },
+        "viewDetails": "View Details",
+        "payNow": "Betala nu",
+        "payInParts %s": "Pay In Parts, from %s/ month"
+      },
+      "bankDetails": {
+        "subject": "Bankspecifikationer för betalningen – referens "
+      },
+      "cryptoTransactionDetails": {
+        "subject": "Din betalningsbegäran i kryptovaluta – referens: "
+      }
+    }
+  }

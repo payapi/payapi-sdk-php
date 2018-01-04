@@ -1,0 +1,390 @@
+{
+    "name": "Suomi",
+    "title": "Turvallinen maksu PayApi:lla",
+    "partnerTitle": "Turvallinen maksu",
+    "paymentGatewayUnavailable": "Maksusiltapalvelu ei ole käytössä. Kokeile uudestaan myöhemmin.",
+    "validationErrors": "Vahvistusvirhe löytynyt. Tämä virhe on lopullinen.  Saman syötteen lähettäminen ei muuta tulosta.",
+    "secureform": {
+      "error": "Virheitä löytynyt",
+      "warning": "Please note",
+      "unavailable": "Palvelu ei ole käytettävissä, tai sitä on käytetty väärillä parametreilla. <br>Kokeile myöhemmin uudestaan!",
+      "invalidParameters": "Palvelua on käytetty virheellisillä parametreilla.",
+      "error503": "Palvelu ei ole käytössä",
+      "error400": "Virheellinen pyyntö",
+      "fraudThresholdExceed": "Valitettavasti emme pysty tarjoamaan sinulle maksusiltapalvelua tällä hetkellä. Tämä ei ole järjestelmävirhe. Kokeile uudestaan huomenna tai ota yhteyttä kauppiaaseen.",
+      "paymentSessionExpired": "Valitettavasti maksutapahtuma on erääntynyt",
+      "title": "Turvallinen maksu",
+      "order": {
+        "legend": "Tilauksen yhteenveto",
+        "sumExcludingVat": "Netto",
+        "sumIncludingVat": "Loppusumma",
+        "vat": "ALV",
+        "referenceId": "Viitenumero"
+      },
+      "seller": {
+        "legend": "Myyjän tiedot",
+        "details": "Yrityksen tiedot",
+        "vatId": "ALV-tunnus",
+        "name": "Yrityksen nimi",
+        "streetAddress": "Katuosoite",
+        "streetAddress2": "Katuosoite",
+        "postalCodeAndCity": "Postinumero ja kaupunki",
+        "country": "Maa"
+      },
+      "products": {
+        "legend": "Tuotteet",
+        "title": "Nimike",
+        "quantity": "Määrä",
+        "priceIncludingVat": "Käytetty määrä",
+        "priceExcludingVat": "Käytetty määrä (ilman ALV:a)",
+        "vat": "ALV",
+        "shippingHandling": "Toimitus ja käsittely",
+        "shippingHandlingDescription": "Toimitus ja käsittely",
+        "shippingHandlingCategory": "Toimitus ja käsittely"
+      },
+      "creditCard": {
+        "legend": "Maksutiedot",
+        "email": "Kuluttajan sähköpostiosoite",
+        "cardHolder": "Kortin haltija",
+        "creditCard": "Luottokortti",
+        "emailInfo": "Sähköposti maksutapahtumia ja toimitusilmoituksia varten",
+        "name": "Kortin haltijan nimi",
+        "nameInfo": "Kortin haltijan nimi täsmälleen niin kuin kortissa kirjoitettuna",
+        "paymentMethod": "Maksutapa",
+        "ccnumber": "Luottokortin numero",
+        "CCV": "CVV/CCV",
+        "CCVInfo": "3-4 numeroa, jotka löytyvät kortin takaa",
+        "expiration": "Erääntyy",
+        "monthExpiration": "Erääntyy (kuukausi)",
+        "yearExpiration": "Erääntyy (vuosi)",
+        "s1button":"Lähetä",
+        "s2button": "Vahvista ostos",
+        "s2buttonmob": "Vahvista",
+        "vbutton": "Tarkista",
+        "mbutton": "Muokkaa",
+        "cbutton": "Peruuta",
+        "medbutton": "Muokkaa lisätietoja",
+        "pbutton %s": "Maksa osissa, alkaen %s/kuukaudessa",
+        "pbuttonmob %s": "Maksa %s/kuukaudessa"
+      },
+      "consumer": {
+        "legend": "Toimitusosoite",
+        "full": "Koko osoite",
+        "name": "Vastaanottajan nimi",
+        "co": "Puolesta",
+        "address": "Katuosoite",
+        "address2": "Katuosoite 2",
+        "zip": "Postinumero",
+        "city": "Kaupunki",
+        "province": "(not in use in Finland)",
+        "country": "Maa",
+        "phoneNumber": "Matkapuhelinnumero"
+      },
+      "tos": {
+        "legend": "Käyttöehdot",
+        "text": "Täyttämällä yllä olevan lomakkeen ja klikkaamalla ”Lähetä”-painiketta, hyväksyt",
+        "checkbox": "Hyväksyn",
+        "terms": "Käyttöehdot",
+        "andTerms": "ja",
+        "rememberMe": "Muista minut, tämä laite on yksityiskäytössä"
+      },
+      "loading": {
+        "title": "Odota...",
+        "step1": "Yhteyden varmistaminen",
+        "step2": "Lähetetään tietoja",
+        "step3": "Arvioidaan asiakasta",
+        "step4": "Arvioidaan kauppiasta",
+        "step5": "Turvallinen maksu on käytössä"
+      },
+      "cryptoPayments": {
+        "cryptoCurrencies": "Kryptovaluutat:",
+        "supportedCryptoCurrencies": "Huomio. Ostoksesi muutetaan Bitcoiniksi nykyisellä valuuttakurssilla.",
+        "confirmNote": "Ostoksesi muutetaan Bitcoiniksi nykyisellä valuuttakurssilla, kun klikkaat ”Vahvista”."
+      }
+    },
+    "secureconfirm": {
+      "title": "Vahvista tiedot"
+    },
+    "securereturn": {
+      "titleCancelled": "Maksu on peruutettu",
+      "titleProcessed": "Maksua käsitellään",
+      "cancelInfo": "Maksusi on peruttu. <br>Sinut ohjataan pian kauppiaan sivulle. Jos sinua ei automaattisesti ohjata, ole hyvä ja",
+      "cancelInfoNoCancelUrl": "Maksusi on peruutettu.",
+      "processInfo": "Maksusi on käsittelyssä. <br> Sinulle ilmoitetaan sähköpostilla, kun maksun tila on muuttunut. <br> Sinut ohjataan pian kauppiaan sivulle. Jos sinua ei automaattisesti ohjata, ole hyvä ja",
+      "processInfoNoSuccessUrl": "Maksuasi käsitellään. ",
+      "clickhere": "Klikkaa tästä"
+    },
+    "secureformverify": {
+      "legend": "Tarkista maksutiedot",
+      "info": "Lisäsuojan varmistamiseksi meidän on vahvistettava oheiset tiedot sinusta ja edellisestä ostoksestasi"
+    },
+    "secureformextrainput": {
+      "title": "Täytä seuraavat maksua koskevat tiedot.",
+      "legend": "Lisätiedot",
+      "cbutton": "Peruuta",
+      "sbutton": "Seuraava"
+    },
+    "cryptoTransaction": {
+      "title": "Kryptovaluuttamaksu",
+      "instructions": {
+        "legend": "Ohjeet",
+        "p1": "Lähetä oikea summa osoitteeseen alla ilmoitetulla tavalla. Varmista, että lähetät tarpeeksi, jotta summa kattaa kaikki tapahtumakulut! Näin varmistat, että järjestelmä merkitsee maksusi onnistuneeksi.  Voit tehdä siirron matkapuhelimellasi tai nettilompakko–sovelluksella.",
+        "p2": "Kun maksu on saapunut onnistuneesti, tulet saamaan sähköposti-ilmoituksen. Vahvistuksen saapuminen saattaa kestää jonkin aikaa, yleensä ilmoitus lähetetään muutaman tunnin kuluessa maksusta. <br><br>Jos tarvitset apua, ota yhteyttä myyjään/kauppiaaseen."
+      },
+      "details": {
+        "legend": "Tapahtumatiedot",
+        "amount": "Summa",
+        "currency": "Valuutta",
+        "transactionId": "Tapahtuman numero",
+        "walletAddress": "Nettilompakon osoite",
+        "confirmsNeeded": "Vahvistus tarvitaan",
+        "timeoutInSecs": "Aikalisä (sekunneissa)",
+        "status": "Tila"
+      },
+      "note": "Huomio! Siirto tulee tehdä 12 tunnin sisällä, jotta se ei eräänny automaattisesti. Voi kestää jonkin aikaa, ennen kuin maksun tila vahvistetaan.",
+      "bclose": "Sulje"
+    },
+    "bankTransfer": {
+      "title": "Tilisiirto",
+      "instructions": {
+        "legend": "Ohjeet",
+        "p1": "Käytä oheisia tietoja maksaessasi tämä ostos tilisiirrolla. Kun vastaanottaja on vastaanottanut ja vahvistanut maksun, tapahtuma merkitään *onnistuneeksi*.",
+        "p2": "Odota vähintään 3 päivää maksun saapumista vastaanottajan pankkitilille, ennen kuin otat heihin yhteyttä.",
+        "p3": "Tilisiirron tiedot lähetetään sinulle sähköpostilla, kun klikkaat ”Sulje”-painiketta."
+      },
+      "bankDetails": {
+        "legend": "Tilisiirron tiedot",
+        "bankAccountOwnerName": "Tilin omistaja",
+        "internationalBankAccountNumber": "IBAN",
+        "messageOrReference": "Viesti/viite",
+        "swiftbic": "SWIFT/BIC"
+      },
+      "note": "Tilisiirtomaksu on tehtävä 2 päivän kuluessa, jotta se ei eräänny automaattisesti. ",
+      "bclose": "Sulje"
+    },
+    "poweredBy": {
+      "poweredBy": "Toimii",
+      "info1": "Turvalliset verkko- ja mobiilimaksut"
+    },
+    "invalid": {
+      "payment":{
+        "ip": {
+          "address": "Virheellinen asiakkaan IP-osoite"
+        },
+        "cardHolderEmail": "Virheellinen kortin haltijan sähköpostiosoite",
+        "cardHolderName": "Virheellinen kortin haltijan nimi",
+        "paymentMethod": "Virheellinen maksutapa",
+        "creditCardNumber": "Virheellinen luottokortin numero",
+        "ccv": "Virheellinen CVV/CCV-koodi",
+        "expiresMonth": "Virheellinen luottokortin erääntymiskuukausi",
+        "expiresYear": "Virheellinen luottokortin erääntymisvuosi",
+        "cardHasExpired": "Luottokortti on vanhentunut",
+        "termsAccepted": "Sinun täytyy hyväksyä käyttöehdot"
+      },
+      "consumer": {
+        "name": "Virheellinen vastaanottajan nimi",
+        "co": "Virheellinen vastaanottaja c/o (puolesta)",
+        "streetAddress": "Virheellinen vastaanottajan katuosoite",
+        "streetAddress2": "Virheellinen vastaanottajan toinen katuosoite",
+        "postalCode": "Virheellinen vastaanottajan postinumero",
+        "city": "Virheellinen vastaanottajan kaupunki",
+        "stateOrProvince": "(not in use in Finland)",
+        "countryCode": "Virheellinen vastaanottajan maa",
+        "locale": "Virheellinen vastaanottajan tapahtumapaikka (5 merkkiä: RFC5646)",
+        "mobilePhoneNumber": "Virheellinen matkapuhelinnumero",
+        "email": "Virheellinen asiakkaan sähköpostiosoite",
+        "consumerId": "Virheellinen asiakasnumero",
+        "ssn": "Virheellinen sosiaaliturvatunnus"
+      },
+      "order": {
+        "sumInCentsIncVat": "Virheellinen tilauksen loppusumma (sisältää ALV:n)",
+        "sumInCentsExcVat": "Virheellinen tilauksen loppusumma (ilman ALV:tä)",
+        "vatInCents": "Virheellinen tilauksen ALV",
+        "referenceId": "Virheellinen tilauksen viitenumero",
+        "currency": "Virheellinen tilauksen valuutta",
+        "tosUrl":"Virheellinen käyttöehdon URL"
+      },
+      "product": {
+        "priceInCentsIncVat": "Virheellinen tuotteen loppusumma (sisältää ALV:n)",
+        "priceInCentsExcVat": "Virheellinen tuotteen loppusumma (ilman ALV:tä)",
+        "vatPercentage": "Virheellinen tuotteen ALV-prosentti",
+        "quantity": "Virheellinen tuotemäärä (täytyy olla numero)",
+        "imageUrl": "Virheellinen tuotteen kuvan URL (vain HTTPS-muoto sallittu)",
+        "description": "Virheellinen tuotekuvaus",
+        "title": "Virheellinen tuotenimi",
+        "category": "Virheellinen tuoteryhmä",
+        "model": "Virheellinen tuotemalli",
+        "extraData": "Virheellinen lisätieto tuotteesta",
+        "options": "Virheelliset tuotevaihtoehdot"
+      },
+      "shippingAddress": {
+        "recipientName": "Virheellinen vastaanottajan nimi",
+        "co": "Virheellinen toimitusosoite c/o",
+        "streetAddress": "Virheellinen toimituksen katuosoite",
+        "streetAddress2": "Virheellinen toimituksen katuosoite 2 ",
+        "postalCode": "Virheellinen postinumero",
+        "city": "Virheellinen toimituskaupunki",
+        "stateOrProvince": "(not in use in Finland)",
+        "countryCode": "Virheellinen maakoodi (2-merkkiä ISO 3166-1 alpha-2)"
+      },
+      "callbacks": {
+        "success": "Onnistuneen maksun maksupyynnön URL-osoite ei ole kelvollinen (vain HTTPS-muoto sallitaan)",
+        "failed": "Epäonnistuneen maksun maksupyynnön URL-osoite ei ole kelvollinen (vain HTTPS-muoto sallitaan)",
+        "chargeback": "Palautuksen maksupyynnön URL-osoite ei ole kelvollinen (vain HTTPS-muoto sallitaan)",
+        "processing": "Käsittelyn maksupyynnön URL-osoite ei ole kelvollinen (vain HTTPS-muoto sallitaan)"
+      },
+      "returnUrls": {
+        "success": "Onnistuneen maksun palautuksen URL-osoite ei ole kelvollinen (vain HTTPS-muoto sallitaan)",
+        "cancel": "Peruutetun maksun palautuksen URL-osoite ei ole kelvollinen (vain HTTPS-muoto sallitaan)",
+        "failed": "Epäonnistuneen maksun palautuksen URL-osoite ei ole kelvollinen (vain HTTPS-muoto sallitaan)"
+      },
+      "whitelistedDomain": "Verkkokaupan verkkotunnus ei ole sallittu API-avaimelle",
+      "webshopUrl": "Verkkokaupan URL tai HTTPS-sertifikaatti ei ole kelvollinen",
+      "publicId": "Virheellinen julkinen tunniste",
+      "json": "JSON-kohde ei ole kelvollinen",
+      "amountBelowMinimumAllowed": "Tilauksen loppusumma on valitun maksutavan vähimmäismäärää pienempi.",
+      "noWhitelistedCountryCode": "Valitsemasi maksutapa ei ole saatavilla maassasi.",
+      "webBrowserNotSupported": "Valitettavasti selaimesi ei ole yhteensopiva suojaustoimintojemme kanssa.  Jotta voisit käyttää palveluitamme, sinun on asennettava selain, joka tukee tietoturvaominaisuuksiamme. Esimerkkejä tällaisista selaimista ovat: <br><br>- Google Chrome v40 tai suurempi <br>- Safari v10 tai suurempi <br>- Mozilla Firefox v45 tai suurempi",
+      "unavailablePreviousPaymentMethod": "Valitettavasti aikaisemmin käyttämäsi maksutapa ei ole mahdollinen tässä ostoksessa. Valitse uusi maksutapa",
+      "noPaymentPlansAvailable": "Valitettavasti valitsemasi maksutapa, Osamaksu, ei ole mahdollinen tässä ostoksessa.",
+      "orderCurrencyNotSupported": "Valittu maksutapa ei ole mahdollinen tässä ostoksessa. Tilauksen valuuttaa ei tueta. Valitse toinen maksutapa"
+    },
+    "partialPayment": {
+      "collector": {
+        "title": "Osamaksusuunnitelma",
+        "instructions":"Huomaa, että osamaksut ovat Demo-tilassa",
+        "legend": "Osamaksu",
+        "ssn": "Sosiaaliturvatunnus",
+        "paymentInformation %s": "Jos valitset maksutavaksi Laskun, saat tuotteet ennen maksua. Voit sitten maksaa koko summan kerralla tai jakaa maksut pienempiin osamaksuihin. Maksun minimimäärä on <i id=\"lowestAmountToPay\"></i> %s. Sinun täytyy olla vähintään 18-vuotias käyttäessäsi tätä maksutapaa. Lisätietoja osoitteesta <a href=\"http://www.collector.se\" target=\"_blank\">http://www.collector.se </a>",
+        "termsAndConditions %1$s %2$s": "Olen lukenut ja hyväksynyt perijän pankin <a href=\"http://www.collector.se/upload/Partners/Agreements/%1$s/Credit_terms_All_%2$s.pdf\" target=\"_blank\">Yleiset käyttöhedot Laskuille ja Luottotileille </a> ja <a href=\"http://www.collector.se/upload/Partners/Agreements/%1$s/SECCI_%2$s.pdf\" target=\"_blank\">Standardoidut eurooppalaiset kulutusluottotiedot</a>",
+        "numberOfInstallments": "Osamaksujen määrä",
+        "plan": "Osamaksusuunnitelma",
+        "monthlyPayment": "Kuukausittainen maksu",
+        "bcancel": "Peruuta",
+        "bagree": "Hyväksy ja lähetä",
+        "loading": {
+          "title": "Luottotietojen tarkastus käynnissä"
+        },
+        "tosLegend": "Perijän laskuratkaisu",
+        "tosText1 %d %s": "Olet valinnut Perijän laskun ja Osamaksun maksutavaksesi. Huomioi, että lasku erääntyy %d päivässä ja laskutuslisä %s lisätään.",
+        "tosText2 %d %s": "Kun saat laskun, voit halutessasi maksaa osissa, jopa %d kuukauden ajan.  Jos maksat osissa, %s vuosikorko lisätään",
+        "error": "Luottotietojen tarkastus epäonnistui, klikkaa ”Muokkaa” ja valitse uusi maksutapa. ",
+        "lowestAmountToPay": "Minimimaksu on"
+      },
+      "fastPay": {
+        "title": "Osamaksusuunnitelma",
+        "instructions":"Huomaa, että osamaksut ovat Demo-tilassa",
+        "legend": "Osamaksu",
+        "ssn": "Sosiaaliturvatunnus",
+        "paymentInformation %s": "Jos valitset maksutavaksi Osamaksun, saat tuotteet ennen kuin maksat. Voit maksaa jopa <i id=\"maxNumberOfInstallments\"></i> osassa. Minimimaksu on <i id=\"minimumMonthlyPayment\"></i> %s kuukaudessa.  Sinun täytyy olla vähintään 18-vuotias käyttäessäsi tätä maksutapaa. Klikkaa <a href=\"https://www.payapi.io\" target=\"_blank\">https://payapi.io </a>ja saat lisätietoa.",
+        "termsAndConditions": "Olen lukenut ja hyväksynyt FastPay osamaksun <a href=\"https://payapi.io/terms\" target=\"_blank\">Yleiset ehdot</a>",
+        "numberOfInstallments": "Osamaksujen määrä",
+        "plan": "Osamaksusuunnitelma",
+        "monthlyPayment": "Kuukausittainen maksu",
+        "bcancel": "Peruuta",
+        "bagree": "Hyväksy ja lähetä",
+        "loading": {
+          "title": "Luottotietojen tarkastus käynnissä"
+        },
+        "tosLegend": "Laskun osamaksu",
+        "tosText1 %d %s": "Olet valinnut Osamaksun maksutavaksi. Huomioi, että lasku erääntyy %d päivässä ja laskutuslisä %s lisätään.",
+        "tosText2 %d %s %s": "Voit halutessasi maksaa erissä, jopa %d kuukauden ajan. Huomio, että %s vuosikorko lisätään. Ensimmäisen laskun avausmaksu on %s.",
+        "error": "Luottotietojen tarkastus epäonnistui",
+        "lowestAmountToPay": "Minimimaksu on",
+        "confirmForm %s %d": "Maksa %s kuukaudessa %d erässä.",
+        "apr": "Nykyinen vuotuinen korkokanta",
+        "currentCredit": "Tämän hetkinen luotto",
+        "interestTotal": "Total interest",
+        "paymentTotal": "Total payment",
+        "feesTotal": "Total fees"
+      }
+    },
+    "emails": {
+      "dear": "Hyvä",
+      "title %s": "Hyvä %s",
+      "footer": "Mukavaa päivää",
+      "disclaimer": "VASTUUVAPAUSLAUSEKE: Tämä tieto on vain informatiiviseen tarkoitukseen. Varmista tapahtumatiedot toimistosta. Suora linkki: ",
+      "infoCallbacks": "Älä lähetä tuotetta tämän ilmoituksen perusteella. Jos et käytä maksupyyntöjä, varmista tapahtumatiedot aina backofficesta, että ne vastaavat myymääsi tuotetta.",
+      "payment": {
+        "successful": {
+          "subject": "Maksupyyntö on käsitelty onnistuneesti",
+          "merchantTitle": "Maksupyyntö on käsitelty onnistuneesti. Tilaustiedot ovat alapuolella",
+          "title": "Maksupyyntö on käsitelty onnistuneesti. Kauppiaalle on ilmoitettu. Tilaustiedot ovat alapuolella"
+        },
+        "failed": {
+          "subject": "Maksupyyntö on epäonnistunut",
+          "title": "Maksupyyntö on epäonnistunut.  Jos haluat lisätietoja, ota yhteyttä kauppiaaseen. Tilaustiedot ovat alapuolella"
+        },
+        "received": {
+          "subject": "Maksupyyntösi on vastaanotettu",
+          "title": "Maksupyyntösi on vastaanotettu ja on nyt käsittelyssä. Sinulle ilmoitetaan, kun maksu on hyväksytty. Tilaustiedot ovat alapuolella"
+        },
+        "date %s": "Maksupyyntö tehtiin kello %s.",
+        "transaction %s": "Tapahtumanumero on %s"
+      },
+      "signup": {
+        "merchant": {
+          "subject": "Tervetuloa ",
+          "title": "Tervetuloa! Uusi käyttäjätilisi on luotu",
+          "p1": "Tällä käyttäjätilillä pääset maksupalvelun backofficeen, saat laajemman maksusiltapalvelun helpoille ja turvallisille maksusuorituksille sekä laajennetut petostentorjuntatoimet",
+          "p2 %s %s %s": "Pääset maksujen backofficeen: %s. Käytä seuraavia tunnistetietoja: <br> - <b> Käyttäjätunnus: %s</b>  <br> - <b> Salasana: %s </b> ",
+          "p3": "Käytä pieni hetki <b>kirjautuaksesi backofficeen ja muuta salasana</b> turvallisuussyistä. <br><br>Hetken kuluttua uusi verkkokauppasi on luotu ja saat uuden sähköpostin, jossa on tietoa kaupasta ja siitä, miten pääset kaupan hallintasivulle",
+          "footer": "Jos tarvitset apua tai tukea, ota yhteyttä paikalliseen myyntiin tai tukeen. <br><br>Nauti matkapuhelimen shoppailuratkaisuista ja turvallisista maksuista!"
+        },
+        "user": {
+          "subject %s": "Tervetuloa %s!",
+          "title": "Tervetuloa PayApi:n backofficen uudeksi käyttäjäksi. Tarjoamme turvalliset maksupalvelut ja laajennetut petostentorjuntatoimet",
+          "p1 %s %s": "Pääset backofficeen: %s. Käytä käyttäjätunnustasi %s ja rekisteröinnin aikana antamaasi salasanaa",
+          "p2": "Jos tarvitset apua, ota meihin yhteyttä support@payapi.io",
+          "footer": "Turvalliset maksut, <br> PayApi-tiimi"
+        },
+        "instructions": {
+          "subject": "Kassan integraatio-opas",
+          "p1":" Onnittelut! Olemme luoneet ja määritelleet oletusarvoisen API-avaimen ja lisänneet sen tilillesi automaattisesti.  Nyt voit integroida kirjastomme, SDK:t tai RESTful API:n",
+          "p2":"Jotta voisit aloittaa mobiilikassan käytön sivustollasi, myymälässäsi tai sovelluksessa, täytyy suorittaa nopea integraatio. Nopea integraatio-opas on ladattavissa täältä. <a href=\"https://storage.cloud.google.com/public0/docs/sdk/quick_integration_guide_latest.pdf\" target=\"_blank\">Nopea integraatio opas</a>",
+          "p3": "Integraatio-oppaassa on kuvaus kaikista tarvittavista vaiheista, miten lisäät ”Kassa”-painikkeen sovellukseesi nopeasti ja vain muutamassa minuutissa. Oppaassa on myös luettelo tuetuista käyttöympäristöistä ja latauslinkkejä erilaisiin kirjastoihin ja SDK:hin, jotka auttavat sinua pääsemään alkuun nopeasti. Maksujen hyväksyntä edellyttää API-avaintietojasi, jotka ovat käytettävissäsi alapuolella. Lisää tietoa löydät <a href=\"https://payapi.io/apidoc\" target=\"_blank\">API-viite</a> PayApi-sivustoltamme",
+          "p4 %s %s": "API-avain tietoa: <br>- <b> Public ID: </b> %s<br>- <b> Key: </b> %s <br>",
+          "p5": "Jos sinulla on kysyttävää, ota meihin yhteyttä",
+          "footer": "Ystävällisin terveisin, <br> Tukitiimi"
+        },
+        "newGateway": {
+          "subject": "Maksusiltapalvelu on määritelty PayApi-tilillesi ",
+          "p1":"Maksujen käsittelyasetukset on määritelty ja lisätty automaattisesti tilillesi. Nyt voit aloittaa maksujen hyväksynnän ja alkaa myymään tuotteitasi verkossa turvallisesti!",
+          "p2 %s":"Jos haluat käyttää tai muuttaa määrityksiä, voit tehdä sen täällä: %s",
+          "p3 %s": "Jos sinulla on jotain kysyttävää, ota yhteyttä paikalliseen %s tukeen",
+          "footer": "Ystävällisin terveisin, <br> PayApi-tiimi"
+        }
+      },
+      "invoice": {
+        "generated": {
+          "subject %s %s": "Lasku #%s %s lta",
+          "title %s": "Laskusi #%s on luotu. <br> Kiitos ostoksestasi",
+          "invoiceDetails": "Laskutiedot",
+          "p1": "Laskun tiedot löytyvät alapuolelta:",
+          "footer %s": "Ystävällisin terveisin, <br> %s"
+        },
+        "reminder": {
+          "subject %s %s": "Laskumuistutus %s %slta",
+          "title %s": "Tämä on muistutus %sn maksamattomasta laskusta. Klikkaa linkkiä, jonka kautta voit katsoa ja maksaa laskun"
+        },
+        "cancelled": {
+          "subject %s %s": "Lasku #%s %slta on peruutettu",
+          "title %s %s": "Lasku #%s %slta on peruutettu"
+        },
+        "overdue": {
+          "subject %s": "Laskun #%s maksu on kaksi kuukautta myöhässä",
+          "title %s %s": "Huomio, että laskun #%s muistutuksia ei lähetetä enää asiakkaalle: %s. Peruuta lasku tai ota yhteyttä asiakkaaseen",
+          "p1": "Laskun tiedot löytyvät alapuolelta:"
+        },
+        "viewDetails": "Lisätiedot",
+        "payNow": "Maksa nyt",
+        "payInParts %s": "Pay In Parts, from %s/ month"
+      },
+      "bankDetails": {
+        "subject": "Pankkitiedot maksua varten – viite: "
+      },
+      "cryptoTransactionDetails": {
+        "subject": "Kryptomaksu pyyntö – viite: "
+      }
+    }
+  }

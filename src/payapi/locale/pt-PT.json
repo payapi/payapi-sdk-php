@@ -1,0 +1,390 @@
+{
+    "name": "Português",
+    "title": "Pagamento seguro com PayApi",
+    "partnerTitle": "Pagamento seguro com",
+    "paymentGatewayUnavailable": "O gateway de pagamento não está disponível. Tente novamente mais tarde.",
+    "validationErrors": "Erro de validação encontrado. Este erro é final. O envio da mesma informação não alterará o resultado.",
+    "secureform": {
+      "error": "Erros encontrados",
+      "warning": "Please note",
+      "unavailable": "O serviço não está disponível ou foi utilizado com parâmetros inválidos.<br>Por favor, tente novamente mais tarde!",
+      "invalidParameters": "O serviço foi utilizado com parâmetros inválidos.",
+      "error503": "O serviço não está disponível.",
+      "error400": "Pedido inválido",
+      "fraudThresholdExceed": "Infelizmente, nesta altura não lhe podemos fornecer um gateway de pagamento. Este não é um erro no sistema. Tente novamente amanhã ou contacte o seu comerciante.",
+      "paymentSessionExpired": "Lamentamos, a sua sessão de pagamento expirou",
+      "title": "Pagamento seguro",
+      "order": {
+        "legend": "Resumo da encomenda",
+        "sumExcludingVat": "Líquido",
+        "sumIncludingVat": "Total",
+        "vat": "IVA",
+        "referenceId": "ID de referência"
+      },
+      "seller": {
+        "legend": "Informações do vendedor",
+        "details": "Informações da empresa",
+        "vatId": "N.º de contribuinte",
+        "name": "Nome da empresa",
+        "streetAddress": "Morada",
+        "streetAddress2": "Morada",
+        "postalCodeAndCity": "Código postal e cidade",
+        "country": "País"
+      },
+      "products": {
+        "legend": "Produtos",
+        "title": "Título",
+        "quantity": "Q.",
+        "priceIncludingVat": "P.U.",
+        "priceExcludingVat": "P.U. (sem IVA)",
+        "vat": "IVA",
+        "shippingHandling": "Shipping and Handling",
+        "shippingHandlingDescription": "Shipping and handling fees, added with instant buy",
+        "shippingHandlingCategory": "Shipping"
+      },
+      "creditCard": {
+        "legend": "Informação de pagamento",
+        "email": "E-mail do consumidor",
+        "cardHolder": "Titular do cartão",
+        "creditCard": "Cartão de crédito",
+        "emailInfo": "E-mail para estado de pagamento e avisos de entrega",
+        "name": "Nome do titular do cartão",
+        "nameInfo": "Nome do titular do cartão exatamente como impresso no cartão",
+        "paymentMethod": "Método de pagamento",
+        "ccnumber": "Número do cartão de crédito",
+        "CCV": "CVV/CCV",
+        "CCVInfo": "3-4 números, geralmente localizados na parte de trás do cartão",
+        "expiration": "Validade",
+        "monthExpiration": "Validade (mês)",
+        "yearExpiration": "Validade (ano)",
+        "s1button":"Enviar",
+        "s2button": "Confirmar compra",
+        "s2buttonmob": "Confirmar",
+        "vbutton": "Verificar",
+        "mbutton": "Modificar",
+        "cbutton": "Cancelar",
+        "medbutton": "Modificar dados suplementares",
+        "pbutton %s": "Pagar parcialmente, de %s/mês",
+        "pbuttonmob %s": "Pagar %s/mês"
+      },
+      "consumer": {
+        "legend": "Morada de entrega",
+        "full": "Morada completa",
+        "name": "Nome do destinatário",
+        "co": "Ao cuidado de",
+        "address": "Morada",
+        "address2": "Morada 2",
+        "zip": "Código postal",
+        "city": "Cidade",
+        "province": "Estado/Província",
+        "country": "País",
+        "phoneNumber": "Número de telemóvel"
+      },
+      "tos": {
+        "legend": "Termos de serviço",
+        "text": "Ao preencher o formulário acima e clicando no botão Enviar, aceita",
+        "checkbox": "Eu aceito",
+        "terms": "os Termos e condições de",
+        "andTerms": "e",
+        "rememberMe": "Recordar-me, este é um dispositivo privado"
+      },
+      "loading": {
+        "title": "Por favor, espere...",
+        "step1": "A proteger a ligação",
+        "step2": "A transmitir os dados",
+        "step3": "A avaliar o consumidor",
+        "step4": "A avaliar o comerciante",
+        "step5": "Pagamento seguro ativado"
+      },
+      "cryptoPayments": {
+        "cryptoCurrencies": "Moedas encriptadas:",
+        "supportedCryptoCurrencies": "Note. A sua compra será convertida em BTC à taxa de câmbio atual.",
+        "confirmNote": "A sua compra será convertida em BTC à taxa de câmbio atual quando clicar em Confirmar."
+      }
+    },
+    "secureconfirm": {
+      "title": "Confirmar informações"
+    },
+    "securereturn": {
+      "titleCancelled": "O pagamento foi cancelado",
+      "titleProcessed": "Pagamento em andamento",
+      "cancelInfo": "O seu pagamento foi cancelado.<br>Será redirecionado para o website do comerciante em breve. Se não for redirecionado automaticamente, por favor",
+      "cancelInfoNoCancelUrl": "O seu pagamento foi cancelado.",
+      "processInfo": "O seu pagamento está em andamento.<br>Será avisado por e-mail quando o estado do seu pagamento for alterado.<br>Será redirecionado para o website do comerciante em breve. Se não for redirecionado automaticamente, por favor",
+      "processInfoNoSuccessUrl": "O seu pagamento está em andamento.",
+      "clickhere": "clique aqui"
+    },
+    "secureformverify": {
+      "legend": "Verificar informação do pagamento",
+      "info": "Para maior segurança, devemos confirmar as seguintes informações de si e da sua compra anterior"
+    },
+    "secureformextrainput": {
+      "title": "Preencha os campos seguintes, necessários para o pagamento",
+      "legend": "Informação suplementar",
+      "cbutton": "Cancelar",
+      "sbutton": "Seguinte"
+    },
+    "cryptoTransaction": {
+      "title": "Pagamento em moeda encriptada",
+      "instructions": {
+        "legend": "Instruções",
+        "p1": "Envie o valor correto para a morada, conforme indicado abaixo. Certifique-se de enviar o suficiente para cobrir quaisquer taxas de transação de moeda! Tal assegurará que o sistema assinalará o seu pagamento como bem sucedido. Pode fazer a transferência utilizando a sua aplicação de carteira móvel/online",
+        "p2": "Quando o pagamento tiver sido bem-recebido, receberá um aviso por e-mail. A chegada da confirmação de transferência pode levar algum tempo; geralmente, o aviso é enviado no prazo de algumas horas após o pagamento.<br><br>Caso necessite de ajuda, contacte o seu vendedor/comerciante."
+      },
+      "details": {
+        "legend": "Informações da fatura",
+        "amount": "Valor",
+        "currency": "Moeda",
+        "transactionId": "ID de fatura",
+        "walletAddress": "Endereço da carteira",
+        "confirmsNeeded": "Confirmação necessária",
+        "timeoutInSecs": "Tempo limite (em segundos)",
+        "status": "Estado"
+      },
+      "note": "Note! A transferência bancária deve ser realizada no prazo de 12 horas para que não caduque automaticamente. Pode levar algum tempo antes de o estado do pagamento ter sido confirmado.",
+      "bclose": "Encerrar"
+    },
+    "bankTransfer": {
+      "title": "Transferência bancária",
+      "instructions": {
+        "legend": "Instruções",
+        "p1": "Utilize as seguintes informações para pagar esta conta utilizando transferência bancária. Quando o pagamento tiver sido recebido e confirmado pelo destinatário, a transação será assinalada como *bem-sucedida*",
+        "p2": "Espere, pelo menos, 3 dias para que o pagamento chegue à conta bancária dos destinatários antes de os contactar.",
+        "p3": "As informações da transferência bancária serão enviadas por e-mail ao clicar no botão “Encerrar”."
+      },
+      "bankDetails": {
+        "legend": "Informações da transferência bancária",
+        "bankAccountOwnerName": "Titular da conta",
+        "internationalBankAccountNumber": "IBAN",
+        "messageOrReference": "Mensagem/Referência",
+        "swiftbic": "SWIFT/BIC"
+      },
+      "note": "O pagamento por transferência bancária deve ser realizado no prazo de 2 dias para que não caduque automaticamente",
+      "bclose": "Encerrar"
+    },
+    "poweredBy": {
+      "poweredBy": "Com tecnologia de",
+      "info1": "Pagamentos online e móveis seguros"
+    },
+    "invalid": {
+      "payment":{
+        "ip": {
+          "address": "Endereço IP do cliente inválido"
+        },
+        "cardHolderEmail": "Endereço de e-mail do titular do cartão inválido",
+        "cardHolderName": "Nome do titular do cartão inválido",
+        "paymentMethod": "Método de pagamento inválido",
+        "creditCardNumber": "Número do cartão de crédito inválido",
+        "ccv": "Código CVV/CCV inválido",
+        "expiresMonth": "Mês de validade do cartão de crédito inválido",
+        "expiresYear": "Ano de validade do cartão de crédito inválido",
+        "cardHasExpired": "O cartão de crédito caducou",
+        "termsAccepted": "Os termos de serviço devem ser aceites"
+      },
+      "consumer": {
+        "name": "Nome do destinatário inválido",
+        "co": "A/c (ao cuidado) do destinatário inválido",
+        "streetAddress": "Morada de destinatário inválida",
+        "streetAddress2": "Morada 2 de destinatário inválida",
+        "postalCode": "Código postal do destinatário inválido",
+        "city": "Cidade do destinatário inválida",
+        "stateOrProvince": "Estado ou província de destinatário inválido",
+        "countryCode": "País do destinatário inválido",
+        "locale": "Local de destinatário inválido (5 caracteres: RFC5646)",
+        "mobilePhoneNumber": "Número de telemóvel inválido",
+        "email": "E-mail do consumidor inválido",
+        "consumerId": "ID do consumidor inválido",
+        "ssn": "Número de segurança social inválido"
+      },
+      "order": {
+        "sumInCentsIncVat": "Soma de encomenda inválida (com IVA)",
+        "sumInCentsExcVat": "Soma de encomenda inválida (sem IVA)",
+        "vatInCents": "IVA de encomenda inválido",
+        "referenceId": "ID de referência de encomenda inválida",
+        "currency": "Moeda de encomenda inválida",
+        "tosUrl":"URL de Termos de Serviço inválido"
+      },
+      "product": {
+        "priceInCentsIncVat": "Soma de produto inválida (com IVA)",
+        "priceInCentsExcVat": "Soma de produto inválida (sem IVA)",
+        "vatPercentage": "Percentagem de IVA do produto inválida",
+        "quantity": "Quantidade de produto inválida (deve ser um número)",
+        "imageUrl": "URL de imagem do produto inválida (apenas permitido HTTPS)",
+        "description": "Descrição do produto inválida",
+        "title": "Título de produto inválido",
+        "category": "Categoria de produto inválida",
+        "model": "Modelo de produto inválido",
+        "extraData": "Informações suplementares de produto inválidas",
+        "options": "Opções de produto inválidas"
+      },
+      "shippingAddress": {
+        "recipientName": "Nome do destinatário do envio inválido",
+        "co": "Morada de A/C de envio inválido",
+        "streetAddress": "Morada de envio inválida",
+        "streetAddress2": "Morada de envio 2 inválida",
+        "postalCode": "Código postal inválido",
+        "city": "Cidade de envio inválida",
+        "stateOrProvince": "Estado ou província inválido",
+        "countryCode": "Código de país inválido. (2-car. ISO 3166-1 alfa-2)"
+      },
+      "callbacks": {
+        "success": "URL de retorno de chamada para pagamento bem-sucedido não é válido (unicamente autorizado HTTPS)",
+        "failed": "URL de retorno de chamada para pagamento falhado não é válido (unicamente autorizado HTTPS)",
+        "chargeback": "URL de retorno de chamada para estorno não é válido (unicamente autorizado HTTPS)",
+        "processing": "URL de retorno de chamada para processamento não é válido (unicamente autorizado HTTPS)"
+      },
+      "returnUrls": {
+        "success": "URL de retorno para pagamento bem-sucedido não é válido (unicamente autorizado HTTPS)",
+        "cancel": "URL de retorno para pagamento cancelado não é válido (unicamente autorizado HTTPS)",
+        "failed": "URL de retorno para pagamento falhado não é válido (unicamente autorizado HTTPS)"
+      },
+      "whitelistedDomain": "Domínio na loja online não listado como autorizado na chave API",
+      "webshopUrl": "URL da loja online ou certificado HTTPS não são válidos",
+      "publicId": "ID público inválido",
+      "json": "O objeto JSON não é válido",
+      "amountBelowMinimumAllowed": "O valor total da encomenda está abaixo do mínimo permitido para o método de pagamento selecionado",
+      "noWhitelistedCountryCode": "O método de pagamento selecionado não está disponível para o seu país.",
+      "webBrowserNotSupported": "Infelizmente, o seu navegador não é compatível com os nossos recursos de segurança. Para utilizar os nossos serviços, deverá instalar um navegador que suporte os nossos recursos de segurança. Exemplos de tais navegadores são: <br><br>- Google Chrome v40 ou superior <br>- Safari v10 ou superior <br>- Mozilla Firefox v45 ou superior",
+      "unavailablePreviousPaymentMethod": "Infelizmente, o método de pagamento anteriormente selecionado não está disponível para esta compra. Selecione o novo método de pagamento",
+      "noPaymentPlansAvailable": "Infelizmente, o método de pagamento selecionado, Pagar parcialmente, não está disponível para esta compra",
+      "orderCurrencyNotSupported": "O método de pagamento selecionado não está disponível para esta compra. A moeda da encomenda não é suportada. Selecione um novo método de pagamento"
+    },
+    "partialPayment": {
+      "collector": {
+        "title": "Contrato de pagamento faseado",
+        "instructions":"Observe que os pagamentos parciais estão no modo de demonstração",
+        "legend": "Pagamento parcial",
+        "ssn": "Número de segurança social",
+        "paymentInformation %s": "Quando seleciona Fatura como método de pagamento, recebe os seus artigos antes de pagar. Pode optar por pagar o valor total de uma vez ou dividir o pagamento em parcelas menores. O valor mínimo a pagar é de <i id=\"lowestAmountToPay\"></i> %s. Deve ter, pelo menos, 18 anos de idade para utilizar este método de pagamento. Consulte <a href=\"http://www.collector.se\" target=\"_blank\">http://www.collector.se </a> para mais informação.",
+        "termsAndConditions %1$s %2$s": "Li e aceitei as <a href=\"http://www.collector.se/upload/Partners/Agreements/%1$s/Credit_terms_All_%2$s.pdf\" target=\"_blank\">Condições gerais para faturação e contas de crédito</a> da Collector Bank e <a href=\"http://www.collector.se/upload/Partners/Agreements/%1$s/SECCI_%2$s.pdf\" target=\"_blank\">a Informação de Crédito ao Consumo Padronizada Europeia</a>",
+        "numberOfInstallments": "Número de prestações",
+        "plan": "Plano de pagamentos parciais",
+        "monthlyPayment": "Pagamento mensal",
+        "bcancel": "Cancelar",
+        "bagree": "Concordar e enviar",
+        "loading": {
+          "title": "Verificação de crédito em curso"
+        },
+        "tosLegend": "Solução de fatura Collector",
+        "tosText1 %d %s": "Selecionou a fatura do Collector e os pagamentos fracionados como método de pagamento. Note que a fatura vencerá em %d dias e será adicionada uma taxa de faturação de %s.",
+        "tosText2 %d %s": "Quando recebe a fatura, pode optar por pagar em prestações, em até %d meses. Em caso de pagamento a prestações, são devidos juros de %s anuais.",
+        "error": "Falha na verificação de crédito, clique em \"Modificar\" para selecionar o novo método de pagamento",
+        "lowestAmountToPay": "O valor mínimo a pagar é de "
+      },
+      "fastPay": {
+        "title": "Contrato de pagamento faseado",
+        "instructions":"Observe que os pagamentos parciais estão no modo de demonstração",
+        "legend": "Pagamento parcial",
+        "ssn": "Número de segurança social",
+        "paymentInformation %s": "Quando seleciona Pagamento a prestações como método de pagamento, recebe os seus artigos antes de pagar. Pode dividir os pagamentos em <i id=\"maxNumberOfInstallments\"></i> prestações. O valor mínimo a pagar é de <i id=\"minimumMonthlyPayment\"></i> %s por mês. Deve ter, pelo menos, 18 anos de idade para utilizar este método de pagamento. Consulte <a href=\"https://www.payapi.io\" target=\"_blank\">https://payapi.io </a> para mais informação.",
+        "termsAndConditions": "Li e aceitei as <a href=\"https://payapi.io/terms\" target=\"_blank\">Condições Gerais</a> de pagamento parcial do FastPay",
+        "numberOfInstallments": "Número de prestações",
+        "plan": "Plano de pagamentos parciais",
+        "monthlyPayment": "Pagamento mensal",
+        "bcancel": "Cancelar",
+        "bagree": "Concordar e enviar",
+        "loading": {
+          "title": "Verificação de crédito em curso"
+        },
+        "tosLegend": "Pagamentos parciais da fatura",
+        "tosText1 %d %s": "Selecionou Pagamento parcelar e a prestações como o seu método de pagamento. Note que a fatura vencerá em %d dias e será adicionada uma taxa de faturação de %s.",
+        "tosText2 %d %s %s": "Pode optar por pagar em prestações, em até %d meses. Recorde que é adicionado o valor de juros de %s anuais e a taxa de abertura para a primeira fatura é de %s",
+        "error": "Falha na verificação de crédito",
+        "lowestAmountToPay": "O valor mínimo a pagar é de ",
+        "confirmForm %s %d": "Para pagar %s por mês em %d prestações",
+        "apr": "Taxa de juros anual real",
+        "currentCredit": "Crédito atual",
+        "interestTotal": "Total interest",
+        "paymentTotal": "Total payment",
+        "feesTotal": "Total fees"
+      }
+    },
+    "emails": {
+      "dear": "Caro",
+      "title %s": "Caro %s",
+      "footer": "Tenha um bom dia",
+      "disclaimer": "AVISO LEGAL: Esta informação destina-se apenas a fins informativos. Verifique as informações da transação no BackOffice. Hiperligação direta: ",
+      "infoCallbacks": "Não envie o produto com base neste aviso por e-mail. Se não estiver a utilizar o retorno de pagamento, deverá sempre verificar as informações da transação no BackOffice e confirmar que coincidem com o produto que está a vender.",
+      "payment": {
+        "successful": {
+          "subject": "O pedido de pagamento foi processado com sucesso",
+          "merchantTitle": "O pedido de pagamento foi processado com sucesso. As informações da encomenda são apresentadas a seguir:",
+          "title": "O pedido de pagamento foi processado com sucesso. O comerciante foi notificado. As informações da encomenda são apresentadas a seguir:"
+        },
+        "failed": {
+          "subject": "O pedido de pagamento falhou",
+          "title": "O pedido de pagamento falhou. Para mais informação, contacte o comerciante. As informações da encomenda são apresentadas a seguir:"
+        },
+        "received": {
+          "subject": "O seu pedido de pagamento foi recebido.",
+          "title": "O seu pedido de pagamento foi recebido e está a ser processado. Será avisado quando o pagamento tiver sido aceite. As informações da encomenda são apresentadas a seguir:"
+        },
+        "date %s": "O pedido de pagamento foi feito em %s",
+        "transaction %s": "A ID da transação é %s"
+      },
+      "signup": {
+        "merchant": {
+          "subject": "Boas-vindas ",
+          "title": "Seja bem-vindo! A sua nova conta de utilizador foi criada",
+          "p1": "Esta conta de utilizador dá acesso ao BackOffice do serviço de pagamento, uma extensão para o gateway de pagamento com soluções de roteamento de pagamento simples e seguras e operações antifraude alargadas",
+          "p2 %s %s %s": "Pode aceder ao BackOffice de pagamentos em: %s:. Utilize as seguintes credenciais: <br> - <b> Nome de utilizador: %s</b>   <br> - <b> Palavra-passe: %s </b> ",
+          "p3": "Perca um pouco de tempo para <b>entrar no seu BackOffice e alterar a palavra-passe</b> por razões de segurança.<br><br> Dentro de pouco tempo, a sua nova loja online terá sido criada e receberá outro e-mail com informação sobre a loja e a forma de acesso à página de administração da loja",
+          "footer": "Se necessitar de ajuda ou suporte, contacte o departamento comercial ou de suporte. <br><br> Aproveite a solução de compras móveis e pagamentos seguros!"
+        },
+        "user": {
+          "subject %s": "Seja bem-vindo %s!",
+          "title": "Seja bem-vindo como novo utilizador para o seu BackOffice PayApi, o serviço de pagamento seguro com operações antifraude ampliadas",
+          "p1 %s %s": "Pode aceder ao seu BackOffice em: %s. Utilize o seu nome de utilizador %s com a palavra-passe fornecida durante o registo",
+          "p2": "Se necessitar de ajuda ou suporte, contacte-nos em support@payapi.io",
+          "footer": "Pagamentos seguros, <br> A equipa PayApi"
+        },
+        "instructions": {
+          "subject": "Guia de Integração de Saída",
+          "p1":" Parabéns! Criámos e configurámos uma chave API padrão e adicionámo-la à sua conta automaticamente para sua conveniência Agora, pode integrar as nossas bibliotecas, SDKs ou a API RESTful",
+          "p2":"Para começar a utilizar a saída móvel no seu website, loja ou aplicação, deve ser realizada uma breve integração. O Guia de Integração Rápida está disponível para transferência aqui: <a href=\"https://storage.cloud.google.com/public0/docs/sdk/quick_integration_guide_latest.pdf\" target=\"_blank\">Guia de integração rápida</a>",
+          "p3": "O guia de integração inclui uma descrição dos passos necessários para adicionar o botão de Saída à sua aplicação de forma simples e em apenas alguns minutos. O guia inclui igualmente a lista de plataformas suportadas e hiperligações de transferência para diferentes bibliotecas e SDKs que o ajudarão a continuar rapidamente. Para aceitar pagamentos, necessita da informação da sua chave API, disponível a seguir. Para informação adicional, consulte a nossa <a href=\"https://payapi.io/apidoc\" target=\"_blank\">referência API</a> no website de documentação PayApi",
+          "p4 %s %s": "Informação chave API: <br>- <b> ID pública: </b> %s<br>- <b> Chave: </b> %s <br>",
+          "p5": "Não hesite em nos contactar, caso exista qualquer dúvida.",
+          "footer": "Cumprimentos,<br> A equipa de suporte"
+        },
+        "newGateway": {
+          "subject": "O gateway de pagamento foi configurado para a sua conta PayApi",
+          "p1":"Para sua informação, as suas configurações de processamento de pagamentos foram configuradas e adicionadas automaticamente para sua conveniência. Agora, pode começar a aceitar pagamentos e a vender os seus produtos online de forma segura!",
+          "p2 %s":"Se precisar de aceder ou de alterar a configuração, pode fazê-lo aqui: %s",
+          "p3 %s": "Se tiver qualquer dúvida, não hesite em contactar a sua equipa de suporte %s local.",
+          "footer": "Cumprimentos,<br> A equipa PayApi"
+        }
+      },
+      "invoice": {
+        "generated": {
+          "subject %s %s": "Fatura #%s de %s",
+          "title %s": "A sua fatura #%s foi gerada. <br> Agradecemos a sua confiança",
+          "invoiceDetails": "Informações da fatura",
+          "p1": "As informações da fatura são apresentadas a seguir:",
+          "footer %s": "Cumprimentos, <br> %s"
+        },
+        "reminder": {
+          "subject %s %s": "Lembrete de fatura #%s de %s",
+          "title %s": "Este é um lembrete para uma fatura não paga de %s. Clique na hiperligação seguinte para ver e pagar a fatura"
+        },
+        "cancelled": {
+          "subject %s %s": "A fatura #%s de %s foi cancelada",
+          "title %s %s": "A fatura #%s de %s foi cancelada"
+        },
+        "overdue": {
+          "subject %s": "O pagamento da fatura #%s está atrasado em dois meses",
+          "title %s %s": "Note que os lembretes para a fatura #%s já não serão enviados para o cliente: %s. Cancele a fatura ou contacte o cliente",
+          "p1": "As informações da fatura são apresentadas a seguir:"
+        },
+        "viewDetails": "View Details",
+        "payNow": "Pagar agora",
+        "payInParts %s": "Pay In Parts, from %s/ month"
+      },
+      "bankDetails": {
+        "subject": "Informações bancárias para pagamento - referência: "
+      },
+      "cryptoTransactionDetails": {
+        "subject": "O seu pedido de pagamento encriptado - referência: "
+      }
+    }
+  }
