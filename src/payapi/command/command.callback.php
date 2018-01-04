@@ -145,7 +145,7 @@ namespace payapi;
 *
 * @NOTE
 *          transactions are cached per status
-*          duplicated status updates are not allowed (returns 401 error)
+*          duplicated status updates do not update/rewrite order cache (returns cached data)
 *
 * @VALID
 *          schema.callback*
@@ -218,8 +218,8 @@ final class commandCallback extends controller
                 $knockData['payment']['status'] . $knockData['order']['referenceId']
             );
             if ($duplicated !== false) {
-                //-> 401 error
                 return $this->render($duplicated);
+                //-> 401 error
                 //return $this->returnResponse($this->error->transactionDuplicated());
             }
             $this->cache(
