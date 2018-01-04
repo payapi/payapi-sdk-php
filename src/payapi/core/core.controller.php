@@ -40,10 +40,11 @@ abstract class controller extends helper
         $this->validate = $this->entity->get('validate');
         $this->api = $this->entity->get('api');
         $this->account = $this->cache('read', 'account', $this->instance());
-        if (isset($this->account['staging']) === true) {
-            $this->config->mode($this->account['staging']);
+        if (isset($this->account['staging']) === true && $this->account['staging'] === true) {
+            $this->config->mode(true);
             $mode = 'STAG';
         } else {
+            $this->config->mode(false);
             $mode = 'PROD';
         }
         $this->debug('[mode] ' . $mode);
@@ -77,7 +78,7 @@ abstract class controller extends helper
             /*"mandatoryFields",*/
             "consumerIp"
         );
-        if (isset($_GET['payapi'])) {
+        if ($this->request->server('payapi') !== false) {
             //-> this should be crypted (dyn JWT) (note check just one dot, this is crypted)
             if ($this->validateScriptAccess() === true) {
                 $data = array();
@@ -100,22 +101,21 @@ abstract class controller extends helper
 
     protected function validateScriptAccess()
     {
-        //-> @FIXME TODELETE this has to be implemented in PA side
-        //   @TODO better to add it in product url contruct in the meanwhile
-        //-> @TOUPDATE plz use request model!
-        if (isset($_GET['payapiwebshop']) === true && isset($_GET['currency']) === true && isset($_GET['language']) === true && isset($_GET['quantity']) === true) {
+        //-> @FIXME TODELETE this has to be implemented in PA side or we can populate it from store side
+        //   @TODO better to add it in product url contruct in the meanwhile        
+        if ($this->request->server('payapiwebshop') !== false && $this->request->server('currency') !== false && $this->request->server('language') !== false && $this->request->server('quantity') !== false) {
             return true;
         }
         return true;
         //->
-        if (isset($_GET['payapi']) === true) {
+        if ($this->request->server('payapi') !== false) {
+            $payapi = $this->request->server('payapi');
             //-> this should be crypted (dyn JWT) (note check just one dot, this is crypted)
-            if (is_string($_GET['payapi']) === true && substr_count($_GET['payapi'], '.') === 1) {
-                $payapi = addslashes($_GET['payapi']);
+            if (is_string($payapi) === true && substr_count($payapi, '.') === 1) {
                 $hash = md5($this->publicId . date('YmdH', time()));
                 $decoded = $this->decode($payapi, $hash);
-                if(is_array($decoded) === true) {
-                  return true;
+                if($decoded !== false) {
+                    return true;
                 }
             }
         }
@@ -295,7 +295,7 @@ abstract class controller extends helper
 
     protected function apiKey()
     {
-        $this->debug('encKey decoded ');
+        $this->debug('encKey decoded');
         return $this->decode($this->account('apiKey'), false, true);
     }
 
@@ -332,21 +332,26 @@ abstract class controller extends helper
         return false;
     }
 
-    protected function calculatePartialPayment($paymentPriceInCents, $paymentCurrency, $countryCode)
+    protected function calculatePartialPayment($paymentPriceInCents, $paymentCurrency, $countryCode, $demo = false)
     {
-        if ($this->partialPayments() === true) {
+        if ($demo === true) {
+            $this->partialPaymentSettings = $this->demoPartialData();
+        } else if ($this->partialPayments() === true) {
             $this->partialPaymentSettings = $this->settings('partialPayments');
-            if(is_string($countryCode) === true) { //->  && is_array($this->partialPaymentSettings) === true
+        }
+        if (is_array($this->partialPaymentSettings) === true) {
+            if(is_string($countryCode) === true) { 
                 if (isset($this->partialPaymentSettings['whitelistedCountries']) !== true || $this->partialPaymentSettings['whitelistedCountries'] === false || in_array($countryCode, $this->partialPaymentSettings['whitelistedCountries']) === true) {
                     if (is_int($paymentPriceInCents) === true && $paymentPriceInCents >= $this->partialPaymentSettings['minimumAmountAllowedInCents'] && is_string($paymentCurrency) === true) {
                         $calculate = array();
                         $partial = array();
                         $minimumAmountPerMonthInCents =($this->partialPaymentSettings['monthlyFeeThresholdInCents'] / $this->partialPaymentSettings['numberOfInstallments']);
-                        $minimumAmountPerMonth =($minimumAmountPerMonthInCents / 100);
-                        if (round(($paymentPriceInCents / $minimumAmountPerMonthInCents), 0) >= $this->partialPaymentSettings['numberOfInstallments']) {
+                        $minimumAmountPerMonth = ($minimumAmountPerMonthInCents / 100);
+                        if ($minimumAmountPerMonth < 1 || round(($paymentPriceInCents / $minimumAmountPerMonthInCents), 0) >= $this->partialPaymentSettings['numberOfInstallments']) {
                             $partial['paymentMonths'] = $this->partialPaymentSettings['numberOfInstallments'];
                         } else {
-                            $partial['paymentMonths'] = $maximumPricePartialMonths;
+                            //$partial['paymentMonths'] = $maximumPricePartialMonths;
+                            $partial['paymentMonths'] = round(($paymentPriceInCents / $minimumAmountPerMonthInCents), 0);
                         }
                         $partial['interestRate'] =(($this->partialPaymentSettings['nominalAnnualInterestRateInCents'] / 100) / 12) * $partial['paymentMonths'];
                         $partial['interestRatePerMonth'] = round(($partial['interestRate'] / $partial['paymentMonths']), 2);
@@ -362,10 +367,47 @@ abstract class controller extends helper
                         return $partial;
                     }
                 }
-            }
 
+            }
         }
         return false;
+    }
+
+    private function demoPartialData()
+    {
+        return array(
+            "preselectedPartialPayment"        => 'partial_demo',
+            "paymentTermInDays"                => 8,
+            "whitelistedCountries"             => false,
+            "openingFeeInCents"                => 900,
+            "nominalAnnualInterestRateInCents" => 200,
+            "minimumAmountAllowedInCents"      => 100,
+            "numberOfInstallments"             => 36,
+            "invoiceFeeInCents"                => 900,
+            "monthlyFeeThresholdInCents"       => 900
+        );
+    }
+
+    public function demoConsumerData()
+    {
+        return array(
+            "fullname" => 'John Doe',
+            "name" => 'John',
+            "surname" => 'Doe',
+            "care" => 'Mary Doe',
+            "address1" => 'Doe street 7',
+            "address2" => null,
+            "phone" => '123456789',
+            "postal" => '3F4S8K',
+            "city" => 'San Diego',
+            "region" => 'California',
+            "country" => 'United States',
+            "email" => 'john-doe@email.com',
+            "cardHolder" => 'John Doe',
+            "cardNumber" => '4321',
+            "cardCvv" => '123',
+            "expiration" => '2021'
+        ) ;
     }
 
     protected function brand($key = false)
@@ -445,6 +487,16 @@ abstract class controller extends helper
             break;
         }
         return false;
+    }
+
+    protected function paymentPayload($products)
+    {
+        $sumInCentsExcVat = 0;
+        $vatInCents = 0;
+
+        foreach ($products as $key => $product) {
+
+        }
     }
 
 

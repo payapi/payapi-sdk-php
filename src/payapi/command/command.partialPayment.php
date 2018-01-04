@@ -53,15 +53,15 @@ namespace payapi;
 *          handle currency
 *
 */
-
+//-> @TODO demo mode
 final class commandPartialPayment extends controller
 {
 
     public function run()
     {
-        if ($this->partialPayments() === true) {
+        if ($this->partialPayments() === true || $this->arguments(3) === true) {
             if (is_numeric($this->arguments(0)) === true && is_string($this->arguments(1)) === true) {
-                $partialPayment = $this->calculatePartialPayment((int) $this->arguments(0),  $this->arguments(1), $this->countryCode());
+                $partialPayment = $this->calculatePartialPayment((int) $this->arguments(0),  $this->arguments(1), $this->countryCode(),  $this->arguments(3));
                 if (is_array($partialPayment) !== false) {
                     return $this->render($partialPayment);
                 } else {
@@ -76,10 +76,6 @@ final class commandPartialPayment extends controller
 
     private function countryCode()
     {
-        //-> @FIXME TODELETE 
-        $this->warning('hacked', 'countryCode');
-        return 'FI';
-        //->
         if ($this->arguments(2) !== false && $this->validate->ip($this->arguments(2)) === true) {
             $localization = $this->localization($this->arguments(2));
             if (is_string($localization['countryCode']) === true) {
