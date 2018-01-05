@@ -174,6 +174,8 @@ final class api extends helper
             $this->debug('[headers] disabled');
             return true;
         }
+        //-> reset headers
+        $this->headers = false;
         $this->debug('[headers] ' . $this->mode);
         if(isset($this->modes[$this->mode]) === true && is_string($this->modes[$this->mode]) === true) {
             header('Content-type: ' . $this->modes[$this->mode]);
