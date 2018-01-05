@@ -220,15 +220,20 @@ final class api extends helper
 
     private function getIp()
     {
-        if (($access = $this->sanitize->ip(getenv('HTTP_CLIENT_IP', true))) == false)
-            if (($access = $this->sanitize->ip(getenv('HTTP_X_FORWARDED_FOR', true))) == false)
-                if (($access = $this->sanitize->ip(getenv('HTTP_X_FORWARDED', true))) == false)
-                    if (($access = $this->sanitize->ip(getenv('HTTP_FORWARDED_FOR', true))) == false)
-                        if (($access = $this->sanitize->ip(getenv('HTTP_FORWARDED', true))) == false)
-                            if (($access = $this->sanitize->ip(getenv('REMOTE_ADDR', true))) == false)
+        if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_CLIENT_IP'))) == false)
+            if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_X_FORWARDED_FOR'))) == false)
+                if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_X_FORWARDED'))) == false)
+                    if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_FORWARDED_FOR'))) == false)
+                        if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_FORWARDED'))) == false)
+                            if (($access = $this->sanitize->ip($this->getenvvalue('REMOTE_ADDR'))) == false)
                                 $access = $this->serialize->undefined();
         $ip = htmlspecialchars($access, ENT_COMPAT, 'UTF-8');
         return $ip;
+    }
+
+    private function getenvvalue($key)
+    {
+      return (getenv($key, true) != false) ? getenv($key, true) : getenv($key);
     }
 
     private function hackAccess()
