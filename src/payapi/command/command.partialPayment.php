@@ -73,25 +73,14 @@ final class commandPartialPayment extends controller
         }
         return $this->returnResponse($this->error->notImplemented());
     }
-
+    //-> @NOTE this will be updated to handle localization internally
     private function countryCode()
     {
-        if ($this->arguments(2) !== false && $this->validate->ip($this->arguments(2)) === true) {
-            $localization = $this->localization($this->arguments(2));
-            if (is_string($localization['countryCode']) === true) {
-                $countryCode = $localization['countryCode'];
-            } else {
-                $countryCode = false;
-            }
-        } else if (isset($this->localized['countryCode']) === true) {
-            $countryCode = $this->localized['countryCode'];
-        }        
-
-        if (is_string($countryCode) === true) {
-          $this->partialPaymentCountryCode = $countryCode;
-          return $countryCode;
+        if (is_string($this->arguments(2)) === true) {
+          $this->partialPaymentCountryCode = $this->arguments(2);
+          return $this->partialPaymentCountryCode;
         }
-        $this->debug('not localized');
+        $this->debug('no valid country');
         return false;
     }
 
