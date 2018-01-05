@@ -36,7 +36,7 @@
     },
     "options": {
       "___mandatory": false,
-      "___type": "string"
+      "___type": "array"
     },
     "model": {
       "___mandatory": false,
