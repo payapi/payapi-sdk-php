@@ -51,7 +51,7 @@ final class payapiSettings {
 
 	public function partials()
 	{
-		if (self::merchant() != null) {
+		if (is_array(self::merchant()) === true) {
 			if (isset(self::$settings[self::$instance]['merchant']['partialPayments']) === true && is_array(self::$settings[self::$instance]['merchant']['partialPayments'])) {
 				return self::$settings[self::$instance]['merchant']['partialPayments'];
 			}
@@ -62,6 +62,14 @@ final class payapiSettings {
 	public function merchant()
 	{
 		return self::get('merchant');
+	}
+
+	public function paymentGateway()
+	{
+		if (isset(self::$settings[self::$instance]['merchant']['enabledPaymentGateways']) === true) {
+			return self::$settings[self::$instance]['merchant']['enabledPaymentGateways'];
+		}
+		return false;
 	}
 
 	public function resume()
