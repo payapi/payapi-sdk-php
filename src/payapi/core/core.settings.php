@@ -21,6 +21,14 @@ final class payapiSettings {
 		self::$settings[self::$instance] = array();
 	}
 
+	public static function boolify($key)
+	{
+		if (self::get($key) !== false && self::get($key) !== 0) {
+			return 'true';
+		}
+		return 'false';
+	}
+
 	public static function get($key)
 	{
 		if (self::has($key) === true) {
@@ -43,7 +51,7 @@ final class payapiSettings {
 
 	public static function enabled()
 	{
-		if (self::get('demo') == 1 || (is_string(self::get('___public')) === true && self::get('___public') != null)) {
+		if (self::get('sandbox') == 1 || (is_string(self::get('___public')) === true && self::get('___public') != null)) {
 			return true;
 		}
 		return false;
