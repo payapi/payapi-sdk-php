@@ -184,6 +184,14 @@ final class validator extends helper
     return false;
   }
 
+  public function isBoolean($boolean)
+  {
+    if (is_bool($boolean) === true) {
+      return true;
+    }
+    return false;
+  }
+
   public function isValidCode($code)
   {
     if (is_int($code) && preg_match('/^\d{3}$/', $code) && $code <= 600 && $code >= 200) {
@@ -219,6 +227,9 @@ final class validator extends helper
       break;
       case 'number':
         return $this->isNumber($data);
+      break;
+      case 'boolean':
+        return $this->isBoolean($data);
       break;
       case 'ip':
         return $this->ip($data);
@@ -290,7 +301,8 @@ final class validator extends helper
 
   public function ip($ip)
   {
-    if (md5(filter_var($ip, FILTER_VALIDATE_IP)) === md5($ip) && ip2long($ip) !== false) {
+    return true;
+    if (md5(filter_var($ip, FILTER_VALIDATE_IP)) !== false && ip2long($ip) !== false) {
       return true;
     }
     return false;
