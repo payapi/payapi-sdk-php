@@ -76,7 +76,6 @@ final class commandSettings extends controller
 
   public function run()
   {
-    //var_dump($this->arguments(0), $this->arguments(1), $this->arguments(2)); exit;
     if ($this->arguments(1) != false) {
       $this->cache('delete', 'settings', $this->instance());
     }
@@ -84,13 +83,11 @@ final class commandSettings extends controller
       $publicId = $this->arguments(1);
       $apiKey = $this->arguments(2);
     } else {
-      //-> @FIXME just when both are false! $this->arguments(2&&3)
       $publicId = $this->publicId();
       $apiKey = $this->apiKey();
     }
-    //-> @TODO review config mode handling
+    //-> @TODO add updating mode (PROD/STAG) debug flag/entry
     $this->config->mode($this->arguments(0));
-    //var_dump($this->arguments(0)); exit;
     $this->staging = $this->config->staging();
     if ($this->validate->publicId($publicId) === true && $this->validate->apiKey($apiKey) === true) {
       $cached = $this->cache('read', 'settings', $this->instance());
@@ -106,8 +103,7 @@ final class commandSettings extends controller
             if (is_array($validated) !== false) {
               $error = 0;
               foreach($validated as $key => $value) {
-                if($value !== false) {
-                  //var_dump('false', $validated); exit;
+                if($value !== false && $value !== true) {
                   $settings[$key] = $this->validate->schema($value, $this->load->schema('settings' . '.' . $key));
                   if (is_array($settings[$key]) === false) {
                     $error ++;
@@ -116,7 +112,6 @@ final class commandSettings extends controller
                   $settings[$key] = false;
                 }
               }
-            //var_dump($settings); exit;
               if ($error === 0) {
                 $this->cache('writte', 'account', $this->instance(), array(
                   "publicId" => $publicId,
@@ -160,8 +155,7 @@ final class commandSettings extends controller
   private function payload($apiKey)
   {
     $payload = array(
-      //=>
-      "storeDomain" => getenv('SERVER_NAME')
+      "storeDomain" => ((getenv('HTTP_HOST', true) !== false) ? getenv('HTTP_HOST', true) : getenv('HTTP_HOST'))
     );
     return $this->encode($payload, $apiKey);
   }
