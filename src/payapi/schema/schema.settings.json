@@ -4,6 +4,10 @@
     "___date": "20170719"
   },
   "___schema": {
+    "enabledPaymentGateways": {
+      "___mandatory": false,
+      "___type": "boolean"
+    },
     "partialPayments": {
       "___mandatory": false,
       "___type": "setting"
