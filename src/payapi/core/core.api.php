@@ -242,7 +242,7 @@ final class api extends helper
 
     public function validPAccess()
     {
-        if (is_string($this->request->get('payapiWebshop')) === true && is_string($this->request->get('quantity')) === true && is_string($this->request->get('consumerIp')) === true && is_string($this->request->get('locale')) === true && is_string($this->request->get('currency')) === true) {
+        if (is_string($this->request->get('payapiwebshop')) === true && is_string($this->request->get('quantity')) === true && is_string($this->request->get('consumerIp')) === true && is_string($this->request->get('locale')) === true && is_string($this->request->get('currency')) === true) {
             return true;
         }
         return false;
