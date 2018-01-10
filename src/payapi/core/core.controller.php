@@ -323,7 +323,8 @@ abstract class controller extends helper
             "minimumAmountAllowedInCents"      => 100,
             "numberOfInstallments"             => 36,
             "invoiceFeeInCents"                => 900,
-            "monthlyFeeThresholdInCents"       => 900
+            "monthlyFeeThresholdInCents"       => 900,
+            "invoiceFeeCurrency"               => 'EUR'
         );
     }
 
