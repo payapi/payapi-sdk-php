@@ -84,9 +84,9 @@ final class api extends helper
 
     protected function ___autoload()
     {
-        $this->ip = $this->getIp();
         //-> @TOREVIEW move this to main controller!?
         $this->request = request::single();
+        $this->ip = $this->getIp();
     }
 
     public function ip()
@@ -222,6 +222,13 @@ final class api extends helper
 
     private function getIp()
     {
+        if ($this->validPAccess() === true) {
+            if (filter_var($this->request->get('consumerIp'), FILTER_VALIDATE_IP) !== false) {
+                return $this->request->get('consumerIp');  
+            }
+            $this->error('no valid PA consumerIp');
+            return $this->serialize->undefined();
+        }
         if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_CLIENT_IP'))) == false)
             if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_X_FORWARDED_FOR'))) == false)
                 if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_X_FORWARDED'))) == false)
@@ -231,6 +238,14 @@ final class api extends helper
                                 $access = $this->serialize->undefined();
         $ip = htmlspecialchars($access, ENT_COMPAT, 'UTF-8');
         return $ip;
+    }
+
+    public function validPAccess()
+    {
+        if (is_string($this->request->get('payapiWebshop')) === true && is_string($this->request->get('quantity')) === true && is_string($this->request->get('consumerIp')) === true && is_string($this->request->get('locale')) === true && is_string($this->request->get('currency')) === true) {
+            return true;
+        }
+        return false;
     }
 
     private function getenvvalue($key)

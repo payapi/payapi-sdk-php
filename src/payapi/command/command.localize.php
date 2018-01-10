@@ -56,7 +56,7 @@ final class commandLocalize extends controller
 
   public function run()
   {
-    if ($this->validate->ip($this->arguments(1)) === true) {
+    if ($this->arguments(1) != false && $this->validate->ip($this->arguments(1)) === true) {
       $ip = $this->arguments(1);
     } else {
       $ip = $this->ip();

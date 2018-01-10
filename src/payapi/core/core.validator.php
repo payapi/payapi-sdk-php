@@ -301,8 +301,7 @@ final class validator extends helper
 
   public function ip($ip)
   {
-    return true;
-    if (md5(filter_var($ip, FILTER_VALIDATE_IP)) !== false && ip2long($ip) !== false) {
+    if (filter_var($ip, FILTER_VALIDATE_IP) !== false && ip2long($ip) !== false) {
       return true;
     }
     return false;

@@ -49,7 +49,7 @@ final class request
         if($this->has('server') && isset($this->data['server'][$key]) === true) {
             return $this->data['server'][$key];
         }
-        return $key;
+        return false;
     }
 
     public function url()
@@ -83,7 +83,7 @@ final class request
         if($this->has('get') && isset($this->data['get'][$key]) === true) {
             return $this->data['get'][$key];
         }
-        return $key;
+        return null;
     }
     /*
     public function get($key)

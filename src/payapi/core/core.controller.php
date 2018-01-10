@@ -48,10 +48,10 @@ abstract class controller extends helper
             $mode = 'PROD';
         }
         $this->debug('[mode] ' . $mode);
-        if (is_string($this->cache('read', 'ssl', $this->api->ip())) !== true) {
+        if (is_string($this->cache('read', 'ssl', $this->domain)) !== true) {
             $validated = $this->validate->ssl();
             if (is_resource($validated) === true) {
-                $this->cache('writte', 'ssl', $this->api->ip(),(string) $validated);
+                $this->cache('writte', 'ssl', $this->domain,(string) $validated);
             } else {
                 return $this->api->returnResponse($this->error->noValidSsl());
             }
@@ -59,67 +59,7 @@ abstract class controller extends helper
         $this->adaptor = $this->entity->get('adaptor');
         $this->language = $this->adaptor->language();
         $this->currency = $this->adaptor->currency();
-        //-> @TODO validat PA access
         $this->sdk();
-    }
-
-    protected function accessScript()
-    {
-        //-> validate PA access
-        //   to update currency, language, ip
-        //-> TODO add get values to API(cgi)
-        $expected = array(
-            "payapiwebshop",
-            "currency",
-            "language",
-            "quantity",
-            //-> @NOTE. @TODO token to implement in PA side?
-            "payapi",
-            /*"mandatoryFields",*/
-            "consumerIp"
-        );
-        if ($this->request->server('payapi') !== false) {
-            //-> this should be crypted (dyn JWT) (note check just one dot, this is crypted)
-            if ($this->validateScriptAccess() === true) {
-                $data = array();
-                $error = 0;
-                foreach ($expected as $key => $value) {
-                  if(isset($_GET[$value]) === true) {
-                      $data[$value] = addslashes($_GET[$value]);
-                  } else {
-                      $error ++;
-                  }
-                }
-                if($error === 0) {
-                    return $data;
-                }
-                $this->warning('No valid PA token', 'HACK');
-            }
-        }
-        return false;
-    }
-
-    protected function validateScriptAccess()
-    {
-        //-> @FIXME TODELETE this has to be implemented in PA side or we can populate it from store side
-        //   @TODO better to add it in product url contruct in the meanwhile        
-        if ($this->request->server('payapiwebshop') !== false && $this->request->server('currency') !== false && $this->request->server('language') !== false && $this->request->server('quantity') !== false) {
-            return true;
-        }
-        return true;
-        //->
-        if ($this->request->server('payapi') !== false) {
-            $payapi = $this->request->server('payapi');
-            //-> this should be crypted (dyn JWT) (note check just one dot, this is crypted)
-            if (is_string($payapi) === true && substr_count($payapi, '.') === 1) {
-                $hash = md5($this->publicId . date('YmdH', time()));
-                $decoded = $this->decode($payapi, $hash);
-                if($decoded !== false) {
-                    return true;
-                }
-            }
-        }
-        return false; 
     }
 
     protected function accessConsumer()
@@ -173,7 +113,6 @@ abstract class controller extends helper
 
     public function locate()
     {
-        //-> note if PA access this should be PA query ip
         $this->localized = $this->localization();
         if (isset($this->localized['ip']) === true && isset($this->localized['countryCode']) === true) {
             return true;
@@ -184,31 +123,30 @@ abstract class controller extends helper
 
     protected function localization($requestedIp = false)
     {
-        //-> @TODO localization just when needed(just for payments)
-        //         validate $requestedIp and handle error(s)
-        if(is_string($requestedIp) === true) {
+        if($requestedIp !== false) {
               $ip = $requestedIp;
         } else {
               $ip = $this->ip();
         }
-        $cached = $this->cache('read', 'localize', $ip);
-        if ($cached !== false) {
-            $this->debug('[localized] success');
-            //$this->debug(json_encode($cached, JSON_HEX_TAG));
-            return $cached;
-        }
-        $endPoint = $this->serialize->endPointLocalization($ip);
-        $request = $this->curl($endPoint, false, false);
-        if ($request !== false && isset($request['code']) === true) {
-            if ($request['code'] === 200) {
-                $validated = $this->validate->schema($request['data'], $this->load->schema('localize'));
-                if (is_array($validated) !== false) {
-                    $this->debug('[localize] valid schema');
-                    $adaptedData = $this->adaptor->localized($validated);
-                    $this->cache('writte', 'localize', $ip, $adaptedData);
-                    $cached = $this->cache('read', 'localize', $ip);
-                    //$this->debug(json_encode($cached, JSON_HEX_TAG));
-                    return $cached;
+        if ($this->validate->ip($ip) === true) {
+            $cached = $this->cache('read', 'localize', $ip);
+            if ($cached !== false) {
+                $this->debug('[localized] success');
+                return $cached;
+            }
+            $endPoint = $this->serialize->endPointLocalization($ip);
+            $request = $this->curl($endPoint, false, false);
+            if ($request !== false && isset($request['code']) === true) {
+                if ($request['code'] === 200) {
+                    $validated = $this->validate->schema($request['data'], $this->load->schema('localize'));
+                    if (is_array($validated) !== false) {
+                        $this->debug('[localize] valid schema');
+                        $adaptedData = $this->adaptor->localized($validated);
+                        $this->cache('writte', 'localize', $ip, $adaptedData);
+                        $cached = $this->cache('read', 'localize', $ip);
+                        //$this->debug(json_encode($cached, JSON_HEX_TAG));
+                        return $cached;
+                    }
                 }
             }
         }
@@ -331,15 +269,17 @@ abstract class controller extends helper
         }
         return false;
     }
-
-    protected function calculatePartialPayment($paymentPriceInCents, $paymentCurrency, $countryCode, $demo = false)
+    // delete countryCode -> udated to demo
+    protected function calculatePartialPayment($paymentPriceInCents, $paymentCurrency, $demo = false)
     {
         if ($demo === true) {
+            $this->debug('[demo] enabled');
             $this->partialPaymentSettings = $this->demoPartialData();
         } else if ($this->partialPayments() === true) {
             $this->partialPaymentSettings = $this->settings('partialPayments');
         }
-        if (is_array($this->partialPaymentSettings) === true) {
+        $countryCode = (isset($this->localized['countryCode']) === true) ? $this->localized['countryCode'] : null;
+        if (is_array($this->partialPaymentSettings) === true && md5($paymentCurrency) === md5($this->partialPaymentSettings['invoiceFeeCurrency'])) {
             if(is_string($countryCode) === true) { 
                 if (isset($this->partialPaymentSettings['whitelistedCountries']) !== true || $this->partialPaymentSettings['whitelistedCountries'] === false || in_array($countryCode, $this->partialPaymentSettings['whitelistedCountries']) === true) {
                     if (is_int($paymentPriceInCents) === true && $paymentPriceInCents >= $this->partialPaymentSettings['minimumAmountAllowedInCents'] && is_string($paymentCurrency) === true) {
@@ -350,7 +290,6 @@ abstract class controller extends helper
                         if ($minimumAmountPerMonth < 1 || round(($paymentPriceInCents / $minimumAmountPerMonthInCents), 0) >= $this->partialPaymentSettings['numberOfInstallments']) {
                             $partial['paymentMonths'] = $this->partialPaymentSettings['numberOfInstallments'];
                         } else {
-                            //$partial['paymentMonths'] = $maximumPricePartialMonths;
                             $partial['paymentMonths'] = round(($paymentPriceInCents / $minimumAmountPerMonthInCents), 0);
                         }
                         $partial['interestRate'] =(($this->partialPaymentSettings['nominalAnnualInterestRateInCents'] / 100) / 12) * $partial['paymentMonths'];
