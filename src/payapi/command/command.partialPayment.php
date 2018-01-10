@@ -4,7 +4,7 @@ namespace payapi;
 
 /*
 * @COMMAND
-*           $sdk->partialPayment($paymentPriceInCents, $paymentCurrency, $paymentIp = false)
+*           $sdk->partialPayment($paymentPriceInCents, $paymentCurrency, $paymentCountry, $demo = false)
 *
 * @PARAMS
 *           $paymentPriceInCents = numeric
@@ -59,9 +59,9 @@ final class commandPartialPayment extends controller
 
     public function run()
     {
-        if ($this->partialPayments() === true || $this->arguments(3) === true) {
+        if ($this->partialPayments() === true || $this->arguments(2) === true) {
             if (is_numeric($this->arguments(0)) === true && is_string($this->arguments(1)) === true) {
-                $partialPayment = $this->calculatePartialPayment((int) $this->arguments(0),  $this->arguments(1), $this->countryCode(),  $this->arguments(3));
+                $partialPayment = $this->calculatePartialPayment((int) $this->arguments(0),  $this->arguments(1), $this->arguments(2));
                 if (is_array($partialPayment) !== false) {
                     return $this->render($partialPayment);
                 } else {
@@ -72,16 +72,6 @@ final class commandPartialPayment extends controller
             }
         }
         return $this->returnResponse($this->error->notImplemented());
-    }
-    //-> @NOTE this will be updated to handle localization internally
-    private function countryCode()
-    {
-        if (is_string($this->arguments(2)) === true) {
-          $this->partialPaymentCountryCode = $this->arguments(2);
-          return $this->partialPaymentCountryCode;
-        }
-        $this->debug('no valid country');
-        return false;
     }
 
 
