@@ -109,7 +109,7 @@ final class commandSettings extends controller
                     $error ++;
                   }
                 } else {
-                  $settings[$key] = false;
+                  $settings[$key] = $value;
                 }
               }
               if ($error === 0) {
