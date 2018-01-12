@@ -106,8 +106,12 @@ final class crypter
 
   public function uniqueServerSignature()
   {
-    //-> @NOTE if 'SERVER_NAME' OR 'USER' changes will not be able to access previous data
-    return $this->encode(md5(getenv('SERVER_NAME') . md5(getenv('USER'))), md5(getenv('USER')));
+    return $this->encode(md5($this->getEnviroment('SERVER_NAME') . md5($this->getEnviroment('USER'))), md5($this->getEnviroment('USER')));
+  }
+
+  private function getEnviroment($key)
+  {
+    return ((getenv($key, true)) ? getenv($key, true) : getenv($key));
   }
 
   private function uniqueInstanceToken($instance)
