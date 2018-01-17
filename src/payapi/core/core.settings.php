@@ -14,11 +14,10 @@ final class payapiSettings {
 
 	private static $single = false;
 	private static $settings = array();
-	private static $instance = 'single';
 
-	public function __contruct() {
-		self::$instance = instance::this();
-		self::$settings[self::$instance] = array();
+	private static function isolated()
+	{
+		return md5(str_replace('*', 'store', ((getenv('HTTP_HOST', true) !== false) ? getenv('HTTP_HOST', true) : getenv('HTTP_HOST'))));
 	}
 
 	public static function boolify($key)
@@ -32,13 +31,13 @@ final class payapiSettings {
 	public static function get($key)
 	{
 		if (self::has($key) === true) {
-			return self::$settings[self::$instance][$key];
+			return self::$settings[self::isolated()][$key];
 		}
 		return false;
 	}
 
 	public static function has($key) {
-		if (isset(self::$settings[self::$instance][$key]) === true) {
+		if (isset(self::$settings[self::isolated()][$key]) === true) {
 			return true;
 		}
 		return false;
@@ -46,7 +45,7 @@ final class payapiSettings {
 
 	public static function set($key, $value)
 	{
-		self::$settings[self::$instance][$key] = $value;
+		self::$settings[self::isolated()][$key] = $value;
 	}
 
 	public static function enabled()
@@ -60,8 +59,8 @@ final class payapiSettings {
 	public function partials()
 	{
 		if (is_array(self::merchant()) === true) {
-			if (isset(self::$settings[self::$instance]['merchant']['partialPayments']) === true && is_array(self::$settings[self::$instance]['merchant']['partialPayments'])) {
-				return self::$settings[self::$instance]['merchant']['partialPayments'];
+			if (isset(self::$settings[self::isolated()]['merchant']['partialPayments']) === true && is_array(self::$settings[self::isolated()]['merchant']['partialPayments'])) {
+				return self::$settings[self::isolated()]['merchant']['partialPayments'];
 			}
 		}
 		return false;
@@ -74,10 +73,12 @@ final class payapiSettings {
 
 	public function paymentGateway()
 	{
-		if (isset(self::$settings[self::$instance]['merchant']['enabledPaymentGateways']) === true) {
-			return self::$settings[self::$instance]['merchant']['enabledPaymentGateways'];
+		if (isset(self::$settings[self::isolated()]['merchant']['enabledPaymentGateways']) === true) {
+			return self::$settings[self::isolated()]['merchant']['enabledPaymentGateways'];
 		}
-		return false;
+		//-> @TOUPDATE AFTER UPDATE
+		return true;
+		//return false;
 	}
 
 	public function resume()
