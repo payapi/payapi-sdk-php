@@ -4,21 +4,19 @@ namespace payapi;
 
 final class debug
 {
+    public static $single = false;
 
-    public 
-       static $single                  =    false;
+    protected $history    = false;
 
-    protected $history                 =    false;
-
-    private   $enabled                 =    false;
-    private   $microtime               =    false;
-    private   $lapses                  =        0;
-    private   $run                     =        0;
-    private   $lapse                   =  array();
-    private   $fullTrace               =    false;
-    private   $dir                     =    false;
-    private   $file                    =    false;
-    private   $labels                  =    array(
+    private $enabled      = false;
+    private $microtime    = false;
+    private $lapses       = 0;
+    private $run          = 0;
+    private $lapse        = array();
+    private $fullTrace    = false;
+    private $dir          = false;
+    private $file         = false;
+    private $labels       = array(
         'info'   ,
         'time'   ,
         'api'    ,
@@ -27,7 +25,7 @@ final class debug
         'error'  ,
         'warning',
         'fatal'
-      );
+    );
 
     protected function __construct($enabled)
     {
@@ -48,44 +46,45 @@ final class debug
 
     public function load()
     {
-        return $this->timing('load',(microtime(true) - $this->microtime));
+        return $this->timing('load', (microtime(true) - $this->microtime));
     }
 
     public function run($refresh = false)
     {
         if ($refresh === true) {
-          $this->run = microtime(true);
+            $this->run = microtime(true);
         } else {
-          $microseconds =(microtime(true) - $this->run);
-          return $this->timing('run', $microseconds);
+            $microseconds =(microtime(true) - $this->run);
+            return $this->timing('run', $microseconds);
         }
     }
 
     public function lapse($key, $refresh = false)
     {
         if (isset($this->lapse[$key]) === true && is_numeric($this->lapse[$key]) && $refresh !== true) {
-          $lapse =(microtime(true) - $this->lapse[$key]);
-          switch($key) {
-              case 'app':
-                  $microseconds =($lapse - $this->lapses);
-              break;
-              case 'execution':
-                  $microseconds = $lapse;
-              break;
-              default:
-                  if ($key != 'run') {
-                      $this->lapses += $lapse;
-                  }
-                  $this->run += $lapse;
-                  $microseconds = $lapse;
-              break;
-          }
-          return $this->timing($key, $microseconds);
+            $lapse =(microtime(true) - $this->lapse[$key]);
+            switch ($key) {
+                case 'app':
+                    $microseconds =($lapse - $this->lapses);
+                    break;
+                case 'execution':
+                    $microseconds = $lapse;
+                    break;
+                default:
+                    if ($key != 'run') {
+                        $this->lapses += $lapse;
+                    }
+                    $this->run += $lapse;
+                    $microseconds = $lapse;
+                    break;
+            }
+            return $this->timing($key, $microseconds);
         }
         $this->lapse[$key] = microtime(true);
     }
 
-    private function milisecons($microseconds) {
+    private function milisecons($microseconds)
+    {
         $miliseconds = (round($microseconds, 3) * 1000);
         return $miliseconds;
     }
@@ -97,10 +96,10 @@ final class debug
         return $this->blank();
     }
 
-    private function timing ($key, $microseconds)
+    private function timing($key, $microseconds)
     {
         $timing = '[' . $key . '] timing ' . $this->milisecons($microseconds) . 'ms.';
-        return $this->add($timing , 'time');
+        return $this->add($timing, 'time');
     }
 
     private function timestamp()
@@ -112,7 +111,9 @@ final class debug
     {
         $trace = $this->trace(debug_backtrace());
         $miliseconds = str_pad(round((microtime(true) - $this->microtime) * 1000, 0), 4, '0', STR_PAD_LEFT);
-        $entry =($miliseconds . ' [' . $this->label($label) . '] ' . $trace . ' ' .((is_string($info)) ? $info :((is_array($info) ? json_encode($info) :((is_bool($info) || is_object($info)) ?(string) $info : 'undefined')))));
+        $entry = ($miliseconds . ' [' . $this->label($label) . '] ' . $trace . ' ' .
+            ((is_string($info)) ? $info :((is_array($info) ? json_encode($info) :
+            ((is_bool($info) || is_object($info)) ?(string) $info : 'undefined')))));
         $this->history[] = $entry;
         return $this->set($entry);
     }
@@ -126,15 +127,21 @@ final class debug
     {
         $separator = '->';
         if ($this->fullTrace !== true) {
-            $class = str_replace('payapi\\', null,(isset($traced[3]['class'])) ? str_replace('"', null, $traced[3]['class']) :((isset($traced[2]['class'])) ? $traced[2]['class'] : $traced[1]['class']));
-            $function = str_replace('__', null,(isset($traced[3]['function'])) ? str_replace('"', null, $traced[3]['function']) :((isset($traced[2]['function'])) ? $traced[2]['function'] : $traced[1]['function']));
+            $class = str_replace('payapi\\', null, (isset($traced[3]['class'])) ?
+                str_replace('"', null, $traced[3]['class']) :
+                ((isset($traced[2]['class'])) ? $traced[2]['class'] : $traced[1]['class']));
+            $function = str_replace('__', null, (isset($traced[3]['function'])) ?
+                str_replace('"', null, $traced[3]['function']) :
+                ((isset($traced[2]['function'])) ? $traced[2]['function'] : $traced[1]['function']));
             $route = str_replace(array('payapi\\', '___'), null, $class . $separator . $function);
             return $route;
         }
         $levels = 5;
         $route = null;
-        for($cont = count($traced); $cont > 0; $cont --) {
-            $route .=((isset($traced[$cont]['class']) === true) ? $traced[$cont]['class'] . $separator : null) .((isset($traced[$cont]['function']) === true) ? $traced[$cont]['function'] . $separator : null);
+        for ($cont = count($traced); $cont > 0; $cont --) {
+            $route .= ((isset($traced[$cont]['class']) === true) ?
+                $traced[$cont]['class'] . $separator : null) .
+                ((isset($traced[$cont]['function']) === true) ? $traced[$cont]['function'] . $separator : null);
         }
         return $route;
     }
@@ -178,9 +185,8 @@ final class debug
     public function __destruct()
     {
         $this->lapse('app');
-        $this->set('=== ' . $this->milisecons(microtime(true) - $this->microtime) . 'ms. === ' . $this->timestamp() . ' ===');
+        $this->set('=== ' . $this->milisecons(microtime(true) - $this->microtime) .
+            'ms. === ' . $this->timestamp() . ' ===');
         $this->blank();
     }
-
-
 }

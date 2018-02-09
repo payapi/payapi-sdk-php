@@ -23,5 +23,6 @@ $___['label_status_processed']                    = 'Jalostettu';
 $___['label_status_failed']                       = 'Epäonnistui';
 $___['label_status_chargeback']                   = 'Takaisinveloitus';
 
-$___['error_default']                             = 'Hups, jokin meni pieleen, jos luulet, että tämä on virhe, ota yhteyttä';
+$___['error_default']                             =
+    'Hups, jokin meni pieleen, jos luulet, että tämä on virhe, ota yhteyttä';
 $___['error_mandatory']                           = 'Täytä kaikki vaaditut kentät ja yritä uudelleen';

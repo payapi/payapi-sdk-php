@@ -5,24 +5,24 @@ namespace payapi;
 final class api extends helper
 {
 
-    public    $version                         =   '0.0.1';
-    public    $request                         =     false;
+    public $version  = '0.0.1';
+    public $request  = false;
 
-    private   $curl                            =     false;
-    private   $knock                           =     false;
-    private   $code                            =     false;
-    private   $entity                          =     false;
-    private   $headers                         =     false;
-    private   $timeout                         =         1;
-    private   $index                           =     'no';
-    private   $follow                          =     'no';
-    private   $mode                            =     'sdk';
-    private   $modes                           =    array(
-                  'json'    => 'application/json',
-                  'html'    => 'text/html',
-                  'sdk'     => false
-              );
-    private   $responses                       =    array(
+    private $curl    = false;
+    private $knock   = false;
+    private $code    = false;
+    private $entity  = false;
+    private $headers = false;
+    private $timeout = 1;
+    private $index   = 'no';
+    private $follow  = 'no';
+    private $mode    = 'sdk';
+    private $modes   = array(
+        'json' => 'application/json',
+        'html' => 'text/html',
+        'sdk'  => false
+    );
+    private $responses = array(
                   // @NOTE PHP ZEND INTERNAL STATUS HEADERS
 
                   // Informational 1xx
@@ -125,13 +125,32 @@ final class api extends helper
         return $this->render($this->responses[$code], $code);
     }
 
-    public function curl($url, $secured = true, $post = false, $timeout = 1, $return = 1, $header = 0, $ssl = 1, $fresh = 1, $noreuse = 1)
-    {
+    public function curl(
+        $url,
+        $secured = true,
+        $post = false,
+        $timeout = 1,
+        $return = 1,
+        $header = 0,
+        $ssl = 1,
+        $fresh = 1,
+        $noreuse = 1
+    ) {
         if ($this->curl === false) {
             $this->curl = new curl();
         }
         $checkTimeout =($this->config->staging() === true) ? 2 : $timeout;
-        $response = $this->curl->proccess($url, $secured, $post, $checkTimeout, $return, $header, $ssl, $fresh, $noreuse);
+        $response = $this->curl->proccess(
+            $url,
+            $secured,
+            $post,
+            $checkTimeout,
+            $return,
+            $header,
+            $ssl,
+            $fresh,
+            $noreuse
+        );
         //->
         return $response;
     }
@@ -177,7 +196,7 @@ final class api extends helper
         //-> reset headers
         $this->headers = false;
         $this->debug('[headers] ' . $this->mode);
-        if(isset($this->modes[$this->mode]) === true && is_string($this->modes[$this->mode]) === true) {
+        if (isset($this->modes[$this->mode]) === true && is_string($this->modes[$this->mode]) === true) {
             header('Content-type: ' . $this->modes[$this->mode]);
         }
         header("X-Robots-Tag: " . $this->index . "index," . $this->follow . "follow");
@@ -186,7 +205,7 @@ final class api extends helper
 
     public function mode($mode)
     {
-        if(is_string($mode) === true && isset($this->modes[$mode]) === true) {
+        if (is_string($mode) === true && isset($this->modes[$mode]) === true) {
             return $this->mode = $mode;
         }
         $this->warning('no valid api mode');
@@ -224,25 +243,35 @@ final class api extends helper
     {
         if ($this->validPAccess() === true) {
             if (filter_var($this->request->get('consumerIp'), FILTER_VALIDATE_IP) !== false) {
-                return $this->request->get('consumerIp');  
+                return $this->request->get('consumerIp');
             }
             $this->error('no valid PA consumerIp');
             return $this->serialize->undefined();
         }
-        if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_CLIENT_IP'))) == false)
-            if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_X_FORWARDED_FOR'))) == false)
-                if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_X_FORWARDED'))) == false)
-                    if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_FORWARDED_FOR'))) == false)
-                        if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_FORWARDED'))) == false)
-                            if (($access = $this->sanitize->ip($this->getenvvalue('REMOTE_ADDR'))) == false)
+        if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_CLIENT_IP'))) == false) {
+            if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_X_FORWARDED_FOR'))) == false) {
+                if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_X_FORWARDED'))) == false) {
+                    if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_FORWARDED_FOR'))) == false) {
+                        if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_FORWARDED'))) == false) {
+                            if (($access = $this->sanitize->ip($this->getenvvalue('REMOTE_ADDR'))) == false) {
                                 $access = $this->serialize->undefined();
+                            }
+                        }
+                    }
+                }
+            }
+        }
         $ip = htmlspecialchars($access, ENT_COMPAT, 'UTF-8');
         return $ip;
     }
 
     public function validPAccess()
     {
-        if (is_string($this->request->get('payapiwebshop')) === true && is_string($this->request->get('quantity')) === true && is_string($this->request->get('consumerIp')) === true && is_string($this->request->get('locale')) === true && is_string($this->request->get('currency')) === true) {
+        if (is_string($this->request->get('payapiwebshop')) === true &&
+            is_string($this->request->get('quantity')) === true &&
+            is_string($this->request->get('consumerIp')) === true &&
+            is_string($this->request->get('locale')) === true &&
+            is_string($this->request->get('currency')) === true) {
             return true;
         }
         return false;
@@ -250,11 +279,11 @@ final class api extends helper
 
     private function getenvvalue($key)
     {
-      return (getenv($key, true) != false) ? getenv($key, true) : getenv($key);
+        return (getenv($key, true) != false) ? getenv($key, true) : getenv($key);
     }
 
     private function hackAccess()
-    { 
+    {
         $this->warning('access IP hacked');
         //-> check core.instance.php
         $this->warning('SERVER NAME hacked');
@@ -279,6 +308,4 @@ final class api extends helper
     {
         return $this->version;
     }
-
-
 }

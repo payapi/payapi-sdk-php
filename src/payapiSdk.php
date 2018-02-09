@@ -22,16 +22,20 @@
 *                payapi/cache/<instanceKey>/settings
 *
 *        - 2. commands :
-*              $sdk->instantPayment($data);                       //-> validate/sanitize/cache product/payment data
-*                                                                          returns array("metadata", "endPointPayment", "endPointProductPayment");
+*              $sdk->instantPayment($data);
+*              //-> validate/sanitize/cache product/payment data
+*                     returns array("metadata", "endPointPayment", "endPointProductPayment");
 *              $sdk->branding();                                  //-> gets branding/partner info
 *
 *              $sdk->callback();                                  //-> gets/cache callback decoded transaction
 *
-*              $sdk->localize();                                  //-> gets/cache ip decoded localization(plugin adds adapt country and zone ids)
-*              $sdk->localize(true);                              //-> gets & refresh ip decoded localization cache(plugin adds adapt country and zone ids)
+*              $sdk->localize();
+*              //-> gets/cache ip decoded localization(plugin adds adapt country and zone ids)
+*              $sdk->localize(true);
+*              //-> gets & refresh ip decoded localization cache(plugin adds adapt country and zone ids)
 *
-*              $sdk->settings('public_id', 'api_key', true);      //-> verify account & gets/cache instance merchantSettings, also refresh account data
+*              $sdk->settings('public_id', 'api_key', true);
+*              //-> verify account & gets/cache instance merchantSettings, also refresh account data
 *              $sdk->settings(false, false, true);                //-> refresh & gets instance merchantSettings
 *              $sdk->settings();                                  //-> gets instance cached merchantSettings
 *
@@ -75,25 +79,24 @@
 //-> $         curl --insecure https://www.sdk.dev > /dev/null
 
 namespace Payapi\PaymentsSdk;
+
 use \payapi\engine as app;
 
 class payapiSdk
 {
 
-  private
-    $app                       =   false;
+    private $app = false;
 
-  public function __construct($adapt = false, $plugin = false, $branding = false)
-  {
-    require_once(__DIR__ . DIRECTORY_SEPARATOR . 'payapi' . DIRECTORY_SEPARATOR . 'app' . '.' . 'engine' . '.' . 'php');
-    $this->app = app :: single($adapt, $plugin, $branding);
-    return $this->app;
-  }
+    public function __construct($adapt = false, $plugin = false, $branding = false)
+    {
+        require_once(__DIR__ . DIRECTORY_SEPARATOR . 'payapi' .
+            DIRECTORY_SEPARATOR . 'app' . '.' . 'engine' . '.' . 'php');
+        $this->app = app :: single($adapt, $plugin, $branding);
+        return $this->app;
+    }
 
-  public function __call($command, $arguments = array())
-  {
-    return $this->app->$command($arguments);
-  }
-
-
+    public function __call($command, $arguments = array())
+    {
+        return $this->app->$command($arguments);
+    }
 }

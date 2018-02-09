@@ -23,5 +23,7 @@ $___['label_status_processed']                    = 'Procesado';
 $___['label_status_failed']                       = 'Fallido';
 $___['label_status_chargeback']                   = 'Devolución';
 
-$___['error_default']                             = 'Oops, algo ha ido mal, si piensa que es un error, por favor, contacte con nosotros';
-$___['error_mandatory']                           = 'Por favor, rellene todos los campos obligatirios e inténtelo de nuevo';
+$___['error_default']                             =
+    'Oops, algo ha ido mal, si piensa que es un error, por favor, contacte con nosotros';
+$___['error_mandatory']                           =
+    'Por favor, rellene todos los campos obligatirios e inténtelo de nuevo';

@@ -12,8 +12,12 @@ $___['text_wait']                                 = 'Odota...';
 $___['text_total']                                = 'kaikki yhteensä';
 $___['text_net']                                  = 'Netto';
 $___['text_tax']                                  = 'ALV';
-$___['text_partial_notice_1']                     = 'Olet valinnut osittaisen maksun maksutavaksi. Huomaa, että lasku vanhenee %s päivinä ja laskutetaan %s%s laskutusmaksu';
-$___['text_partial_notice_2']                     = 'Kun saat laskun, voit maksaa erissä enintään kuukausien% s. Jos maksat erissä, lisätään prosentti %s% s kuukaudessa';
+$___['text_partial_notice_1']                     =
+    'Olet valinnut osittaisen maksun maksutavaksi. ' .
+    'Huomaa, että lasku vanhenee %s päivinä ja laskutetaan %s%s laskutusmaksu';
+$___['text_partial_notice_2']                     =
+    'Kun saat laskun, voit maksaa erissä enintään kuukausien% s. ' .
+    'Jos maksat erissä, lisätään prosentti %s% s kuukaudessa';
 $___['text_partial_resume']                       = '%s%s %s kuukaudesta';
 $___['text_instant_notice_1']                     = '';
 $___['text_instant_notice_2']                     = '';

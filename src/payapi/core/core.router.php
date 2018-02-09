@@ -5,14 +5,13 @@ namespace payapi;
 final class router
 {
 
-    public 
-      static  $single                     =   false;
+    public static $single = false;
 
-    protected $version                    = '0.0.1';
+    protected $version    = '0.0.1';
 
-    private   $root                       =   false;
-    private   $instance                   =   false;
-    private   $frontversion               =       1;
+    private $root         = false;
+    private $instance     = false;
+    private $frontversion = 1;
 
     private function __construct()
     {
@@ -49,7 +48,7 @@ final class router
             $wording = $dictionary . $key . '.' . 'php';
             if (is_file($wording) === true) {
                 return $wording;
-            } else if ($retry === false) {
+            } elseif ($retry === false) {
                 return $this->wording($key, 'en-gb', true);
             }
         }
@@ -109,7 +108,8 @@ final class router
 
     private function routeTranslator($key)
     {
-        $translator = $this->root('data') . 'translator' . DIRECTORY_SEPARATOR . 'translator' . '.' . $key . '.' . 'json';
+        $translator = $this->root('data') . 'translator' . DIRECTORY_SEPARATOR .
+            'translator' . '.' . $key . '.' . 'json';
         if (is_file($translator) === true) {
             return $translator;
         }
@@ -123,7 +123,8 @@ final class router
 
     public static function routeError()
     {
-        return str_replace(DIRECTORY_SEPARATOR . basename(__DIR__), null, __DIR__) . DIRECTORY_SEPARATOR . 'debug' . DIRECTORY_SEPARATOR . 'error' . DIRECTORY_SEPARATOR;
+        return str_replace(DIRECTORY_SEPARATOR . basename(__DIR__), null, __DIR__) .
+            DIRECTORY_SEPARATOR . 'debug' . DIRECTORY_SEPARATOR . 'error' . DIRECTORY_SEPARATOR;
     }
 
     public function routeDebug()
@@ -175,8 +176,10 @@ final class router
     public function cache($type, $key)
     {
         $common = array('localize', 'ssl', 'instance', 'reseller', 'update');
-        $isolated =(in_array($type, $common) === true) ? null : 'data' . DIRECTORY_SEPARATOR . $this->instance . DIRECTORY_SEPARATOR;
-        $cacheFile = $this->routeCache() . $isolated . $type . DIRECTORY_SEPARATOR . 'cache' . '.' . $key . '.' . 'data';
+        $isolated =(in_array($type, $common) === true) ?
+            null : 'data' . DIRECTORY_SEPARATOR . $this->instance . DIRECTORY_SEPARATOR;
+        $cacheFile = $this->routeCache() . $isolated . $type .
+            DIRECTORY_SEPARATOR . 'cache' . '.' . $key . '.' . 'data';
         return $cacheFile;
     }
 
@@ -197,6 +200,4 @@ final class router
     {
         return $this->version;
     }
-
-
 }

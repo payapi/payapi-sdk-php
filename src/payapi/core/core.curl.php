@@ -2,13 +2,24 @@
 
 namespace payapi;
 
-final class curl extends helper {
+final class curl extends helper
+{
 
-    private   $version               = '0.0.1';
-    private   $code                  =   false;
+    private $version = '0.0.1';
+    private $code    = false;
 
-    public function proccess($url, $post = false, $secured = true, $timeout = 1, $return = 1, $header = 0, $ssl = 1, $fresh = 1, $noreuse = 1, $retried = false)
-    {
+    public function proccess(
+        $url,
+        $post = false,
+        $secured = true,
+        $timeout = 1,
+        $return = 1,
+        $header = 0,
+        $ssl = 1,
+        $fresh = 1,
+        $noreuse = 1,
+        $retried = false
+    ) {
         $this->debug('[' .(($retried !== false) ?  'retry' : $this->method($post)) . '] ' . $this->parseDomain($url));
         $options = array(
             CURLOPT_URL              => $url,
@@ -38,9 +49,12 @@ final class curl extends helper {
                 $this->debug('[' . $code . '] success');
                 if ($code === 200) {
                     if ($secured !== false) {
-                        if (isset($dataExpected['data']) === true && is_string($dataExpected['data']) === true && substr_count($dataExpected['data'], '.') === 2) {
+                        if (isset($dataExpected['data']) === true &&
+                            is_string($dataExpected['data']) === true &&
+                            substr_count($dataExpected['data'], '.') === 2) {
                             $serialized = array(
-                                "code" =>(int)((isset($dataExpected['code']) === true && $this->isCleanCodeInt($dataExpected['code']) === true) ? $dataExpected['code'] : $code),
+                                "code" =>(int)((isset($dataExpected['code']) === true &&
+                                $this->isCleanCodeInt($dataExpected['code']) === true) ? $dataExpected['code'] : $code),
                                 "data" => $dataExpected['data']
                             );
                             curl_close($buffer);
@@ -51,7 +65,8 @@ final class curl extends helper {
                     } else {
                         if (is_array($dataExpected) !== false) {
                             $serialized = array(
-                                "code" =>(int)((isset($dataExpected['code']) === true && $this->isCleanCodeInt($dataExpected['code']) === true) ? $dataExpected['code'] : $code),
+                                "code" =>(int)((isset($dataExpected['code']) === true &&
+                                $this->isCleanCodeInt($dataExpected['code']) === true) ? $dataExpected['code'] : $code),
                                 "data" => $dataExpected
                             );
                             curl_close($buffer);
@@ -61,10 +76,10 @@ final class curl extends helper {
                         }
                     }
                 } else {
-                  $this->error('unexpected response', 'curl');
+                    $this->error('unexpected response', 'curl');
                 }
             }
-        } else if ($retried === false) {
+        } elseif ($retried === false) {
             $this->warning('timeout', 'curl');
             curl_close($buffer);
             return  $this->proccess($url, $post, $secured, $timeout, $return, $header, $ssl, $fresh, $noreuse, true);
@@ -95,6 +110,4 @@ final class curl extends helper {
         }
         return $parsed['host'];
     }
-
-
 }

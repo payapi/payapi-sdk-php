@@ -11,8 +11,12 @@ $___['text_wait']                                 = 'Por favor, espere...';
 $___['text_total']                                = 'total';
 $___['text_net']                                  = 'Neto';
 $___['text_tax']                                  = 'IVA';
-$___['text_partial_notice_1']                     = 'Ha seleccionadp Pago a Plazos como método de pago. Tenga en cuenta que el recibo vence en %s días, añadiéndose un recargo de %s%s';
-$___['text_partial_notice_2']                     = 'Al realizar el pago puede elegir abonarlo hasta en %s meses. Para el pago aplazado se añadirá un interés del %s%s mensual';
+$___['text_partial_notice_1']                     =
+    'Ha seleccionadp Pago a Plazos como método de pago.' .
+    'Tenga en cuenta que el recibo vence en %s días, añadiéndose un recargo de %s%s';
+$___['text_partial_notice_2']                     =
+    'Al realizar el pago puede elegir abonarlo hasta en %s meses.' .
+    'Para el pago aplazado se añadirá un interés del %s%s mensual';
 $___['text_partial_resume']                       = '%s%s por %s meses';
 $___['text_instant_notice_1']                     = '';
 $___['text_instant_notice_2']                     = '';
