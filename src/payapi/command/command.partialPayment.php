@@ -61,7 +61,8 @@ final class commandPartialPayment extends controller
     {
         if ($this->partialPayments() === true || $this->arguments(2) === true) {
             if (is_numeric($this->arguments(0)) === true && is_string($this->arguments(1)) === true) {
-                $partialPayment = $this->calculatePartialPayment((int) $this->arguments(0),  $this->arguments(1), $this->arguments(2));
+                $partialPayment =
+                    $this->calculatePartialPayment((int)$this->arguments(0), $this->arguments(1), $this->arguments(2));
                 if (is_array($partialPayment) !== false) {
                     return $this->render($partialPayment);
                 } else {
@@ -73,6 +74,4 @@ final class commandPartialPayment extends controller
         }
         return $this->returnResponse($this->error->notImplemented());
     }
-
-
 }

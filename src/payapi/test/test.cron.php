@@ -1,3 +1,3 @@
 <?php
 
-$test = $sdk -> cron () ;
+$test = $sdk->cron();

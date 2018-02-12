@@ -1,3 +1,3 @@
 <?php
 
-$test = $sdk -> brand ( true ) ;
+$test = $sdk->brand(true);

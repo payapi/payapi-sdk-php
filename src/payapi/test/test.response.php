@@ -1,3 +1,3 @@
 <?php
 
-$test = $sdk -> response () ;
+$test = $sdk->response();

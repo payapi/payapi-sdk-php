@@ -1,3 +1,3 @@
 <?php
 
-$test = $sdk -> info ( true ) ;
+$test = $sdk->info(true);

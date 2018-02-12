@@ -5,37 +5,36 @@ namespace payapi;
 final class engine
 {
 
-    public 
-       static $single                    =       false;
+    public static $single = false;
 
-    private   $version                   =     '3.0.0';
-    private   $plugin                    =    'native';
-    private   $adapt                     =       false;
-    private   $debug                     =       false;
-    private   $config                    =       false;
-    private   $localize                  =       false;
-    private   $entity                    =       false;
-    private   $route                     =       false;
-    private   $validate                  =       false;
-    private   $load                      =       false;
-    private   $api                       =       false;
-    private   $command                   =       false;
-    private   $arguments                 =       false;
-    private   $public                    =      array(
-                  "info"                 =>       true,
-                  "plugin"               =>       true,
-                  "branding"             =>       true,
-                  "localize"             =>       true,
-                  "settings"             =>       true
-              );
+    private $version      = '3.0.0';
+    private $plugin       = 'native';
+    private $adapt        = false;
+    private $debug        = false;
+    private $config       = false;
+    private $localize     = false;
+    private $entity       = false;
+    private $route        = false;
+    private $validate     = false;
+    private $load         = false;
+    private $api          = false;
+    private $command      = false;
+    private $arguments    = false;
+    private $public       = array(
+        "info"     => true,
+        "plugin"   => true,
+        "branding" => true,
+        "localize" => true,
+        "settings" => true
+    );
 
     private function __construct($adapt, $plugin, $branding)
     {
         date_default_timezone_set('UTC');
-        if(session_id() === false) {
+        if (session_id() === false) {
             session_start();
         }
-        foreach(glob(__DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . '*' . '.' . 'php') as $core) {
+        foreach (glob(__DIR__ . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . '*' . '.' . 'php') as $core) {
             require $core;
         }
         $this->route = router::single();
@@ -60,7 +59,7 @@ final class engine
         $this->config = config::single();
         $this->debug = debug::single();
         $this->error = error::single();
-        $this->entity->set('___info',(string) $this);
+        $this->entity->set('___info', (string) $this);
         $this->debug->add($this->entity->get('___info'));
         $this->debug->add('[plugin] ' . $this->plugin);
         $this->entity->addInfo('sdk_payapi_v', $this->version);
@@ -99,14 +98,15 @@ final class engine
         $controller = '\\payapi\\' . 'command' . ucfirst($this->command);
         $command = new $controller($this->adapt);
         if (method_exists($command, 'run') === true) {
-            if ($this->validate->publicId($command->publicId()) === true || in_array($this->command, $this->public) === true) {
-              //-> @TODO this should be called in engine load
-              if ($command->locate() === true) {
-                  $this->debug->run(true);
-                  return $command->run();
-              } else {
-                  return $command->returnResponse($this->error->notLocalizableAccess());
-              }
+            if ($this->validate->publicId($command->publicId()) === true ||
+                in_array($this->command, $this->public) === true) {
+                //-> @TODO this should be called in engine load
+                if ($command->locate() === true) {
+                    $this->debug->run(true);
+                    return $command->run();
+                } else {
+                    return $command->returnResponse($this->error->notLocalizableAccess());
+                }
             } else {
                 return $command->returnResponse($this->error->forbidden());
             }
@@ -125,6 +125,4 @@ final class engine
         }
         return self::$single;
     }
-
-
 }

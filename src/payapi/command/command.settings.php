@@ -72,93 +72,95 @@ namespace payapi;
 final class commandSettings extends controller
 {
 
-  private $staging = false;
+    private $staging = false;
 
-  public function run()
-  {
-    if ($this->arguments(1) != false) {
-      $this->cache('delete', 'settings', $this->instance());
-    }
-    if ($this->validate->publicId($this->arguments(1)) === true && $this->validate->apiKey($this->arguments(2)) === true) {
-      $publicId = $this->arguments(1);
-      $apiKey = $this->arguments(2);
-    } else {
-      $publicId = $this->publicId();
-      $apiKey = $this->apiKey();
-    }
-    //-> @TODO add updating mode (PROD/STAG) debug flag/entry
-    $this->config->mode($this->arguments(0));
-    $this->staging = $this->config->staging();
-    if ($this->validate->publicId($publicId) === true && $this->validate->apiKey($apiKey) === true) {
-      $cached = $this->cache('read', 'settings', $this->instance());
-      if ($this->arguments(1) === false && $cached !== false) {
-        return $this->render($cached);
-      } else {
-        $endPoint = $this->serialize->endPointSettings($publicId);
-        $request = $this->curl($endPoint, $this->payload($apiKey), true);
-        if ($request !== false && isset($request['code']) === true) {
-          if ($request['code'] === 200) {
-            $decodedData = json_decode($this->decode($request['data'], $apiKey), true);
-            $validated = $this->validate->schema($decodedData, $this->load->schema('settings'));
-            if (is_array($validated) !== false) {
-              $error = 0;
-              foreach($validated as $key => $value) {
-                if($value !== false && $value !== true) {
-                  $settings[$key] = $this->validate->schema($value, $this->load->schema('settings' . '.' . $key));
-                  if (is_array($settings[$key]) === false) {
-                    $error ++;
-                  }
-                } else {
-                  $settings[$key] = $value;
-                }
-              }
-              if ($error === 0) {
-                $this->cache('writte', 'account', $this->instance(), array(
-                  "publicId" => $publicId,
-                  "apiKey"   => $this->encode($apiKey, false, true),
-                  "staging"  => $this->staging
-                ));
-                $resellerData = $settings['reseller'];
-                $resellerId = $resellerData['partnerId'];
-                $settings['reseller'] = $resellerId;
-                $settings['staging'] = $this->staging;
-                $this->cache('writte', 'reseller', $resellerId, $resellerData);
-                $this->cache('writte', 'settings', $this->instance(), $settings);
-                return $this->render($this->cache('read', 'settings', $this->instance()));
-              } else {
-                $this->error('no valid settings', 'warning');
-                return $this->returnResponse($this->error->notValidSchema());
-              }
-            } else {
-              //-> not valid schema from PA
-              $this->error('no valid settings', 'warning');
-              return $this->returnResponse($this->error->notValidSchema());
-            }
-          } else {
-            return $this->returnResponse($request['code']);
-          }
-        } else {
-          return $this->returnResponse($this->error->unexpectedResponse());
+    public function run()
+    {
+        if ($this->arguments(1) != false) {
+            $this->cache('delete', 'settings', $this->instance());
         }
-      }
-    } else {
-      return $this->returnResponse($this->error->badRequest());
+        if ($this->validate->publicId($this->arguments(1)) === true &&
+            $this->validate->apiKey($this->arguments(2)) === true) {
+            $publicId = $this->arguments(1);
+            $apiKey = $this->arguments(2);
+        } else {
+            $publicId = $this->publicId();
+            $apiKey = $this->apiKey();
+        }
+        //-> @TODO add updating mode (PROD/STAG) debug flag/entry
+        $this->config->mode($this->arguments(0));
+        $this->staging = $this->config->staging();
+        if ($this->validate->publicId($publicId) === true && $this->validate->apiKey($apiKey) === true) {
+            $cached = $this->cache('read', 'settings', $this->instance());
+            if ($this->arguments(1) === false && $cached !== false) {
+                return $this->render($cached);
+            } else {
+                $endPoint = $this->serialize->endPointSettings($publicId);
+                $request = $this->curl($endPoint, $this->payload($apiKey), true);
+                if ($request !== false && isset($request['code']) === true) {
+                    if ($request['code'] === 200) {
+                        $decodedData = json_decode($this->decode($request['data'], $apiKey), true);
+                        $validated = $this->validate->schema($decodedData, $this->load->schema('settings'));
+                        if (is_array($validated) !== false) {
+                            $error = 0;
+                            foreach ($validated as $key => $value) {
+                                if ($value !== false && $value !== true) {
+                                    $settings[$key] = $this->validate->schema(
+                                        $value,
+                                        $this->load->schema('settings' . '.' . $key)
+                                    );
+                                    if (is_array($settings[$key]) === false) {
+                                        $error ++;
+                                    }
+                                } else {
+                                    $settings[$key] = $value;
+                                }
+                            }
+                            if ($error === 0) {
+                                $this->cache('writte', 'account', $this->instance(), array(
+                                    "publicId" => $publicId,
+                                    "apiKey"   => $this->encode($apiKey, false, true),
+                                    "staging"  => $this->staging
+                                ));
+                                $resellerData = $settings['reseller'];
+                                $resellerId = $resellerData['partnerId'];
+                                $settings['reseller'] = $resellerId;
+                                $settings['staging'] = $this->staging;
+                                $this->cache('writte', 'reseller', $resellerId, $resellerData);
+                                $this->cache('writte', 'settings', $this->instance(), $settings);
+                                return $this->render($this->cache('read', 'settings', $this->instance()));
+                            } else {
+                                $this->error('no valid settings', 'warning');
+                                return $this->returnResponse($this->error->notValidSchema());
+                            }
+                        } else {
+                            //-> not valid schema from PA
+                            $this->error('no valid settings', 'warning');
+                            return $this->returnResponse($this->error->notValidSchema());
+                        }
+                    } else {
+                        return $this->returnResponse($request['code']);
+                    }
+                } else {
+                    return $this->returnResponse($this->error->unexpectedResponse());
+                }
+            }
+        } else {
+            return $this->returnResponse($this->error->badRequest());
+        }
+        return $this->returnResponse($this->error->timeout());
     }
-    return $this->returnResponse($this->error->timeout());
-  }
 
-  private function updateBrand()
-  {
-    //->
-  }
+    private function updateBrand()
+    {
+        //->
+    }
 
-  private function payload($apiKey)
-  {
-    $payload = array(
-      "storeDomain" => ((getenv('HTTP_HOST', true) !== false) ? getenv('HTTP_HOST', true) : getenv('HTTP_HOST'))
-    );
-    return $this->encode($payload, $apiKey);
-  }
-
-
+    private function payload($apiKey)
+    {
+        $payload = array(
+            "storeDomain" => ((getenv('HTTP_HOST', true) !== false) ? getenv('HTTP_HOST', true) : getenv('HTTP_HOST'))
+        );
+        return $this->encode($payload, $apiKey);
+    }
 }

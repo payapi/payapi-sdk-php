@@ -1,3 +1,3 @@
 <?php
 
-$test = $sdk -> callback () ;
+$test = $sdk->callback();

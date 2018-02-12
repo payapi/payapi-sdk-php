@@ -1,4 +1,4 @@
 <?php
 
 //$test = $sdk -> localize ( true ) ;
-$test = $sdk -> localize () ;
+$test = $sdk->localize();

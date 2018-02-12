@@ -1,3 +1,3 @@
 <?php
 
-$test = $sdk -> plugin ( 'somepay' ) ;
+$test = $sdk->plugin('somepay');

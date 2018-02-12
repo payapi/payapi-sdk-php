@@ -23,14 +23,11 @@ namespace payapi;
 */
 final class commandPublicId extends controller
 {
-
-  public function run()
-  {
-    if (is_string($this->publicId()) === true) {
-      return $this->render($this->publicId());
+    public function run()
+    {
+        if (is_string($this->publicId()) === true) {
+            return $this->render($this->publicId());
+        }
+        return $this->returnResponse($this->error->notFound());
     }
-    return $this->returnResponse($this->error->notFound());
-  }
-
-
 }

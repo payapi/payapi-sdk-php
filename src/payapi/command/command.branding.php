@@ -28,7 +28,10 @@ namespace payapi;
 *              ["partnerIconUrl"]=>
 *              string(77) "https://input.payapi.io/modules/core/img/brand/payapi_shield_protected_v2.jpg"
 *              ["partnerSupportInfoL1"]=>
-*              string(212) "For any support requests or help, please do not hesitate to contact &lt;strong&gt;PayApi Support&lt;/strong&gt; via &lt;a href=&quot;https://payapi.io&quot;&gt;payapi.io&lt;/a&gt; or via email: support@payapi.io."
+*              string(212) "For any support requests or help,
+*              please do not hesitate to contact
+*              &lt;strong&gt;PayApi Support&lt;/strong&gt; via &lt;a href=&quot;
+*              https://payapi.io&quot;&gt;payapi.io&lt;/a&gt; or via email: support@payapi.io."
 *              ["partnerSupportInfoL2"]=>
 *              string(0) ""
 *              ["webshopBaseDomain"]=>
@@ -67,7 +70,6 @@ namespace payapi;
 
 final class commandBranding extends controller
 {
-
     private $defaultPluginBrand = 'payapi';
 
     public function run()
@@ -82,6 +84,4 @@ final class commandBranding extends controller
         $this->warning('brand defaulted');
         return $this->render($this->pluginBranding());
     }
-
-
 }

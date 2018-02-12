@@ -9,29 +9,29 @@ namespace payapi;
 final class commandDemo extends controller
 {
 
-    private   $returning       =     true;
-    private   $partial         =     false;
-    private   $modes           =     array(
-                  "confirm",
-                  "success",
-                  "failed",
-                  "cancel"
-              );
-    private   $return          =     array(
-                  "success",
-                  "failed",
-                  "canceled",
-                  "unavailable"
-              );
-    private   $product         =     false;
-    private   $urlProduct      =     false;
-    private   $urlBase         =     false;
-    private   $metadata        =     false;
-    private   $encodedMode     =   array();
-    private   $mode            =    'load';
-    private   $monetary        =     false;
-    private   $branding        =   array();
-    private   $frontend        =      null;
+    private $returning   = true;
+    private $partial     = false;
+    private $modes       = array(
+        "confirm",
+        "success",
+        "failed",
+        "cancel"
+    );
+    private $return      = array(
+        "success",
+        "failed",
+        "canceled",
+        "unavailable"
+    );
+    private $product     = false;
+    private $urlProduct  = false;
+    private $urlBase     = false;
+    private $metadata    = false;
+    private $encodedMode = array();
+    private $mode        = 'load';
+    private $monetary    = false;
+    private $branding    = array();
+    private $frontend    = null;
 
     public function run()
     {
@@ -74,8 +74,16 @@ final class commandDemo extends controller
         if (is_string($requested) === true) {
             $parsed = $this->serialize->urlGet($requested);
             parse_str($this->serialize->urlGet($requested, 'query'), $this->query);
-            if(isset($this->query['mode'])) {
-                $clean = str_replace(array('&mode=' . $this->query['mode'], '&amp;mode=' . $this->query['mode'], '?mode=' . $this->query['mode']), null, $requested);
+            if (isset($this->query['mode'])) {
+                $clean = str_replace(
+                    array(
+                        '&mode=' . $this->query['mode'],
+                        '&amp;mode=' . $this->query['mode'],
+                        '?mode=' . $this->query['mode']
+                    ),
+                    null,
+                    $requested
+                );
                 return $clean;
             } else {
                 return $requested;
@@ -105,14 +113,26 @@ final class commandDemo extends controller
                 if (md5($this->api->request->get('mode')) == md5('confirm')) {
                     $this->mode = 'confirm';
                     //->
-                } else if (md5($this->api->request->get('mode')) == md5('success') || md5($this->api->request->get('mode')) == md5('cancel') || md5($this->api->request->get('mode')) == md5('failed') || md5($this->api->request->get('mode')) == md5('unavailable')) {
+                } elseif (md5($this->api->request->get('mode')) == md5('success') ||
+                    md5($this->api->request->get('mode')) == md5('cancel') ||
+                    md5($this->api->request->get('mode')) == md5('failed') ||
+                    md5($this->api->request->get('mode')) == md5('unavailable')) {
                     $this->mode = 'notice';
                     $this->wording->load('notice');
                     //->
                     $this->wording->set('redirectLocation', '/');
-                    $this->wording->set('title', $this->wording->get('return_' . $this->api->request->get('mode') . '_title'));
-                    $this->wording->set('description', $this->wording->get('return_' . $this->api->request->get('mode') . '_info'));
-                    $this->wording->set('class', $this->wording->get('return_' . $this->api->request->get('mode') . '_class'));
+                    $this->wording->set(
+                        'title',
+                        $this->wording->get('return_' . $this->api->request->get('mode') . '_title')
+                    );
+                    $this->wording->set(
+                        'description',
+                        $this->wording->get('return_' . $this->api->request->get('mode') . '_info')
+                    );
+                    $this->wording->set(
+                        'class',
+                        $this->wording->get('return_' . $this->api->request->get('mode') . '_class')
+                    );
                 } else {
                     //$rediredt = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'] . '?' . 'mode' . '=' . 'confirm';
                     $redirect = 'https://www.oc23.dev/index.php?route=payapi/test' . '&' . 'mode' . '=' . 'confirm' . '&product=' . urlencode($this->product['url']);
@@ -187,10 +207,15 @@ final class commandDemo extends controller
                     "url"           => $this->urlProduct
                 );
                 //-> partial
-                if (isset($this->metadata['order_preselectedPartialPayment']) && $this->metadata['order_preselectedPartialPayment'] != null) {
+                if (isset($this->metadata['order_preselectedPartialPayment']) &&
+                    $this->metadata['order_preselectedPartialPayment'] != null) {
                     //-> enable partial
                     $totalPrice = ($this->product['price'] + $this->product['shipping']);
-                    $this->product['partial'] = $this->calculatePartialPayment($totalPrice, $this->currency, $this->localized['countryCode']);
+                    $this->product['partial'] = $this->calculatePartialPayment(
+                        $totalPrice,
+                        $this->currency,
+                        $this->localized['countryCode']
+                    );
                 }
                 return $this->product;
             }
@@ -242,7 +267,8 @@ final class commandDemo extends controller
     private function validate()
     {
         //->
-        if (isset($_GET['product']) === true && is_string($_GET['product']) === true && substr_count($_GET['product'], '.') === 2) {
+        if (isset($_GET['product']) === true && is_string($_GET['product']) === true &&
+            substr_count($_GET['product'], '.') === 2) {
             $this->product = $this-decode(addslashes($_GET['product']));
             if (is_string($this->product) === true) {
                 return $this->product;
@@ -265,12 +291,10 @@ final class commandDemo extends controller
 
     private function encodedMode()
     {
-        foreach($this->modes as $key => $value) {
+        foreach ($this->modes as $key => $value) {
             $encoded = md5($value);
             $this->encodedMode[$encoded] = $value;
         }
         return $this->encodedMode;
     }
-
-
 }

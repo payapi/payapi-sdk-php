@@ -1,3 +1,3 @@
 <?php
 
-$test = $sdk -> partialPayment ( 100000 , 'EUR' ) ;
+$test = $sdk->partialPayment(100000, 'EUR');

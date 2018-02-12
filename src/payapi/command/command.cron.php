@@ -25,28 +25,25 @@ namespace payapi;
 */
 final class commandCron extends controller
 {
-
-  public function run()
-  {
-    if ($this->validate->commandLineInterfaceAccess() === true) {
-      $this->debug('[cron] valid access');
-      //-> check SSL(done in controller auto)
-      //-> check if merchant account
-      //-> sanitize caches
-      if ($this->sanitizeCache() === true) {
-        return $this->render('success');
-      }
-      $this->error('cannot sanitize cache files', 'warning');
-      return $this->returnResponse($this->error->noCacheSanitization());
+    public function run()
+    {
+        if ($this->validate->commandLineInterfaceAccess() === true) {
+            $this->debug('[cron] valid access');
+            //-> check SSL(done in controller auto)
+            //-> check if merchant account
+            //-> sanitize caches
+            if ($this->sanitizeCache() === true) {
+                return $this->render('success');
+            }
+            $this->error('cannot sanitize cache files', 'warning');
+            return $this->returnResponse($this->error->noCacheSanitization());
+        }
+        $this->error('[cron] unvalid access', 'warning');
+        return $this->returnResponse($this->error->noValidCronAccess());
     }
-    $this->error('[cron] unvalid access', 'warning');
-    return $this->returnResponse($this->error->noValidCronAccess());
-  }
 
-  private function sanitizeCache()
-  {
-    return $this->cache->sanitize();
-  }
-
-
+    private function sanitizeCache()
+    {
+        return $this->cache->sanitize();
+    }
 }

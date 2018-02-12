@@ -21,7 +21,8 @@ namespace payapi;
 *            ["metadata"]=>
 *             string(1519) "<meta name="io.payapi.webshop" content="your_public_id">
 *           <meta name="product.id" content="ref87567">
-*           <meta name="product.url" content="https://store.multimerchantshop.xyz/index.php?route=product/product&product_id=43">
+*           <meta name="product.url"
+*           content="https://store.multimerchantshop.xyz/index.php?route=product/product&product_id=43">
 *           <meta name="product.title" content="Product 1">
 *           <meta name="product.imageUrl" content="https://store.payapi.io/media/43307ac7f356d51e6dd65b8ca9fe3d93/image/cache/catalog/Users/User4/payapi_premium_support-228x228.jpg">
 *           <meta name="product.category" content="category 1">
@@ -67,7 +68,7 @@ final class commandInstantPayment extends controller
         $data['product'] = $this->adaptor->product($data['product']);
         $error = 0;
         $md5 = md5(json_encode($data, JSON_HEX_TAG));
-        $cache = $this->cache ('read', 'product', $md5);
+        $cache = $this->cache('read', 'product', $md5);
         if ($cache !== false) {
             return $cache;
         }
@@ -106,7 +107,8 @@ final class commandInstantPayment extends controller
             "metadata"                  => $metaData,
             "productUrl"                => $productUrl,
             "endPointInstantBuy"        => $this->serialize->endPointInstantBuy($this->publicId()),
-            "endPointProductInstantBuy" => $this->serialize->endPointInstantBuy($this->publicId()) . $this->serialize->paymentUrlEncode($productUrl)
+            "endPointProductInstantBuy" =>
+            $this->serialize->endPointInstantBuy($this->publicId()) . $this->serialize->paymentUrlEncode($productUrl)
         );
         $this->cache('writte', 'product', $md5);
 

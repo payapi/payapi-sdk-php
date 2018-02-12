@@ -6,7 +6,8 @@ $product = array (
     "id"                   => 'ref87567'   ,
     "url"                  => 'https://store.multimerchantshop.xyz/index.php?route=product/product&product_id=43' ,
     "title"                => 'Product 1'  ,
-    "imageUrl"             => 'https://store.payapi.io/media/43307ac7f356d51e6dd65b8ca9fe3d93/image/cache/catalog/Users/User4/payapi_premium_support-228x228.jpg' ,
+    "imageUrl"             =>
+    'https://store.payapi.io/media/43307ac7f356d51e6dd65b8ca9fe3d93/image/cache/catalog/Users/User4/payapi_premium_support-228x228.jpg',
     "category"             => 'category 1' ,
     "priceInCentsExcVat"   => 20000        ,
     "priceInCentsIncVat"   => 24000        ,
@@ -33,4 +34,4 @@ $product = array (
   )
 ) ;
 
-$test = $sdk -> instantPayment ( $product ) ;
+$test = $sdk -> instantPayment($product);

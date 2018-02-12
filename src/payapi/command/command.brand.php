@@ -27,7 +27,9 @@ namespace payapi;
 *            ["partnerIconUrl"]=>
 *             string(77) "https://input.payapi.io/modules/core/img/brand/payapi_shield_protected_v2.jpg"
 *            ["partnerSupportInfoL1"]=>
-*             string(178) "For any support requests or help, please do not hesitate to contact <strong>PayApi Support</strong> via <a href="https://payapi.io">payapi.io</a> or via email: support@payapi.io."
+*             string(178) "For any support requests or help,
+*             please do not hesitate to contact <strong>PayApi Support</strong>
+*             via <a href="https://payapi.io">payapi.io</a> or via email: support@payapi.io."
 *            ["webshopBaseDomain"]=>
 *             string(21) "multimerchantshop.com"
 *            ["partnerWebUrl"]=>
@@ -48,13 +50,11 @@ namespace payapi;
 final class commandBrand extends controller
 {
 
-  public function run()
-  {
-    if (is_array($this->brand()) !== false) {
-      return $this->render($this->brand());
+    public function run()
+    {
+        if (is_array($this->brand()) !== false) {
+            return $this->render($this->brand());
+        }
+        return $this->returnResponse($this->error->notFound());
     }
-    return $this->returnResponse($this->error->notFound());
-  }
-
-
 }

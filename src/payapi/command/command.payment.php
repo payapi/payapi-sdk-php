@@ -54,7 +54,8 @@ namespace payapi;
 *                  ["id"]=>
 *                   string(8) "ref87568"
 *                  ["url"]=>
-*                   string(99) "https%3A%2F%2Fstore.multimerchantshop.xyz%2Findex.php%3Froute%3Dproduct%2Fproduct%26product_id%3D43"
+*                   string(99)
+*                   "https%3A%2F%2Fstore.multimerchantshop.xyz%2Findex.php%3Froute%3Dproduct%2Fproduct%26product_id%3D43"
 *                  ["title"]=>
 *                   string(9) "Product 2"
 *                  ["imageUrl"]=>
@@ -127,7 +128,6 @@ namespace payapi;
 */
 class commandPayment extends controller
 {
-
     private $payment = false;
 
     public function run()
@@ -138,7 +138,7 @@ class commandPayment extends controller
         $data = $this->adaptor->payment($data, $partialPaymentMethod);
         $error = 0;
         $md5 = md5(json_encode($data, JSON_HEX_TAG));
-        $cache = $this->cache ('read', 'payment', $md5);
+        $cache = $this->cache('read', 'payment', $md5);
         if ($cache !== false && 1 === 2) {
             return $cache;
         } else {
@@ -213,9 +213,11 @@ class commandPayment extends controller
         foreach ($data['products'] as $key => $product) {
             $data['products'][$key]['vatInCents'] =
                 ($data['products'][$key]['priceInCentsIncVat'] - $data['products'][$key]['priceInCentsExcVat']);
-            $data['products'][$key]['vatPercentage'] = ($this->serialize->percentage(
-                $data['products'][$key]['priceInCentsIncVat'],
-                $data['products'][$key]['vatInCents'])
+            $data['products'][$key]['vatPercentage'] = (
+                $this->serialize->percentage(
+                    $data['products'][$key]['priceInCentsIncVat'],
+                    $data['products'][$key]['vatInCents']
+                )
             );
         }
         return $data;

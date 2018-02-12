@@ -32,11 +32,11 @@ final class plugin
 
     private function __construct($native)
     {
-      $this->native = $native;
-      $this->session = $this->session();
-      $this->db = $this->db();
-      $this->config = $this->config();
-      $this->loadLog();
+        $this->native = $native;
+        $this->session = $this->session();
+        $this->db = $this->db();
+        $this->config = $this->config();
+        $this->loadLog();
     }
 
     public function language()
@@ -52,7 +52,7 @@ final class plugin
     public function validated()
     {
       //->
-      return true;
+        return true;
     }
 
     public function product($product)
@@ -81,11 +81,11 @@ final class plugin
     {
         $error = 0;
         if (is_array($product) === true) {
-          foreach ($this->schemaProduct as $key => $mandatory) {
-              if (isset($product[$key]) !== true && $mandatory === true) {
-                  $error ++;
-              }
-          }
+            foreach ($this->schemaProduct as $key => $mandatory) {
+                if (isset($product[$key]) !== true && $mandatory === true) {
+                    $error ++;
+                }
+            }
         } else {
             $error ++;
         }
@@ -138,8 +138,8 @@ final class plugin
     public function customer($email)
     {
         //-> checks customer data by email
-        $query = $this->db->query( "SELECT `customer_id` FROM `oc_customer` WHERE ´email´= '" . $email . "' LIMIT 1");
-        if ( isset($query->row) === true && is_array($query->row) === true) {
+        $query = $this->db->query("SELECT `customer_id` FROM `oc_customer` WHERE ´email´= '" . $email . "' LIMIT 1");
+        if (isset($query->row) === true && is_array($query->row) === true) {
             return $query->row;
         }
         return false;
@@ -149,7 +149,7 @@ final class plugin
     {
         //-> @TODO DELETE
         return true;
-        if($this->config->has('payapi_debug') && $this->config->get('payapi_debug') != 0) {
+        if ($this->config->has('payapi_debug') && $this->config->get('payapi_debug') != 0) {
             return true;
         }
         return false;
@@ -170,7 +170,7 @@ final class plugin
 
     public function staging()
     {
-        if($this->config->has('payapi_test') && $this->config->get('payapi_test') != 0) {
+        if ($this->config->has('payapi_test') && $this->config->get('payapi_test') != 0) {
             return true;
         }
         return false;
@@ -188,11 +188,11 @@ final class plugin
             $resultZone = $this->db->query("SELECT `zone_id` FROM `" . DB_PREFIX . "zone` WHERE `country_id` = '" . $resultCountry->row['country_id'] . "' LIMIT 1");
             if (isset($resultZone) === true && $resultZone->num_rows > 0) {
                 return array_merge(
-                  $localized,
-                  array(
-                      'contry_id' => $resultCountry->row['country_id'],
-                      'zone_id'   => $resultZone->row['zone_id']
-                  )
+                    $localized,
+                    array(
+                        'contry_id' => $resultCountry->row['country_id'],
+                        'zone_id'   => $resultZone->row['zone_id']
+                    )
                 );
             }
         }
@@ -217,6 +217,4 @@ final class plugin
     {
         return $this->version;
     }
-
-
 }
