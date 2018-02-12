@@ -48,7 +48,7 @@ final class adaptor
             $this->debug = debug::single($this->debug());
             foreach ($config as $key => $setting) {
                 //-> @FIXME TODELETE after update
-                if($key != 'staging') {
+                if ($key != 'staging') {
                     $enabled =($setting != false) ? 'true' : 'false';
                     $this->debug->add('[' . $key . '] ' . $enabled);
                 }

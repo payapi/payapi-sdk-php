@@ -5,14 +5,13 @@ namespace payapi;
 class serializer
 {
 
-    public 
-      static  $single                     =   false;
+    public static $single = false;
 
-    protected $instance                   =   false;
-    protected $version                    = '0.0.1';
+    protected $instance   = false;
+    protected $version    = '0.0.1';
 
-    private   $staging                    =   false;
-    private   $monetized                  = 'en_GB';
+    private $staging      = false;
+    private $monetized    = 'en_GB';
 
     protected function __construct()
     {
@@ -67,16 +66,21 @@ class serializer
             $formatted = $standarized;
         }
         $monetized = $currencyLeft . $formatted . $currencyRight;
-        if(strpos($monetized, '.') === false && strpos($monetized, ',') === false) {
+        if (strpos($monetized, '.') === false && strpos($monetized, ',') === false) {
             return $monetized;
         }
-        $zero = str_repeat("0",$decimals);
-        return str_replace(array('.' . $zero, ',' . $zero), array('<small>.' . $zero, '<small>,' . $zero), $monetized) . '</small>';
+        $zero = str_repeat("0", $decimals);
+        return str_replace(
+            array('.' . $zero, ',' . $zero),
+            array('<small>.' . $zero, '<small>,' . $zero),
+            $monetized
+        ) . '</small>';
     }
 
     public function endPointLocalization($ip)
     {
-        $api = $this->https() . $this->staging() . 'input' . '.' . 'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'api' . '/' . 'fraud' . '/' . 'ipdata' . '/' . $ip;
+        $api = $this->https() . $this->staging() . 'input' . '.' .
+            'payapi' . '.' . 'io' . '/' . 'v1' . '/' . 'api' . '/' . 'fraud' . '/' . 'ipdata' . '/' . $ip;
         return $api;
     }
 
@@ -166,7 +170,7 @@ class serializer
     public function options($options)
     {
         $optionsSerialized = '';
-        foreach($options as $option => $value) {
+        foreach ($options as $option => $value) {
             $optionsSerialized .=(($optionsSerialized !== '') ? '&' : null) . $option . '=' . $value;
         }
         return $optionsSerialized;
@@ -211,10 +215,11 @@ class serializer
     public function urlGet($url, $key = false)
     {
         //-> parse_url($url) returns array: schema, user, pass, host, port, path, query, fragment
-        //-> parse_url($url, <flags>): PHP_URL_SCHEME, PHP_URL_USER, PHP_URL_PASS, PHP_URL_HOST, PHP_URL_PORT, PHP_URL_PATH, PHP_URL_QUERY, PHP_URL_FRAGMENT
+        //-> parse_url($url, <flags>): PHP_URL_SCHEME, PHP_URL_USER, PHP_URL_PASS,
+        //PHP_URL_HOST, PHP_URL_PORT, PHP_URL_PATH, PHP_URL_QUERY, PHP_URL_FRAGMENT
         $parsed = parse_url($url);
         //-> TODO anchorRight
-        if(is_array($parsed) === true) {
+        if (is_array($parsed) === true) {
             if (strpos($url, '/#') !== false) {
                 $parsed['anchorRight'] = false;
             } else {
@@ -222,8 +227,7 @@ class serializer
             }
             if ($key === false) {
                 return $parsed;
-            } else
-            if (is_string($key) === true) {
+            } elseif (is_string($key) === true) {
                 if (isset($parsed[$key]) === true) {
                     return $parsed[$key];
                 }
@@ -235,9 +239,19 @@ class serializer
     public function urlUpdateQuery($url, $key, $value)
     {
         $part = $this->urlGet($url);
-        if(isset($part['query']) === true) {
+        if (isset($part['query']) === true) {
             $part['query'] = str_replace($key .'=' . '?', $key . '=' . $value, $part['query']);
-            return $this->urlBuild($part['host'], true, $part['user'], $part['pass'], $part['port'], $part['path'], $part['query'], $part['fragment'], $part['anchorRight']);
+            return $this->urlBuild(
+                $part['host'],
+                true,
+                $part['user'],
+                $part['pass'],
+                $part['port'],
+                $part['path'],
+                $part['query'],
+                $part['fragment'],
+                $part['anchorRight']
+            );
         }
     }
 
@@ -261,12 +275,21 @@ class serializer
         return $this->urlBuild($host, $secure, $user, $pass, $port, $path, $query, $fragment, $anchorRight);
     }
 
-    public function urlBuild($host, $secure = true, $user = false, $pass = false, $port = false, $path = false, $query = false, $fragment = false, $anchorRight = true)
-    {
+    public function urlBuild(
+        $host,
+        $secure = true,
+        $user = false,
+        $pass = false,
+        $port = false,
+        $path = false,
+        $query = false,
+        $fragment = false,
+        $anchorRight = true
+    ) {
         if (is_string($host) === true) {
             $schema = 'http';
-            if($secure === true) {
-              $schema .= 's';
+            if ($secure === true) {
+                $schema .= 's';
             }
             $url = $schema . '://';
             if (is_numeric($port) === true) {
@@ -318,6 +341,4 @@ class serializer
         }
         return self::$single;
     }
-
-
 }

@@ -18,7 +18,11 @@ final class instance
     public static function domain()
     {
         //-> getenv(<variable>, true) -> force OS env values
-        return str_replace('*', 'store', ((getenv('HTTP_HOST', true) !== false) ? getenv('HTTP_HOST', true) : getenv('HTTP_HOST')));
+        return str_replace(
+            '*',
+            'store',
+            ((getenv('HTTP_HOST', true) !== false) ? getenv('HTTP_HOST', true) : getenv('HTTP_HOST'))
+        );
     }
 
     private static function encode($decoded)
@@ -28,5 +32,4 @@ final class instance
         }
         return false;
     }
-
 }

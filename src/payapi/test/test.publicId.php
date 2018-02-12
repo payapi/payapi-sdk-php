@@ -1,3 +1,3 @@
 <?php
 
-$test = $sdk -> publicId () ;
+$test = $sdk -> publicId();

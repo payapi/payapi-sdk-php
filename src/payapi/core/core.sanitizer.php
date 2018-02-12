@@ -5,16 +5,15 @@ namespace payapi;
 final class sanitizer
 {
 
-    public 
-      static  $single                     =   false;
+    public static $single = false;
 
-    protected $version                    = '0.0.0';
+    protected $version    = '0.0.0';
 
     public function schema($schema, $data)
     {
         if (isset($schema['___schema']) === true && is_array($data) !== false) {
             $diffs = array_diff_key($data, $schema['___schema']);
-            foreach($diffs as $diff => $value) {
+            foreach ($diffs as $diff => $value) {
                 if ($diff != 'numberOfInstallments') {
                     unset($data[$diff]);
                 }
@@ -67,12 +66,12 @@ final class sanitizer
     {
         if (is_array($render) !== false) {
             $sanitize = array('___tk');
-            foreach($render as $key => $value) {
+            foreach ($render as $key => $value) {
                 if (in_array($key, $sanitize) === true) {
                     unset($render[$key]);
                 }
                 if (is_array($value)) {
-                    foreach($value as $key2 => $value2) {
+                    foreach ($value as $key2 => $value2) {
                         if (in_array($key2, $sanitize) === true) {
                             unset($render[$key][$key2]);
                         }
@@ -86,8 +85,8 @@ final class sanitizer
     public function clean($array)
     {
         $sanitized = array();
-        foreach($array as $key => $value) {
-            if(is_array($value)){
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
                 $sanitized[$this->string($key)] = $this->clean($value);
             } else {
                 $sanitized[$this->string($key)] = $this->string(addslashes($value));
@@ -117,6 +116,4 @@ final class sanitizer
         }
         return self::$single;
     }
-
-
 }

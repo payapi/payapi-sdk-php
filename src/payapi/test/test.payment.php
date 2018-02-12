@@ -4,10 +4,11 @@
 $product = array (
   "products"                => array (
     array (
-      "id"                   => 'ref87567' . rand ( 1000 , 9999 )   ,
+      "id"                   => 'ref87567' . rand(1000, 9999),
       "url"                  => 'https://store.multimerchantshop.xyz/index.php?route=product/product&product_id=41' ,
       "title"                => 'Product 1'  ,
-      "imageUrl"             => 'https://store.payapi.io/media/43307ac7f356d51e6dd65b8ca9fe3d93/image/cache/catalog/Users/User4/payapi_premium_support-228x228.jpg' ,
+      "imageUrl"             =>
+      'https://store.payapi.io/media/43307ac7f356d51e6dd65b8ca9fe3d93/image/cache/catalog/Users/User4/payapi_premium_support-228x228.jpg',
       "category"             => 'category 1' ,
       "priceInCentsExcVat"   => 20000        ,
       "priceInCentsIncVat"   => 24000        ,
@@ -18,10 +19,11 @@ $product = array (
       )
     ) ,
     array (
-      "id"                   => 'ref87568' . rand ( 1000 , 9999 ) ,
+      "id"                   => 'ref87568' . rand(1000, 9999),
       "url"                  => 'https://store.multimerchantshop.xyz/index.php?route=product/product&product_id=42' ,
       "title"                => 'Product 2'  ,
-      "imageUrl"             => 'https://store.payapi.io/media/43307ac7f356d51e6dd65b8ca9fe3d93/image/cache/catalog/Users/User4/payapi_premium_support-228x228.jpg' ,
+      "imageUrl"             =>
+      'https://store.payapi.io/media/43307ac7f356d51e6dd65b8ca9fe3d93/image/cache/catalog/Users/User4/payapi_premium_support-228x228.jpg',
       "category"             => 'category 2' ,
       "priceInCentsExcVat"   => 20000        ,
       "priceInCentsIncVat"   => 24000        ,
@@ -32,10 +34,11 @@ $product = array (
       )
     ) ,
     array (
-      "id"                   => 'ref87569' . rand ( 1000 , 9999 ) ,
+      "id"                   => 'ref87569' . rand(1000, 9999),
       "url"                  => 'https://store.multimerchantshop.xyz/index.php?route=product/product&product_id=43' ,
       "title"                => 'Product 3'  ,
-      "imageUrl"             => 'https://store.payapi.io/media/43307ac7f356d51e6dd65b8ca9fe3d93/image/cache/catalog/Users/User4/payapi_premium_support-228x228.jpg' ,
+      "imageUrl"             =>
+      'https://store.payapi.io/media/43307ac7f356d51e6dd65b8ca9fe3d93/image/cache/catalog/Users/User4/payapi_premium_support-228x228.jpg',
       "category"             => 'category 3' ,
       "priceInCentsExcVat"   => 50000        ,
       "priceInCentsIncVat"   => 60000        ,
@@ -48,7 +51,7 @@ $product = array (
   ) ,
   "order"           => array (
     "currency"      => 'EUR' ,
-    "referenceId"   => ( 'REF-' . md5 ( date ( 'YmdHis' , time () ) ) . '-' . 'test' ) ,
+    "referenceId"   => ('REF-' . md5(date('YmdHis', time())) . '-' . 'test'),
     "tosUrl"        => 'https://store.example.com/terms'
   ) ,
   "callbacks"       => array (
@@ -65,4 +68,4 @@ $product = array (
   )
 ) ;
 
-$test = $sdk -> payment ( $product ) ;
+$test = $sdk -> payment($product);

@@ -5,31 +5,31 @@ namespace payapi;
 abstract class controller extends helper
 {
 
-    protected $customer                  =     false;
-    protected $entity                    =     false;
-    protected $session                   =     false;
-    protected $data                      =     false;
-    protected $token                     =     false;
-    protected $cache                     =     false;
-    protected $validate                  =     false;
-    protected $sanitizer                 =     false;
-    protected $load                      =     false;
-    protected $api                       =     false;
-    protected $localized                 =     false;
-    protected $language                  =     false;
-    protected $currency                  =     false;
-    protected $adaptor                   =     false;
-    protected $db                        =     false;
-    protected $partialPaymentCountryCode =     false;
-    protected $partialPaymentSettings    =     false;
+    protected $customer                  = false;
+    protected $entity                    = false;
+    protected $session                   = false;
+    protected $data                      = false;
+    protected $token                     = false;
+    protected $cache                     = false;
+    protected $validate                  = false;
+    protected $sanitizer                 = false;
+    protected $load                      = false;
+    protected $api                       = false;
+    protected $localized                 = false;
+    protected $language                  = false;
+    protected $currency                  = false;
+    protected $adaptor                   = false;
+    protected $db                        = false;
+    protected $partialPaymentCountryCode = false;
+    protected $partialPaymentSettings    = false;
 
-    private   $crypter                   =     false;
-    private   $publicId                  =     false;
-    private   $apiKey                    =     false;
-    private   $account                   =     false;
-    private   $settings                  =     false;
-    private   $brand                     =     false;
-    private   $arguments                 =     false;
+    private $crypter                     = false;
+    private $publicId                    = false;
+    private $apiKey                      = false;
+    private $account                     = false;
+    private $settings                    = false;
+    private $brand                       = false;
+    private $arguments                   = false;
 
     protected function ___autoload($native)
     {
@@ -51,7 +51,7 @@ abstract class controller extends helper
         if (is_string($this->cache('read', 'ssl', $this->domain)) !== true) {
             $validated = $this->validate->ssl();
             if (is_resource($validated) === true) {
-                $this->cache('writte', 'ssl', $this->domain,(string) $validated);
+                $this->cache('writte', 'ssl', $this->domain, (string) $validated);
             } else {
                 return $this->api->returnResponse($this->error->noValidSsl());
             }
@@ -74,12 +74,12 @@ abstract class controller extends helper
     }
 
     protected function pluginBranding($brand = false)
-    {    
+    {
         if (is_string($brand) === true) {
             $this->debug('checking brand: ' . $brand);
             return $this->getPluginBrandFromKey($brand);
         } else {
-            if (method_exists('\Payapi\Branding\Branding','getBrandingCode')) {
+            if (method_exists('\Payapi\Branding\Branding', 'getBrandingCode')) {
                 $brandFromComposer = new \Payapi\Branding\Branding();
                 $brandCode = $brandFromComposer->getBrandingCode();
                 $this->debug('checking brand from library: ' . $brandCode);
@@ -103,12 +103,12 @@ abstract class controller extends helper
                 );
                 return $pluginBrand;
             } else {
-                $this->warning('invalid plugin branding');          
+                $this->warning('invalid plugin branding');
             }
-          } else {
-              $this->warning('invalid value');
-          }
-          return false;
+        } else {
+            $this->warning('invalid value');
+        }
+        return false;
     }
 
     public function locate()
@@ -117,13 +117,13 @@ abstract class controller extends helper
         if (isset($this->localized['ip']) === true && isset($this->localized['countryCode']) === true) {
             return true;
         }
-        $this->error( 'not localized', 'warning');
+        $this->error('not localized', 'warning');
         return false;
     }
 
     protected function localization($requestedIp = false)
     {
-        if($requestedIp !== false) {
+        if ($requestedIp !== false) {
               $ip = $requestedIp;
         } else {
               $ip = $this->ip();
@@ -195,12 +195,12 @@ abstract class controller extends helper
             $this->entity->addInfo('brand', $this->brand('partnerName') . ', ' . $this->brand('partnerSlogan'));
         }
         $this->debug('[run] ' . strtolower($this->entity->get('command')));
-        $this->entity->addInfo('adaptor_' . $this->entity->get('plugin') . '_v',(string) $this->adaptor);
-        $this->entity->addInfo('api_v',(string) $this->api);
-        $this->entity->addInfo('crypter_v',(string) $this->crypter);
-        $this->entity->addInfo('validator_v',(string) $this->validate);
-        $this->entity->addInfo('sanitizer_v',(string) $this->sanitizer);
-        $this->entity->addInfo('serializer_v',(string) $this->serialize);
+        $this->entity->addInfo('adaptor_' . $this->entity->get('plugin') . '_v', (string) $this->adaptor);
+        $this->entity->addInfo('api_v', (string) $this->api);
+        $this->entity->addInfo('crypter_v', (string) $this->crypter);
+        $this->entity->addInfo('validator_v', (string) $this->validate);
+        $this->entity->addInfo('sanitizer_v', (string) $this->sanitizer);
+        $this->entity->addInfo('serializer_v', (string) $this->serialize);
     }
     //-> SDK passed argument(s)
     protected function arguments($key)
@@ -252,8 +252,17 @@ abstract class controller extends helper
         return $this->api->ip();
     }
 
-    protected function curl($url, $post = false, $secured = true, $timeout = 1, $return = 1, $header = 0, $ssl = 1, $fresh = 1, $noreuse = 1)
-    {
+    protected function curl(
+        $url,
+        $post = false,
+        $secured = true,
+        $timeout = 1,
+        $return = 1,
+        $header = 0,
+        $ssl = 1,
+        $fresh = 1,
+        $noreuse = 1
+    ) {
         return $this->api->curl($url, $post, $secured, $timeout, $return, $header, $ssl, $fresh, $noreuse);
     }
 
@@ -275,30 +284,47 @@ abstract class controller extends helper
         if ($demo === true) {
             $this->debug('[demo] enabled');
             $this->partialPaymentSettings = $this->demoPartialData();
-        } else if ($this->partialPayments() === true) {
+        } elseif ($this->partialPayments() === true) {
             $this->partialPaymentSettings = $this->settings('partialPayments');
         }
         $countryCode = (isset($this->localized['countryCode']) === true) ? $this->localized['countryCode'] : null;
-        if (is_array($this->partialPaymentSettings) === true && md5($paymentCurrency) === md5($this->partialPaymentSettings['invoiceFeeCurrency'])) {
-            if(is_string($countryCode) === true) { 
-                if (isset($this->partialPaymentSettings['whitelistedCountries']) !== true || $this->partialPaymentSettings['whitelistedCountries'] === false || in_array($countryCode, $this->partialPaymentSettings['whitelistedCountries']) === true) {
-                    if (is_int($paymentPriceInCents) === true && $paymentPriceInCents >= $this->partialPaymentSettings['minimumAmountAllowedInCents'] && is_string($paymentCurrency) === true) {
+        if (is_array($this->partialPaymentSettings) === true &&
+            md5($paymentCurrency) === md5($this->partialPaymentSettings['invoiceFeeCurrency'])) {
+            if (is_string($countryCode) === true) {
+                if (isset($this->partialPaymentSettings['whitelistedCountries']) !== true ||
+                    $this->partialPaymentSettings['whitelistedCountries'] === false ||
+                    in_array($countryCode, $this->partialPaymentSettings['whitelistedCountries']) === true) {
+                    if (is_int($paymentPriceInCents) === true &&
+                        $paymentPriceInCents >= $this->partialPaymentSettings['minimumAmountAllowedInCents'] &&
+                        is_string($paymentCurrency) === true) {
                         $calculate = array();
                         $partial = array();
-                        $minimumAmountPerMonthInCents =($this->partialPaymentSettings['monthlyFeeThresholdInCents'] / $this->partialPaymentSettings['numberOfInstallments']);
+                        $minimumAmountPerMonthInCents =
+                            ($this->partialPaymentSettings['monthlyFeeThresholdInCents'] /
+                            $this->partialPaymentSettings['numberOfInstallments']);
                         $minimumAmountPerMonth = ($minimumAmountPerMonthInCents / 100);
-                        if ($minimumAmountPerMonth < 1 || round(($paymentPriceInCents / $minimumAmountPerMonthInCents), 0) >= $this->partialPaymentSettings['numberOfInstallments']) {
+                        if ($minimumAmountPerMonth < 1 ||
+                            round(($paymentPriceInCents / $minimumAmountPerMonthInCents), 0) >=
+                            $this->partialPaymentSettings['numberOfInstallments']) {
                             $partial['paymentMonths'] = $this->partialPaymentSettings['numberOfInstallments'];
                         } else {
-                            $partial['paymentMonths'] = round(($paymentPriceInCents / $minimumAmountPerMonthInCents), 0);
+                            $partial['paymentMonths'] =
+                                round(($paymentPriceInCents / $minimumAmountPerMonthInCents), 0);
                         }
-                        $partial['interestRate'] =(($this->partialPaymentSettings['nominalAnnualInterestRateInCents'] / 100) / 12) * $partial['paymentMonths'];
-                        $partial['interestRatePerMonth'] = round(($partial['interestRate'] / $partial['paymentMonths']), 2);
-                        $partial['interestPriceInCents'] = round((($paymentPriceInCents / 100) * $partial['interestRate']), 0);
+                        $partial['interestRate'] =
+                            (($this->partialPaymentSettings['nominalAnnualInterestRateInCents'] / 100) / 12) *
+                            $partial['paymentMonths'];
+                        $partial['interestRatePerMonth'] =
+                            round(($partial['interestRate'] / $partial['paymentMonths']), 2);
+                        $partial['interestPriceInCents'] =
+                            round((($paymentPriceInCents / 100) * $partial['interestRate']), 0);
                         $partial['openingFeeInCents'] = $this->partialPaymentSettings['openingFeeInCents'];
                         $partial['invoiceFeeInCents'] = $this->partialPaymentSettings['invoiceFeeInCents'];
-                        $partial['priceInCents'] = $paymentPriceInCents + $partial['interestPriceInCents'] + ($partial['invoiceFeeInCents'] * $partial['paymentMonths']);
-                        $partial['pricePerMonthInCents'] = round($partial['priceInCents'] / $partial['paymentMonths'], 0);
+                        $partial['priceInCents'] =
+                            $paymentPriceInCents + $partial['interestPriceInCents'] +
+                            ($partial['invoiceFeeInCents'] * $partial['paymentMonths']);
+                        $partial['pricePerMonthInCents'] =
+                            round($partial['priceInCents'] / $partial['paymentMonths'], 0);
                         $partial['paymentMethod'] = $this->partialPaymentSettings['preselectedPartialPayment'];
                         $partial['invoiceFeeDays'] = $this->partialPaymentSettings['paymentTermInDays'];
                         $partial['currency'] = $paymentCurrency;
@@ -306,7 +332,6 @@ abstract class controller extends helper
                         return $partial;
                     }
                 }
-
             }
         }
         return false;
@@ -406,23 +431,23 @@ abstract class controller extends helper
         //-> @FIXME token is still isolated per account
         $tokenCoded = $this->encode($token, false, true);
         $cacheKey = str_replace(strtok($tokenCoded, '.') . '.', null, $tokenCoded);
-        switch($action) {
-            case 'writte' :
+        switch ($action) {
+            case 'writte':
                 if (is_array($data) !== false) {
                     $data['timestamp'] = $this->serialize->microstamp();
                 }
                 $encryptedData = $this->encode($data, false, true);
                 return $this->cache->writte($type, $cacheKey, $encryptedData);
-            case 'read' :
+            case 'read':
                 $cached = $this->cache->read($type, $cacheKey);
                 if ($cached !== false) {
                     return $this->decode($cached, false, true);
                 }
-            break;
-            case 'delete' :
+                break;
+            case 'delete':
                 return $this->cache->delete($type, $cacheKey);
             break;
-            default :
+            default:
                 return false;
             break;
         }
@@ -435,9 +460,6 @@ abstract class controller extends helper
         $vatInCents = 0;
 
         foreach ($products as $key => $product) {
-
         }
     }
-
-
 }

@@ -5,19 +5,18 @@ namespace payapi;
 final class request
 {
 
-    public 
-       static $single                          =   false;
+    public static $single = false;
 
-    private   $method                          =     false;
-    private   $shell                           =     false;
-    private   $sanitize                        =   array();
-    private   $serialize                       =   array();
-    private   $data                            =     array(
-                  'server'  => array(),
-                  'get'     => array(),
-                  'post'    => array(),
-                  'session' => array()
-              );
+    private $method       = false;
+    private $shell        = false;
+    private $sanitize     = array();
+    private $serialize    = array();
+    private $data         = array(
+        'server'  => array(),
+        'get'     => array(),
+        'post'    => array(),
+        'session' => array()
+    );
 
     private function __construct()
     {
@@ -46,7 +45,7 @@ final class request
 
     public function server($key)
     {
-        if($this->has('server') && isset($this->data['server'][$key]) === true) {
+        if ($this->has('server') && isset($this->data['server'][$key]) === true) {
             return $this->data['server'][$key];
         }
         return false;
@@ -67,9 +66,12 @@ final class request
         if (is_string($requested) === true) {
             $parsed = $this->serialize->urlGet($requested);
             parse_str($this->serialize->urlGet($requested, 'query'), $query);
-            if(isset($query['mode'])) {
-
-                $clean = str_replace(array('&mode=' . $query['mode'], '&amp;mode=' . $query['mode'], '?mode=' . $query['mode']), null, $requested);
+            if (isset($query['mode'])) {
+                $clean = str_replace(
+                    array('&mode=' . $query['mode'], '&amp;mode=' . $query['mode'], '?mode=' . $query['mode']),
+                    null,
+                    $requested
+                );
                 return $clean;
             } else {
                 return $requested;
@@ -80,7 +82,7 @@ final class request
 
     public function get($key)
     {
-        if($this->has('get') && isset($this->data['get'][$key]) === true) {
+        if ($this->has('get') && isset($this->data['get'][$key]) === true) {
             return $this->data['get'][$key];
         }
         return null;
@@ -99,7 +101,7 @@ final class request
     */
     public function post($key)
     {
-        if($this->has('post') && isset($this->data['post'][$key]) === true) {
+        if ($this->has('post') && isset($this->data['post'][$key]) === true) {
             return $this->data['post'][$key];
         }
         return $key;
@@ -107,7 +109,7 @@ final class request
 
     public function session($key)
     {
-        if($this->has('session') && isset($this->data['session'][$key]) === true) {
+        if ($this->has('session') && isset($this->data['session'][$key]) === true) {
             return $this->data['session'][$key];
         }
         return $key;
@@ -138,6 +140,4 @@ final class request
     {
         return json_encode($this->data, true);
     }
-
-
 }
