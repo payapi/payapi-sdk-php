@@ -3,7 +3,7 @@
  *
  *  @author    Efim Polevoi <efim@payapi.in>
  *  @copyright 2017 PayApi Ltd
- *  @license   GPL v3.0
+ *  @license   Apache v2.0
  */
 
 $(document).ready(function() {

@@ -67,7 +67,7 @@
 *
 *  @author     florin
 *  @copyright  PayApi Ltd
-*  @license    GPL v3.0
+*  @license    Apache v2.0
 *
 *
 *  @TODO       ever!
