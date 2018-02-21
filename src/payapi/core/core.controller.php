@@ -50,7 +50,7 @@ abstract class controller extends helper
         $this->debug('[mode] ' . $mode);
         if (is_string($this->cache('read', 'ssl', $this->domain)) !== true) {
             $validated = $this->validate->ssl();
-            if (is_resource($validated) === true) {
+            if (is_string($validated) === true) {
                 $this->cache('writte', 'ssl', $this->domain, (string) $validated);
             } else {
                 return $this->api->returnResponse($this->error->noValidSsl());
