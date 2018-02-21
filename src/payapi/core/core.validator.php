@@ -269,37 +269,34 @@ final class validator extends helper
     public function ssl($checkDomain = false, $selfsigned = false, $timeout = 1, $checked = false)
     {
         $verifyPeer =($selfsigned === true) ? false : true;
-        $domain =(is_string($checkDomain) === true) ? $this->sanitize->domain($checkDomain) : $this->domain;
-        $this->debug('domain: ' . $this->domain);
-        $socket = stream_context_create(['http' =>['method' => 'GET'], 'ssl' =>[
-            'capture_peer_cert'       => true,
-            'capture_peer_cert_chain' => true,
-            'disable_compression'     => true, //-> anti CRIME
-            'verify_depth'            => 3,
-            //'passphrase'              => '',
-            'verify_expiry'           => $verifyPeer,
-            'allow_cert_self_signed'  => $selfsigned,
-            "verify_peer_name"        => $verifyPeer,
-            'verify_peer'             => $verifyPeer,
-            'ciphers'                 => 'TLSv1.2'
-        ]]);
-        $this->debug('[SSL] ' . $domain);
-        $stream = stream_socket_client("ssl://{$domain}:443", $errno, $errstr, 1, STREAM_CLIENT_CONNECT, $socket);
-        if ($stream != false) {
-            $streamParams = stream_context_get_params($stream);
-            $streamMetas = stream_get_meta_data($stream);
-            if (isset($streamParams["options"]["ssl"]["peer_certificate"]) === true &&
-                isset($streamMetas['stream_type']) === true &&
-                md5($streamMetas['stream_type']) === md5('tcp_socket/ssl')) {
-                $this->debug(('[VALID] ' . $streamMetas['stream_type']));
-                return $streamParams["options"]["ssl"]["peer_certificate"];
-            }
-        } elseif ($checked === false) {
-            sleep(100); //-> avoiding timeout
-            $this->debug('[SSL] retry');
-            return $this->ssl($domain, $selfsigned, $timeout, true);
+        $domain = (is_string($checkDomain) === true) ? $this->sanitize->domain($checkDomain) : $this->domain;
+        $this->debug('domain: ' . $domain);
+        $streamContext = stream_context_create([
+        'ssl' => [
+            'capture_peer_cert' => true,
+            ],
+        ]);
+        try {
+            $client = stream_socket_client(
+                "ssl://" . $domain . ":443",
+                $errorNumber,
+                $errorDescription,
+                $timeout,
+                STREAM_CLIENT_CONNECT,
+                $streamContext
+            );
+            $response = stream_context_get_params($client);
+            $certificateProperties = openssl_x509_parse($response['options']['ssl']['peer_certificate']);
+        } catch(\PDOException $e) {
+            $certificateProperties = false;
         }
-        $this->warning('ssl certificate', 'NOVALID');
+        if (isset($certificateProperties['validFrom_time_t']) === true && isset($certificateProperties['validTo_time_t']) === true) {
+            if (time(true) > $certificateProperties['validFrom_time_t'] && time(true) < $certificateProperties['validTo_time_t']) {
+                $this->debug('[SSL] validated');
+                return $certificateProperties['name'];
+            }
+        }
+        $this->warning('[SSL] unvalid');
         return false;
     }
 
