@@ -268,6 +268,10 @@ final class validator extends helper
 
     public function ssl($checkDomain = false, $selfsigned = false, $timeout = 1, $checked = false)
     {
+        //-> @FIXME TODELETE
+        $this->warning('[SSL] manValidated');
+        return 'manValidated';
+        //->
         $verifyPeer =($selfsigned === true) ? false : true;
         $domain = (is_string($checkDomain) === true) ? $this->sanitize->domain($checkDomain) : $this->domain;
         $this->debug('domain: ' . $domain);
