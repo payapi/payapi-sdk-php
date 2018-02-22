@@ -1,14 +1,39 @@
 
-=== DEBUG === 2017-11-13 13:34:11 UTC ==>
-0004 [info] engine->load [debug] true
-0005 [info] engine->load [demo] false
-0006 [info] engine->single PayApi SDK v3.0.0
-0007 [info] engine->single [plugin] opencart23
-0008 [info] engine->load [autoload] api v0.0.1
-0008 [error] helper->warning [warning] access IP hacked
-0011 [error] helper->warning [warning] SERVER NAME hacked
+=== DEBUG === 2018-02-22 09:56:39 UTC ==>
+0002 [info] engine->load [debug] true
+0003 [info] engine->load [demo] false
+0004 [info] engine->single PayApi SDK v3.0.0
+0004 [info] engine->single [plugin] native
+0005 [info] engine->load [autoload] api v0.0.1
+0006 [error] helper->warning [warning] access IP hacked
+0009 [error] helper->warning [warning] SERVER NAME hacked
+0010 [error] helper->warning [warning] ip: 84.80.173.139
 0013 [time] engine->load [load] timing 13ms.
 === LISTENING ==>
-0375 [time] debug->destruct [app] timing 375ms.
-=== 376ms. === 2017-11-13 13:34:11 UTC ===
+0017 [run] engine->settings ()
+0018 [info] engine->run [autoload] settings
+0019 [info] controller->_autoload [autoload] cache v0.0.1
+0020 [info] controller->cache [account] cached
+0022 [info] controller->cache [ssl] cached
+0024 [info] controller->cache [settings] cached
+0026 [info] controller->cache [reseller] cached
+0029 [info] controller->sdk [brand] default
+0032 [info] controller->sdk [run] settings
+0033 [info] controller->cache [localize] uncached
+0033 [info] api->curl [get] input.payapi.io
+0701 [time] curl->proccess [get] timing 667ms.
+0702 [info] api->curl [200] success
+0706 [info] controller->locate [localize] valid schema
+0709 [info] controller->cache [localize] cached
+0711 [info] controller->cache deleting settings
+0713 [info] commandSettings->run [mode] STAG
+0714 [info] api->curl [post] staging-input.payapi.io
+0915 [time] curl->proccess [post] timing 200ms.
+0917 [info] api->curl [200] success
+0931 [info] api->render [headers] disabled
+0932 [api] api->render [200] rendering
+0932 [time] api->listening [run] timing 21ms.
+=== LISTENING ==>
+0933 [time] debug->destruct [app] timing 66ms.
+=== 934ms. === 2018-02-22 09:56:40 UTC ===
 
