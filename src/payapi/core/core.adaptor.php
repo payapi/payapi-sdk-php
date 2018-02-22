@@ -12,16 +12,7 @@ final class adaptor
     private $route        = false;
     private $config       = false;
     private $debug        = false;
-    private $adaptors     = array(
-        "native",
-        "opencart2",
-        "opencart22",
-        "opencart23",
-        "opencart3",
-        "prestashop",
-        "magento",
-        "oscommerce"
-    );
+    private $default      = 'native';
 
     protected $log        = false;
 
@@ -33,11 +24,11 @@ final class adaptor
         $this->error = error::single();
         $this->route = router::single();
         //->
-        if (in_array($plugin, $this->adaptors) !== false) {
+        if ($this->route->plugin($plugin) !== false) {
             $this->plugin = $plugin;
         } else {
             $this->error('[adaptor] not available', 'warning');
-            $this->plugin = 'native';
+            $this->plugin = $this->default;
         }
         $pluginRoute = $this->route->plugin($this->plugin);
         if (is_string($pluginRoute) === true) {
