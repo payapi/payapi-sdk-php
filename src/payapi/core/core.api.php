@@ -282,15 +282,6 @@ final class api extends helper
         return (getenv($key, true) != false) ? getenv($key, true) : getenv($key);
     }
 
-    private function hackAccess()
-    {
-        $this->warning('access IP hacked');
-        //-> check core.instance.php
-        $this->warning('SERVER NAME hacked');
-        return '84.79.234.58';
-        return '84.79.' . rand(100, 200) . '.' . rand(100, 200);
-    }
-
     private function isCleanCodeInt($int)
     {
         if (is_int($int) === true && $int >= 200 && $int <= 600) {
