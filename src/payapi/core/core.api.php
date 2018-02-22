@@ -241,9 +241,6 @@ final class api extends helper
 
     private function getIp()
     {
-        //-> @FIXME TODELETE
-        return $this->hackAccess();
-        //->
         if ($this->validPAccess() === true) {
             if (filter_var($this->request->get('consumerIp'), FILTER_VALIDATE_IP) !== false) {
                 return $this->request->get('consumerIp');
@@ -290,10 +287,8 @@ final class api extends helper
         $this->warning('access IP hacked');
         //-> check core.instance.php
         $this->warning('SERVER NAME hacked');
-        //return '84.79.234.58';
-        $random = '84.80.' . rand(100, 200) . '.' . rand(100, 200);
-        $this->warning('ip: ' . $random);
-        return $random;
+        return '84.79.234.58';
+        return '84.79.' . rand(100, 200) . '.' . rand(100, 200);
     }
 
     private function isCleanCodeInt($int)

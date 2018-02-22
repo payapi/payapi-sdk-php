@@ -59,6 +59,8 @@ abstract class controller extends helper
             }
         }
         $this->adaptor = $this->entity->get('adaptor');
+        $this->language = $this->adaptor->language();
+        $this->currency = $this->adaptor->currency();
         $this->sdk();
     }
 
@@ -168,6 +170,9 @@ abstract class controller extends helper
             $this->token = $this->crypter->instanceToken($this->publicId());
             $this->entity->addInfo('tk', $this->token());
         }
+        $this->wording = wording::single($this->language);
+        $this->wording->set('branding', $this->pluginBranding());
+
         $this->info();
     }
 
@@ -285,7 +290,7 @@ abstract class controller extends helper
         }
         return false;
     }
-
+    // delete countryCode -> udated to demo
     protected function calculatePartialPayment($paymentPriceInCents, $paymentCurrency, $demo = false)
     {
         if ($demo === true) {
@@ -434,6 +439,8 @@ abstract class controller extends helper
 
     protected function cache($action, $type, $token, $data = false)
     {
+        //-> @TODO review common caches
+        //-> @FIXME token is still isolated per account
         $tokenCoded = $this->encode($token, false, true);
         $cacheKey = str_replace(strtok($tokenCoded, '.') . '.', null, $tokenCoded);
         switch ($action) {

@@ -13,6 +13,7 @@ final class adaptor
     private $config       = false;
     private $debug        = false;
     private $default      = 'native';
+
     protected $log        = false;
 
     private function __construct($adapt, $plugin)
