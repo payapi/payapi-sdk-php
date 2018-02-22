@@ -72,8 +72,6 @@ namespace payapi;
 final class commandSettings extends controller
 {
 
-    private $staging = false;
-
     public function run()
     {
         if ($this->arguments(1) != false) {
@@ -87,9 +85,8 @@ final class commandSettings extends controller
             $publicId = $this->publicId();
             $apiKey = $this->apiKey();
         }
-        //-> @TODO add updating mode (PROD/STAG) debug flag/entry
         $this->config->mode($this->arguments(0));
-        $this->staging = $this->config->staging();
+        $this->staging = $this->staging();
         if ($this->validate->publicId($publicId) === true && $this->validate->apiKey($apiKey) === true) {
             $cached = $this->cache('read', 'settings', $this->instance());
             if ($this->arguments(1) === false && $cached !== false) {

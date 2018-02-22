@@ -5,6 +5,7 @@ namespace payapi;
 abstract class controller extends helper
 {
 
+    protected $staging                   = false;
     protected $customer                  = false;
     protected $entity                    = false;
     protected $session                   = false;
@@ -40,14 +41,15 @@ abstract class controller extends helper
         $this->validate = $this->entity->get('validate');
         $this->api = $this->entity->get('api');
         $this->account = $this->cache('read', 'account', $this->instance());
-        if (isset($this->account['staging']) === true && $this->account['staging'] === true) {
-            $this->config->mode(true);
-            $mode = 'STAG';
+        if (isset($this->account['staging']) === true) {
+            if ($this->account['staging'] === true) {
+                $this->config->mode(true);
+            } else {
+                $this->config->mode(false);
+            }            
         } else {
-            $this->config->mode(false);
-            $mode = 'PROD';
+            $this->debug('settings not found');
         }
-        $this->debug('[mode] ' . $mode);
         if (is_string($this->cache('read', 'ssl', $this->domain)) !== true) {
             $validated = $this->validate->ssl();
             if (is_string($validated) === true) {
@@ -173,11 +175,21 @@ abstract class controller extends helper
 
         $this->info();
     }
-    //-> @TODELETE
-    public function staging()
+
+    protected function staging()
     {
-        return $this->config->staging();
+        $mode = $this->config->staging();
+        if ($mode !== false) {
+            $this->staging = true;
+            $mode = 'STAG';
+        } else {
+            $this->staging = false;
+            $mode = 'PROD';
+        }
+        $this->debug('[mode] ' . $mode);
+        return $this->staging;
     }
+
 
     public function instance()
     {
