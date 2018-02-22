@@ -9,6 +9,7 @@ final class config
     public static $single = false;
 
     private $settings     = false;
+    private $staging      = false;
     private $instance     = false;
     private $schema       = array(
         "debug" => false,
@@ -36,6 +37,21 @@ final class config
         }
         //->  @NOTE
         return null;
+    }
+
+    //-> @NOTE true enables staging mode, false for production
+    public function mode($mode)
+    {
+        if ($mode !== false) {
+            $this->staging = true;
+        } else {
+            $this->staging = false;
+        }
+    }
+
+    public function staging()
+    {
+        return $this->staging;
     }
 
     public static function single($config = array())

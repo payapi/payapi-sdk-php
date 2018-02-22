@@ -59,7 +59,11 @@ final class commandLocalize extends controller
         if ($this->arguments(1) != false && $this->validate->ip($this->arguments(1)) === true) {
             $ip = $this->arguments(1);
         } else {
-            $ip = $this->ip();
+            if (is_array($this->localized) === true) {
+                return $this->render($this->localized);
+            } else {
+                return $this->returnResponse($this->error->notValidLocalizationSchema());
+            }
         }
         $this->debug('[check] ' . $ip);
         $cached = $this->cache('read', 'localize', $ip);
