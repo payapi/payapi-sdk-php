@@ -51,18 +51,26 @@ namespace payapi;
 *          common ip cahe is still isolated at encoding
 *
 */
+
 final class commandLocalize extends controller
 {
 
     public function run()
     {
-        if ($this->arguments(1) != false && $this->validate->ip($this->arguments(1)) === true) {
-            $ip = $this->arguments(1);
-        } else {
-            if (is_array($this->localized) === true) {
-                return $this->render($this->localized);
+        if ($this->arguments(1) != false) {
+            if ($this->validate->ip($this->arguments(1)) === true) {
+                $ip = $this->arguments(1);
             } else {
-                return $this->returnResponse($this->error->notValidLocalizationSchema());
+                return $this->returnResponse($this->error->badRequest());
+            }
+        } else {
+            $ip = $this->ip();
+            if ($this->arguments(0) !== true) {
+                if (is_array($this->localized) === true) {
+                    return $this->render($this->localized);
+                } else {
+                    return $this->returnResponse($this->error->notValidLocalizationSchema());
+                }
             }
         }
         $this->debug('[check] ' . $ip);
@@ -81,7 +89,6 @@ final class commandLocalize extends controller
                         $this->cache('writte', 'localize', $ip, $adaptedData);
                         return $this->render($this->cache('read', 'localize', $ip));
                     } else {
-                        //-> not valid schema from PA
                         $this->error('no valid localization', 'warning');
                         return $this->returnResponse($this->error->notValidLocalizationSchema());
                     }
@@ -90,6 +97,7 @@ final class commandLocalize extends controller
                 }
             }
         }
+        //->
         return $this->returnResponse($this->error->timeout());
     }
 }
