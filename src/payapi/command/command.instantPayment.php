@@ -98,17 +98,9 @@ final class commandInstantPayment extends controller
             $this->product($sanitized)
         );
         $metaData = $this->metadata($this->payment);
-        $productUrl =
-            $this->payment['product']['url'] . '&' . 'extraData' . '=' . $this->extraData($data['product']);
-        //-> @TODO options/extraData
         $product = array(
-            //"product"                 => $this->payment,
-            //"payload"                 => $this->encode($payloadJson, $this->publicId()),
             "metadata"                  => $metaData,
-            "productUrl"                => $productUrl,
-            "endPointInstantBuy"        => $this->serialize->endPointInstantBuy($this->publicId()),
-            "endPointProductInstantBuy" =>
-            $this->serialize->endPointInstantBuy($this->publicId()) . $this->serialize->paymentUrlEncode($productUrl)
+            "endPointInstantBuy"        => $this->serialize->endPointInstantBuy($this->publicId())
         );
         $this->cache('writte', 'product', $md5);
 
