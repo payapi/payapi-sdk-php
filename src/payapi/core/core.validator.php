@@ -283,8 +283,12 @@ final class validator extends helper
                 STREAM_CLIENT_CONNECT,
                 $streamContext
             );
-            $response = stream_context_get_params($client);
-            $certificateProperties = openssl_x509_parse($response['options']['ssl']['peer_certificate']);
+            if (is_resource($client) === true) {
+                $response = stream_context_get_params($client);
+                $certificateProperties = openssl_x509_parse($response['options']['ssl']['peer_certificate']);
+            } else {
+                $this->debug('[SSL] no valid resource');
+            }
         } catch(\PDOException $e) {
             $certificateProperties = false;
         }
