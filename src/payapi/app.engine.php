@@ -7,7 +7,7 @@ final class engine
 
     public static $single = false;
 
-    private $version      = '3.0.2';
+    private $version      = '3.0.3';
     private $plugin       = 'native';
     private $adapt        = false;
     private $debug        = false;
