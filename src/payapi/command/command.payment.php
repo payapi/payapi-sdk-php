@@ -134,7 +134,6 @@ class commandPayment extends controller
     {
         $data = $this->arguments(0);
         $partialPaymentMethod = $this->arguments(1);
-        //error_log(' SDK partialPaymentMethod: '.$partialPaymentMethod, 0);
         $data = $this->adaptor->payment($data, $partialPaymentMethod);
         $error = 0;
         $md5 = md5(json_encode($data, JSON_HEX_TAG));
@@ -143,11 +142,6 @@ class commandPayment extends controller
             return $cache;
         } else {
             if (is_array($this->validate->schema($data, $this->load->schema('payment'))) !== false) {
-                /*
-                $sanitized = array(
-                    'order' => array()
-                );
-                 */
                 foreach ($data as $key => $value) {
                     if ($key !== 'products') {
                         $sanitization = $this->validate->schema($value, $this->load->schema('payment.' . $key));
@@ -176,27 +170,12 @@ class commandPayment extends controller
             if ($error === 0) {
                 $this->payment = $sanitized;
                 $this->debug('[schema] valid');
-                /*
-                $data = array(
-                  'title' => 'shipping and handling',
-                  'model' => 'shipping',
-                  'category' => 'shipping',
-                  'priceInCentsExcVat' => 1000,
-                  'priceInCentsIncVat' => 1200
-                );
-                $this->addShipping($data);
-                $this->payment = $this->product($this->payment);
-                $this->order();
-                 */
-                // $payloadJson = json_encode($this->payment, true);
                 $payloadJwt = $this->encode($this->payment, $this->apiKey());
                 $payment = array(
                     "payment"            => $this->payment,
                     "payload"            => $payloadJwt,
-                    //"decoded"            => $this->decode($payloadJwt, $this->publicId()),
                     "endPointPayment"    => $this->serialize->endPointPayment($this->publicId()),
-                    //"order_form_js_path" => "payapi/views/js/order_form.js",
-                    "order_form_js_path" => $this->route->view('form/order')
+                    "order_form_js_path" => $this->route->script('form/order')
                 );
                 $this->cache('writte', 'payment', $md5);
                 return $this->render($payment);
