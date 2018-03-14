@@ -78,6 +78,15 @@ final class router
         return false;
     }
 
+    public function script($key)
+    {
+        $script = $this->ui() . 'view' . DIRECTORY_SEPARATOR . 'view' . '.' . str_replace('/', '.', $key) . '.' . 'js';
+        if (is_file($script) === true) {
+            return $script;
+        }
+        return false;
+    }
+
     private function check($dir)
     {
         if (is_dir($dir) !== true) {
