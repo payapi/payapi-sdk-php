@@ -7,7 +7,7 @@ final class engine
 
     public static $single = false;
 
-    private $version      = '3.0.6';
+    private $version      = '3.0.5';
     private $plugin       = 'native';
     private $adapt        = false;
     private $debug        = false;
@@ -25,8 +25,7 @@ final class engine
         "plugin"   => true,
         "branding" => true,
         "localize" => true,
-        "settings" => true,
-        "debug" => true
+        "settings" => true
     );
 
     private function __construct($adapt, $plugin, $branding)
