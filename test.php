@@ -6,7 +6,7 @@ require(dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'autoload' . '.' . 'php');
 
 final class test {
 
-	public $test      = 'localize';
+	public $test      = 'cdn';
 	public $domain    = 'www.google.com';
 	public $ip        = '216.58.210.142';
 
