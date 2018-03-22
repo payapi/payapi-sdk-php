@@ -171,11 +171,15 @@ class commandPayment extends controller
                 $this->payment = $sanitized;
                 $this->debug('[schema] valid');
                 $payloadJwt = $this->encode($this->payment, $this->apiKey());
+                //-> @TODO move to adaptor/router
+                //$script = $this->route->script('form/order');
+                //->
+                $script = 'payapi/ui/v1/view/view.form.order.js';
                 $payment = array(
                     "payment"            => $this->payment,
                     "payload"            => $payloadJwt,
                     "endPointPayment"    => $this->serialize->endPointPayment($this->publicId()),
-                    "order_form_js_path" => $this->route->script('form/order')
+                    "order_form_js_path" => $script
                 );
                 $this->cache('writte', 'payment', $md5);
                 return $this->render($payment);
