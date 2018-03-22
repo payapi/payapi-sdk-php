@@ -25,8 +25,7 @@ final class engine
         "plugin"   => true,
         "branding" => true,
         "localize" => true,
-        "settings" => true,
-        "debug" => true
+        "settings" => true
     );
 
     private function __construct($adapt, $plugin, $branding)
