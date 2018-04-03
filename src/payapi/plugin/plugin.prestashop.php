@@ -82,7 +82,11 @@ final class plugin
             $prodVatPercentage = round($prodVatInCents / $prodPriceInCentsExcVat * 100);
 
             //error_log("attributes: ".$product['attributes'], 0);
-            $name_with_attributes = $product['name']." ".$product['attributes'];
+            if (array_key_exists('attributes', $product)) {
+                $name_with_attributes = $product['name']." ".$product['attributes'];
+            } else {
+                $name_with_attributes = $product['name'];
+            }
 
             $productObject = array(
                 'id' => $product['id_product'],
