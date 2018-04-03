@@ -82,7 +82,11 @@ final class plugin
             $prodVatPercentage = round($prodVatInCents / $prodPriceInCentsExcVat * 100);
 
             //error_log("attributes: ".$product['attributes'], 0);
-            $name_with_attributes = $product['name']." ".$product['attributes'];
+            if (array_key_exists('attributes', $product)) {
+                $name_with_attributes = $product['name']." ".$product['attributes'];
+            } else {
+                $name_with_attributes = $product['name'];
+            }
 
             $productObject = array(
                 'id' => $product['id_product'],
@@ -102,7 +106,10 @@ final class plugin
         $shipping_cost_no_tax = (float)$cart->getOrderTotal(false, \Cart::ONLY_SHIPPING) * 100;
         // Add shipping cost as a last product
         $shippingObject = array(
-            'id' => $cart->id_carrier,
+            //-> @FIXED 201804031322 florin (added string to shipping ID)
+            //   *NOTE @FIXME (using shipping method ID means could get duplicated 'product' ID)
+            'id' => (string) $cart->id_carrier,
+            //->
             'quantity' => 1,
             'title' => "Shipping cost",
             'description' => "",
