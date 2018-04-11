@@ -72,6 +72,10 @@ final class engine
 
     public function __call($command, $arguments = array())
     {
+        if (md5($command) === md5('debug') && isset($arguments[0][0]) === true) {
+            return $this->debug->add($arguments[0][0], 'debug');
+        }
+
         return $this->worker($command, $arguments);
     }
 
