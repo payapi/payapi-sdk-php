@@ -7,7 +7,7 @@ final class engine
 
     public static $single = false;
 
-    private $version      = '3.0.8';
+    private $version      = '3.0.9';
     private $plugin       = 'native';
     private $adapt        = false;
     private $debug        = false;
@@ -72,6 +72,10 @@ final class engine
 
     public function __call($command, $arguments = array())
     {
+        if (md5($command) === md5('debug') && isset($arguments[0][0]) === true) {
+            return $this->debug->add($arguments[0][0], 'debug');
+        }
+
         return $this->worker($command, $arguments);
     }
 
