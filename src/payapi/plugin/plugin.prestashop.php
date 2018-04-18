@@ -99,6 +99,11 @@ final class plugin
                 'vatInCents' => $prodVatInCents,
                 'vatPercentage' => $prodVatPercentage,
             );
+            //-> florin added 20180417
+            if (isset($cart->gallery) === true && isset($cart->gallery[$product['id_product']]['imageUrl']) === true) {
+                $productObject['imageUrl'] = $cart->gallery[$product['id_product']]['imageUrl'];
+                $this->debug('[product][image] ' . $productObject['imageUrl']);
+            }
             array_push($products_array, $productObject);
         }
 
@@ -174,7 +179,7 @@ final class plugin
                 'returnUrls' => $returnUrls
             );
         }
-
+        $this->debug('[cart][payment] ' . json_encode($secureformObject));
         return $secureformObject;
     }
 

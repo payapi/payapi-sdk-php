@@ -17,7 +17,9 @@ namespace payapi;
 *          ["error"]=>
 *           string(15) "debugged string"
 *
+* @NOTE    deprecated, command is exec from engine
 */
+
 final class commandDebug extends controller
 {
     public function run()

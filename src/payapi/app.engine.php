@@ -7,7 +7,7 @@ final class engine
 
     public static $single = false;
 
-    private $version      = '3.0.9';
+    private $version      = '4.0.0';
     private $plugin       = 'native';
     private $adapt        = false;
     private $debug        = false;
@@ -24,6 +24,7 @@ final class engine
         "info"     => true,
         "plugin"   => true,
         "branding" => true,
+        "server"   => true,
         "localize" => true,
         "settings" => true
     );
@@ -104,13 +105,8 @@ final class engine
         if (method_exists($command, 'run') === true) {
             if ($this->validate->publicId($command->publicId()) === true ||
                 in_array($this->command, $this->public) === true) {
-                //-> @TODO this should be called in engine load
-                if ($command->locate() === true) {
-                    $this->debug->run(true);
-                    return $command->run();
-                } else {
-                    return $command->returnResponse($this->error->notLocalizableAccess());
-                }
+                $this->debug->run(true);
+                return $command->run();
             } else {
                 return $command->returnResponse($this->error->forbidden());
             }
