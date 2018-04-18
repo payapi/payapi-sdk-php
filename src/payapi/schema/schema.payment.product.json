@@ -30,7 +30,7 @@
     },
     "imageUrl": {
       "___mandatory": false,
-      "___type": "urlencoded",
+      "___type": "url",
       "___min": 1
     },
     "category": {

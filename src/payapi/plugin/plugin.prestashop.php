@@ -99,7 +99,7 @@ final class plugin
                 'vatInCents' => $prodVatInCents,
                 'vatPercentage' => $prodVatPercentage,
             );
-            //-> florin added 20180417
+            //-> florin added 20180418
             if (isset($cart->gallery) === true && isset($cart->gallery[$product['id_product']]['imageUrl']) === true) {
                 $productObject['imageUrl'] = $cart->gallery[$product['id_product']]['imageUrl'];
                 $this->debug('[product][image] ' . $productObject['imageUrl']);
