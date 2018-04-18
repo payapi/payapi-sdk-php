@@ -52,10 +52,10 @@ abstract class controller extends helper
         } else {
             $this->debug('settings not found');
         }
+        $this->adaptor = $this->entity->get('adaptor');
         if ($this->api->env() == 'server' && $this->locate() !== true) {
             return $this->returnResponse($this->error->notLocalizableAccess());
         }
-        $this->adaptor = $this->entity->get('adaptor');
         $this->sdk();
     }
 
