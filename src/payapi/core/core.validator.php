@@ -5,7 +5,7 @@ namespace payapi;
 final class validator extends helper
 {
 
-    public $version = '1.0.0';
+    public $version = '1.0.1';
 
     public function command($command)
     {
@@ -310,9 +310,9 @@ final class validator extends helper
         return false;
     }
     //->
-    public function publicId($apiKey)
+    public function publicId($publicId)
     {
-        if ($this->isString($apiKey, 4, 250) === true) {
+        if ($this->isString($publicId, 4, 250) === true) {
             return true;
         }
         return false;
