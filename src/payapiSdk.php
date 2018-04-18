@@ -29,6 +29,8 @@
 *
 *              $sdk->callback();                                  //-> gets/cache callback decoded transaction
 *
+*              $sdk->server();                                    //-> validates server ssl certificate
+*
 *              $sdk->localize();
 *              //-> gets/cache ip decoded localization(plugin adds adapt country and zone ids)
 *              $sdk->localize(true);
@@ -71,7 +73,8 @@
 *
 *
 *  @TODO       ever!
-*              sdk default noplugin settings
+*              extend terminal mode
+*              extend server command
 *
 *
 **/
