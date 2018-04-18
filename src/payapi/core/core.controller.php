@@ -2,6 +2,8 @@
 
 namespace payapi;
 
+//-> include public_id in ALL renders!
+
 abstract class controller extends helper
 {
 
@@ -50,13 +52,8 @@ abstract class controller extends helper
         } else {
             $this->debug('settings not found');
         }
-        if (is_string($this->cache('read', 'ssl', $this->domain)) !== true) {
-            $validated = $this->validate->ssl();
-            if (is_string($validated) === true) {
-                $this->cache('writte', 'ssl', $this->domain, (string) $validated);
-            } else {
-                return $this->api->returnResponse($this->error->noValidSsl());
-            }
+        if ($this->api->env() != 'server' && $this->locate() !== true) {
+            return $command->returnResponse($this->error->notLocalizableAccess());
         }
         $this->adaptor = $this->entity->get('adaptor');
         $this->sdk();
