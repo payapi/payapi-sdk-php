@@ -8,6 +8,7 @@ final class api extends helper
     public $version  = '0.0.1';
     public $request  = false;
 
+    private $env     = false;
     private $curl    = false;
     private $knock   = false;
     private $code    = false;
@@ -87,6 +88,20 @@ final class api extends helper
         //-> @TOREVIEW move this to main controller!?
         $this->request = request::single();
         $this->ip = $this->getIp();
+        $this->env();
+    }
+
+    public function env()
+    {   
+        if ($this->env === false) {
+            if (isset($_SERVER) === true && isset($_SERVER['HTTP_HOST']) === true) {
+                $this->env = 'server';
+            } else {
+                $this->env = 'terminal';
+            }
+        }
+        $this->debug('[APP][ENV] ' . $this->env);
+        return $this->env;
     }
 
     public function ip()
