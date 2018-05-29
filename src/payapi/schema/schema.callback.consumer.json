@@ -22,6 +22,10 @@
     "mobilePhoneNumber": {
       "___mandatory": false,
       "___type": "phone"
+    },
+    "optInEnabled": {
+      "___mandatory": false,
+      "___type": "boolean"
     }
   }
 }
