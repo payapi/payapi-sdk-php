@@ -9,12 +9,11 @@ use \payapi\engine as app;
 class payapiSdkTest
 {
 
-    private   $app = false;
-    private 
-      static  $settings = array(
-                            'debug' => true
-                        );
-    private   $test = false;
+    private $app = false;
+    private $test = false;
+    private $settings = array(
+                'debug' => true
+            );
 
     public function __construct($adapt = false, $plugin = false, $branding = false)
     {
@@ -27,14 +26,14 @@ class payapiSdkTest
         //-> loads sdk engine
         require_once(str_replace('test' . DIRECTORY_SEPARATOR, null, __DIR__) . DIRECTORY_SEPARATOR . 'payapi' .
             DIRECTORY_SEPARATOR . 'app' . '.' . 'engine' . '.' . 'php');
-        $this->app = app::single($adapt, $plugin, $branding);
+        $this->app = app::single($this->settings(), $plugin, $branding);
         $this->tester();
         return $this->app;
     }
 
-    public static function settings()
+    public function settings()
     {
-        return self::$settings;
+        return $this->settings;
     }
 
     private function tester()
@@ -56,4 +55,4 @@ class payapiSdkTest
 
 }
 
-$sdk = new payapiSdkTest(payapiSdkTest::settings(), 'native', 'payapi');
+$sdk = new payapiSdkTest();
