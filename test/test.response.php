@@ -2,5 +2,3 @@
 require(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'sdk' . '.' . 'php');
 
 $test = $sdk->response();
-
-var_dump($test);

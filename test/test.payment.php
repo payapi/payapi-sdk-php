@@ -69,5 +69,3 @@ $product = array (
 ) ;
 
 $test = $sdk -> payment($product);
-
-var_dump($test);

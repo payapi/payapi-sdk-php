@@ -35,5 +35,3 @@ $product = array (
 ) ;
 
 $test = $sdk -> instantPayment($product);
-
-var_dump($test);
