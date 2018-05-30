@@ -9,8 +9,12 @@ use \payapi\engine as app;
 class payapiSdkTest
 {
 
-    private $app = false;
-    private $test = false;
+    private   $app = false;
+    private 
+      static  $settings = array(
+                            'debug' => true
+                        );
+    private   $test = false;
 
     public function __construct($adapt = false, $plugin = false, $branding = false)
     {
@@ -23,15 +27,24 @@ class payapiSdkTest
         //-> loads sdk engine
         require_once(str_replace('test' . DIRECTORY_SEPARATOR, null, __DIR__) . DIRECTORY_SEPARATOR . 'payapi' .
             DIRECTORY_SEPARATOR . 'app' . '.' . 'engine' . '.' . 'php');
-        $this->app = app :: single($adapt, $plugin, $branding);
+        $this->app = app::single($adapt, $plugin, $branding);
         $this->tester();
         return $this->app;
+    }
+
+    public static function settings()
+    {
+        return self::$settings;
     }
 
     private function tester()
     {
         require_once(__DIR__ . DIRECTORY_SEPARATOR . 'tester' . '.' . 'php');
-    	//->return $this->app->settings(true, 'multimerchantshop', 'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9');
+    }
+
+    private function login()
+    {
+        return $this->app->settings(true, 'multimerchantshop', 'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9');
     }
 
     public function __call($command, $arguments = array())
@@ -39,8 +52,8 @@ class payapiSdkTest
         $this->test = new tester($this->app->$command($arguments));
         return $this->test->result();
     }
+
+
 }
 
-$sdk = new payapiSdkTest(array(
-	'debug' => true
-), 'native', 'payapi');
+$sdk = new payapiSdkTest(payapiSdkTest::settings(), 'native', 'payapi');
