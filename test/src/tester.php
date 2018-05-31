@@ -31,9 +31,18 @@ class tester {
 		} else {
 			$this->error[] = 'undefined error';
 		}
-		$this->debug(json_encode($this->error, true), 'error');
+		if (is_array($this->error) === true)  {
+			$this->debug($this->stringify($this->error), 'error');
+		}
+		//-> @FIXME @TODELETE
 		var_dump($this->response);
+		//->
 		return $this->response;
+	}
+
+	private function stringify($data)
+	{
+		return  json_encode($data, true);
 	}
 
 	public function debug($info, $label = 'test')
