@@ -34,4 +34,4 @@ $product = array (
   )
 ) ;
 
-$test = $sdk -> instantPayment($product);
+return $sdk -> instantPayment($product);

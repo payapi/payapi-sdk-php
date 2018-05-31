@@ -68,4 +68,4 @@ $product = array (
   )
 ) ;
 
-$test = $sdk -> payment($product);
+return $sdk -> payment($product);
