@@ -5,7 +5,7 @@ namespace payapi;
 final class validator extends helper
 {
 
-    public $version = '1.0.0';
+    public $version = '1.0.1';
 
     public function command($command)
     {
@@ -192,6 +192,14 @@ final class validator extends helper
         return false;
     }
 
+    public function isFloat($float)
+    {
+        if (is_float($float) === true) {
+            return true;
+        }
+        return false;
+    }
+
     public function isValidCode($code)
     {
         if (is_int($code) && preg_match('/^\d{3}$/', $code) && $code <= 600 && $code >= 200) {
@@ -230,6 +238,9 @@ final class validator extends helper
                 break;
             case 'boolean':
                 return $this->isBoolean($data);
+                break;
+            case 'float':
+                return $this->isFloat($data);
                 break;
             case 'ip':
                 return $this->ip($data);
@@ -310,9 +321,9 @@ final class validator extends helper
         return false;
     }
     //->
-    public function publicId($apiKey)
+    public function publicId($publicId)
     {
-        if ($this->isString($apiKey, 4, 250) === true) {
+        if ($this->isString($publicId, 4, 250) === true) {
             return true;
         }
         return false;

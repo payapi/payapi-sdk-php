@@ -46,8 +46,8 @@ final class commandDemo extends controller
         $this->config->set('monetary', $this->monetary);
         //die($this->urlBase());
         //-> @TODO filter arguments
-        if (is_string($this->arguments(0)) === true) {
-            $this->branding = $this->pluginBranding($this->arguments(0));
+        if ($this->arguments(0) !== $this->serialize->undefined() && is_string($this->arguments(0)) === true) {
+            $this->branding = $this->pluginBranding($this->sanitize->string($this->arguments(0)));
         } else {
             $this->branding = $this->pluginBranding();
         }

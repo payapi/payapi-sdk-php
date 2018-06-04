@@ -31,7 +31,7 @@ final class loader extends helper
     {
         if (is_string($route = $this->route->command($key)) === true) {
             if (isset($this->loaded[$key]) !== true) {
-                require_once($route);
+                require($route);
                 $this->loaded[$key] = true;
             }
             return true;

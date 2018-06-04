@@ -107,7 +107,7 @@ final class crypter
     public function uniqueServerSignature()
     {
         return $this->encode(
-            md5($this->getEnviroment('SERVER_NAME') . md5($this->getEnviroment('USER'))),
+            md5($this->getEnviroment('SERVER_HOST') . md5($this->getEnviroment('USER'))),
             md5($this->getEnviroment('USER'))
         );
     }

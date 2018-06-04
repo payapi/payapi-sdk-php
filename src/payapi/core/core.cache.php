@@ -10,23 +10,12 @@ final class cache extends helper
     private $intance   = false;
     private $dir       = false;
     private $caches    = false;
-    private $cache     = array(
-        //             expiration days
-        "localize"    => 30,
-        "ssl"         => 1,
-        "product"     => 1,
-        "payment"     => 1,
-        "transaction" => false,
-        "update"      => false,
-        "reseller"    => false,
-        "instance"    => false,
-        "account"     => false,
-        "settings"    => false
-    );
+    private $cache     = array();
 
     public function ___autoload()
     {
         $this->instance = instance::this();
+        $this->cache = param::caches();
     }
 
     public function caches()
