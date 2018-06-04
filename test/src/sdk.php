@@ -16,8 +16,8 @@ class payapiSdkTest
     private $plugin   = 'native';
     private $branding = 'payapi';
     private $data     = array(
-                'public_id' => 'multimerchantshop',
-                'api_key'   => 'qETkgXpgkhNKYeFKfxxqKhgdahcxEFc9',
+                'public_id' => '<public_id>',
+                'api_key'   => '<api_key>',
                 'staging'   => true,
             );
 

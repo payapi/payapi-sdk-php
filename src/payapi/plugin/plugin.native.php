@@ -7,7 +7,7 @@ final class plugin
 
     public static $single = false;
 
-    public $version       = '0.0.0';
+    public $version       = '0.0.1';
 
     private $native       = false;
     private $config       = false;
@@ -134,4 +134,6 @@ final class plugin
     {
         return $this->version;
     }
+
+    
 }
