@@ -1,0 +1,12 @@
+{
+    "preselectedPartialPayment": "partial_demo",
+    "paymentTermInDays": 8,
+    "whitelistedCountries": false,
+    "openingFeeInCents": 900,
+    "nominalAnnualInterestRateInCents": 200,
+    "minimumAmountAllowedInCents": 100,
+    "numberOfInstallments": 36,
+    "invoiceFeeInCents": 900,
+    "monthlyFeeThresholdInCents": 900,
+    "invoiceFeeCurrency": "EUR"
+}

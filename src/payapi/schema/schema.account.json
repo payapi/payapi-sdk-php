@@ -1,0 +1,26 @@
+{
+  "___info": {
+    "___version": "0.0.1",
+    "___date": "20180420"
+  },
+  "___schema": {
+    "publicId": {
+      "___mandatory": true,
+      "___type": "string",
+      "___min": 4
+    },
+    "apiKey": {
+      "___mandatory": true,
+      "___type": "string",
+      "___min": 4
+    },
+    "staging": {
+      "___mandatory": true,
+      "___type": "boolean"
+    },
+    "timestamp": {
+      "___mandatory": false,
+      "___type": "float"
+    }
+  }
+}
