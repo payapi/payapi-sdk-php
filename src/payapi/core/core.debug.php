@@ -16,19 +16,11 @@ final class debug
     private $fullTrace    = false;
     private $dir          = false;
     private $file         = false;
-    private $labels       = array(
-        'info'   ,
-        'time'   ,
-        'api'    ,
-        'run'    ,
-        'debug'  ,
-        'error'  ,
-        'warning',
-        'fatal'
-    );
+    private $labels       = array();
 
     protected function __construct($enabled)
     {
+        $this->labels = param::labels();
         // $this->route
         if ($enabled !== true) {
             return false;

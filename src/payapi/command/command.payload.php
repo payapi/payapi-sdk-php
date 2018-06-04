@@ -18,7 +18,7 @@ final class commandPayload extends controller
 
     public function run()
     {
-        if ($this->arguments(0) ==! false) {
+        if ($this->arguments(0) ==! $this->serialize->undefined()) {
             return $this->render($this->payload($this->arguments(0)));
         }
         return $this->returnResponse($this->error->badRequest());

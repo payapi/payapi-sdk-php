@@ -8,8 +8,8 @@
 *              JWT
 *
 *  @category   Payments, Social Sharing
-*  @version    v1.0.0.0(20170711)
-*  @version    v2.0.0.0(20171019)
+*  @version    v1.0.0(20170711)
+*  @version    v4.0.4(20180604)
 *
 *  @param     (object) adapt =(main sdk config || adapt model for adaptor plugin)
 *
@@ -54,17 +54,22 @@
 *              - prestashop
 *
 *  @return
+*
 *        - success :
-*              array(
-*                "code"  =>   (int)            200,
-*                "data"  => (array) <expectedData>
-*             );
+*               array(
+*                  "code"    =>   (int)            200,
+*                  "data"    => (array)     <response>,
+*                  "public"  => (string)   <public_id>,
+*                  "staging" =>   (bool)   <staging>
+*               );
 *
 *        - error :
-*              array(
-*                "code"  =>   (int)    <errorCode>,
-*                "error" =>(string)    <errorData>
-*             );
+*               array(
+*                  "code"    =>    (int)   <errorCode>,
+*                  "error"   => (string)   <errorData>,
+*                  "public"  => (string)   <public_id>,
+*                  "staging" =>   (bool)   <staging>
+*               );
 *
 *
 *  @author     florin
@@ -75,6 +80,8 @@
 *  @TODO       ever!
 *              extend terminal mode
 *              extend server command
+*              update ___public_id after PA login
+*              review check account/settings for private commands
 *
 *
 **/

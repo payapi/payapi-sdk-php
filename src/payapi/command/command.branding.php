@@ -74,10 +74,10 @@ final class commandBranding extends controller
 
     public function run()
     {
-        if ($this->arguments(0) !== false) {
+        if ($this->arguments(0) !== $this->serialize->undefined()) {
             $pluginBrand = $this->pluginBranding($this->arguments(0));
             if (is_array($pluginBrand) === true) {
-                $this->warning('brand: ' . $this->arguments(0));
+                $this->debug('brand: ' . $this->arguments(0));
                 return $this->render($pluginBrand);
             }
         }

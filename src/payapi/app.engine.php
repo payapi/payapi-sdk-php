@@ -55,18 +55,19 @@ final class engine
 
     private function load()
     {
-        $this->entity = entity::single();
-        $this->adaptor = adaptor::single($this->adapt, $this->plugin);
-        $this->config = config::single();
-        $this->debug = debug::single();
-        $this->error = error::single();
+        $this->entity   = entity::single();
+        $this->adaptor  = adaptor::single($this->adapt, $this->plugin);
+        $this->config   = config::single();
+        $this->debug    = debug::single();
+        $this->error    = error::single();
         $this->entity->set('___info', (string) $this);
         $this->debug->add($this->entity->get('___info'));
         $this->debug->add('[plugin] ' . $this->plugin);
         $this->entity->addInfo('sdk_payapi_v', $this->version);
+        $this->entity->set('adaptor', $this->adaptor);
         $this->validate = new validator();
-        $this->load = new loader();
-        $this->api = new api();
+        $this->load     = new loader();
+        $this->api      = new api();
         $this->debug->load();
         $this->debug->blank('=== LISTENING ==>');
     }

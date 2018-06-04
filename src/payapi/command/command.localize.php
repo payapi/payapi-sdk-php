@@ -40,6 +40,7 @@ namespace payapi;
 *           }
 *
 * @NOTE
+*          this command is NOT terminal mode compatible
 *          localization info is cached
 *          data is adapted through plugin
 *
@@ -48,7 +49,7 @@ namespace payapi;
 *
 * @TODO
 *          localize just when needed->transaction
-*          common ip cahe is still isolated at encoding
+*          common ip cache is still isolated at encoding
 *
 */
 
@@ -57,7 +58,10 @@ final class commandLocalize extends controller
 
     public function run()
     {
-        if ($this->arguments(1) != false) {
+        if ($this->api->env() !== 'server' && $this->arguments(1) === $this->serialize->undefined()) {
+            return $this->returnResponse($this->error->notFound());
+        }
+        if ($this->arguments(1) != $this->serialize->undefined()) {
             if ($this->validate->ip($this->arguments(1)) === true) {
                 $ip = $this->arguments(1);
             } else {
@@ -65,7 +69,7 @@ final class commandLocalize extends controller
             }
         } else {
             $ip = $this->ip();
-            if ($this->arguments(0) !== true) {
+            if ($this->arguments(0) !== $this->serialize->undefined() && $this->arguments(0) !== true) {
                 if (is_array($this->localized) === true) {
                     return $this->render($this->localized);
                 } else {
@@ -77,7 +81,7 @@ final class commandLocalize extends controller
         if ($this->validate->ip($ip) === true) {
             $this->debug('[check] ' . $ip);
             $cached = $this->cache('read', 'localize', $ip);
-            if ($this->arguments(0) !== true && $cached !== false) {
+            if ($this->arguments(0) !== $this->serialize->undefined() && $this->arguments(0) !== true && $cached !== false) {
                 return $this->render($cached);
             } else {
                 $endPoint = $this->serialize->endPointLocalization($ip);

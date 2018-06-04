@@ -5,86 +5,28 @@ namespace payapi;
 final class api extends helper
 {
 
-    public $version  = '0.0.1';
-    public $request  = false;
+    public $version    = '0.0.2';
+    public $request    = false;
 
-    private $env     = false;
-    private $curl    = false;
-    private $knock   = false;
-    private $code    = false;
-    private $entity  = false;
-    private $headers = false;
-    private $timeout = 1;
-    private $index   = 'no';
-    private $follow  = 'no';
-    private $mode    = 'sdk';
-    private $modes   = array(
-        'json' => 'application/json',
-        'html' => 'text/html',
-        'sdk'  => false
-    );
-    private $responses = array(
-                  // @NOTE PHP ZEND INTERNAL STATUS HEADERS
-
-                  // Informational 1xx
-                  100 =>                        'continue',
-                  101 =>             'switching Protocols',
-
-                  // Success 2xx
-                  200 =>                         'success',
-                  201 =>                         'created',
-                  202 =>                        'accepted',
-                  203 =>   'non-Authoritative Information',
-                  204 =>                      'no Content',
-                  205 =>                   'reset Content',
-                  206 =>                 'partial Content',
-
-                  // Redirection 3xx
-                  300 =>                'multiple choices',
-                  301 =>               'moved permanently',
-                  302 =>                           'found',  // 1.1
-                  303 =>                       'see Other',
-                  304 =>                    'not modified',
-                  305 =>                       'use proxy',
-                  // 306 is deprecated but reserved
-                  307 =>              'temporary redirect',
-
-                  // Client Error 4xx
-                  400 =>                     'bad request',
-                  401 =>                    'unauthorized',
-                  402 =>                'payment required',
-                  403 =>                       'forbidden',
-                  404 =>                       'not found',
-                  405 =>              'method not allowed',
-                  406 =>                  'not acceptable',
-                  407 =>   'proxy authentication required',
-                  408 =>                 'request timeout',
-                  409 =>                        'conflict',
-                  410 =>                            'gone',
-                  411 =>                 'length required',
-                  412 =>             'precondition failed',
-                  413 =>        'request entity too large',
-                  414 =>            'request-uri too long',
-                  415 =>          'unsupported media type',
-                  416 => 'requested range not satisfiable',
-                  417 =>              'expectation failed',
-
-                  // Server Error 5xx
-                  500 =>           'internal server error',
-                  501 =>                 'not implemented',
-                  502 =>                     'bad gateway',
-                  503 =>             'service unavailable',
-                  504 =>                 'gateway timeout',
-                  505 =>      'http version not supported',
-                  509 =>        'bandwidth limit exceeded',
-
-                  // @NOTE Extra One(s) 6xx  :)
-                  600 =>                         'boo boo'
-              );
+    private $env       = false;
+    private $curl      = false;
+    private $knock     = false;
+    private $code      = false;
+    private $entity    = false;
+    private $headers   = false;
+    private $timeout   = 1;
+    private $index     = 'no';
+    private $follow    = 'no';
+    private $mode      = 'sdk';
+    private $terminal  = '127.0.0.1';
+    private $modes     = array();
+    private $responses = array();
 
 
     protected function ___autoload()
     {
+        $this->modes = param::modes();
+        $this->responses = param::responses();
         //-> @TOREVIEW move this to main controller!?
         $this->request = request::single();
         $this->ip = $this->getIp();
@@ -102,6 +44,16 @@ final class api extends helper
         }
         $this->debug('[APP][ENV] ' . $this->env);
         return $this->env;
+    }
+
+
+    public function domain()
+    {
+        if ($this->env === 'terminal') {
+            return $this->terminal;
+        }
+        //-> force OS env values if available
+        return str_replace('*', 'store', ((getenv('HTTP_HOST', true) !== false) ? getenv('HTTP_HOST', true) : getenv('HTTP_HOST')));
     }
 
     public function ip()
@@ -150,7 +102,8 @@ final class api extends helper
         $ssl = 1,
         $fresh = 1,
         $noreuse = 1
-    ) {
+    )
+    {
         if ($this->curl === false) {
             $this->curl = new curl();
         }
@@ -256,12 +209,11 @@ final class api extends helper
 
     private function getIp()
     {
-        if ($this->validPAccess() === true) {
-            if (filter_var($this->request->get('consumerIp'), FILTER_VALIDATE_IP) !== false) {
-                return $this->request->get('consumerIp');
-            }
-            $this->error('no valid PA consumerIp');
-            return $this->serialize->undefined();
+        if ($this->paCallCheck() === true) {
+            return $this->paCallValid();
+        }
+        if ($this->env === 'terminal') {
+            return $this->terminal;
         }
         if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_CLIENT_IP'))) == false) {
             if (($access = $this->sanitize->ip($this->getenvvalue('HTTP_X_FORWARDED_FOR'))) == false) {
@@ -278,6 +230,28 @@ final class api extends helper
         }
         $ip = htmlspecialchars($access, ENT_COMPAT, 'UTF-8');
         return $ip;
+    }
+
+    private function paCallCheck()
+    {
+        if (is_string($this->request->get('payapiwebshop')) === true &&
+            is_string($this->request->get('quantity')) === true &&
+            is_string($this->request->get('consumerIp')) === true &&
+            is_string($this->request->get('locale')) === true &&
+            is_string($this->request->get('currency')) === true) {
+            return true;
+        }
+        return false;
+    }
+
+    private function paCallValid()
+    {
+        if (filter_var($this->request->get('consumerIp'), FILTER_VALIDATE_IP) !== false) {
+            $this->debug('[PA][valid]');
+            return $this->request->get('consumerIp');
+        }
+        $this->error('[PA][error][consumerIp]');
+        return $this->serialize->undefined();
     }
 
     public function validPAccess()
@@ -305,7 +279,7 @@ final class api extends helper
         return false;
     }
     //-> @TODO
-    public function checkIncomingHasValidSsl($url)
+    public function checkIncomingValidSsl($url)
     {
         return $this->checkSsl($url);
     }

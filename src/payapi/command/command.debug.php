@@ -24,9 +24,10 @@ final class commandDebug extends controller
 {
     public function run()
     {
-        if ($this->arguments(0) !== false && is_string($this->arguments(0)) === true) {
-            $this->debug($this->arguments(0), 'debug');
-            return $this->render($this->arguments(0));
+        if ($this->arguments(0) !== $this->serialize->undefined() && is_string($this->arguments(0)) === true) {
+        	$debug = $this->sanitize->string($this->arguments(0));
+            $this->debug($debug, 'debug');
+            return $this->render($debug);
         }
         return $this->returnResponse($this->error->badRequest());
     }

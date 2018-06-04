@@ -42,21 +42,33 @@ abstract class controller extends helper
         $this->load = $this->entity->get('load');
         $this->validate = $this->entity->get('validate');
         $this->api = $this->entity->get('api');
-        $this->account = $this->cache('read', 'account', $this->instance());
-        if (isset($this->account['staging']) === true) {
-            if ($this->account['staging'] === true) {
-                $this->config->mode(true);
-            } else {
-                $this->config->mode(false);
-            }            
-        } else {
-            $this->debug('settings not found');
-        }
-        $this->adaptor = $this->entity->get('adaptor');
-        if ($this->api->env() == 'server' && $this->locate() !== true) {
+        if ($this->api->env() === 'server' && $this->locate() !== true) {
             return $this->returnResponse($this->error->notLocalizableAccess());
         }
+        $this->validateAccount();
+        $this->adaptor = $this->entity->get('adaptor');
         $this->sdk();
+    }
+
+    protected function validateAccount()
+    {
+        //-> publicId, apiKey, staging, timestamp
+        $account = $this->cache('read', 'account', $this->instance());
+        if (is_array($account) === true) {
+            $filtered = $this->validate->schema($account, $this->load->schema('account'));
+            if (is_array($filtered) === true) {
+                $this->account = $filtered;
+                if ($this->account['staging'] !== false) {
+                    $this->config->mode(true);
+                } else {
+                    $this->config->mode(false);
+                }
+                return $this->account;
+            }
+            $this->cache('delete', 'account', $this->instance());
+            return $this->warning('[settings] no valid');
+        }
+        $this->debug('[settings] not found');
     }
 
     protected function accessConsumer()
@@ -213,7 +225,7 @@ abstract class controller extends helper
         if (isset($this->arguments[0][$key])) {
             return $this->arguments[0][$key];
         }
-        return false;
+        return $this->serialize->undefined();
     }
     //-> merchantSettings
     protected function settings($key = false)
@@ -401,7 +413,8 @@ abstract class controller extends helper
 
     protected function populate($data)
     {
-        $data['___public'] = $this->publicId();
+        $data['public'] = $this->publicId();
+        $data['staging'] = $this->staging;
         return $data;
     }
 
@@ -412,6 +425,9 @@ abstract class controller extends helper
 
     public function returnResponse($code)
     {
+        //-> @FIXME refresh public_id
+        //-> @NOTE 
+        //->       could be diferent if settings is called with diferent vars
         $render =$this->api->returnResponse($code);
         $populate = $this->populate($render);
         $return =(($this->config->debug() === true) ? $this->entity->addExtradata($populate) : $populate);
