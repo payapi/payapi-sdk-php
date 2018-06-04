@@ -1,0 +1,18 @@
+{
+    "fullname": "John Doe",
+    "name": "John",
+    "surname": "Doe",
+    "care": "Mary Doe",
+    "address1": "Doe street 7",
+    "address2": null,
+    "phone": "123456789",
+    "postal": "3F4S8K",
+    "city": "San Diego",
+    "region": "California",
+    "country": "United States",
+    "email": "john-doe@email.com",
+    "cardHolder": "John Doe",
+    "cardNumber": "4321",
+    "cardCvv": "123",
+    "expiration": "2021"
+}
