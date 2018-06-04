@@ -9,7 +9,7 @@ class payapiSdkTest
 
     private $app      = false;
     private $test     = false;
-    private $login    = true;
+    private $login    = false;
     private $config   = array(
                 'debug' => true
             );
@@ -47,10 +47,10 @@ class payapiSdkTest
         require_once(__DIR__ . DIRECTORY_SEPARATOR . 'tester' . '.' . 'php');
     }
 
-    private function login()
+    public function login()
     {
         if ($this->login === true) {
-            $this->settings($this->data['staging'], $this->data['public_id'], $this->data['api_key']);
+            return $this->settings($this->data['staging'], $this->data['public_id'], $this->data['api_key']);
         }
     }
 

@@ -35,7 +35,7 @@ class tester {
 			$this->debug($this->stringify($this->error), 'error');
 		}
 		//-> @FIXME @TODELETE
-		var_dump($this->response);
+		//var_dump('__debug', $this->response);
 		//->
 		return $this->response;
 	}
