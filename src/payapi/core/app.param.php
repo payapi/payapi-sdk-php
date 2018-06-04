@@ -2,13 +2,11 @@
 
 namespace payapi;
 
-final class params
+final class param
 {
 
-    private
-       static $extension = 'data';
     private   
-       static $responses                       =   array(
+        static $responses = array(
                   // @NOTE PHP ZEND INTERNAL STATUS HEADERS
 
                   // Informational 1xx
@@ -67,33 +65,67 @@ final class params
                   600 =>                         'boo boo'
               );
 
-    private 
-      static  $cdn = array(
-                "domain" => 'cdn-bps.dellebanane.it',
-                "secure" => true,
-                "secret" => 'ec6sG{sGLTmQ&mZoJQsPv^kCUBWTqk&E'
-            );
+    private
+       static $modes = array(
+                 'json'         => 'application/json',
+                 'html'         => 'text/html',
+                 'sdk'          => false
+              );      
 
+    private 
+       static $caches = array(
+                  //             expiration days
+                  'localize'    => 30,
+                  'ssl'         => 1,
+                  'product'     => 1,
+                  'payment'     => 1,
+                  'transaction' => false,
+                  'update'      => false,
+                  'reseller'    => false,
+                  'instance'    => false,
+                  'account'     => false,
+                  'settings'    => false
+              );
+
+    private 
+       static $labels = array(
+                  'info'   ,
+                  'time'   ,
+                  'api'    ,
+                  'run'    ,
+                  'debug'  ,
+                  'error'  ,
+                  'warning',
+                  'fatal'
+              );
+    //-> @TOTEST
+    private 
+       static $cdn = array(
+                  'domain'      => 'cdn.payapi.io',
+                  'secure'      => true,
+                  'secret'      => 'ec6sG{sGLTmQ&mZoJQsPv^kCUBWTqk&E'
+              );
+    //-> @TODO move to schema
   	private 
-  	  static  $schema = array(
+  	   static $schema = array(
         				  'createStore' => array(
-          						'publicId'         => array('string', true),
-          						'email'            => array('email', true),
-          						'apiKey'           => array('string', true),
-          						'subDomain'        => array('string', true),
-          						'locale'           => array('string', true),
-          						'currency'         => array('string', true),
-          						'companyName'      => array('string', true),
-          						'phoneNumber'      => array('string', true),
-          						'countryCode'      => array('string', true),
-          						'streetAddress'    => array('string', true),
-          						'stateOrProvince'  => array('string', true),
-          						'postalCode'       => array('string', true),
-          						'city'             => array('string', true),
-          						'companyLogoUrl'   => array('url', true),
-          						'endPoint'         => array('url', true),
-          						'cloneDomain'      => array('domain', true),
-          						'reseller'         => array('array', true, 'reseller')
+          						'publicId'             => array('string', true),
+          						'email'                => array('email',  true),
+          						'apiKey'               => array('string', true),
+          						'subDomain'            => array('string', true),
+          						'locale'               => array('string', true),
+          						'currency'             => array('string', true),
+          						'companyName'          => array('string', true),
+          						'phoneNumber'          => array('string', true),
+          						'countryCode'          => array('string', true),
+          						'streetAddress'        => array('string', true),
+          						'stateOrProvince'      => array('string', true),
+          						'postalCode'           => array('string', true),
+          						'city'                 => array('string', true),
+          						'companyLogoUrl'       => array('url',    true),
+          						'endPoint'             => array('url',    true),
+          						'cloneDomain'          => array('domain', true),
+          						'reseller'             => array('array',  true, 'reseller')
         				  ),
         				  'reseller'    => array(
           						'partnerId'            => array('string', true),
@@ -110,24 +142,37 @@ final class params
         			);
 
   	private 
-  	  static $action = array(
-        				  'store' => array(
-        						'create',
-        						'handle'
+  	   static $action = array(
+        				  'store'  => array(
+        						  'create',
+        						  'handle'
         				  )
         			);
 
     private
-      static $instance = array(
-        'domain'   => array('string', true),
-        'key'      => array('string', true),
-        'clone'    => array('string', false),
-        'barnd'    => array('string', true)
-      );
+       static $instance = array(
+                'domain'   => array('string',  true),
+                'key'      => array('string',  true),
+                'clone'    => array('string', false),
+                'brand'    => array('string',  true)
+              );
+
+    private
+       static $extension = 'data';
 
     public static function cdn()
     {
       return self::$cdn;
+    }
+
+    public static function caches()
+    {
+      return self::$caches;
+    }
+
+    public static function modes()
+    {
+      return self::$modes;
     }
 
   	public static function get($key, $value)
@@ -187,6 +232,11 @@ final class params
           return self::$responses[$code];
         }
         return self::$responses[600];
+    }
+
+    public static function labels()
+    {
+      return self::$labels;
     }
 
     public static function getEnviroment($key)
