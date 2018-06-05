@@ -7,3 +7,4 @@ src/payapi/debug/*
 *.data
 index.php
 vendor
+*.sw*
