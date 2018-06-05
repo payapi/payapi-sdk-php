@@ -6,3 +6,4 @@ src/payapi/debug/*
 *.log
 *.data
 index.php
+vendor
