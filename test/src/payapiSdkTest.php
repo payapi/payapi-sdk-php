@@ -21,6 +21,6 @@ class payapiSdkTest extends TestCase
     #$this->calcMock->expects($this->once())
     #        ->method('__construct')
     #        ->will($this->returnValue(true));
-    $this->assertNull(null);
+    $this->assertNull(1);
   }
 }
