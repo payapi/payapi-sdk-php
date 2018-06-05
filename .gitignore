@@ -8,3 +8,5 @@ src/payapi/debug/*
 index.php
 vendor
 *.sw*
+composer.xml
+composer.txt
