@@ -10,3 +10,4 @@ vendor
 *.sw*
 composer.xml
 composer.txt
+dist
