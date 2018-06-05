@@ -14,6 +14,7 @@ class payapiSdkTest extends TestCase
 
     public function testSdkLoadNative()
     {
+        $this->payapiSdk = new payapiSdk();
         $this->assertInstanceOf(
             payapiSdk::class,
             $this->payapiSdk
