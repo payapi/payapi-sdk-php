@@ -42,11 +42,11 @@ abstract class controller extends helper
         $this->load = $this->entity->get('load');
         $this->validate = $this->entity->get('validate');
         $this->api = $this->entity->get('api');
+        $this->validateAccount();
+        $this->adaptor = $this->entity->get('adaptor');
         if ($this->api->env() === 'server' && $this->locate() !== true) {
             return $this->returnResponse($this->error->notLocalizableAccess());
         }
-        $this->validateAccount();
-        $this->adaptor = $this->entity->get('adaptor');
         $this->sdk();
     }
 
