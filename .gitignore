@@ -10,4 +10,5 @@ vendor
 *.sw*
 composer.xml
 composer.txt
+composer.lock
 dist
