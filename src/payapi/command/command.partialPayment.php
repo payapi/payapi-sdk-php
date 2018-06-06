@@ -59,7 +59,7 @@ final class commandPartialPayment extends controller
 
     public function run()
     {
-        if ($this->partialPayments() === true || $this->arguments(2) === true) {
+        if ($this->partialPayments() === true || is_string($this->arguments(2)) === true) {
             if (is_numeric($this->arguments(0)) === true && $this->arguments(1) !== $this->serialize->undefined() && is_string($this->arguments(1)) === true) {
                 $partialPayment =
                     $this->calculatePartialPayment((int)$this->arguments(0), $this->arguments(1), $this->arguments(2));
