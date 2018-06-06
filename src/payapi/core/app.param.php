@@ -92,6 +92,8 @@ final class param
                   'info'   ,
                   'time'   ,
                   'api'    ,
+                  'cron'   ,
+                  'test'   ,
                   'run'    ,
                   'debug'  ,
                   'error'  ,
