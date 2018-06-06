@@ -81,7 +81,6 @@ class payapiSdkTestCommand extends TestCase
     {
         $paymentPriceInCents = 10000000;
         $paymentCurrency = 'EUR';
-        $paymentCountry = 'ES';
         $demo = true;
         $partialPayment = $this->payapiSdk->partialPayment($paymentPriceInCents, $paymentCurrency, $demo);
         //->$this->payapiSdk->debug('[testPartialPaymentSuccess] ' . json_encode($partialPayment));
