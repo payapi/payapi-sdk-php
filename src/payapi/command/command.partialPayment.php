@@ -4,7 +4,7 @@ namespace payapi;
 
 /*
 * @COMMAND
-*           $sdk->partialPayment($paymentPriceInCents, $paymentCurrency, $paymentCountry, $demo = false)
+*           $sdk->partialPayment($paymentPriceInCents, $paymentCurrency, $demo = false)
 *
 * @PARAMS
 *           $paymentPriceInCents = numeric
@@ -50,10 +50,13 @@ namespace payapi;
 *                    - added 'openingFeeInCents' && 'monthlyFeeThresholdInCents'
 *
 * @TODO
-*          handle currency
+*         handle currency
+*
+* @TOTEST 
+*         demo mode
 *
 */
-//-> @TODO demo mode
+
 final class commandPartialPayment extends controller
 {
 
