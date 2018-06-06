@@ -44,7 +44,9 @@ final class adaptor
                     $this->debug->add('[' . $key . '] ' . $enabled);
                 }
             }
+            $this->debug->add('[plugin] ' . $this->plugin);
         } else {
+            //-> @FIXME no debug
             $this->debug->add('[plugin] 404', 'error');
         }
     }
