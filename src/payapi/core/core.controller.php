@@ -306,8 +306,8 @@ abstract class controller extends helper
         $countryCode = (isset($this->localized['countryCode']) === true) ? $this->localized['countryCode'] : null;
         if (is_array($this->partialPaymentSettings) === true &&
             md5($paymentCurrency) === md5($this->partialPaymentSettings['invoiceFeeCurrency'])) {
-            if (is_string($countryCode) === true) {
-                if (isset($this->partialPaymentSettings['whitelistedCountries']) !== true ||
+            if ($demo === true || is_string($countryCode) === true) {
+                if ($demo === true || isset($this->partialPaymentSettings['whitelistedCountries']) !== true ||
                     $this->partialPaymentSettings['whitelistedCountries'] === false ||
                     in_array($countryCode, $this->partialPaymentSettings['whitelistedCountries']) === true) {
                     if (is_int($paymentPriceInCents) === true &&

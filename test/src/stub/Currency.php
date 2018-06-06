@@ -1,12 +1,12 @@
 <?php
 
-class Country
+class Currency
 {
     public $iso_code;
 
     public function __construct()
     {
-        $this->iso_code = "ES";
+        $this->iso_code = "EUR";
     }
 
     public function __toString()

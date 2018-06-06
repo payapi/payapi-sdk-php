@@ -16,21 +16,16 @@ class payapiSdk
     private $plugin   = 'native';
     private $branding = 'payapi';
     private $data     = array(
-                'public_id' => '<public_id>',
-                'api_key'   => '<api_key>',
                 'staging'   => true,
             );
 
     public function __construct($plugin = false, $branding = false)
     {
         //-> loads server hacks for server mode simulation
-        //require_once(str_replace('test' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'class', 'hack', __DIR__) . DIRECTORY_SEPARATOR . 'hack' . '.' . 'server' . '.' . 'php');
+        //require_once(str_replace('src' . DIRECTORY_SEPARATOR . 'class', 'hack', __DIR__) . DIRECTORY_SEPARATOR . 'hack' . '.' . 'server' . '.' . 'php');
         //-> loads sdk engine
         $this->app = app::single($this->config(), $this->plugin, $this->branding);
         $this->debug = debug::single(true);
-        $this->debug('[autoload] tester');
-
-        //$this->login();
     }
 
     public function config()
@@ -38,12 +33,6 @@ class payapiSdk
         return $this->config;
     }
 
-    public function login()
-    {
-        if ($this->login === true) {
-            return $this->settings($this->data['staging'], $this->data['public_id'], $this->data['api_key']);
-        }
-    }
     public function __call($command, $arguments = array())
     {
         return $this->app->$command($arguments);
@@ -65,9 +54,6 @@ class payapiSdk
         if (is_array($this->error) === true)  {
             $this->debug($this->stringify($this->error), 'error');
         }
-        //-> @FIXME @TODELETE
-        //var_dump('__debug', $this->response);
-        //->
         return $this->response;
     }
 
@@ -78,7 +64,8 @@ class payapiSdk
 
     private function debug($info, $label = 'test')
     {
-        return $this->debug->add('[' . $label . ']' . $info, $label);
+        $backtrace = debug_backtrace();
+        return $this->debug->add('[' . $label . ']' . '[' . $backtrace[1]['function'] . ']' . $info, $label);
     }
 
 
