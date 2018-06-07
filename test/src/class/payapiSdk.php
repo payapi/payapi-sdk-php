@@ -14,17 +14,19 @@ class payapiSdk
                 'debug' => true
             );
     private $plugin   = 'native';
-    private $branding = 'payapi';
     private $data     = array(
                 'staging'   => true,
             );
 
-    public function __construct($plugin = false, $branding = false)
+    public function __construct($mode = 'terminal', $plugin = false)
     {
-        //-> loads server hacks for server mode simulation
-        //require_once(str_replace('src' . DIRECTORY_SEPARATOR . 'class', 'hack', __DIR__) . DIRECTORY_SEPARATOR . 'hack' . '.' . 'server' . '.' . 'php');
+        if(md5($mode) === md5('server')) {
+            //-> loads server hacks for server mode simulation
+            require_once(str_replace('src' . DIRECTORY_SEPARATOR . 'class', 'hack', __DIR__) . DIRECTORY_SEPARATOR . 'hack' . '.' . 'server' . '.' . 'php');            
+        }
+        $this->plugin = (is_string($plugin) === true) ? $plugin : null;
         //-> loads sdk engine
-        $this->app = app::single($this->config(), $this->plugin, $this->branding);
+        $this->app = app::single($this->config(), $this->plugin);
         $this->debug = debug::single(true);
     }
 

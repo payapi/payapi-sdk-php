@@ -10,10 +10,12 @@ class payapiSdkTestCommand extends TestCase
     private $account   = array(
                 'publicId' => 'pa_tester',
                 'apiKey'   => 'LgJF6y4QaXRhTX7hHnteEGrJXPdd8XPN',
+                'staging'  => true,
             );
 
     public function __construct()
     {
+        //-> @NOTE loads sdk in shell mode using native plugin
         $this->payapiSdk = new payapiSdk(); // @codeCoverageIgnore
     } // @codeCoverageIgnore
 
@@ -42,7 +44,7 @@ class payapiSdkTestCommand extends TestCase
     {
         $this->assertArrayHasKey('data', $this->payapiSdk->branding('payapi'));
     }
-
+    //-> @NOTE testMerchantSettingsError deletes merchantSettings if cached
     public function testMerchantSettingsError()
     {
         $merchantSettings = $this->payapiSdk->settings(true, 'reset', 'error');
@@ -51,7 +53,7 @@ class payapiSdkTestCommand extends TestCase
     //-> @NOTE testMerchantSettingsSuccess enables SDK private commands
     public function testMerchantSettingsSuccess()
     {
-        $merchantSettings = $this->payapiSdk->settings(true, $this->account['publicId'], $this->account['apiKey']);
+        $merchantSettings = $this->payapiSdk->settings($this->account['staging'], $this->account['publicId'], $this->account['apiKey']);
         //->$this->payapiSdk->debug('[merchantSettings] ' . json_encode($merchantSettings));
         $this->assertArrayHasKey('data', $merchantSettings);
     }
@@ -108,5 +110,21 @@ class payapiSdkTestCommand extends TestCase
         $this->assertArrayHasKey('data', $this->payapiSdk->localize(true, $ipRandom));
     }
 
+/* @NOTE this should use another test unit
+    public function testServerMode()
+    {
+        $sdk = new payapiSdk('server');
+        $info = $sdk->info();
+        $this->payapiSdk->debug('[testServerMode] ' . json_encode($info['___extradata']));
+        $this->assertArrayHasKey('data', $info);
+    }
+
+    public function testPsPlugin()
+    {
+        $sdk = new payapiSdk('server', 'prestashop');
+        $info = $sdk->info();
+        $this->assertArrayHasKey('data', $info);
+    }
+*/
 
 }
