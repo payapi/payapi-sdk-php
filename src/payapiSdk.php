@@ -9,7 +9,7 @@
 *
 *  @category   Payments, Social Sharing
 *  @version    v1.0.0(20170711)
-*  @version    v4.0.4(20180604)
+*  @version    v4.0.5(20180607)
 *
 *  @param     (object) adapt =(main sdk config || adapt model for adaptor plugin)
 *
