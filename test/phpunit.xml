@@ -1,12 +1,14 @@
 <phpunit>
   <testsuites>
     <testsuite name="PayApi">
-     <file>src/unit/payapiSdkTestCommand.php</file>
+     <file>src/unit/payapiSdkTerminalTestCommand.php</file>
+     <file>src/unit/payapiSdkServerTestCommand.php</file>
     </testsuite>
   </testsuites>
   <filter>
     <whitelist processUncoveredFilesFromWhitelist="true">
-     <file>src/unit/payapiSdkTestCommand.php</file>
+     <file>src/unit/payapiSdkTerminalTestCommand.php</file>
+     <file>src/unit/payapiSdkServerTestCommand.php</file>
     </whitelist>
   </filter>
   <logging>

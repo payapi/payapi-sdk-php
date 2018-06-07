@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class payapiSdkTestCommand extends TestCase
+class payapiSdkTerminalTestCommand extends TestCase
 {
 
     private $payapiSdk = false;
@@ -110,21 +110,5 @@ class payapiSdkTestCommand extends TestCase
         $this->assertArrayHasKey('data', $this->payapiSdk->localize(true, $ipRandom));
     }
 
-/* @NOTE this should use another test unit
-    public function testServerMode()
-    {
-        $sdk = new payapiSdk('server');
-        $info = $sdk->info();
-        $this->payapiSdk->debug('[testServerMode] ' . json_encode($info['___extradata']));
-        $this->assertArrayHasKey('data', $info);
-    }
-
-    public function testPsPlugin()
-    {
-        $sdk = new payapiSdk('server', 'prestashop');
-        $info = $sdk->info();
-        $this->assertArrayHasKey('data', $info);
-    }
-*/
 
 }
