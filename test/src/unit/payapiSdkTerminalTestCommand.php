@@ -8,8 +8,8 @@ class payapiSdkTerminalTestCommand extends TestCase
     private $payapiSdk = false;
     private $test      = null;
     private $account   = array(
-                'publicId' => 'pa_tester',
-                'apiKey'   => 'LgJF6y4QaXRhTX7hHnteEGrJXPdd8XPN',
+                'publicId' => '<public_id>',
+                'apiKey'   => '<api_key>',
                 'staging'  => true,
             );
 
