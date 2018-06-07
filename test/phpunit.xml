@@ -2,11 +2,13 @@
   <testsuites>
     <testsuite name="PayApi">
      <file>src/unit/payapiSdkTestCommand.php</file>
+     <file>src/unit/payapiSdkTestCore.php</file>
     </testsuite>
   </testsuites>
   <filter>
     <whitelist processUncoveredFilesFromWhitelist="true">
      <file>src/unit/payapiSdkTestCommand.php</file>
+     <file>src/unit/payapiSdkTestCore.php</file>
     </whitelist>
   </filter>
   <logging>
