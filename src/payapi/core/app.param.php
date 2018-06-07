@@ -6,7 +6,7 @@ final class param
 {
 
     private   
-        static $responses = array(
+    static $responses = array(
                   // @NOTE PHP ZEND INTERNAL STATUS HEADERS
 
                   // Informational 1xx
@@ -66,14 +66,14 @@ final class param
               );
 
     private
-       static $modes = array(
+    static $modes = array(
                  'json'         => 'application/json',
                  'html'         => 'text/html',
                  'sdk'          => false
               );      
 
     private 
-       static $caches = array(
+    static $caches = array(
                   //             expiration days
                   'localize'    => 30,
                   'ssl'         => 1,
@@ -88,7 +88,7 @@ final class param
               );
 
     private 
-       static $labels = array(
+    static $labels = array(
                   'info'   ,
                   'time'   ,
                   'api'    ,
@@ -102,14 +102,14 @@ final class param
               );
     //-> @TOTEST
     private 
-       static $cdn = array(
+    static $cdn = array(
                   'domain'      => 'cdn.payapi.io',
                   'secure'      => true,
                   'secret'      => 'ec6sG{sGLTmQ&mZoJQsPv^kCUBWTqk&E'
               );
     //-> @TODO move to schema
   	private 
-  	   static $schema = array(
+  	static $schema = array(
         				  'createStore' => array(
           						'publicId'             => array('string', true),
           						'email'                => array('email',  true),
@@ -144,7 +144,7 @@ final class param
         			);
 
   	private 
-  	   static $action = array(
+  	static $action = array(
         				  'store'  => array(
         						  'create',
         						  'handle'
@@ -152,7 +152,7 @@ final class param
         			);
 
     private
-       static $instance = array(
+    static $instance = array(
                 'domain'   => array('string',  true),
                 'key'      => array('string',  true),
                 'clone'    => array('string', false),
@@ -160,27 +160,27 @@ final class param
               );
 
     private
-       static $extension = 'data';
+    static $extension = 'data';
 
     public static function cdn()
     {
-      return self::$cdn;
+        return self::$cdn;
     }
 
     public static function caches()
     {
-      return self::$caches;
+        return self::$caches;
     }
 
     public static function modes()
     {
-      return self::$modes;
+        return self::$modes;
     }
 
   	public static function get($key, $value)
   	{
       	if (isset(self::$key[$value]) === true) {
-      		return self::$key[$value];
+      		  return self::$key[$value];
       	}
       	return false;
   	}
@@ -208,37 +208,37 @@ final class param
 
     public static function schema($key)
     {
-    	if (isset(self::$schema[$key]) === true) {
-    		return self::$schema[$key];
-    	}
-    	return array();
+      	if (isset(self::$schema[$key]) === true) {
+        		return self::$schema[$key];
+      	}
+      	return array();
     }
 
     public static function action($key)
     {
-    	if (isset(self::$action[$key]) === true) {
-    		return self::$action[$key];
-    	}
-    	return array();
+      	if (isset(self::$action[$key]) === true) {
+        		return self::$action[$key];
+      	}
+      	return array();
     }
 
     public static function responses()
     {
-    	return self::$responses;
+      	return self::$responses;
     }
 
     public static function response($code)
     {
-      if (isset(self::$responses[$code]) === true)
-        {
-          return self::$responses[$code];
-        }
-        return self::$responses[600];
+        if (isset(self::$responses[$code]) === true)
+          {
+              return self::$responses[$code];
+          }
+          return self::$responses[600];
     }
 
     public static function labels()
     {
-      return self::$labels;
+        return self::$labels;
     }
 
     public static function getEnviroment($key)
