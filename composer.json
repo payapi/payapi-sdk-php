@@ -15,10 +15,7 @@
       "classmap": [
           "test/src/class/",
           "test/src/stub/",
-          "test/src/unit/",
-          "src/payapi/core/",
-          "src/payapi/",
-          "src/"
+          "test/src/unit/"
       ]
   },
   "authors": [{

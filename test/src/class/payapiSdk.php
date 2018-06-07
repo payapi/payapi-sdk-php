@@ -20,6 +20,8 @@ class payapiSdk
 
     public function __construct($mode = 'terminal', $plugin = false)
     {
+        //-> loads PHP SDK engone
+        require_once(str_replace('test' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'class', 'src' . DIRECTORY_SEPARATOR . 'payapi', __DIR__) . DIRECTORY_SEPARATOR . 'app' . '.' . 'engine' . '.' . 'php');            
         if(md5($mode) === md5('server')) {
             //-> loads server hacks for server mode simulation
             require_once(str_replace('src' . DIRECTORY_SEPARATOR . 'class', 'hack', __DIR__) . DIRECTORY_SEPARATOR . 'hack' . '.' . 'server' . '.' . 'php');            
