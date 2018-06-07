@@ -230,10 +230,10 @@ final class param
     public static function response($code)
     {
         if (isset(self::$responses[$code]) === true)
-          {
-              return self::$responses[$code];
-          }
-          return self::$responses[600];
+        {
+            return self::$responses[$code];
+        }
+        return self::$responses[600];
     }
 
     public static function labels()
