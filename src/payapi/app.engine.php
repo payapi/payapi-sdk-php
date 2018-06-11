@@ -31,7 +31,9 @@ final class engine
 
     private function __construct($adapt, $plugin, $branding)
     {
-        date_default_timezone_set('UTC');
+        if (is_string(date_default_timezone_get()) !== true) {
+            date_default_timezone_set('UTC');
+        }
         if (session_id() === false) {
             session_start();
         }
