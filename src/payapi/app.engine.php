@@ -11,6 +11,7 @@ final class engine
     private $plugin       = 'native';
     private $adapt        = false;
     private $debug        = false;
+    private $error        = false;
     private $config       = false;
     private $localize     = false;
     private $entity       = false;
@@ -41,6 +42,8 @@ final class engine
             require $core;
         }
         $this->route = router::single();
+        set_error_handler(array($this, 'error_handler'));
+        $this->error = error::single();
         if (is_string($plugin) === true && $this->route->plugin($plugin) !== false) {
             $this->plugin = $plugin;
             $this->adapt = $adapt;
@@ -114,6 +117,38 @@ final class engine
                 return $command->returnResponse($this->error->forbidden());
             }
         }
+    }
+
+    public function error_handler($code, $message, $file, $line)
+    {
+        if (error_reporting() === 0) {
+            return false;
+        }
+        switch ($code) {
+            case E_ERROR:
+            case E_USER_ERROR:
+                $label = 'fatal';
+                break;
+            case E_WARNING:
+            case E_USER_WARNING:
+                $label = 'warning';
+                break;
+            case E_NOTICE:
+            case E_USER_NOTICE:
+                $label = 'notice';
+                break;
+            default:
+                $label = 'undefined';
+                break;
+        }
+        $error = $message . ' in ' . $file . ' on line ' . $line;
+        return $this->error($error, $label);
+    }
+
+    protected function error($error, $label = 'error')
+    {
+        $this->debug('[' . $label . '] ' . $error, 'error');
+        return $this->error->add($error, $label);
     }
 
     public function __toString()

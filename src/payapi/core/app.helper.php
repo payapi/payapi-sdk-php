@@ -28,7 +28,6 @@ abstract class helper
         $this->serialize = serializer::single();
         $this->error = error::single();
         $this->route = router::single();
-        set_error_handler(array($this, 'error_handler'));
         $this->debug = debug::single();
         if (method_exists($this, '___autoload')) {
             $version =(isset($this->version) === true) ? ' v' . $this->version : null;
@@ -54,32 +53,6 @@ abstract class helper
             return $this->debug->add($data, $label);
         }
         return false;
-    }
-
-    public function error_handler($code, $message, $file, $line)
-    {
-        if (error_reporting() === 0) {
-            return false;
-        }
-        switch ($code) {
-            case E_ERROR:
-            case E_USER_ERROR:
-                $label = 'fatal';
-                break;
-            case E_WARNING:
-            case E_USER_WARNING:
-                $label = 'warning';
-                break;
-            case E_NOTICE:
-            case E_USER_NOTICE:
-                $label = 'notice';
-                break;
-            default:
-                $label = 'undefined';
-                break;
-        }
-        $error = $message . ' in ' . $file . ' on line ' . $line;
-        return $this->error($error, $label);
     }
 
     public function get($key = null)
