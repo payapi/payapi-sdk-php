@@ -71,7 +71,7 @@ final class files
         return false;
     }
 
-    public static function require($file)
+    public static function get($file)
     {
     	if (is_file($file) === true) {
     		return require($file);    		
