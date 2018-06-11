@@ -34,7 +34,7 @@ abstract class helper
             $version =(isset($this->version) === true) ? ' v' . $this->version : null;
             $this->debug(
                 '[autoload] ' . strtolower(str_replace(
-                    array('payapi\\command', 'payapi\\'),
+                    array(__NAMESPACE__ . '\\command', __NAMESPACE__ . '\\'),
                     null,
                     get_called_class()
                 ) . $version)
