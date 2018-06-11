@@ -130,15 +130,16 @@ final class router
         return $this->root('schema');
     }
 
-    public static function routeError()
+    public static function error()
     {
-        return str_replace(DIRECTORY_SEPARATOR . basename(__DIR__), null, __DIR__) .
-            DIRECTORY_SEPARATOR . 'debug' . DIRECTORY_SEPARATOR . 'error' . DIRECTORY_SEPARATOR;
+        return self::debug() .
+            'error' . DIRECTORY_SEPARATOR;
     }
 
-    public function routeDebug()
+    public static function debug()
     {
-        return $this->root('debug');
+        return str_replace(DIRECTORY_SEPARATOR . basename(__DIR__), null, __DIR__) .
+            DIRECTORY_SEPARATOR . 'debug' . DIRECTORY_SEPARATOR;;
     }
 
     private function routePlugin()
