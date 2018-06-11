@@ -23,4 +23,10 @@ $(document).ready(function() {
     input.setAttribute("value", payapi_payload_data);
     form.appendChild(input);
     document.getElementsByTagName("body")[0].appendChild(form);
+    //-> reloads page on cart update (20180608 florin)
+    prestashop.on('updateCart', () => {
+        event.preventDefault();
+        location.reload();
+    });
+    //->
 });
