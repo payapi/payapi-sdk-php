@@ -329,6 +329,19 @@ class serializer
         return str_replace(array('payapi\\', 'controller_', 'model_'), null, $route);
     }
 
+    public static function trace($backtrace)
+    {
+        $separator = '->';
+        $class = (isset($backtrace[3]['class']) ?
+            $backtrace[3]['class'] :
+            ((isset($backtrace[2]['class'])) ? $backtrace[2]['class'] : $backtrace[1]['class']));
+        $function = (isset($backtrace[3]['function']) ?
+            $backtrace[3]['function'] :
+            ((isset($backtrace[2]['function'])) ? $backtrace[2]['function'] : $backtrace[1]['function']));
+        $route = str_replace(array(__NAMESPACE__ . '\\', '___', '__'), null, $class . $separator . $function);
+        return $route;
+    }
+
     public function __toString()
     {
         return $this->version;

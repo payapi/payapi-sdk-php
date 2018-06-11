@@ -101,7 +101,7 @@ final class debug
 
     public function add($info, $label = 'info')
     {
-        $trace = $this->trace(debug_backtrace());
+        $trace = serializer::trace(debug_backtrace());
         $miliseconds = str_pad(round((microtime(true) - $this->microtime) * 1000, 0), 4, '0', STR_PAD_LEFT);
         $entry = ($miliseconds . ' [' . $this->label($label) . '] ' . $trace . ' ' .
             ((is_string($info)) ? $info :((is_array($info) ? json_encode($info) :
@@ -113,29 +113,6 @@ final class debug
     public function blank($info = null)
     {
         $this->set($info);
-    }
-
-    public function trace($traced)
-    {
-        $separator = '->';
-        if ($this->fullTrace !== true) {
-            $class = str_replace('payapi\\', null, (isset($traced[3]['class'])) ?
-                str_replace('"', null, $traced[3]['class']) :
-                ((isset($traced[2]['class'])) ? $traced[2]['class'] : $traced[1]['class']));
-            $function = str_replace('__', null, (isset($traced[3]['function'])) ?
-                str_replace('"', null, $traced[3]['function']) :
-                ((isset($traced[2]['function'])) ? $traced[2]['function'] : $traced[1]['function']));
-            $route = str_replace(array('payapi\\', '___'), null, $class . $separator . $function);
-            return $route;
-        }
-        $levels = 5;
-        $route = null;
-        for ($cont = count($traced); $cont > 0; $cont --) {
-            $route .= ((isset($traced[$cont]['class']) === true) ?
-                $traced[$cont]['class'] . $separator : null) .
-                ((isset($traced[$cont]['function']) === true) ? $traced[$cont]['function'] . $separator : null);
-        }
-        return $route;
     }
 
     public function label($label)
