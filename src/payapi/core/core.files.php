@@ -42,8 +42,9 @@ final class files
 		return false;
 	}
 
-	public static function checkDir($dir)
+	public static function checkDir($dir, $permissions = false)
 	{
+		$access = ($permissions !== false) ? $permissions : self::$default;
 		if (!is_dir($dir)) {
 			$this_path = null;
 			$paths = explode('/', $dir);
@@ -53,7 +54,7 @@ final class files
 					if (!is_dir($this_path)) {
 						mkdir($this_path);
 					}
-					@chmod($this_path, self::$default);
+					@chmod($this_path, $access);
 				}
 			}
 		}
