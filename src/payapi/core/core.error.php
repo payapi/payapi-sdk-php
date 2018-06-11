@@ -13,15 +13,11 @@ final class error
     private $domain       = false;
     private $instance     = false;
     private $log          = false;
-    private $labels       = array(
-        "fatal",
-        "warning",
-        "notice",
-        "undefined"
-    );
+    private $labels       = array();
 
     private function __construct()
     {
+        $this->labes = param::errors();
         $this->domain = instance::domain();
         $this->instance = instance::this();
         $this->log = router::routeError() . date('Ymd') . '.' . 'error' . '.' . 'log';

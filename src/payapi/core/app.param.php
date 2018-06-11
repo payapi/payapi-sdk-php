@@ -62,14 +62,14 @@ final class param
                   509 =>        'bandwidth limit exceeded',
 
                   // @NOTE Extra One(s) 6xx  :)
-                  600 =>                         'boo boo'
+                  600 =>                         'boo boo',
               );
 
     private
     static $modes = array(
                  'json'         => 'application/json',
                  'html'         => 'text/html',
-                 'sdk'          => false
+                 'sdk'          => false,
               );      
 
     private 
@@ -84,7 +84,7 @@ final class param
                   'reseller'    => false,
                   'instance'    => false,
                   'account'     => false,
-                  'settings'    => false
+                  'settings'    => false,
               );
 
     private 
@@ -98,14 +98,22 @@ final class param
                   'debug'  ,
                   'error'  ,
                   'warning',
-                  'fatal'
+                  'fatal',
+              );
+
+    private 
+    static $errors = array(
+                  'fatal',
+                  'warning',
+                  'notice',
+                  'undefined',
               );
     //-> @TOTEST
     private 
     static $cdn = array(
                   'domain'      => 'cdn.payapi.io',
                   'secure'      => true,
-                  'secret'      => 'ec6sG{sGLTmQ&mZoJQsPv^kCUBWTqk&E'
+                  'secret'      => 'ec6sG{sGLTmQ&mZoJQsPv^kCUBWTqk&E',
               );
     //-> @TODO move to schema
   	private 
@@ -127,7 +135,7 @@ final class param
           						'companyLogoUrl'       => array('url',    true),
           						'endPoint'             => array('url',    true),
           						'cloneDomain'          => array('domain', true),
-          						'reseller'             => array('array',  true, 'reseller')
+          						'reseller'             => array('array',  true, 'reseller'),
         				  ),
         				  'reseller'    => array(
           						'partnerId'            => array('string', true),
@@ -139,7 +147,7 @@ final class param
           						'webshopBaseDomain'    => array('string', true),
           						'partnerWebUrl'        => array('string', true),
           						'partnerContactEmail'  => array('string', true),
-          						'partnerContactPhone'  => array('string', true)
+          						'partnerContactPhone'  => array('string', true),
         				  )
         			);
 
@@ -147,7 +155,7 @@ final class param
   	static $action = array(
         				  'store'  => array(
         						  'create',
-        						  'handle'
+        						  'handle',
         				  )
         			);
 
@@ -156,7 +164,7 @@ final class param
                 'domain'   => array('string',  true),
                 'key'      => array('string',  true),
                 'clone'    => array('string', false),
-                'brand'    => array('string',  true)
+                'brand'    => array('string',  true),
               );
 
     private
@@ -239,6 +247,11 @@ final class param
     public static function labels()
     {
         return self::$labels;
+    }
+
+    public static function errors()
+    {
+        return self::$errors;
     }
 
     public static function getEnviroment($key)
