@@ -20,7 +20,8 @@ final class error
         $this->labes = param::errors();
         $this->domain = instance::domain();
         $this->instance = instance::this();
-        $this->log = router::routeError() . date('Ymd') . '.' . 'error' . '.' . 'log';
+        files::checkDir(router::error());
+        $this->log = router::error() . date('Ymd') . '.' . 'error' . '.' . 'log';
     }
 
     private function save($info, $label)

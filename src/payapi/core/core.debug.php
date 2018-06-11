@@ -30,8 +30,8 @@ final class debug
         $this->microtime = microtime(true);
         $this->lapse('execution', true);
         $this->lapse('app', true);
-        $this->dir = str_replace('core', 'debug', __DIR__) . DIRECTORY_SEPARATOR;
-        $this->file = $this->dir . 'debug.' . __NAMESPACE__ . '.' . 'log';
+        files::checkDir(router::debug());
+        $this->file = router::debug() . 'debug.' . __NAMESPACE__ . '.' . 'log';
         $this->reset();
         $this->set('=== DEBUG === ' . $this->timestamp() . ' ==>');
     }
