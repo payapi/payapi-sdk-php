@@ -67,7 +67,7 @@ final class cache extends helper
         if (is_string($file = $this->validate($key, $token)) === true) {
             //-> checks data is encrypted
             if (is_string($data) === true && substr_count($data, '.') === 1) {
-                $this->checkDir(str_replace(basename($file), null, $file));
+                files::checkDir(str_replace(basename($file), null, $file), 700);
                 return file_put_contents($file, $data, LOCK_EX);
             } else {
                 $this->error('cache data not properly encrypted');
@@ -88,14 +88,6 @@ final class cache extends helper
             $this->error('[cache] key no valid');
         }
         return false;
-    }
-
-    private function checkDir($dir)
-    {
-        if (is_dir($dir) === true) {
-            return true;
-        }
-        return mkdir($dir, 0700, true);
     }
 
     public function sanitize()
