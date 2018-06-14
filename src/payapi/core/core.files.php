@@ -23,7 +23,6 @@ final class files
 								$error++;
 							} else {
 								$dirs++;
-								chmod($dest . '/' . $file, self::$default);
 							}
 						}
 						self::xcopy($src . '/' . $file, $dest . '/' . $file);
@@ -32,7 +31,6 @@ final class files
 							$error++;
 						} else {
 							$files++;
-							chmod($dest . '/' . $file, self::$default);
 						}
 					}
 				}
@@ -54,7 +52,6 @@ final class files
 					if (!is_dir($this_path)) {
 						mkdir($this_path);
 					}
-					@chmod($this_path, $access);
 				}
 			}
 		}
