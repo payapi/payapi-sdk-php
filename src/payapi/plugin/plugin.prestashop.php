@@ -107,6 +107,27 @@ final class plugin
             array_push($products_array, $productObject);
         }
 
+        //-> discount with/taxes (true)
+        $discount = (float)$cart->getOrderTotal(true, \Cart::ONLY_DISCOUNTS);
+        if ($discount > 0) {
+            $discounted = (int)(0 - round(($discount * 100), 2));
+            $discountedExcTaxes = (int)(0 - round(($cart->getOrderTotal(false, \Cart::ONLY_DISCOUNTS) * 100), 2));
+            $discountVatInCents = -($discounted - $discountedExcTaxes);
+            $discountVatPercentage = -(round($discountVatInCents / $discountedExcTaxes * 100));
+            $productDiscount = array(
+                'id' => '0',
+                'quantity' => 1,
+                'title' => 'Discount',
+                'description' => 'Discount',
+                'category' => 'discount', //-> handled by category
+                'priceInCentsIncVat' => $discounted,
+                'priceInCentsExcVat' => $discountedExcTaxes,
+                'vatInCents' => -$discountVatInCents,
+                'vatPercentage' => $discountVatPercentage,
+            );
+            array_push($products_array, $productDiscount);
+        }
+
         $shipping_cost = (float)$cart->getOrderTotal(true, \Cart::ONLY_SHIPPING) * 100;
         $shipping_cost_no_tax = (float)$cart->getOrderTotal(false, \Cart::ONLY_SHIPPING) * 100;
         // Add shipping cost as a last product
